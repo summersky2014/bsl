@@ -1,0 +1,29 @@
+{
+  "name": "bsl",
+  "version": "0.0.1",
+  "description": "基于React的框架和UI组件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/summersky2014/bsl.git"
+  },
+  "keywords": [
+    "React",
+    "framework",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/summersky2014/bsl/issues"
+  },
+  "homepage": "https://github.com/summersky2014/bsl#readme",
+  "dependencies": {
+    "@types/react": "^16.8.1",
+    "react": "^16.7.0",
+    "typescript": "^3.3.1"
+  }
+}
