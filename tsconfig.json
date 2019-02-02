@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "noEmitOnError": true,
+        "removeComments": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "module": "esnext",
+        "target": "es5",
+        "experimentalDecorators": true,
+        "noUnusedLocals": true,
+        "sourceMap": true,
+        "lib": ["dom", "scripthost", "es5", "es2015"]
+    },
+    "exclude": [
+        "node_modules",
+        ".history",
+        ".vscode"
+    ],
+    "include": [
+        "__demo",
+        "_base",
+        "component",
+        "chart",
+        "model",
+        "utils",
+        "app",
+        "task",
+        "typings"
+    ]
+}
