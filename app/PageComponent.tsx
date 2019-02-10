@@ -1,8 +1,8 @@
-import yj from '../typings';
+import BSL from '../typings';
 import * as React from 'react';
 import App, { push, Context, global } from './App';
 
-export interface PageProps<Match> extends yj.PageProps<Match> {
+export interface PageProps<Match> extends BSL.PageProps<Match> {
   entrytime: number;
 }
 
