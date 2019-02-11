@@ -1,6 +1,6 @@
 import BSL from '../typings';
 import * as React from 'react';
-import App, { push, Context, global } from './App';
+import { push, Context, appData } from './core';
 
 export interface PageProps<Match> extends BSL.PageProps<Match> {
   entrytime: number;
@@ -10,7 +10,7 @@ abstract class PageComponent<Props, State, Match> extends React.Component<Props 
   constructor(props: Props & PageProps<Match>, state: State) {
     super(props, state);
 
-    if (App.env === 'development') {
+    if (appData.env === 'development') {
       setTimeout(() => {
         if (this.isCallInit === false) {
           console.warn(this, '请检查该页面构造函数中是否调用了init方法');
@@ -18,7 +18,7 @@ abstract class PageComponent<Props, State, Match> extends React.Component<Props 
       });
     }
 
-    this.pageId = global.currentPageId;
+    this.pageId = appData.currentPageId;
     this.rootElemRef = React.createRef();
     this.getStaytime = this.getStaytime.bind(this);
     this.pageRender = this.pageRender.bind(this);
@@ -42,11 +42,10 @@ abstract class PageComponent<Props, State, Match> extends React.Component<Props 
 
   /** Page初始化时调用 */
   protected init(): void {
-    App.pages.push(this as PageComponent<any, any, any>);
+    appData.pages.push(this as PageComponent<any, any, any>);
     push(this.props as any);
     this.isCallInit = true;
 
-    console.log(this, this.pageId, global.currentPageId)
     this.pageActive();
   }
 
@@ -64,8 +63,7 @@ abstract class PageComponent<Props, State, Match> extends React.Component<Props 
 
   public shouldComponentUpdate(): boolean {
     if (this.rootElemRef.current) {
-      const visible = this.pageId === global.currentPageId;
-      console.log(this, this.pageId, global.currentPageId)
+      const visible = this.pageId === appData.currentPageId;
       this.rootElemRef.current.style.display = visible ? 'block' : 'none';
       return visible;
     } else {
