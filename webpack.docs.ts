@@ -9,7 +9,7 @@ webpackConfig = {
   dirname: __dirname,
   addVersion: false,
   vender: false,
-  outputDir: './docs/build/',
+  outputDir: './docs/dist/',
   tsInclude: [
     nodePath.resolve(__dirname, 'docs'),
     nodePath.resolve(__dirname, 'component'),
