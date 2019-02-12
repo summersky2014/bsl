@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import PageComponent from '../../app/PageComponent';
+import PageComponent, { PageProps } from '../../../app/PageComponent';
+
+interface Props {
+}
 
 interface State {
   status: string;
 }
 
-class A extends PageComponent<any, State, any> {
-  constructor(props: any, state: State) {
+interface Match {
+}
+
+class Home extends PageComponent<Props, State, Match> {
+  constructor(props: PageProps<Match>, state: State) {
     super(props, state);
     this.init();
   }
@@ -46,4 +52,4 @@ class A extends PageComponent<any, State, any> {
   }
 }
 
-export default A;
+export default Home;

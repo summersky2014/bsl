@@ -18,7 +18,7 @@ interface AppData {
 export interface AppBaseProps {
   /** 路由改变时触发 */
   onRouteChange?: (pathname: string) => void;
-  children: any;
+  children: JSX.Element[] | JSX.Element;
 }
 
 export interface AppProps extends AppBaseProps, BSL.PageProps<any> {

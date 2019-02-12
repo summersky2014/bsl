@@ -126,7 +126,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
     }));
   } else  {
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
-    // plugins.push(new BabiliPlugin());
   }
 
   beforeComplie(dirname, outputDir, cleanDir, copy);
