@@ -4,7 +4,7 @@ const docsTask = require('./task').default;
 const nodePath = require('path');
 webpackConfig = {
   entry: {
-    index: nodePath.resolve(__dirname, 'docs/src/Launcher.tsx'),
+    index: nodePath.resolve(__dirname, 'docs/src/App.tsx'),
   },
   dirname: __dirname,
   addVersion: false,
@@ -14,7 +14,12 @@ webpackConfig = {
     nodePath.resolve(__dirname, 'docs'),
     nodePath.resolve(__dirname, 'component'),
     nodePath.resolve(__dirname, 'app')
-  ]
+  ],
+  copy: [{
+    orginPath: './node_modules/antd/dist/antd.min.css',
+    targetDir: 'docs/dist/css',
+    targetFileName: 'antd.min.css'
+  }],
 };
 
 module.exports = docsTask(webpackConfig);

@@ -96,14 +96,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
       outputStyle: 'expanded',
       sourceMap: isDev
     }
-  }, {
-    loader: 'sass-resources-loader',
-    options: {
-      resources: [
-        path.resolve(__dirname, '../style/mixins.scss'),
-        path.resolve(dirname, './node_modules/yuejia-pro/theme/index.scss'),
-      ]
-    },
   }];
 
   if (cssModule !== false) {
@@ -192,16 +184,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
       extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.tsx', '.ts', '.web.ts', '.scss', '.css'],
       modules: isDev ? [path.resolve(dirname, 'node_modules')] : undefined,
       mainFields: isDev ? ['jsnext:main', 'main'] : undefined
-    },
-    externals: isDev ? {
-      'react/addons': true,
-      'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': true,
-      'react-addons-test-utils': 'react-dom',
-      'socket.io-client': 'io'
-    } : {
-      'sockjs-client': 'SockJS',
-      'socket.io-client': 'io'
     },
     plugins,
     stats: {

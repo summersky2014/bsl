@@ -4,7 +4,7 @@ const task = require('./task').default;
 const path = require('path');
 webpackConfig = {
   entry: {
-    app: path.resolve(__dirname, 'examples/App'),
+    PageStack: path.resolve(__dirname, 'examples/PageStack'),
   },
   dirname: __dirname,
   addVersion: false,

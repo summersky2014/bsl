@@ -1,0 +1,56 @@
+@import '../../common.scss';
+
+.component {
+  grid-area: menu;
+  background: #001529;
+}
+
+.head {
+  height: 64px;
+  padding-left: 24px;
+}
+
+.logo {
+  height: 32px;
+}
+
+.title {
+  color: hsla(0,0%,100%,.65);
+  padding: 13px 24px;
+  cursor: pointer;
+
+  &-arrow {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    position: relative;
+    top: 1px;
+  }
+}
+
+.sub {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 24px 0 50px;
+  color: hsla(0,0%,100%,.65);
+  background-color: rgb(0, 12, 23);
+  cursor: pointer;
+}
+
+.active {
+  background-color: $primary;
+  color: #fff;
+}
+
+.open {
+  color: #fff;
+  .title {
+    &-arrow {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.hide {
+  display: none;
+}

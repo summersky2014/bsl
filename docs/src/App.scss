@@ -1,0 +1,38 @@
+@import './common.scss';
+
+html {
+  font-size: 14px;
+}
+
+body {
+  background: #f0f2f5;
+}
+
+a {
+  color: $primary;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 256px auto;
+  grid-template-areas: "menu main"; 
+  min-height: 100vh;
+}
+
+.main {
+  display: grid;
+  grid-template-rows: auto 100px;
+  grid-area: main;
+  grid-template-areas: (
+    "content"
+    "footer"
+  );
+  padding: 24px 24px 0;
+}
+
+.content {
+  grid-area: content;
+  background: #fff;
+  padding: 25px 50px;
+  border-radius: 3px;
+}
