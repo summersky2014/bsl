@@ -18,11 +18,9 @@
         ".vscode"
     ],
     "include": [
-        "__demo",
-        "_base",
+        "examples",
+        "test",
         "component",
-        "chart",
-        "model",
         "utils",
         "app",
         "task",

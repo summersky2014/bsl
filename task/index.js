@@ -3,15 +3,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const fs = require("fs");
 const webpack = require("webpack");
-const clean_1 = require("./clean");
 const env = process.env.NODE_ENV;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const isDev = env === 'development' ? true : false;
-function cleanDir(dirname, outputDir, execClean = true, copy) {
-    if (execClean) {
-        clean_1.default(path.resolve(dirname, outputDir));
+function clean(outputDir) {
+    let files;
+    if (fs.existsSync(outputDir)) {
+        files = fs.readdirSync(outputDir);
+        files.forEach((file) => {
+            const curPath = `${outputDir}/${file}`;
+            if (fs.statSync(curPath).isDirectory()) {
+                clean(curPath);
+            }
+            else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(outputDir);
+    }
+}
+function beforeComplie(dirname, outputDir, cleanDir = true, copy) {
+    if (cleanDir) {
+        clean(outputDir);
     }
     if (Array.isArray(copy)) {
         copy.forEach((item) => {
@@ -27,7 +42,7 @@ function cleanDir(dirname, outputDir, execClean = true, copy) {
     }
 }
 function webpackConfig(params) {
-    const { entry, dirname, publicPath, historyMode, vender, execClean, copy, platform, cssModule } = params;
+    const { entry, dirname, publicPath, vender, cleanDir, copy, platform, cssModule } = params;
     const addVersion = params.addVersion === false ? false : true;
     const outputDir = params.outputDir || 'build';
     const pkg = JSON.parse(fs.readFileSync(path.resolve(dirname, 'package.json'), { encoding: 'utf8' }));
@@ -41,7 +56,6 @@ function webpackConfig(params) {
                 version: JSON.stringify(version),
                 outputDir: JSON.stringify(outputDir),
                 publicPath: JSON.stringify(publicPath),
-                historyMode: JSON.stringify(historyMode),
             },
         }),
         new webpack.NoEmitOnErrorsPlugin(),
@@ -100,7 +114,7 @@ function webpackConfig(params) {
     else {
         plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
-    cleanDir(dirname, outputDir, execClean, copy);
+    beforeComplie(dirname, outputDir, cleanDir, copy);
     return {
         entry: entry || {
             index: path.resolve(dirname, './src/entry/index.tsx'),

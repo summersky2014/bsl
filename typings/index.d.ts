@@ -1,5 +1,4 @@
 /// <reference path="./module.d.ts" />
-/// <reference path="./lodash/index.d.ts" />
 
 import { RouteComponentProps } from 'react-router';
 import { Location } from 'history';

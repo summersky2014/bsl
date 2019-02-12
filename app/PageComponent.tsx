@@ -24,16 +24,14 @@ abstract class PageComponent<Props, State, Match> extends React.Component<Props 
     this.pageRender = this.pageRender.bind(this);
   }
 
-  /** 是否调用了init方法 */
-  private isCallInit: boolean = false;
-  /** 是否进行登录认证 */
-  public readonly loginAuth: boolean = false;
-  /** 进入页面的时间 */
-  public entrytime: number = Date.now();
   /** 当前页面id */
   private pageId: number = 0;
   /** 根元素的引用 */
   private readonly rootElemRef: React.RefObject<HTMLDivElement>;
+  /** 是否调用了init方法 */
+  private isCallInit: boolean = false;
+  /** 进入页面的时间 */
+  public entrytime: number = Date.now();
   /** 当获取这个属性时，得到已经停留了的时间 */
   public getStaytime(): number {
     const levaeTime = Date.now();

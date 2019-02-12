@@ -6,7 +6,6 @@ const vendors = [
   // 'better-scroll',
   // 'classnames',
   // 'lodash',
-  // 'react-transition-group',
   // 'url-search-params',
   'react',
   'react-dom',

@@ -7,10 +7,8 @@ interface WebpackConfig {
   outputDir?: string;
   /** 文件加载时的路径 */
   publicPath?: string;
-  /** 是否创建路由文件 */
-  createRouter?: boolean;
   /** 是否清除output的目录 */
-  execClean?: boolean;
+  cleanDir?: boolean;
   /** 是否添加版本号 */
   addVersion?: boolean;
   /** 复制文件到指定目录 */
@@ -21,8 +19,6 @@ interface WebpackConfig {
   }[];
   /** ts-loader include */
   tsInclude?: string[];
-  /** 路由的模式 */
-  historyMode?: 'hash' | 'browser';
   /** 是否使用dll出来的vender */
   vender?: boolean;
   /** 平台 */

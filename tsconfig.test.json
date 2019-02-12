@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "noEmitOnError": true,
+        "removeComments": false,
+        "strict": true,
+        "sourceMap": false,
+        "inlineSources": false,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "target": "esnext",
+        "experimentalDecorators": true,
+        "preserveConstEnums": true,
+        "noUnusedLocals": true,
+        "outDir": "./build/__tests__"
+    },
+    "exclude": [
+        "node_modules",
+        ".history",
+        ".vscode"
+    ],
+    "include": [
+        "test"
+    ]
+  }

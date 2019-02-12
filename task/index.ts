@@ -2,7 +2,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import * as webpack from 'webpack';
-import clean from './clean';
 import BSL from '../typings';
 
 interface Package {
@@ -13,16 +12,29 @@ type Config = webpack.Configuration;
 const env = process.env.NODE_ENV as BSL.Env;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-// const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-// const BabiliPlugin = require('babili-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 
-function cleanDir(dirname: string, outputDir: string, execClean: boolean = true, copy?: WebpackConfig['copy']): void {
+function clean(outputDir: string): void {
+  let files;
+  if (fs.existsSync(outputDir)) {
+    files = fs.readdirSync(outputDir);
+    files.forEach((file) => {
+      const curPath = `${outputDir}/${file}`;
+      if (fs.statSync(curPath).isDirectory()) {
+        clean(curPath);
+      } else {
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(outputDir);
+  }
+}
+
+function beforeComplie(dirname: string, outputDir: string, cleanDir: boolean = true, copy?: WebpackConfig['copy']): void {
   // 清空输出目录
-  if (execClean) {
-    clean(path.resolve(dirname, outputDir));
+  if (cleanDir) {
+    clean(outputDir);
   }
 
   // 复制文件
@@ -42,7 +54,7 @@ function cleanDir(dirname: string, outputDir: string, execClean: boolean = true,
 }
 
 export default function webpackConfig(params: WebpackConfig): Config {
-  const { entry, dirname, publicPath, historyMode, vender, execClean, copy, platform, cssModule } = params;
+  const { entry, dirname, publicPath, vender, cleanDir, copy, platform, cssModule } = params;
   const addVersion = params.addVersion === false ? false : true;
   const outputDir = params.outputDir || 'build';
   const pkg: Package = JSON.parse(fs.readFileSync(path.resolve(dirname, 'package.json'), { encoding: 'utf8' }));
@@ -56,7 +68,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
         version: JSON.stringify(version),
         outputDir: JSON.stringify(outputDir),
         publicPath: JSON.stringify(publicPath),
-        historyMode: JSON.stringify(historyMode),
       },
     }),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -118,7 +129,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
     // plugins.push(new BabiliPlugin());
   }
 
-  cleanDir(dirname, outputDir, execClean, copy);
+  beforeComplie(dirname, outputDir, cleanDir, copy);
   return {
     entry: entry || {
       index: path.resolve(dirname, './src/entry/index.tsx'),
