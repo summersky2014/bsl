@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="en">
   <head>
-    <title>PageStack</title>
+    <title>Container</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <style>
-      * {
-        margin:  0;
-      }
-    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -18,8 +13,13 @@
         const scriptTime = new Date().getTime();
         const body = document.getElementsByTagName('body')[0];
         const script = document.createElement('script');
+        const head = document.getElementsByTagName('head')[0];
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '../../../build/css/Container.css?time=' + scriptTime;
         script.type = 'text/javascript';
-        script.src = '../../../build/js/PageStack.js?time=' + scriptTime;
+        script.src = '../../../build/js/Container.js?time=' + scriptTime;
+        head.appendChild(link);
         body.appendChild(script);
       })();
     </script>

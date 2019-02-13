@@ -5,9 +5,11 @@ const path = require('path');
 webpackConfig = {
   entry: {
     PageStack: path.resolve(__dirname, 'examples/PageStack'),
+    Container: path.resolve(__dirname, 'examples/Container'),
   },
   dirname: __dirname,
   addVersion: false,
+  vender: false,
   publicPath: '/build/',
   tsInclude: [
     path.resolve(__dirname, 'examples'),

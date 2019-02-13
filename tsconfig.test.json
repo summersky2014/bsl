@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "jsx": "react",
         "noEmitOnError": true,
         "removeComments": false,
         "strict": true,

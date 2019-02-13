@@ -15,8 +15,13 @@ declare namespace BSL {
   }
   
   interface ComponentProps {
+    /** 类名前缀 */
+    prefixCls?: string;
+    /** 组件根元素的类名 */
     className?: string;
+    /** 组件根元素的id */
     id?: string;
+    /** 组件根元素的样式 */
     style?: React.CSSProperties;
   }
 }

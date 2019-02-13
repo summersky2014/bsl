@@ -1,0 +1,139 @@
+$prefix: bsl-container;
+
+:global(.#{$prefix}) {
+  position: relative;
+  z-index: 1;
+
+  &-flex {
+    display: flex;
+  }
+
+  &-flexDirection-row {
+    flex-direction: row;
+  }
+
+  &-flexDirection-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  &-flexDirection-column-reverse {
+    flex-direction: column-reverse;
+  }
+
+  &-flexDirection-column {
+    flex-direction: column;
+  }
+
+  &-flexWrap-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  &-flexWrap-wrap {
+    flex-wrap: wrap;
+  }
+
+  &-flexWrap-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+
+  &-justifyContent-flex-start {
+    justify-content: flex-start;
+  }
+
+  &-justifyContent-flex-end {
+    justify-content: flex-end;
+  }
+
+  &-justifyContent-center {
+    justify-content: center;
+  }
+
+  &-justifyContent-space-between {
+    justify-content: space-between;
+  }
+  
+  &-justifyContent-space-around {
+    justify-content: space-around;
+  }
+  
+  &-alignItems-flex-start {
+    align-items: flex-start;
+  }
+  
+  &-alignItems-flex-end {
+    align-items: flex-end;
+  }
+  
+  &-alignItems-center {
+    align-items: center;
+  }
+  
+  &-alignItems-baseline {
+    align-items: baseline;
+  }
+  
+  &-alignItems-stretch {
+    align-items: stretch;
+  }
+  
+  &-alignContent-flex-start {
+    align-content: flex-start;
+  }
+  
+  &-alignContent-flex-end {
+    align-content: flex-end;
+  }
+  
+  &-alignContent-space-between {
+    align-content: space-between;
+  }
+  
+  &-alignContent-center {
+    align-content: center;
+  }
+  
+  &-alignContent-space-around {
+    align-content: space-around;
+  }
+  
+  &-alignContent-stretch {
+    align-content: stretch;
+  }
+  
+  @for $i from 0 through 10 {
+    &-order-#{$i} {
+      order: $i;
+    }
+  }
+  
+  @for $i from 0 through 10 {
+    &-flex-#{$i} {
+      flex: $i;
+      width: 0;
+    }
+  }
+  
+  &-alignSelf-auto {
+    align-self: auto;
+  }
+  
+  &-alignSelf-flex-start {
+    align-self: flex-start;
+  }
+  
+  &-alignSelf-flex-end {
+    align-self: flex-end;
+  }
+  
+  &-alignSelf-center {
+    align-self: center;
+  }
+  
+  &-alignSelf-baseline {
+    align-self: baseline;
+  }
+  
+  &-alignSelf-stretch {
+    align-self: stretch;
+  }
+}

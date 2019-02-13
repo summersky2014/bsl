@@ -19,11 +19,11 @@
     ],
     "include": [
         "examples",
-        "test",
+        "tests",
         "component",
         "utils",
         "app",
         "task",
-        "typings"
+        "typings",
     ]
 }
