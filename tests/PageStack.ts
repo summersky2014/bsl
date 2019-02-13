@@ -21,7 +21,12 @@ describe('PageStack', () => {
     const status = await page.evaluate(() => {
       return document.querySelector('#Aleave')!.textContent;
     });
+    const display = await page.evaluate(() => {
+      const pageElem = document.querySelector('#root')!.children[0] as HTMLDivElement;
+      return pageElem.style.display;
+    });
     expect(status).toBe('leave: true');
+    expect(display).toBe('none');
   });
 
   it('pageActive', async () => {
