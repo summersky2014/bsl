@@ -7,8 +7,9 @@
     "start": "npm run vender && tsc --project tsconfig.task.json && set NODE_ENV=development&&webpack --env development --mode development --watch --progress --color --display-error-details",
     "test": "tsc --project tsconfig.test.json&&jest",
     "vender": "set NODE_ENV=development&&webpack --env development --mode development --progress --color --display-error-details --config ./task/dll.ts",
-    "publish": "tsc --project tsconfig.task.json && set NODE_ENV=development&&webpack --env development --mode development --progress --color --display-error-details --config ./task/dll.ts && npm publish",
-    "docs:dev": "npm run vender && tsc --project tsconfig.task.json && set NODE_ENV=development&&webpack --env development --mode development --watch --progress --color --display-error-details --config ./webpack.docs.ts"
+    "publish": "npm run vender && npm publish",
+    "docs:dev": "npm run vender && tsc --project tsconfig.task.json && set NODE_ENV=development&&webpack --env development --mode development --watch --progress --color --display-error-details --config ./webpack.docs.ts",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {
     "type": "git",
