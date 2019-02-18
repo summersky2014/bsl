@@ -20,7 +20,7 @@
     "include": [
         "examples",
         "tests",
-        "component",
+        "components",
         "utils",
         "app",
         "task",

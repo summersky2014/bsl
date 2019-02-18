@@ -1,6 +1,6 @@
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
 import PageComponent from '../../app/PageComponent';
+import Link from '../../components/Link';
 
 class C extends PageComponent<any, any, any> {
   constructor(props: any, state: any) {
@@ -22,9 +22,7 @@ class C extends PageComponent<any, any, any> {
 
   public pageRender(): JSX.Element {
     return (
-      <div>
-        C
-      </div>
+      <div id="goBack" onClick={Link.goBack}>当前页面C，点击回到上一页</div>
     );
   }
 }

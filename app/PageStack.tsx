@@ -27,6 +27,12 @@ function getRoute(nextProps: Props): JSX.Element {
 }
 
 class PageStack extends React.Component<BaseProps, State> {
+  constructor(props: BaseProps, state: State) {
+    super(props, state);
+
+    appData.history = (props as Props).history;
+  }
+
   public state: State = {
     route: [getRoute(this.props as Props)],
     pathname: (this.props as Props).location.pathname

@@ -39,8 +39,8 @@ describe('PageStack', () => {
   });
 
   it('pageEnter', async () => {
-    await page.click('#linkToB');
-    await page.goBack();
+    await page.click('#linkToC');
+    await page.click('#goBack');
 
     const status = await page.evaluate(() => {
       return document.querySelector('#Astatus')!.textContent;

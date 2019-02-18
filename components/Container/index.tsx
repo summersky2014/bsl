@@ -4,6 +4,7 @@ import * as classNames from 'classnames';
 import './index.scss';
 
 export interface Props extends BSL.ComponentProps {
+  prefixCls?: string;
   children?: any | any[];
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
   flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
@@ -16,12 +17,12 @@ export interface Props extends BSL.ComponentProps {
   onClick?: BSL.OnClick<HTMLDivElement>;
 }
 
+const prefixCls = 'bsl-container';
 const Container = (props: Props) => {
   const {
     className, style, flexDirection, flexWrap, justifyContent, alignItems, alignContent, children, order, id,
     flex, alignSelf, onClick
   } = props;
-  const prefixCls = props.prefixCls || 'bsl-container';
   return (
     <div
       className={classNames(prefixCls, className, {

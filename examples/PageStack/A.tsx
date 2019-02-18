@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import PageComponent from '../../app/PageComponent';
+import Link from '../../components/Link';
 
 interface State {
   status: string;
@@ -40,7 +40,7 @@ class A extends PageComponent<any, State, any> {
         <div id="Aleave">leave: false</div>
         <Link id="linkToB" to="/b">A to B</Link>
         <br/>
-        <Link to="/c" replace>A replace C</Link>
+        <Link id="linkToC" to="/c">A to C</Link>
       </div>
     );
   }
