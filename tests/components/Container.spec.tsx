@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { act } from 'react-test-renderer';
 import { root } from './helpers';
-import Container from '../components/Container';
+import Container from '../../components/Container';
 import 'jest-dom/extend-expect';
 
 describe('Container', () => {

@@ -6,6 +6,7 @@ webpackConfig = {
   entry: {
     PageStack: path.resolve(__dirname, 'examples/PageStack'),
     Container: path.resolve(__dirname, 'examples/Container'),
+    Icon: path.resolve(__dirname, 'examples/Icon'),
   },
   dirname: __dirname,
   addVersion: false,

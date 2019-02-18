@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Container</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="../../../vender/vendor.js"></script>
+    <script>
+      (function() {
+        const scriptTime = new Date().getTime();
+        const body = document.getElementsByTagName('body')[0];
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '../../../build/js/Icon.js?time=' + scriptTime;
+        body.appendChild(script);
+      })();
+    </script>
+  </body>
+</html> 

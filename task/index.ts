@@ -161,7 +161,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
         options: {
           extract: true,
           esModule: false,
-          spriteFilename: `/svg/sprite_${pkg.version}.svg`
+          spriteFilename: addVersion ? `/svg/sprite_${pkg.version}.svg` : `/svg/sprite.svg`
         }
       }, {
         test: /\.(png|jpg|gif)$/,

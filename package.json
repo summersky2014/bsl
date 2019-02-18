@@ -30,7 +30,7 @@
   "homepage": "https://github.com/summersky2014/bsl#readme",
   "jest": {
     "preset": "jest-puppeteer",
-    "testMatch": ["**/__tests__/tests/*.spec.js"],
+    "testMatch": ["**/__tests__/tests/**/*.spec.js"],
     "moduleNameMapper": {
       ".+\\.(css|scss)$": "<rootDir>/style-mock.js"
     }
@@ -79,7 +79,6 @@
     "jsdom": "^13.2.0",
     "puppeteer": "^1.12.2",
     "react-test-renderer": "^16.8.1",
-    "react-testing-library": "^5.6.1",
     "tslint": "^5.12.1",
     "tslint-react-hooks": "^1.1.0",
     "webpack-cli": "^3.2.1"
