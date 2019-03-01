@@ -4,6 +4,7 @@ import Link from '../../components/Link';
 
 interface State {
   status: string;
+  count: number;
 }
 
 class A extends PageComponent<any, State, any> {
@@ -13,8 +14,17 @@ class A extends PageComponent<any, State, any> {
   }
 
   public state: State = {
-    status: 'init'
+    status: 'init',
+    count: 0
   };
+
+  public componentDidMount(): void {
+    setInterval(() => {
+      this.setState({
+        count: this.state.count + 1
+      });
+    }, 1000);
+  }
 
   public pageEnter(): void {
     // pageEnter的执行先于页面显示，所以稍微延后一下执行
@@ -34,6 +44,8 @@ class A extends PageComponent<any, State, any> {
   }
 
   public pageRender(): JSX.Element {
+    // push新路由后，render函数不会被触发
+    console.log(this.state.count);
     return (
       <div>
         <div id="Astatus">status: {this.state.status}</div>

@@ -15,7 +15,8 @@ webpackConfig = {
   tsInclude: [
     path.resolve(__dirname, 'examples'),
     path.resolve(__dirname, 'component'),
-    path.resolve(__dirname, 'app')
+    path.resolve(__dirname, 'app'),
+    path.resolve(__dirname, 'hooks'),
   ]
 };
 

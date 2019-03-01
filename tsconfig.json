@@ -25,5 +25,6 @@
         "app",
         "task",
         "typings",
+        "hooks"
     ]
 }

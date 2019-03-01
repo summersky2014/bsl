@@ -8,12 +8,11 @@ declare namespace BSL {
   type Env = 'development' | 'production' | 'prerelease';
   type RequestStatus = 'start' | 'end' | undefined;
   type OnClick<T> = (e: React.MouseEvent<T>, ...args: any[]) => void;
-  
   interface PageProps<Match>  {
     match: RouteComponentProps<Match>['match'];
     location: Location;
   }
-  
+
   interface ComponentProps {
     /** 组件根元素的类名 */
     className?: string;
