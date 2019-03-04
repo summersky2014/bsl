@@ -85,10 +85,10 @@ function dispatch(): void {
   }
 }
 
-/** 获取当前页面 */
-function getCurrentPage(): PageType | undefined {
-  return appData.pages[appData.pages.length - 1];
-}
+// /** 获取当前页面 */
+// function getCurrentPage(): PageType | undefined {
+//   return appData.pages[appData.pages.length - 1];
+// }
 
 /* 获取上N个页面的类声明 */
 function getPrevPageClassDeclaration(prevCount: number): PageType | undefined {
@@ -105,7 +105,11 @@ function isReplaceAction(nextProps: AppProps): boolean {
 
 /** 添加一个页面 */
 function push(nextProps: AppProps): void {
-  onPush(nextProps);
+  const currentPage = getPrevPageClassDeclaration(2);
+  // 上一个页面的离开事件
+  if (currentPage && currentPage.pageLeave) {
+    currentPage.pageLeave();
+  }
   window.scrollTo(0, 0);
 }
 
@@ -113,8 +117,14 @@ function push(nextProps: AppProps): void {
 function pop(nextProps: AppProps): void {
   const top = appData.scrollLocation[appData.scrollLocation.length - 1];
 
-  if (appData.pages.length) {
-    onPop(nextProps);
+  if (appData.pages.length && !isReplaceAction(nextProps)) {
+    const toPage = getPrevPageClassDeclaration(2);
+    // 目标页面的进入事件
+    if (toPage && toPage.pageEnter) {
+      toPage.pageEnter();
+      // 后退回页面时，重置进入时间
+      toPage.entrytime = Date.now();
+    }
   }
 
   appData.pages.pop();
@@ -123,35 +133,8 @@ function pop(nextProps: AppProps): void {
   window.scrollTo(0, top);
 }
 
-/** 添加页面事件 */
-function onPush(nextProps: AppProps): void {
-  const currentPage = getPrevPageClassDeclaration(2);
-
-  // 上一个页面的离开事件
-  if (currentPage && currentPage.pageLeave) {
-    currentPage.pageLeave();
-  }
-}
-
-/** 卸载页面事件 */
-function onPop(nextProps: AppProps): void {
-  if (isReplaceAction(nextProps)) {
-    return;
-  }
-
-  const toPage = getPrevPageClassDeclaration(2);
-
-  // 目标页面的进入事件
-  if (toPage && toPage.pageEnter) {
-    toPage.pageEnter();
-    // 后退回页面时，重置进入时间
-    toPage.entrytime = Date.now();
-  }
-}
-
 export {
   appData,
-  getCurrentPage,
   getPrevPageClassDeclaration,
   rafDispatch,
   dispatch,

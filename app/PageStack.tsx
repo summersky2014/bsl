@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
-import { appData, getCurrentPage, rafDispatch, pop, AppProps as Props, AppBaseProps as BaseProps } from './core';
+import { appData, getPrevPageClassDeclaration, rafDispatch, pop, AppProps as Props, AppBaseProps as BaseProps } from './core';
 // import Toast from '../Toast';
 
 interface State {
@@ -62,7 +62,7 @@ class PageStack extends React.Component<BaseProps, State> {
     if (nextHistory.action === 'POP') {
       pop(nextProps);
       prevState.route.pop();
-      const page = getCurrentPage();
+      const page = getPrevPageClassDeclaration(1);
       if (page) {
         page.pageActive();
       }
