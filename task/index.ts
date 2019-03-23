@@ -13,48 +13,12 @@ const env = process.env.NODE_ENV as BSL.Env;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 
-function clean(outputDir: string): void {
-  let files;
-  if (fs.existsSync(outputDir)) {
-    files = fs.readdirSync(outputDir);
-    files.forEach((file) => {
-      const curPath = `${outputDir}/${file}`;
-      if (fs.statSync(curPath).isDirectory()) {
-        clean(curPath);
-      } else {
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(outputDir);
-  }
-}
-
-function beforeComplie(dirname: string, outputDir: string, cleanDir: boolean = true, copy?: WebpackConfig['copy']): void {
-  // 清空输出目录
-  if (cleanDir) {
-    clean(outputDir);
-  }
-
-  // 复制文件
-  if (Array.isArray(copy)) {
-    copy.forEach((item) => {
-      let pathtemp = '';
-      // 判断目标目录是否存在，不存在则一级一级的创建
-      item.targetDir.split('/').forEach((dir: string) => {
-        pathtemp = path.resolve(dirname, pathtemp, dir);
-        if (!fs.existsSync(pathtemp)) {
-          fs.mkdirSync(pathtemp);
-        }
-      });
-      fs.copyFileSync(item.orginPath, path.join(dirname, item.targetDir, item.targetFileName));
-    });
-  }
-}
-
 export default function webpackConfig(params: WebpackConfig): Config {
-  const { entry, dirname, publicPath, vender, cleanDir, copy, platform, cssModule } = params;
+  const { entry, dirname, publicPath, vender, platform, cssModule } = params;
+  const addPlugins = params.plugins || [];
   const addVersion = params.addVersion === false ? false : true;
   const outputDir = params.outputDir || 'build';
   const pkg: Package = JSON.parse(fs.readFileSync(path.resolve(dirname, 'package.json'), { encoding: 'utf8' }));
@@ -74,10 +38,12 @@ export default function webpackConfig(params: WebpackConfig): Config {
     new SpriteLoaderPlugin(),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|fr|hu/),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new CleanWebpackPlugin(),
     new ExtractTextPlugin({
       filename: addVersion ? `css/[name]_${version}.css` : 'css/[name].css',
       allChunks: true
-    })
+    }),
+    ...addPlugins
   ];
   const extract: any[] = [{
     loader: 'postcss-loader',
@@ -120,7 +86,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
     plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
   }
 
-  beforeComplie(dirname, outputDir, cleanDir, copy);
   return {
     entry: entry || {
       index: path.resolve(dirname, './src/entry/index.tsx'),
@@ -150,9 +115,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
         loaders: ['ts-loader'],
         include: [
           path.resolve(dirname, 'src'),
-          path.resolve(dirname, 'node_modules/yuejia'),
-          path.resolve(dirname, 'node_modules/yuejia-new'),
-          path.resolve(dirname, 'node_modules/yuejia-pro'),
           ...tsInclude
         ]
       }, {

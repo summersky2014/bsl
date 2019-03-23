@@ -7,42 +7,11 @@ const env = process.env.NODE_ENV;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
-function clean(outputDir) {
-    let files;
-    if (fs.existsSync(outputDir)) {
-        files = fs.readdirSync(outputDir);
-        files.forEach((file) => {
-            const curPath = `${outputDir}/${file}`;
-            if (fs.statSync(curPath).isDirectory()) {
-                clean(curPath);
-            }
-            else {
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(outputDir);
-    }
-}
-function beforeComplie(dirname, outputDir, cleanDir = true, copy) {
-    if (cleanDir) {
-        clean(outputDir);
-    }
-    if (Array.isArray(copy)) {
-        copy.forEach((item) => {
-            let pathtemp = '';
-            item.targetDir.split('/').forEach((dir) => {
-                pathtemp = path.resolve(dirname, pathtemp, dir);
-                if (!fs.existsSync(pathtemp)) {
-                    fs.mkdirSync(pathtemp);
-                }
-            });
-            fs.copyFileSync(item.orginPath, path.join(dirname, item.targetDir, item.targetFileName));
-        });
-    }
-}
 function webpackConfig(params) {
-    const { entry, dirname, publicPath, vender, cleanDir, copy, platform, cssModule } = params;
+    const { entry, dirname, publicPath, vender, platform, cssModule } = params;
+    const addPlugins = params.plugins || [];
     const addVersion = params.addVersion === false ? false : true;
     const outputDir = params.outputDir || 'build';
     const pkg = JSON.parse(fs.readFileSync(path.resolve(dirname, 'package.json'), { encoding: 'utf8' }));
@@ -62,10 +31,12 @@ function webpackConfig(params) {
         new SpriteLoaderPlugin(),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|fr|hu/),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new CleanWebpackPlugin(),
         new ExtractTextPlugin({
             filename: addVersion ? `css/[name]_${version}.css` : 'css/[name].css',
             allChunks: true
-        })
+        }),
+        ...addPlugins
     ];
     const extract = [{
             loader: 'postcss-loader',
@@ -106,7 +77,6 @@ function webpackConfig(params) {
     else {
         plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
-    beforeComplie(dirname, outputDir, cleanDir, copy);
     return {
         entry: entry || {
             index: path.resolve(dirname, './src/entry/index.tsx'),
@@ -136,9 +106,6 @@ function webpackConfig(params) {
                     loaders: ['ts-loader'],
                     include: [
                         path.resolve(dirname, 'src'),
-                        path.resolve(dirname, 'node_modules/yuejia'),
-                        path.resolve(dirname, 'node_modules/yuejia-new'),
-                        path.resolve(dirname, 'node_modules/yuejia-pro'),
                         ...tsInclude
                     ]
                 }, {

@@ -2,6 +2,8 @@
 
 const docsTask = require('./task').default;
 const nodePath = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
+
 webpackConfig = {
   entry: {
     index: nodePath.resolve(__dirname, 'docs/src/App.tsx'),
@@ -15,11 +17,14 @@ webpackConfig = {
     nodePath.resolve(__dirname, 'component'),
     nodePath.resolve(__dirname, 'app')
   ],
-  copy: [{
-    orginPath: './node_modules/antd/dist/antd.min.css',
-    targetDir: 'docs/dist/css',
-    targetFileName: 'antd.min.css'
-  }],
+  plugins: [
+    new CopyPlugin([{
+      from: './node_modules/antd/dist/antd.min.css',
+      to: 'css/antd.min.css'
+    }], {
+      copyUnmodified: true
+    }),
+  ]
 };
 
 module.exports = docsTask(webpackConfig);

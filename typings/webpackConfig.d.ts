@@ -7,16 +7,8 @@ interface WebpackConfig {
   outputDir?: string;
   /** 文件加载时的路径 */
   publicPath?: string;
-  /** 是否清除output的目录 */
-  cleanDir?: boolean;
   /** 是否添加版本号 */
   addVersion?: boolean;
-  /** 复制文件到指定目录 */
-  copy?: {
-    orginPath: string;
-    targetDir: string;
-    targetFileName: string;
-  }[];
   /** ts-loader include */
   tsInclude?: string[];
   /** 是否使用dll出来的vender */
@@ -25,6 +17,8 @@ interface WebpackConfig {
   platform?: '桌面' | '移动';
   /** 是否使用CSS Module */
   cssModule?: boolean;
+  /** webpack插件 */
+  plugins?: any[];
 }
 
 declare let webpackConfig: WebpackConfig;
