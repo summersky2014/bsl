@@ -106,6 +106,7 @@ function webpackConfig(params) {
                     loaders: ['ts-loader'],
                     include: [
                         path.resolve(dirname, 'src'),
+                        path.resolve(dirname, './node_modules/bsl'),
                         ...tsInclude
                     ]
                 }, {
@@ -114,6 +115,13 @@ function webpackConfig(params) {
                     options: {
                         extract: true,
                         esModule: false,
+                        symbolId: (filePath) => {
+                            const indexOfStr = 'src' + path.sep;
+                            const srcIndex = filePath.indexOf(indexOfStr);
+                            const symbolId = filePath.substr(srcIndex + indexOfStr.length).replace('.svg', '').replace(/\/|\\/g, '_');
+                            // console.log('filePath', filePath)
+                            return symbolId
+                        },
                         spriteFilename: addVersion ? `/svg/sprite_${pkg.version}.svg` : `/svg/sprite.svg`
                     }
                 }, {

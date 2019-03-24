@@ -115,6 +115,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
         loaders: ['ts-loader'],
         include: [
           path.resolve(dirname, 'src'),
+          path.resolve(dirname, './node_modules/bsl'),
           ...tsInclude
         ]
       }, {
@@ -123,6 +124,12 @@ export default function webpackConfig(params: WebpackConfig): Config {
         options: {
           extract: true,
           esModule: false,
+          symbolId: (filePath: string) => {
+            const indexOfStr = 'src' + path.sep;
+            const srcIndex = filePath.indexOf(indexOfStr);
+            const symbolId = filePath.substr(srcIndex + indexOfStr.length).replace('.svg', '').replace(/\/|\\/g, '_');
+            return symbolId;
+        },
           spriteFilename: addVersion ? `/svg/sprite_${pkg.version}.svg` : `/svg/sprite.svg`
         }
       }, {

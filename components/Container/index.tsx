@@ -18,7 +18,7 @@ export interface Props extends BSL.ComponentProps {
 }
 
 const prefixCls = 'bsl-container';
-const Container = (props: Props) => {
+const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>) => {
   const {
     className, style, flexDirection, flexWrap, justifyContent, alignItems, alignContent, children, order, id,
     flex, alignSelf, onClick
@@ -38,11 +38,11 @@ const Container = (props: Props) => {
       })}
       style={style}
       id={id}
+      ref={ref}
       onClick={onClick}
     >
       {children}
     </div>
   );
-};
-
+});
 export default Container;

@@ -267,12 +267,15 @@ select,
 textarea {
   font-family: $family; /* 1 */
   font-size: 100%; /* 1 */
-  line-height: 1; /* 1 */
   margin: 0; /* 2 */
   resize: none;
   padding: 0;
   border: 0;
   background: #fff;
+  /* 光标颜色 */
+  caret-color: currentColor;
+  -webkit-appearance: none;
+  color: inherit;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -492,4 +495,17 @@ iframe[height="0"], iframe[width="0"] {
 blockquote {
   margin: 0;
   padding: 0;
+}
+
+:global(.bsl_component) {
+  &[disabled] {
+    color: #999;
+    pointer-events: none;
+    cursor: not-allowed !important;
+    user-select: none;
+  }
+  
+  &[data-state=error] {
+    color: #ff0000;
+  }
 }
