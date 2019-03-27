@@ -337,6 +337,26 @@ button:-moz-focusring,
   outline: 1px dotted ButtonText;
 }
 
+button {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:active {
+    // background-color: $fill-tap;
+    opacity: 0.8;
+  }
+  &:disabled {
+    color: fade-out( #000, 0.7);
+    opacity: 0.6;
+  }
+}
+
 /**
 * Correct the padding in Firefox.
 */
@@ -498,6 +518,10 @@ blockquote {
 }
 
 :global(.bsl_component) {
+  &[data-placeholder] {
+    color: #c3c3c3;
+  }
+
   &[disabled] {
     color: #999;
     pointer-events: none;
@@ -508,4 +532,9 @@ blockquote {
   &[data-state=error] {
     color: #ff0000;
   }
+ 
+}
+
+::-webkit-input-placeholder {
+  color: #c3c3c3;
 }
