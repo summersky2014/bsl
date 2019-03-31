@@ -2,8 +2,8 @@ import { createContext,  } from 'react';
 import { createSubscription } from 'create-subscription';
 import { appData } from './core';
 
-type ListenerCallback = (currentTime: number, overTime: number) => boolean;
-interface Listen {
+export type ListenerCallback = (currentTime: number, overTime: number) => boolean;
+export interface Listen {
   execTimestamp: number;
   overTime: number;
   callback: ListenerCallback;
@@ -37,15 +37,19 @@ function updateLoop(): void {
     const time = Date.now();
     for (let i = 0; i < listensLength; i++) {
       const listen = listens[i];
-      // execTimestamp为0代表还没初始化
-      if (listen.execTimestamp === 0) {
-        listen.execTimestamp = time;
-      }
-      listen.overTime = time - listen.execTimestamp;
-      // callback返回ture表示函数已正确执行，将重置execTimestamp
+
       // 判断listen是否存在，有可能callback里会执行removeListener，然后isten被销毁了
-      if (listen.callback(time, listen.overTime) && listen) {
-        listen.execTimestamp = time;
+      if (listen) {
+        // execTimestamp为0代表还没初始化
+        if (listen.execTimestamp === 0) {
+          listen.execTimestamp = time;
+        }
+        listen.overTime = time - listen.execTimestamp;
+        // callback返回ture表示函数已正确执行，将重置execTimestamp
+        
+        if (listen.callback(time, listen.overTime)) {
+          listen.execTimestamp = time;
+        }
       }
     }
   }
