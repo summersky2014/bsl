@@ -1,6 +1,4 @@
 import BSL from '../typings';
-import { createContext,  } from 'react';
-import { createSubscription } from 'create-subscription';
 import { History } from 'history';
 import PageComponent from './PageComponent';
 
@@ -25,9 +23,6 @@ export interface AppProps extends AppBaseProps, BSL.PageProps<any> {
   history: History;
 }
 
-let subscribeCallback: (model: object) => void;
-let dispatchLock: boolean = false;
-let rafId: number | undefined = 1;
 /** 应用运行时的数据 */
 const appData: AppData = {
   /** 储存页面 */
@@ -44,51 +39,8 @@ const appData: AppData = {
   currentPageId: 1,
 };
 
-const Context = createContext({});
-const Subscription: React.ComponentFactory<any, any> = createSubscription({
-  getCurrentValue: (model: object) => {
-    return model;
-  },
-  subscribe: (model: object, callback: (model: object) => void) => {
-    subscribeCallback = callback;
-    return () => null;
-  }
-});
 
-/** 在整个应用生命周期中每帧检测是否需要更新界面 */
-function rafDispatch(): void {
-  if (dispatchLock === false && subscribeCallback) {
-    subscribeCallback({});
-    dispatchLock = true;
-  }
 
-  if (appData.inputFoucs && rafId) {
-    cancelAnimationFrame(rafId);
-    rafId = undefined;
-  } else {
-    rafId = requestAnimationFrame(rafDispatch);
-  }
-}
-
-/** 用于数据更新 */
-function dispatch(): void {
-  // 判断是否是从输入框触发的，如果是就不加setTimeout，因为输入框加setTimeout在输入中文时会有BUG
-  if (appData.inputFoucs) {
-    subscribeCallback({});
-    appData.inputFoucs = false;
-    dispatchLock = true;
-  } else {
-    dispatchLock = false;
-    if (rafId === undefined) {
-      rafDispatch();
-    }
-  }
-}
-
-// /** 获取当前页面 */
-// function getCurrentPage(): PageType | undefined {
-//   return appData.pages[appData.pages.length - 1];
-// }
 
 /* 获取上N个页面的类声明 */
 function getPrevPageClassDeclaration(prevCount: number): PageType | undefined {
@@ -136,11 +88,7 @@ function pop(nextProps: AppProps): void {
 export {
   appData,
   getPrevPageClassDeclaration,
-  rafDispatch,
-  dispatch,
   isReplaceAction,
   push,
   pop,
-  Context,
-  Subscription
 };

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
-import { appData, getPrevPageClassDeclaration, rafDispatch, pop, AppProps as Props, AppBaseProps as BaseProps } from './core';
+import { appData, getPrevPageClassDeclaration, pop, AppProps as Props, AppBaseProps as BaseProps } from './core';
+import { updateLoop } from './model';
 // import Toast from '../Toast';
 
 interface State {
@@ -44,7 +45,7 @@ class PageStack extends React.Component<BaseProps, State> {
   }
 
   public componentDidMount(): void {
-    rafDispatch();
+    updateLoop();
   }
 
   public static getDerivedStateFromProps(nextProps: Props, prevState: State): State | null {
