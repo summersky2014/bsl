@@ -1,7 +1,7 @@
 import BSL from '../../typings/index';
 import * as React from 'react';
 
-export interface Props extends BSL.ComponentProps {
+export interface Props extends BSL.ComponentProps, React.SVGAttributes<SVGElement> {
   onClick?: BSL.OnClick<SVGElement>;
   /** svg sprite的id */
   src: string;
