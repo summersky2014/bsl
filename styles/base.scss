@@ -533,7 +533,10 @@
    &[data-state=error] {
      color: #ff0000;
    }
-  
+ 
+   &[data-hide=true], &_hide {
+     display: none;
+   }
  }
  
  ::-webkit-input-placeholder {
