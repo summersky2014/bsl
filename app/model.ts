@@ -79,7 +79,9 @@ function addListener(callback: ListenerCallback): void {
 /** 向更新循环删除回调 */
 function removeListener(callback: ListenerCallback): void {
   const index = listens.findIndex((item) => item.callback === callback);
-  listens.splice(index, 1);
+  if (index >= 0) {
+    listens.splice(index, 1);
+  }
 }
 
 /** 每帧执行 */
