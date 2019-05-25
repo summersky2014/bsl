@@ -7,25 +7,28 @@ export interface Props extends BSL.ComponentProps {
   to: string;
   /** 是否替换当前路由 */
   replace?: boolean;
+  children?: any;
+  /** 页面参数 */
+  query?: (string | number)[];
   /** 路由跳转前执行 */
   onBefore?: (beforePathname: string, afterPathname: string) => void;
   /** 路由跳转后执行 */
   onAfter?: (beforePathname: string, afterPathname: string) => void;
-  children?: any;
 }
 
-function link(url: string, replace: boolean): void {
-  if (appData.history!.location.pathname !== url) {
+function link(url: string, replace: boolean, query?: (string | number)[]): void {
+  const qsurl = query ? `${url}/${query.join('/')}` : url;
+  if (appData.history!.location.pathname !== qsurl) {
     if (replace) {
-      appData.history!.replace(url);
+      appData.history!.replace(qsurl);
     } else {
-      appData.history!.push(url);
+      appData.history!.push(qsurl);
     }
   }
 }
 
 const Link = (props: Props) => {
-  const { className, style, id, children, to, replace, onBefore, onAfter } = props;
+  const { className, style, id, children, to, replace, onBefore, onAfter, query } = props;
   return (
     <div
       className={className}
@@ -41,9 +44,9 @@ const Link = (props: Props) => {
         }
 
         if (replace) {
-          link(to, true);
+          link(to, true, query);
         } else {
-          link(to, false);
+          link(to, false, query);
         }
 
         if (onAfter) {
@@ -54,11 +57,11 @@ const Link = (props: Props) => {
   );
 };
 
-Link.go = function(url: string): void {
-  link(url, false);
+Link.go = function(url: string, query?: (string | number)[]): void {
+  link(url, false, query);
 };
-Link.replace = function(url: string): void {
-  link(url, true);
+Link.replace = function(url: string, query?: (string | number)[]): void {
+  link(url, true, query);
 };
 Link.goBack = function(): void {
   appData.history!.goBack();
