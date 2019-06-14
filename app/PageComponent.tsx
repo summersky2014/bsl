@@ -7,8 +7,8 @@ export interface PageProps<Match> extends BSL.PageProps<Match> {
   entrytime: number;
 }
 
-abstract class PageComponent<Props, State, Match> extends React.Component<Props & PageProps<Match>, State> {
-  constructor(props: Props & PageProps<Match>, state: State) {
+abstract class PageComponent extends React.Component<any, any> {
+  constructor(props: any, state: any) {
     super(props, state);
 
     if (appData.env === 'development') {
@@ -41,7 +41,7 @@ abstract class PageComponent<Props, State, Match> extends React.Component<Props 
 
   /** Page初始化时调用 */
   protected init(): void {
-    appData.pages.push(this as PageComponent<any, any, any>);
+    appData.pages.push(this as PageComponent);
     push(this.props as any);
     this.isCallInit = true;
 

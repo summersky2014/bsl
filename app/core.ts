@@ -2,10 +2,8 @@ import BSL from '../typings';
 import { History } from 'history';
 import PageComponent from './PageComponent';
 
-type PageType = PageComponent<BSL.PageProps<any>, any, any>;
-
 interface AppData {
-  pages: PageComponent<BSL.PageProps<any>, any, any>[];
+  pages: PageComponent[];
   scrollLocation: number[];
   history: History | undefined;
   inputFoucs: boolean;
@@ -39,11 +37,8 @@ const appData: AppData = {
   currentPageId: 1,
 };
 
-
-
-
 /* 获取上N个页面的类声明 */
-function getPrevPageClassDeclaration(prevCount: number): PageType | undefined {
+function getPrevPageClassDeclaration(prevCount: number): PageComponent | undefined {
   return appData.pages[appData.pages.length - prevCount];
 }
 
