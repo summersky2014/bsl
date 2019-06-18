@@ -6,7 +6,7 @@ interface State {
   status: string;
 }
 
-class B extends PageComponent<any, any, any> {
+class B extends PageComponent {
   constructor(props: any, state: any) {
     super(props, state);
     this.init();

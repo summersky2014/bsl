@@ -39,6 +39,7 @@ declare namespace BSL {
     data: any;
     code: ResponseCode;
     msg: string;
+    cacheKey?: string;
   }
 }
 

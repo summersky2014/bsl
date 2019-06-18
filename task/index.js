@@ -10,7 +10,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 function webpackConfig(params) {
-    const { entry, dirname, publicPath, vender, platform, cssModule } = params;
+    const { entry, dirname, publicPath, vender, cssModule } = params;
     const addPlugins = params.plugins || [];
     const addVersion = params.addVersion === false ? false : true;
     const outputDir = params.outputDir || 'build';
@@ -43,9 +43,7 @@ function webpackConfig(params) {
             options: {
                 ident: 'postcss',
                 plugins: [
-                    require('autoprefixer')({
-                        browsers: platform === '桌面' ? ['Firefox > 20', 'ie > 9', 'chrome > 39'] : ['iOS >= 7', 'Android >= 4']
-                    }),
+                    require('autoprefixer')(),
                 ],
                 sourceMap: isDev
             }
@@ -119,8 +117,7 @@ function webpackConfig(params) {
                             const indexOfStr = 'src' + path.sep;
                             const srcIndex = filePath.indexOf(indexOfStr);
                             const symbolId = filePath.substr(srcIndex + indexOfStr.length).replace('.svg', '').replace(/\/|\\/g, '_');
-                            // console.log('filePath', filePath)
-                            return symbolId
+                            return symbolId;
                         },
                         spriteFilename: addVersion ? `/svg/sprite_${pkg.version}.svg` : `/svg/sprite.svg`
                     }

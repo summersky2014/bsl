@@ -1,7 +1,7 @@
 import BSL from '../typings';
 import * as React from 'react';
 import { push, appData } from './core';
-import { Context } from './model';
+import { Context } from './Scheduler';
 
 export interface PageProps<Match> extends BSL.PageProps<Match> {
   entrytime: number;

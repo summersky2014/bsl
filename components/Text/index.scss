@@ -1,0 +1,31 @@
+@import '../../Mobile/common.scss';
+$prefix: bsl-text;
+
+:global(.#{$prefix}) {
+  &-ellipsis {
+    @include ellipsis();
+  }
+
+  &-ellipsis-lines {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  &-justify {
+    display: flex;
+
+    &-item {
+      flex: 1;
+    }
+  }
+
+  @for $i from 0 through 10 {
+    &-line-clamp-#{$i} {
+      -webkit-line-clamp: $i;
+    }
+  }
+}

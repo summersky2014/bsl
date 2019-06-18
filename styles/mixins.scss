@@ -1,0 +1,56 @@
+
+// 多行多余字符省略
+@mixin ellipsis-lines($lines: 2) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+// 单行省略
+@mixin ellipsis() {
+  width: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;  
+  word-wrap: break-word;
+}
+
+@mixin border($color, $direction) {
+  &:after {
+    content: ""; 
+    box-sizing: border-box; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    transform: scale(0.5); 
+    transform-origin: 0 0; 
+    background: $color;
+    pointer-events: none;
+
+    @if ($direction == left) {
+      width: 1px; 
+      height: 200%; 
+      left: 0;
+      top: 0;
+    } @else if ($direction == right) {
+      width: 1px; 
+      height: 200%; 
+      right: 0;
+      top: 0;
+    } @else if ($direction == top) {
+      width: 200%; 
+      height: 1px; 
+      left: 0;
+      top: 0;
+    } @else if ($direction == bottom) {
+      width: 200%; 
+      height: 1px; 
+      left: 0;
+      bottom: 0;
+    }
+  }
+}

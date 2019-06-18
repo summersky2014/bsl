@@ -19,7 +19,6 @@
     ],
     "include": [
         "examples",
-        "tests",
         "components",
         "utils",
         "app",

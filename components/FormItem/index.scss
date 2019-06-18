@@ -1,0 +1,13 @@
+$prefix: bsl-formitem;
+
+:global(.#{$prefix}) {
+  &-prompt {
+    width: 20px;
+    height: 20px;
+    background: #ffe2e2;
+    fill: #ff7777;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 12px;
+  }
+}

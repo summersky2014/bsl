@@ -2,21 +2,24 @@
 
 const task = require('./task').default;
 const path = require('path');
+const resolve = (filePath) => path.resolve(__dirname, filePath);
+
 webpackConfig = {
   entry: {
-    PageStack: path.resolve(__dirname, 'examples/PageStack'),
-    Container: path.resolve(__dirname, 'examples/Container'),
-    Icon: path.resolve(__dirname, 'examples/Icon'),
+    PageStack: resolve('examples/PageStack'),
+    Container: resolve('examples/Container'),
+    Icon: resolve('examples/Icon'),
   },
   dirname: __dirname,
   addVersion: false,
   vender: false,
   publicPath: '/build/',
   tsInclude: [
-    path.resolve(__dirname, 'examples'),
-    path.resolve(__dirname, 'component'),
-    path.resolve(__dirname, 'app'),
-    path.resolve(__dirname, 'hooks'),
+    resolve('examples'),
+    resolve('component'),
+    resolve('app'),
+    resolve('hooks'),
+    resolve('utils')
   ]
 };
 

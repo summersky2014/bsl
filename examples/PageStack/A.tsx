@@ -7,7 +7,7 @@ interface State {
   count: number;
 }
 
-class A extends PageComponent<any, State, any> {
+class A extends PageComponent {
   constructor(props: any, state: State) {
     super(props, state);
     this.init();

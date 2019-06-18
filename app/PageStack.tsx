@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
 import { appData, getPrevPageClassDeclaration, pop, AppProps as Props, AppBaseProps as BaseProps } from './core';
-import { updateLoop } from './model';
-// import Toast from '../Toast';
+import { updateLoop } from './Scheduler';
+import Toast, { prefixCls } from '../components/Toast';
 
 interface State {
   /** 当前匹配的路由 */
@@ -53,12 +53,12 @@ class PageStack extends React.Component<BaseProps, State> {
       return null;
     }
     const nextHistory = nextProps.history;
-    // const loadingElem = document.querySelector('.yj-component-toast-loading');
+    const loadingElem = document.querySelector('.' + prefixCls);
 
     // 防止Toast.loading卡死页面
-    // if (loadingElem) {
-    //   Toast.close();
-    // }
+    if (loadingElem) {
+      Toast.close();
+    }
 
     if (nextHistory.action === 'POP') {
       pop(nextProps);

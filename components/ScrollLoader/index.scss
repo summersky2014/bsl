@@ -1,0 +1,8 @@
+$prefix: bsl-scrollloader;
+
+:global(.#{$prefix}) {
+  padding: 12px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}

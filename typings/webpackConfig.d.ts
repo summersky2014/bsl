@@ -13,8 +13,6 @@ interface WebpackConfig {
   tsInclude?: string[];
   /** 是否使用dll出来的vender */
   vender?: boolean;
-  /** 平台 */
-  platform?: '桌面' | '移动';
   /** 是否使用CSS Module */
   cssModule?: boolean;
   /** webpack插件 */

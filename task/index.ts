@@ -17,7 +17,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 
 export default function webpackConfig(params: WebpackConfig): Config {
-  const { entry, dirname, publicPath, vender, platform, cssModule } = params;
+  const { entry, dirname, publicPath, vender, cssModule } = params;
   const addPlugins = params.plugins || [];
   const addVersion = params.addVersion === false ? false : true;
   const outputDir = params.outputDir || 'build';
@@ -50,9 +50,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
     options: {
       ident: 'postcss',
       plugins: [
-        require('autoprefixer')({
-          browsers: platform === '桌面' ? ['Firefox > 20', 'ie > 9', 'chrome > 39'] : ['iOS >= 7', 'Android >= 4']
-        }),
+        require('autoprefixer')(),
       ],
       sourceMap: isDev
     }

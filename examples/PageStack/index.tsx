@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Route, HashRouter } from 'react-router-dom';
-import { Subscription, Context } from '../../app/core';
+import { Subscription, Context } from '../../app/Scheduler';
 import AppStack from '../../app/PageStack';
 import A from './A';
 import B from './B';

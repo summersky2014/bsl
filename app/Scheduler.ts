@@ -46,7 +46,6 @@ function updateLoop(): void {
         }
         listen.overTime = time - listen.execTimestamp;
         // callback返回ture表示函数已正确执行，将重置execTimestamp
-        
         if (listen.callback(time, listen.overTime)) {
           listen.execTimestamp = time;
         }

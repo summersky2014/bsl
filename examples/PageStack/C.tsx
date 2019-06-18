@@ -2,7 +2,7 @@ import * as React from 'react';
 import PageComponent from '../../app/PageComponent';
 import Link from '../../components/Link';
 
-class C extends PageComponent<any, any, any> {
+class C extends PageComponent {
   constructor(props: any, state: any) {
     super(props, state);
     this.init();

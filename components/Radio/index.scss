@@ -1,0 +1,27 @@
+@import '../../Mobile/common.scss';
+$prefix: bsl-radio;
+
+:global(.#{$prefix}) {
+  display: flex;
+  align-content: center;
+
+  &-unselect, &-select {
+    width: 23px;
+    height: 23px;
+  }
+  
+  &-unselect {
+    border: 1px solid #aeaeae;
+    border-radius: 50%;
+  }
+  
+  &-select {
+    fill: $primary;
+  }
+
+  &-text {
+    font-size: 17px;
+    color: #000;
+    margin-left: 10px;
+  }
+}
