@@ -11,13 +11,13 @@ export interface Props extends RequestOption, BSL.ComponentProps {
   /** 用于刷新接口， 触发useEffect */
   refreshId?: any;
   /** 请求成功 */
-  onComplete?: (response: BSL.RequestResponse) => void;
+  onComplete?: (response: BSL.RequestResponse<any>) => void;
   /** 请求成功，但数据为空 */
-  onEmpty?: (response: BSL.RequestResponse) => void;
+  onEmpty?: (response: BSL.RequestResponse<any>) => void;
   /** catch时执行 */
   onFail?: (error?: Error) => void;
   /** onFinally先于onComplete和onFail执行 */
-  onFinally?: (response?: BSL.RequestResponse) => void;
+  onFinally?: (response?: BSL.RequestResponse<any>) => void;
 }
 
 function RequestView(props: Props) {

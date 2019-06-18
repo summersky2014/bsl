@@ -35,10 +35,11 @@ declare namespace BSL {
   }
 
   /** 请求的响应结构 */
-  interface RequestResponse {
-    data: any;
+  interface RequestResponse<T> {
+    data: T;
     code: ResponseCode;
     msg: string;
+    /** 缓存数据的key */
     cacheKey?: string;
   }
 }

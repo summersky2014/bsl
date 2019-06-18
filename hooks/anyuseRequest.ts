@@ -26,10 +26,10 @@ export interface Option extends Omit<AxiosRequestConfig, 'url', 'method'> {
 
 export const cacheData: Map<string, any> = new Map();
 
-function useRequest(): [(option: Option) => Promise<BSL.RequestResponse>, Canceler | null, (key: string) => void] {
+function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, Canceler | null, (key: string) => void] {
   const clearCache = (key: string) => cacheData.delete(key);
   let cancelToken: (() => void) | null = null;
-  const request = (option: Option): Promise<BSL.RequestResponse> => {
+  const request = (option: Option): Promise<BSL.RequestResponse<any>> => {
     return new Promise((resolve, reject) => {
       const { api } = option;
       const urlSearchParams = new URLSearchParams();
@@ -41,7 +41,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse>, Cancel
       if (option.cache) {
         const key = createKey();
         if (cacheData.has(key)) {
-          const response: BSL.RequestResponse = {
+          const response: BSL.RequestResponse<any> = {
             data: cacheData.get(key),
             code: 200,
             msg: ''
@@ -88,14 +88,14 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse>, Cancel
             key
           });
         } else {
-          const response: BSL.RequestResponse = {
+          const response: BSL.RequestResponse<null> = {
             data: null,
             code: 500,
             msg: '网络错误'
           };
           resolve(response);
         }
-      }).catch((err: Error) => {
+      }).catch((err) => {
         reject(err);
       });
     });
@@ -103,5 +103,4 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse>, Cancel
 
   return [request, cancelToken, clearCache];
 }
-
 export default useRequest;

@@ -92,7 +92,7 @@ function ScrollLoader(props: Props) {
       <RequestView
         {...props}
         refreshId={loaderRefreshId + props.refreshId}
-        onEmpty={(res: BSL.RequestResponse) => {
+        onEmpty={(res: BSL.RequestResponse<any[]>) => {
           updateState(isSourceDataEmpty ? 'empty' : 'over');
           if (props.onEmpty) {
             props.onEmpty(res);

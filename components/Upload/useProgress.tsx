@@ -4,7 +4,7 @@ import axios, { Canceler, AxiosRequestConfig } from 'axios';
 interface OnUploadProgress extends AxiosRequestConfig {
   api: string;
   /** 上传成功 */
-  onComplete: (res: BSL.RequestResponse) => void;
+  onComplete: (res: BSL.RequestResponse<any>) => void;
   /**
    * 上传异常,还未到服务器返回阶段/
    * 上传失败，服务器状态码返回非200
@@ -51,7 +51,7 @@ function UploadProgress(): [(config: OnUploadProgress) => void, (() => void) | n
         }
       }
     }).then((response: any) => {
-      const res = response as BSL.RequestResponse;
+      const res = response as BSL.RequestResponse<any>;
       if (onFinally) {
         onFinally();
       }
