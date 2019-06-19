@@ -1,0 +1,15 @@
+$prefix: bsl-stateview-empty;
+
+:global(.#{$prefix}) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &-label {
+    color: rgba(0,0,0,0.65);
+    font-size: 16px;
+    padding-top: 10px;
+    text-align: center;
+  }
+}

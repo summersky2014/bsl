@@ -30,6 +30,8 @@ class InputHelper extends Helper<string> {
       } else {
         this.state = this.validate(value) ? 'complete' : 'fail';
       }
+    } else {
+      this.state = 'undefined';
     }
 
     this.value.set(value);

@@ -4,7 +4,7 @@ build
 docs
 examples
 node_moudles
-test
+tests
 .gitignore
 .npmignore
 .sass-lint.yml

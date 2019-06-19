@@ -38,6 +38,7 @@ function webpackConfig(params) {
         }),
         ...addPlugins
     ];
+    console.log(path.resolve(__dirname, '../styles/mixins.scss'));
     const extract = [{
             loader: 'postcss-loader',
             options: {
@@ -53,6 +54,13 @@ function webpackConfig(params) {
                 outputStyle: 'expanded',
                 sourceMap: isDev
             }
+        }, {
+            loader: 'sass-resources-loader',
+            options: {
+                resources: [
+                    path.resolve(__dirname, '../styles/mixins.scss'),
+                ]
+            },
         }];
     if (cssModule !== false) {
         extract.unshift({
@@ -76,9 +84,7 @@ function webpackConfig(params) {
         plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
     return {
-        entry: entry || {
-            index: path.resolve(dirname, './src/entry/index.tsx'),
-        },
+        entry,
         devtool: isDev ? 'inline-source-map' : false,
         output: {
             publicPath,

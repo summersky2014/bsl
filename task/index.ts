@@ -45,6 +45,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
     }),
     ...addPlugins
   ];
+  console.log(path.resolve(__dirname, '../styles/mixins.scss'))
   const extract: any[] = [{
     loader: 'postcss-loader',
     options: {
@@ -60,6 +61,13 @@ export default function webpackConfig(params: WebpackConfig): Config {
       outputStyle: 'expanded',
       sourceMap: isDev
     }
+  }, {
+    loader: 'sass-resources-loader',
+    options: {
+      resources: [
+        path.resolve(__dirname, '../styles/mixins.scss'),
+      ]
+    },
   }];
 
   if (cssModule !== false) {
@@ -73,8 +81,24 @@ export default function webpackConfig(params: WebpackConfig): Config {
         localIdentName: '[local]_[hash:base64:5]'
       }
     });
+    // extract.unshift({
+    //   loader: 'dts-css-modules-loader',
+    //   options: {
+    //     namedExport: true,
+    //   }
+    // }, {
+    //   loader: 'css-loader',
+    //   options: {
+    //     modules: {
+    //       mode: 'local',
+    //       localIdentName: '[local]_[hash:base64:5]',
+    //     },
+    //     localsConvention: 'camelCaseOnly',
+    //     // localIdentName: '[local]_[hash:base64:5]',
+    //     onlyLocals: true,
+    //   }
+    // });
   }
-
   if (isDev && vender !== false) {
     plugins.push(new webpack.DllReferencePlugin({
       context: 'bsl',
@@ -85,9 +109,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
   }
 
   return {
-    entry: entry || {
-      index: path.resolve(dirname, './src/entry/index.tsx'),
-    },
+    entry,
     devtool: isDev ? 'inline-source-map' : false,
     output: {
       publicPath,

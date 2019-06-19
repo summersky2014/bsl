@@ -1,4 +1,4 @@
-@import '../../Mobile/common.scss';
+@import '../../styles/mixins.scss';
 $prefix: bsl-text;
 
 :global(.#{$prefix}) {

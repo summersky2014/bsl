@@ -2,15 +2,10 @@ import BSL from '../typings';
 import axios, { AxiosRequestConfig, Canceler, Method } from 'axios';
 import RequestView from '../components/RequestView';
 
-type Omit<A, B extends keyof A, C extends keyof A> = Pick<A, ({
-  [K in keyof A]: K
-} & {
-  [K in B]: never
-} & {
-  [K in C]: never
-})[keyof A]>;
+type Omit_url = Omit<AxiosRequestConfig, 'url'>;
+type Omit_url_method = Omit<Omit_url, 'method'>;
 
-export interface Option extends Omit<AxiosRequestConfig, 'url', 'method'> {
+export interface Option extends Omit_url_method {
   /** 请求接口的名称 */
   api: string;
   /**

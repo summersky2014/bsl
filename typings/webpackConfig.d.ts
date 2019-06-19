@@ -1,6 +1,6 @@
 interface WebpackConfig {
   dirname: string;
-  entry?: {
+  entry: {
     [key: string]: any;
   };
   /** 文件输出路径 */

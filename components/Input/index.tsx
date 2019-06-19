@@ -5,17 +5,9 @@ import { FromTypeProps } from '../Form';
 import Helper from './Helper';
 import memoAreEqual from '../../utils/memoAreEqual';
 
-type Omit<A, B extends keyof A, C extends keyof A> = Pick<A, ({
-  [K in keyof A]: K
-} & {
-  [K in B]: never
-} & {
-  [K in C]: never
-})[keyof A]>;
-
-export interface Props extends
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange', 'value'>,
-  FromTypeProps<string> {
+type Omit_onChange = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
+type Omit_onChange_value = Omit<Omit_onChange, 'value'>;
+export interface Props extends Omit_onChange_value, FromTypeProps<string> {
 }
 
 function Input(props: Props) {

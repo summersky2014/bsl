@@ -2,15 +2,16 @@ const webpack = require('webpack');
 const path = require('path');
 
 const vendors = [
-  // 'axios',
-  // 'better-scroll',
-  // 'classnames',
-  // 'lodash',
-  // 'url-search-params',
+  'axios',
+  'better-scroll',
+  'classnames',
+  'core-js',
   'react',
   'react-dom',
   'react-router',
   'react-router-dom',
+  'exif-js',
+  'swipe-js-iso',
 ];
 
 module.exports = {

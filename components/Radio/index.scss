@@ -1,4 +1,3 @@
-@import '../../Mobile/common.scss';
 $prefix: bsl-radio;
 
 :global(.#{$prefix}) {
@@ -15,10 +14,6 @@ $prefix: bsl-radio;
     border-radius: 50%;
   }
   
-  &-select {
-    fill: $primary;
-  }
-
   &-text {
     font-size: 17px;
     color: #000;

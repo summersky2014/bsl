@@ -1,5 +1,4 @@
-@import '../../Mobile/common.scss';
-
+@import '../../styles/mixins.scss';
 $prefix: bsl-modal;
 
 :global(.#{$prefix}) {
