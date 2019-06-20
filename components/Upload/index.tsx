@@ -88,7 +88,7 @@ function Upload(props: Props) {
         type="file"
         onChange={onChange}
         disabled={!!src && !disabled}
-        accept={mode === 'image' ? 'image/gif,image/jpeg,image/jpg,image/png' : undefined}
+        accept={mode === 'image' ? 'image/*' : undefined}
       />
       {mode === 'image' ? (
         <img className={`${prefixCls}-img bsl_component`} src={src} data-hide={!src} />
