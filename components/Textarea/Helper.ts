@@ -1,5 +1,5 @@
 import Helper, { Options } from '../Form/Helper';
-import Dispatcher from '.../../../app/Dispatcher';
+import Dispatcher from '../../app/Dispatcher';
 import validate from '../../utils/validate';
 import { Type } from '../SwitchView';
 
