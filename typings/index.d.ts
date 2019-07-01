@@ -12,6 +12,8 @@ declare namespace BSL {
   type ResponseCode = (
     /** 请求成功，对应complete状态 */
     200 |
+    /** 未登录 */
+    403 |
     /** 数据为空，对应empty状态 */
     404 |
     /** 请求超时, 对应timeout状态 */
