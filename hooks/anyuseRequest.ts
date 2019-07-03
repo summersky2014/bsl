@@ -31,6 +31,8 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, C
       const createKey = () => JSON.stringify({ api: option.api, params: option.params, data: option.data });
       const method = (option.method || (axios.defaults.method && axios.defaults.method.toLocaleUpperCase())) as Method;
       const defualtData = RequestView.defaultData;
+      const contentType = axios.defaults.headers['content-type'] || axios.defaults.headers['Content-Type'];
+      const postData: Record<string, string | number | boolean | object> = {};
 
       // 判断是否有缓存
       if (option.cache) {
@@ -49,8 +51,8 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, C
       if (defualtData && method === 'POST') {
         Object.keys((defualtData)).forEach((key) => {
           urlSearchParams.append(key, defualtData[key]);
+          postData[key] = defualtData[key];
         });
-
       }
 
       // 去除object中值为undefined的字段
@@ -58,13 +60,14 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, C
         Object.keys((option.data)).forEach((key) => {
           if (option.data[key] !== undefined) {
             urlSearchParams.append(key, option.data[key]);
+            postData[key] = option.data[key];
           }
         });
       }
 
       axios({
         ...option,
-        data: urlSearchParams,
+        data: contentType === 'application/json' ? postData : urlSearchParams,
         url: api,
         method,
         cancelToken: new axios.CancelToken((cancel) => {
