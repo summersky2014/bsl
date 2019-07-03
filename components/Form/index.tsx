@@ -11,6 +11,7 @@ import anyuseRequest from '../../hooks/anyuseRequest';
 interface Props extends BSL.ComponentProps {
   api?: RequestProps['api'];
   data?: RequestProps['data'];
+  method?: RequestProps['method'];
   /** 请求成功 */
   onComplete?: RequestProps['onComplete'];
   /** catch时执行 */
@@ -62,7 +63,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
 }
 
 function Form(props: Props) {
-  const { className, id, style, children, onSubmitBefore, onSubmit, api, data, onComplete, onFail, onFinally } = props;
+  const { className, id, style, children, onSubmitBefore, onSubmit, api, data, method, onComplete, onFail, onFinally } = props;
   const [request, cancelToken] = anyuseRequest();
 
   React.useEffect(() => {
@@ -97,6 +98,7 @@ function Form(props: Props) {
             request({
               api,
               data,
+              method
             }).then((res) => {
               if (onFinally) {
                 onFinally();
