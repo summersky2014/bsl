@@ -8,7 +8,7 @@ import Choice from '../Choice';
 import { Props as RequestProps } from '../RequestView';
 import anyuseRequest from '../../hooks/anyuseRequest';
 
-interface Props extends BSL.ComponentProps {
+export interface Props extends BSL.ComponentProps {
   api?: RequestProps['api'];
   data?: RequestProps['data'];
   method?: RequestProps['method'];
@@ -41,7 +41,6 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
   React.Children.forEach(children, (child) => {
     for (let i = 0; i < formComponent.length; i++) {
       const type = child.type;
-
       if (type === formComponent[i]) {
         const props = child.props as FromTypeProps<any>;
         if (props.onChange(props.value) === false) {
@@ -55,7 +54,6 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
         break;
       }
     }
-
     if (child && child.props && child.props.children) {
       formCheck(child.props.children, error);
     }

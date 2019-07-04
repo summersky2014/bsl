@@ -10,7 +10,7 @@ const svgFile = {
   prompt: variable.svgRootPath + require('../../assets/prompt.svg').id,
 };
 
-interface Props extends ContainerProps {
+export interface Props extends ContainerProps {
   /** 校验失败的文字 */
   validatePrompt?: string;
   /** 必填为空提示文字 */
