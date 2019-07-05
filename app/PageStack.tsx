@@ -53,7 +53,7 @@ class PageStack extends React.Component<BaseProps, State> {
       return null;
     }
     const nextHistory = nextProps.history;
-    const loadingElem = document.querySelector('.' + prefixCls);
+    const loadingElem = document.querySelector('.' + prefixCls + '-loading');
 
     // 防止Toast.loading卡死页面
     if (loadingElem) {

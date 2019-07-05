@@ -17,7 +17,7 @@ export default function(config: RoutesConifg) {
     const item = config[key];
     const component = item.component as any as React.ComponentClass<any>;
     routes.push(
-      <Route exact key={key} path={item.base + item.pathParams || ''} component={component} />
+      <Route exact key={key} path={item.base + (item.pathParams || '')} component={component} />
     );
   });
 
