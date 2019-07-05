@@ -2,6 +2,7 @@
 
 import { RouteComponentProps } from 'react-router';
 import { Location } from 'history';
+import PageComponent from '../app/PageComponent';
 
 declare namespace BSL {
   /** 运行时的环境变量 */

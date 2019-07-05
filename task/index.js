@@ -38,7 +38,7 @@ function webpackConfig(params) {
         }),
         ...addPlugins
     ];
-    console.log(path.resolve(__dirname, '../styles/mixins.scss'));
+
     const extract = [{
             loader: 'postcss-loader',
             options: {

@@ -45,7 +45,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
     }),
     ...addPlugins
   ];
-  console.log(path.resolve(__dirname, '../styles/mixins.scss'))
   const extract: any[] = [{
     loader: 'postcss-loader',
     options: {
