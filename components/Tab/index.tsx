@@ -3,7 +3,7 @@ import * as React from 'react';
 import Dispatcher from '../../app/Dispatcher';
 import Choice, { BaseProps, Value, Props as ChoiceProps } from '../Choice';
 
-interface Props<T extends Value> extends BSL.ComponentProps, Pick<BaseProps<T>, 'data'>, Pick<ChoiceProps<T>, 'itemCls'> {
+export interface Props<T extends Value> extends BSL.ComponentProps, Pick<BaseProps<T>, 'data'>, Pick<ChoiceProps<T>, 'itemCls'> {
   value: Dispatcher<BaseProps<T>['value']>;
   updateId?: number;
   onChange?: (newValue: Value[]) => void;
