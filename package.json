@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -59,7 +59,7 @@
     "better-scroll": "^1.15.2",
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^2.0.1",
-    "core-js": "^3.1.4",
+    "core-js": "^2.4.0",
     "create-subscription": "^16.7.0",
     "css-loader": "^1.0.1",
     "exif-js": "^2.3.0",
