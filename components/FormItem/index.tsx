@@ -24,6 +24,13 @@ function FormItem(props: Props) {
   const itemRef = React.useRef<HTMLElement | null>(null);
   const containerRef = React.createRef<HTMLDivElement>();
 
+  const toast = (msg: string) => {
+    if (FormItem.toast) {
+      FormItem.toast(msg);
+    } else {
+      Toast.show(msg, 'fail');
+    }
+  };
   const setPromptVisibleFn = function() {
     if (itemRef.current) {
       const state = itemRef.current.dataset['state'] as Type;
@@ -54,13 +61,13 @@ function FormItem(props: Props) {
           const state = itemRef.current!.dataset['state'] as Type;
 
           if (state === 'empty' && requiredPrompt) {
-            Toast.show(requiredPrompt, 'fail');
+            toast(requiredPrompt);
           } else if (state === 'empty' && !requiredPrompt) {
             console.warn('缺少requiredPrompt');
           }
 
           if (state === 'fail' && validatePrompt) {
-            Toast.show(validatePrompt, 'fail');
+            toast(validatePrompt);
           } else if (state === 'fail' && !validatePrompt) {
             console.warn('缺少validatePrompt');
           }
@@ -73,4 +80,5 @@ function FormItem(props: Props) {
   );
 }
 
+FormItem.toast = undefined as undefined | ((msg: string) => void);
 export default FormItem;
