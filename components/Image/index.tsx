@@ -6,33 +6,51 @@ import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import useTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
 import isHttp from '../../utils/isHttp';
 import memoAreEqual from '../../utils/memoAreEqual';
+import variable from '../../utils/variable';
 
-interface Props extends BSL.ComponentProps {
+const imageSvg = variable.svgRootPath + require('./image.svg').id;
+interface Props extends BSL.ComponentProps, DefaultProps {
   /** 主机地址 */
   host?: string;
   /** 要加载的图片 */
   src: string;
-  /**  404时显示的图片 */
-  emptySrc?: string;
-  /** 超时显示视图 */
-  timeoutView?: any;
-  /** 加载时显示的图片 */
-  loadingSrc?: string;
   /** 只在图片加载成功后会响应 */
   onClick?: BSL.OnClick<HTMLImageElement>;
   /** 图片加载超时时间，默认ImageView.defaultTimeout = 30000 */
   timeout?: number;
 }
 
+interface DefaultProps {
+  /**  404时显示的图片 */
+  emptySrc?: string;
+  /** 超时显示视图 */
+  timeoutView?: any;
+  /** 加载时显示的图片 */
+  loadingSrc?: string;
+  /** 图片加载失败的图片 */
+  failSrc?: string;
+}
+
+const defaultProps: Required<DefaultProps> = {
+  emptySrc: imageSvg,
+  timeoutView: imageSvg,
+  loadingSrc: imageSvg,
+  failSrc: imageSvg
+};
+
 function getSrc(host: string | undefined, src: string): string {
   const realHost = host || ImageView.defaultHost;
-  const url = isHttp(src) ? src : realHost + src;
+  if (src) {
+    const url = isHttp(src) ? src : realHost + src;
 
-  return url;
+    return url;
+  }
+
+  return '';
 }
 
 function ImageView(props: Props) {
-  const { src, onClick, emptySrc, timeoutView, loadingSrc, host, className, id } = props;
+  const { src, onClick, emptySrc, timeoutView, loadingSrc, failSrc, host, className, id } = props;
   const [, setRenderId] = React.useState<Type>('undefined');
   const state = React.useRef<Type>('undefined');
   const elemRef = React.createRef<HTMLDivElement>();
@@ -109,6 +127,9 @@ function ImageView(props: Props) {
       <SwitchView.Loading>
         <img className={className} id={id} style={props.style} data-state="loading" src={loadingSrc} />
       </SwitchView.Loading>
+      <SwitchView.Fail>
+        <img className={className} id={id} style={props.style} data-state="fail" src={failSrc} />
+      </SwitchView.Fail>
       <SwitchView.Timeout>
         {timeoutRender()}
       </SwitchView.Timeout>
@@ -121,6 +142,7 @@ function ImageView(props: Props) {
 
 ImageView.defaultHost = '';
 ImageView.defaultTimeout = 30000;
+ImageView.defaultProps = defaultProps;
 
 function areEqual(prevProps: Props, nextProps: Props): boolean {
   return memoAreEqual(prevProps, nextProps);
