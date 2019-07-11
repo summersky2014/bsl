@@ -86,6 +86,10 @@ function RequestView(props: Props) {
           }
           break;
       }
+
+      if (RequestView.onAfter) {
+        RequestView.onAfter(res);
+      }
     }).catch((err: Error) => {
       if (onFinally) {
         onFinally();
@@ -139,5 +143,7 @@ RequestView.Loading = SwtichView.Loading;
 RequestView.Timeout = SwtichView.Timeout;
 /** axios.defaults.data */
 RequestView.defaultData = null as null | Record<string, any>;
+/** 请求响应中最末端执行 */
+RequestView.onAfter = undefined as ((res: BSL.RequestResponse<any>) => void) | undefined;
 
 export default RequestView;
