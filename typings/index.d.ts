@@ -24,7 +24,7 @@ declare namespace BSL {
     500
   );
 
-  interface PageProps<Match>  {
+  interface PageProps<Match> {
     match: RouteComponentProps<Match>['match'];
     location: Location;
   }
