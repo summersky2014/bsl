@@ -5,7 +5,7 @@ import { Type } from '../SwitchView';
 import Input from '../Input';
 import Picker from '../Picker';
 import Choice from '../Choice';
-import { Props as RequestProps } from '../RequestView';
+import RequestView, { Props as RequestProps } from '../RequestView';
 import anyuseRequest from '../../hooks/anyuseRequest';
 
 export interface Props extends BSL.ComponentProps {
@@ -106,6 +106,9 @@ function Form(props: Props) {
               }
               if (onComplete) {
                 onComplete(res);
+              }
+              if (RequestView.onAfter) {
+                RequestView.onAfter(res);
               }
             }).catch((err) => {
               state.current = 'fail';
