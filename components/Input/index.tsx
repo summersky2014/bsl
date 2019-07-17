@@ -7,12 +7,17 @@ import memoAreEqual from '../../utils/memoAreEqual';
 
 type Omit_onChange = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 type Omit_onChange_value = Omit<Omit_onChange, 'value'>;
+
+interface HTMLInputElementExtends extends HTMLInputElement {
+  scrollIntoViewIfNeeded: () => void;
+}
+
 export interface Props extends Omit_onChange_value, FromTypeProps<string> {
 }
 
 function Input(props: Props) {
   const { onFocus, onChange, type, state, className, value } = props;
-  const inputRef = React.useRef<null | HTMLInputElement>(null);
+  const inputRef = React.useRef<null | HTMLInputElementExtends>(null);
 
   return (
     <input
@@ -29,8 +34,8 @@ function Input(props: Props) {
         }
       }}
       onFocus={(e) => {
-        if (inputRef.current) {
-          inputRef.current.scrollIntoView(false);
+        if (inputRef.current && inputRef.current.scrollIntoViewIfNeeded) {
+          inputRef.current.scrollIntoViewIfNeeded();
         }
         if (onFocus) {
           onFocus(e);

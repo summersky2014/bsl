@@ -62,6 +62,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
 
 function Form(props: Props) {
   const { className, id, style, children, onSubmitBefore, onSubmit, api, data, method, onComplete, onFail, onFinally } = props;
+  const state = React.useRef<Type>('undefined');
   const [request, cancelToken] = anyuseRequest();
 
   React.useEffect(() => {
@@ -92,12 +93,14 @@ function Form(props: Props) {
           if (onSubmit) {
             onSubmit();
           }
-          if (api) {
+          if (api && state.current !== 'loading') {
+            state.current = 'loading';
             request({
               api,
               data,
               method
             }).then((res) => {
+              state.current = 'complete';
               if (onFinally) {
                 onFinally();
               }
@@ -105,6 +108,7 @@ function Form(props: Props) {
                 onComplete(res);
               }
             }).catch((err) => {
+              state.current = 'fail';
               if (onFinally) {
                 onFinally();
               }
