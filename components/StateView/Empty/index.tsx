@@ -15,7 +15,7 @@ function Empty(props: Props) {
   return (
     <div className={prefixCls}>
       <Icon src={emptySvg} />
-      <div className={`${prefixCls}-label`}>{children || '暂无数据'}</div>
+      <div className={`${prefixCls}-label`}>{children || '抱歉，暂无数据'}</div>
     </div>
   );
 }

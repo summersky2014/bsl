@@ -10,7 +10,7 @@ function Timeout() {
   return (
     <div className={prefixCls}>
       <Icon src={emptySvg} />
-      <div className={`${prefixCls}-label`}>请求超时</div>
+      <div className={`${prefixCls}-label`}>抱歉，请求超时了</div>
       <div className={`${prefixCls}-label`}>轻触屏幕重试</div>
     </div>
   );

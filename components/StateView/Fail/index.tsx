@@ -10,7 +10,7 @@ function Fail() {
   return (
     <div className={prefixCls}>
       <Icon src={emptySvg} />
-      <div className={`${prefixCls}-label`}>程序异常</div>
+      <div className={`${prefixCls}-label`}>抱歉，服务器出错了</div>
       <div className={`${prefixCls}-label`}>轻触屏幕重试</div>
     </div>
   );
