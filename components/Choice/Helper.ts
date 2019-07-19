@@ -14,7 +14,8 @@ class ChoiceHelper<T extends Value> extends Helper<T[]> {
   public state: Type = 'undefined';
 
   public onChange = (value: T[]) => {
-    this.state = value.length === 0 && this.required ? 'empty' : 'complete';
+    const isEmpty = value.length === 0 || (value[0] && (value[0].id === undefined || value[0].id === null));
+    this.state = isEmpty && this.required ? 'empty' : 'complete';
     this.value.set(value);
     return this.state === 'complete';
   }
