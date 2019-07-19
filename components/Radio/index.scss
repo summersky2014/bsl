@@ -5,8 +5,8 @@ $prefix: bsl-radio;
   align-content: center;
 
   &-unselect, &-select {
-    width: 23px;
-    height: 23px;
+    width: 19px;
+    height: 19px;
   }
   
   &-unselect {
@@ -15,7 +15,7 @@ $prefix: bsl-radio;
   }
   
   &-text {
-    font-size: 17px;
+    font-size: 14px;
     color: #000;
     margin-left: 10px;
   }
