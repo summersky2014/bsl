@@ -39,7 +39,9 @@ function TabBar(props: Props<TabBarData>) {
 
         setValue([data[index]]);
         setValueUpdateId(valueUpdateId + 1);
-        Link.replace(newPathname);
+        Link.replace({
+          url: newPathname
+        });
 
         return true;
       }}

@@ -1,5 +1,6 @@
 import BSL from '../../typings';
 import * as React from 'react';
+import * as classNames from 'classnames';
 import { appData } from '../../app/core';
 
 export interface Props extends BSL.ComponentProps {
@@ -14,24 +15,39 @@ export interface Props extends BSL.ComponentProps {
   onBefore?: (beforePathname: string, afterPathname: string) => void;
   /** 路由跳转后执行 */
   onAfter?: (beforePathname: string, afterPathname: string) => void;
+  /** 是否在一个新的标签页打开 */
+  newPage?: boolean;
 }
 
-function link(url: string, replace: boolean, query?: (string | number)[]): void {
+interface Params {
+  url: string;
+  replace: boolean;
+  query?: (string | number)[];
+  newPage?: boolean;
+}
+
+function link(params: Params): void {
+  const { url, replace, query, newPage } = params;
   const qsurl = query ? `${url}/${query.join('/')}` : url;
   if (appData.history!.location.pathname !== qsurl) {
-    if (replace) {
-      appData.history!.replace(qsurl);
+    if (newPage) {
+      window.open(qsurl, '_blank');
     } else {
-      appData.history!.push(qsurl);
+      if (replace) {
+        appData.history!.replace(qsurl);
+      } else {
+        appData.history!.push(qsurl);
+      }
     }
   }
 }
 
+const prefixCls = 'bsl-link';
 const Link = (props: Props) => {
-  const { className, style, id, children, to, replace, onBefore, onAfter, query } = props;
+  const { className, style, id, children, to, replace, onBefore, onAfter, query, newPage } = props;
   return (
     <div
-      className={className}
+      className={classNames(prefixCls, className)}
       style={style}
       id={id}
       onClick={(e) => {
@@ -44,9 +60,9 @@ const Link = (props: Props) => {
         }
 
         if (replace) {
-          link(to, true, query);
+          link({ url: to, replace: true, query, newPage });
         } else {
-          link(to, false, query);
+          link({ url: to, replace: false, query, newPage });
         }
 
         if (onAfter) {
@@ -57,11 +73,11 @@ const Link = (props: Props) => {
   );
 };
 
-Link.go = function(url: string, query?: (string | number)[]): void {
-  link(url, false, query);
+Link.go = function(params: Omit<Params, 'replace'>): void {
+  link({ ...params, replace: false, });
 };
-Link.replace = function(url: string, query?: (string | number)[]): void {
-  link(url, true, query);
+Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void {
+  link({ ...params, replace: true });
 };
 Link.goBack = function(): void {
   appData.history!.goBack();
