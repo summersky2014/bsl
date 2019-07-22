@@ -25,6 +25,8 @@ function RequestView(props: Props) {
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const [request, cancelToken, clearCache] = anyuseRequest();
   const [, setTypeState] = React.useState<Type>('undefined');
+  /** 重试接口时，遇到相同状态不会重新render，dataId保证能正确执行render */
+  const [dataId, setDataId] = React.useState(0);
   /** 用于重试接口，触发useEffect */
   const [retryId, setRetryId] = React.useState(0);
   const [responseData, setResponseData] = React.useState<any>();
@@ -42,6 +44,7 @@ function RequestView(props: Props) {
       timer.current = null;
     }
 
+    setDataId(dataId + 1);
     setResponseData(res);
     setTypeState(typeValue);
   };
