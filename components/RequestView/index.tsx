@@ -24,12 +24,11 @@ function RequestView(props: Props) {
   const { api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const [request, cancelToken, clearCache] = anyuseRequest();
-  const [, setTypeState] = React.useState<Type>('undefined');
   /** 重试接口时，遇到相同状态不会重新render，dataId保证能正确执行render */
   const [dataId, setDataId] = React.useState(0);
   /** 用于重试接口，触发useEffect */
   const [retryId, setRetryId] = React.useState(0);
-  const [responseData, setResponseData] = React.useState<any>();
+  const responseData = React.useRef<any>();
   const typeRef = React.useRef<Type>('undefined');
   const paramsStr = JSON.stringify(params);
   const dataStr = JSON.stringify(data);
@@ -38,15 +37,13 @@ function RequestView(props: Props) {
   let cacheKey: string | undefined;
   const setType = (typeValue: Type, res?: any) => {
     typeRef.current = typeValue;
+    responseData.current = res;
 
     if (timer.current) {
       clearTimeOut(timer.current);
       timer.current = null;
     }
-
     setDataId(dataId + 1);
-    setResponseData(res);
-    setTypeState(typeValue);
   };
 
   const onRetry = () => {
@@ -132,7 +129,7 @@ function RequestView(props: Props) {
     >
       {typeRef.current !== 'undefined' ? (
         <SwtichView state={typeRef.current}>
-          {children(responseData)}
+          {children(responseData.current)}
         </SwtichView>
       ) : null}
     </div>

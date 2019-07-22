@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import variable from '../../utils/variable';
 
-export interface Props extends BSL.ComponentProps, React.SVGAttributes<SVGElement> {
+export interface Props extends BSL.ComponentProps {
   onClick?: BSL.OnClick<SVGElement>;
   /** svg sprite的id */
   src: string;
@@ -13,7 +13,6 @@ export interface Props extends BSL.ComponentProps, React.SVGAttributes<SVGElemen
 const Icon = (props: Props) => {
   return (
     <svg
-      {...props}
       className={classNames(props.className, variable.bslComponent)}
       style={props.style}
       onClick={props.onClick}
