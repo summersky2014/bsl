@@ -16,7 +16,7 @@ let updateLock = true;
 /** 锁枕 */
 let frameLock = false;
 /** 向raf插入事件的数组 */
-const listens: Listen[] = [];
+const listens: Set<Listen> = new Set([]);
 const Context = createContext({});
 const Subscription: React.ComponentFactory<any, any> = createSubscription({
   getCurrentValue: (model: object) => {
@@ -30,14 +30,12 @@ const Subscription: React.ComponentFactory<any, any> = createSubscription({
 
 /** 更新循环, 在整个应用生命周期中每帧检测是否需要更新界面 */
 function updateLoop(): void {
-  const listensLength = listens.length;
+  const listensLength = listens.size;
   frameLock = false;
 
   if (listensLength) {
     const time = Date.now();
-    for (let i = 0; i < listensLength; i++) {
-      const listen = listens[i];
-
+    listens.forEach((listen) => {
       // 判断listen是否存在，有可能callback里会执行removeListener，然后isten被销毁了
       if (listen) {
         // execTimestamp为0代表还没初始化
@@ -50,7 +48,7 @@ function updateLoop(): void {
           listen.execTimestamp = time;
         }
       }
-    }
+    });
   }
 
   if (updateLock === false && subscribeCallback) {
@@ -68,7 +66,7 @@ function updateLoop(): void {
 
 /** 向更新循环添加回调 */
 function addListener(callback: ListenerCallback): void {
-  listens.push({
+  listens.add({
     callback,
     execTimestamp: 0,
     overTime: 0
@@ -77,10 +75,11 @@ function addListener(callback: ListenerCallback): void {
 
 /** 向更新循环删除回调 */
 function removeListener(callback: ListenerCallback): void {
-  const index = listens.findIndex((item) => item.callback === callback);
-  if (index >= 0) {
-    listens.splice(index, 1);
-  }
+  listens.forEach((listen) => {
+    if (listen.callback === callback) {
+      listens.delete(listen);
+    }
+  });
 }
 
 /** 每帧执行 */
