@@ -87,7 +87,7 @@ function Upload(props: Props) {
         className={`${prefixCls}-input`}
         type="file"
         onChange={onChange}
-        disabled={!!src && !disabled}
+        disabled={!!src || disabled}
         accept={mode === 'image' ? 'image/*' : undefined}
       />
       {mode === 'image' ? (

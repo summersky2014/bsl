@@ -81,7 +81,7 @@ function webpackConfig(params) {
         }));
     }
     else {
-        plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+        // plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
     return {
         entry,

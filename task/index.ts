@@ -103,9 +103,10 @@ export default function webpackConfig(params: WebpackConfig): Config {
       context: 'bsl',
       manifest: require('../vender/manifest.json')
     }));
-  } else  {
-    plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
   }
+  // else  {
+  //   plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+  // }
 
   return {
     entry,

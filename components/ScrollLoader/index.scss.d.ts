@@ -1,1 +1,1 @@
-export const component: string;
+export {};
