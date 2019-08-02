@@ -131,7 +131,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
           tsConfigFile: path.resolve(dirname, './tsconfig.json'),
         }
       }, {
-        test: /.tsx?$/,
+        test: /\.(ts|tsx)$/,
         loaders: ['ts-loader'],
         include: [
           path.resolve(dirname, 'src'),
