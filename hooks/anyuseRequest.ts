@@ -29,7 +29,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, C
       const { api } = option;
       const urlSearchParams = new URLSearchParams();
       const createKey = () => JSON.stringify({ api: option.api, params: option.params, data: option.data });
-      const method = (option.method || (axios.defaults.method && axios.defaults.method.toLocaleUpperCase())) as Method;
+      const method = ((option.method || (axios.defaults.method)) || 'get').toLocaleUpperCase() as Method;
       const defualtData = RequestView.defaultData;
       const contentType = axios.defaults.headers['content-type'] || axios.defaults.headers['Content-Type'];
       const postData: Record<string, string | number | boolean | object> = {};
