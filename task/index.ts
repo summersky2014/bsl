@@ -156,7 +156,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
         test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: '[path][name].[ext]',
           outputPath: 'img/'
         }
       }, {
