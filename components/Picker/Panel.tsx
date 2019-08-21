@@ -29,7 +29,7 @@ function formatData(stateData: Data[][], value: Value[], propsData: Data[], star
     if (eachData === undefined || (eachData.length === 0)) {
       return;
     } else {
-      const selectedIndex = eachData.findIndex((item) => item.value === value[startCol].value);
+      const selectedIndex = value[startCol] ? eachData.findIndex((item) => item.value === value[startCol].value) : 0;
       let selectedData = eachData[selectedIndex] as Data | undefined;
 
       // 如果selectedData不存在就取索引为0的数据
@@ -52,7 +52,7 @@ function formatData(stateData: Data[][], value: Value[], propsData: Data[], star
     newData[0] = [];
     for (let i = 0; i < propsData.length; i++) {
       const dataitem = propsData[i];
-      const selectedIndex = propsData.findIndex((item) => item.value === value[0].value);
+      const selectedIndex = value[0] ? propsData.findIndex((item) => item.value === value[0].value) : 0;
       newData[0].push(dataitem);
 
       // 找到第一列被选中的项，把他的children拿去递归
@@ -91,41 +91,18 @@ function switchData(cascade: Props['cascade'], stateData: Data[][], value: Value
 const prefixCls = 'bsl-picker';
 function Panel(props: Props) {
   const { className, id, style, itemCls, textCls, updateId, onCreate, onScrollEnd, formatSelectedCol } = props;
+  const propsValue = React.useRef(props.value);
   let data = React.useMemo(() => switchData(props.cascade, [], props.value, props.data, 0), [updateId]);
-  const onPickerScrollEnd = (currentCol: number, currentValue: Value, selectedIndex: number) => {
-    const newValue = JSON.parse(JSON.stringify(props.value));
-    newValue[currentCol] = currentValue;
-
-    if (formatSelectedCol) {
-      const indexs = formatSelectedCol(currentCol, newValue);
-      indexs.forEach((selectIndexValue, i) => {
-        newValue[i] = {
-          label: data[i][selectIndexValue].label,
-          value: data[i][selectIndexValue].value
-        };
-      });
-    } else if (props.cascade) {
-      // 将currentCol后续的列初始化为0，重置子项列表的选中项
-      for (let i = currentCol + 1; i < data.length; i++) {
-        newValue[i] = {
-          label: data[i][0].label,
-          value: data[i][0].value
-        };
-      }
-    }
-
-    data = switchData(props.cascade, data, newValue, props.data, currentCol);
-
-    if (onScrollEnd) {
-      onScrollEnd(currentCol, currentValue, newValue);
-    }
-  };
 
   React.useEffect(() => {
     if (onCreate) {
       onCreate(data);
     }
   }, []);
+
+  React.useEffect(() => {
+    propsValue.current = props.value;
+  }, [props.value]);
 
   return (
     <div
@@ -141,11 +118,36 @@ function Panel(props: Props) {
             <Item
               key={col}
               data={item}
-              updateId={props.cascade !== true || col === 0 ? 0 : props.value[col - 1].value}
+              updateId={props.cascade !== true || col === 0 ? 0 : (props.value[col - 1] ? props.value[col - 1].value : col)}
               value={props.value[col]}
               itemCls={itemCls}
               textCls={textCls}
-              onScrollEnd={(currentValue, selectIndex) => onPickerScrollEnd(col, currentValue, selectIndex)}
+              onScrollEnd={(currentValue, selectIndex) => {
+                const newValue = JSON.parse(JSON.stringify(propsValue.current));
+                newValue[col] = currentValue;
+
+                if (formatSelectedCol) {
+                  const indexs = formatSelectedCol(col, newValue);
+                  indexs.forEach((selectIndexValue, i) => {
+                    newValue[i] = {
+                      label: data[i][selectIndexValue].label,
+                      value: data[i][selectIndexValue].value
+                    };
+                  });
+                } else if (props.cascade) {
+                  // 将currentCol后续的列初始化为0，重置子项列表的选中项
+                  // for (let i = col + 1; i < data.length; i++) {
+                  //   newValue[i] = {
+                  //     label: data[i][0].label,
+                  //     value: data[i][0].value
+                  //   };
+                  // }
+                }
+                data = switchData(props.cascade, data, newValue, props.data, col);
+                if (onScrollEnd) {
+                  onScrollEnd(col, currentValue, newValue);
+                }
+              }}
             />
           ))}
         </div>

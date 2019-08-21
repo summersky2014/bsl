@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import * as BetterScroll from 'better-scroll';
+import anyuseTimeout from '../../hooks/anyuseTimeout';
 import './index.scss';
 
 export interface Value {
@@ -8,7 +9,7 @@ export interface Value {
   label: string | number;
 }
 
-export interface Data  {
+export interface Data {
   label: string | number;
   value: string | number;
   children?: Data[];
@@ -48,25 +49,42 @@ export const itemHeight: number = 34;
 export const num: number = calcNum();
 const prefixCls = 'bsl-picker-item';
 
+function getIndex(data: Data[], value: Value) {
+  if (value) {
+    const index = data.findIndex((item) => item.value === value.value);
+    return index === - 1 ? 0 : index;
+  }
+  return 0;
+}
+
 function Item(props: Props) {
   const { itemCls, textCls } = props;
   const elemRef = React.createRef<HTMLDivElement>();
-  const getIndex = () => props.data.findIndex((item) => item.value === props.value.value);
-  let wheel: BetterScroll.default | undefined;
+  const wheel = React.useRef<BetterScroll.default>();
+  const propsData = React.useRef<Data[]>();
+  const [setTimeOut, clearTimeOut] = anyuseTimeout();
 
   React.useEffect(() => {
-    const onScrollEnd = () => {
-      if (wheel) {
-        const selectedIndex = wheel.getSelectedIndex();
-        const item = props.data[selectedIndex];
-        props.onScrollEnd({ label: item.label, value: item.value }, selectedIndex);
+    const timer = () => {
+      if (wheel.current && propsData.current) {
+        const selectedIndex = wheel.current.getSelectedIndex();
+        const index = propsData.current.length <= selectedIndex ? propsData.current.length - 1 : selectedIndex;
+        const item = propsData.current[index] || propsData.current[0];
+        if (selectedIndex !== index) {
+          wheel.current.wheelTo(index);
+        }
+        props.onScrollEnd({ label: item.label, value: item.value }, index);
       }
+      return true;
     };
-    wheel = new BetterScroll.default(elemRef.current!, {
+    const onScrollEnd = () => {
+      setTimeOut(timer, 16);
+    };
+    wheel.current = new BetterScroll.default(elemRef.current!, {
       scrollX: false,
       scrollY: true,
       wheel: {
-        selectedIndex: getIndex(),
+        selectedIndex: getIndex(props.data, props.value),
         rotate: 0,
         adjustTime: 300,
         wheelWrapperClass: `${prefixCls}-col`,
@@ -76,27 +94,23 @@ function Item(props: Props) {
       bounceTime: 300,
       probeType: 3
     });
-    wheel.on('scrollEnd', onScrollEnd);
+    wheel.current.on('scrollEnd', onScrollEnd);
 
     return () => {
-      if (wheel) {
-        wheel.off('scrollEnd', onScrollEnd);
-        wheel.destroy();
+      if (wheel.current) {
+        wheel.current.off('scrollEnd', onScrollEnd);
+        wheel.current.destroy();
       }
+      clearTimeOut(timer);
     };
   }, []);
 
   React.useEffect(() => {
-    if (wheel) {
-      wheel.refresh();
+    if (wheel.current) {
+      wheel.current.refresh();
     }
+    propsData.current = props.data;
   }, [props.updateId]);
-
-  React.useEffect(() => {
-    if (wheel) {
-      wheel.wheelTo(getIndex());
-    }
-  }, [getIndex()]);
 
   return (
     <div

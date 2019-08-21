@@ -21,7 +21,7 @@ export interface Base extends PanelBase {
   onPopup?: () => void;
 }
 
-interface DefaultProps {
+export interface DefaultProps {
   /** 取消的文本 */
   dismissText?: string;
   /** 确定的文本 */
@@ -49,7 +49,6 @@ function getValueWhenOverDataLength(props: Props, stateValue: Value[]): Value[] 
 
   for (let i = 0; i < data.length; i++) {
     const group = data[i];
-
     if (value.length === 0) {
       newAllValue[i] = {
         label: data[i][0].label,
@@ -89,17 +88,46 @@ const defaultProps: Required<DefaultProps> = {
   format: (value) => value.map((item) => item.label).join(','),
 };
 
+function initCascadeData(props: Props) {
+  const newAllValue: Value[] = [];
+  const each = (data: Data, index: number) => {
+    newAllValue[index] = {
+      value: data.value,
+      label: data.label
+    };
+
+    if (data.children) {
+      each(data.children[0], ++index);
+    }
+  };
+
+  each((props.data as Data[])[0], 0);
+  return newAllValue;
+}
+
 function Picker(props: Props) {
   const { updateId, dismissText, okText, title, placeholder, buttonCls, onPopup, disabled, rightIcon } = props;
   const [visible, setVisible] = React.useState(false);
-  const [stateValue, setStateValue] = React.useState<Value[]>(JSON.parse(JSON.stringify(props.value)));
+  // tslint:disable-next-line: max-line-length
+  // const [stateValue, setStateValue] = React.useState<Value[]>(props.value.length ? JSON.parse(JSON.stringify(props.value)) : initCascadeData(props));
   // const stateValue = React.useMemo(() => new Dispatcher()), [props.value.id]);
+  const stateValue = React.useMemo(() => {
+    return {
+      current: props.value.length ? JSON.parse(JSON.stringify(props.value)) : initCascadeData(props)
+    };
+  }, [props.value]);
+  const [, setNow] = React.useState(0);
   const value = props.value;
   const format = props.format as Required<DefaultProps>['format'];
   const label = value.length ? format(props.value) : placeholder;
+  const update = () => {
+    setNow(Date.now());
+  };
   let foramtData: Data[][];
   const onScrollEnd = (currentCol: number, currentValue: Value, allValue: Value[]) => {
-    setStateValue(allValue);
+    stateValue.current = allValue;
+    update();
+    // setStateValue(allValue);
   };
   const onCreate = (data: Data[][]) => {
     foramtData = data;
@@ -112,7 +140,7 @@ function Picker(props: Props) {
     }
   };
   const onOk = () => {
-    const currentValue = stateValue[0].value;
+    const currentValue = stateValue.current[0].value;
     // fix: 不触发onScrollEnd时点击确认，添加默认值
     if ((currentValue === undefined || currentValue === null || currentValue === '') && foramtData) {
       const newValue: Value[] = [];
@@ -124,16 +152,20 @@ function Picker(props: Props) {
       });
       props.onChange(newValue);
     } else {
-      props.onChange(stateValue);
+      props.onChange(stateValue.current);
     }
 
     toogleVisible();
   };
 
   React.useEffect(() => {
-    const newStateValue = getValueWhenOverDataLength(props, stateValue);
-    if (newStateValue) {
-      setStateValue(newStateValue);
+    if (!props.cascade) {
+      const newStateValue = getValueWhenOverDataLength(props, stateValue.current);
+      if (newStateValue) {
+        stateValue.current = newStateValue;
+        update();
+        // setStateValue(newStateValue);
+      }
     }
   }, [updateId]);
 
@@ -164,7 +196,7 @@ function Picker(props: Props) {
         <Panel
           {...props}
           data={props.data}
-          value={stateValue}
+          value={stateValue.current}
           onCreate={onCreate}
           onScrollEnd={onScrollEnd}
         />

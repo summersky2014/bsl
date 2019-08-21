@@ -10,7 +10,7 @@ class PickerHelper extends Helper<Value[]> {
     this.value = new Dispatcher(options && options.defaultValue || []);
   }
 
-  public value!: Dispatcher<Value[]>;
+  public value: Dispatcher<Value[]>;
   public state: Type = 'undefined';
 
   public onChange = (value: Value[]) => {
