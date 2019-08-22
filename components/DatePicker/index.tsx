@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Picker, { Base as PikcerProps, DefaultProps as BaseDefaultProps, PickerHelper } from '../Picker';
+import Picker, { Base as PikcerProps, DefaultProps as BaseDefaultProps } from '../Picker';
+import DatePickerHelper from './Helper';
 import { Value } from '../Picker/Item';
 import { FromTypeProps } from '../Form';
 import createRangeDate from '../../utils/createRangeDate';
@@ -35,5 +36,5 @@ function DatePicker(props: Omit<PikcerProps, 'updateId'>  & BaseDefaultProps & D
 }
 
 DatePicker.defaultProps = defaultProps;
-export { PickerHelper };
+export { DatePickerHelper };
 export default DatePicker;

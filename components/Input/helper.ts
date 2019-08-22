@@ -23,7 +23,7 @@ class InputHelper extends Helper<string> {
   public onChange = (value: string) => {
     if (!value && this.required) {
       this.state = 'empty';
-    } else if (this.validate) {
+    } else if (this.validate && value) {
       // tslint:disable-next-line: prefer-conditional-expression
       if (typeof this.validate === 'string') {
         this.state = validate[this.validate](value) ? 'complete' : 'fail';
