@@ -1,0 +1,13 @@
+$prefix: bsl-scroll-horizontal;
+
+:global(.#{$prefix}) {
+  // display: flex;
+  // align-items: center;
+  &-wrap {
+    @include clearfix();
+  }
+
+  &-item {
+    float: left;
+  }
+}
