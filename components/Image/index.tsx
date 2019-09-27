@@ -148,4 +148,5 @@ function areEqual(prevProps: Props, nextProps: Props): boolean {
   return memoAreEqual(prevProps, nextProps);
 }
 
-export default React.memo(ImageView, areEqual) as ImageView;
+export { ImageView };
+export default React.memo(ImageView, areEqual);

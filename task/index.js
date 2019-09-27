@@ -38,7 +38,6 @@ function webpackConfig(params) {
         }),
         ...addPlugins
     ];
-
     const extract = [{
             loader: 'postcss-loader',
             options: {
@@ -80,9 +79,6 @@ function webpackConfig(params) {
             manifest: require('../vender/manifest.json')
         }));
     }
-    else {
-        // plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
-    }
     return {
         entry,
         devtool: isDev ? 'inline-source-map' : false,
@@ -106,7 +102,7 @@ function webpackConfig(params) {
                         tsConfigFile: path.resolve(dirname, './tsconfig.json'),
                     }
                 }, {
-                    test: /.tsx?$/,
+                    test: /\.(ts|tsx)$/,
                     loaders: ['ts-loader'],
                     include: [
                         path.resolve(dirname, 'src'),
@@ -131,7 +127,7 @@ function webpackConfig(params) {
                     test: /\.(png|jpg|gif)$/,
                     loader: 'file-loader',
                     options: {
-                        name: '[name].[ext]',
+                        name: '[path][name].[ext]',
                         outputPath: 'img/'
                     }
                 }, {

@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -82,7 +82,7 @@
     "tslint": "^5.12.1",
     "tslint-loader": "^3.5.4",
     "tslint-react-hooks": "^1.1.0",
-    "typescript": "^3.5.1",
+    "typescript": "^3.6.3",
     "typings-for-css-modules-loader": "1.7.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.2.1"
