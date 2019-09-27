@@ -1,4 +1,6 @@
-
+@function rem($value) {
+  @return ($value / 2) / 14 * 1rem;
+}
 // 多行多余字符省略
 @mixin ellipsis-lines($lines: 2) {
   display: -webkit-box;
