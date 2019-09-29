@@ -45,7 +45,6 @@ function SwitchView(props: Props) {
   const eachRender = (children: any) => {
     React.Children.forEach(children, (child) => {
       const childElement = child as React.ReactElement<HTMLDivElement, any>;
-      console.log(childElement);
 
       if (childElement && childElement.props) {
         if (typeof childElement.props.children === 'function') {

@@ -26,6 +26,8 @@ function HorizontalScroll(props: Props) {
   /** 上一次容器的宽度 */
   const prevFrameWidth = React.useRef<number>();
   const [scrollWidth, setScrollWidth] = React.useState<string | number>('inherit');
+  /** 是否已经初始化 */
+  const [inited, setInited] = React.useState(false);
   /** 计算容器的宽度 */
   const calcFrameWidth = (): number => {
     let frameWidth = 0;
@@ -33,11 +35,16 @@ function HorizontalScroll(props: Props) {
       const children = wrapRef.current.children;
 
       for (let i = 0; i < children.length; i++) {
-        children[i].classList.add(`${prefixCls}-item`);
-        const width = getNumberByComputed(getComputedStyle(children[i]).width);
-        const marginLeft = getNumberByComputed(getComputedStyle(children[i]).marginLeft);
-        const marginRight = getNumberByComputed(getComputedStyle(children[i]).marginRight);
-        frameWidth += width + marginLeft + marginRight;
+        const child = children[i];
+        child.classList.add(`${prefixCls}-item`);
+        const isAbsolute = getComputedStyle(child).position === 'absolute';
+
+        if (!isAbsolute) {
+          const width = getNumberByComputed(getComputedStyle(child).width);
+          const marginLeft = getNumberByComputed(getComputedStyle(child).marginLeft);
+          const marginRight = getNumberByComputed(getComputedStyle(child).marginRight);
+          frameWidth += width + marginLeft + marginRight;
+        }
       }
     }
 
@@ -71,13 +78,13 @@ function HorizontalScroll(props: Props) {
           bindToWrapper: true,
           eventPassthrough: 'vertical'
         });
+        setInited(true);
       }
     }
 
     if (props.query) {
       autoMove(props.query);
     }
-
     // 如果dom更新后的宽度和之前的宽度不一致就刷新scroll
     if (scroll.current && prevFrameWidth && width && prevFrameWidth.current !== width) {
       prevFrameWidth.current = width;
@@ -91,6 +98,12 @@ function HorizontalScroll(props: Props) {
       }
     };
   }, [props.query]);
+
+  React.useEffect(() => {
+    if (inited && scroll.current) {
+      scroll.current.refresh();
+    }
+  }, [inited]);
 
   return (
     <div
