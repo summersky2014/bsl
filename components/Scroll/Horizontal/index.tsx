@@ -1,7 +1,7 @@
 import BSL from '../../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as BetterScroll from 'better-scroll';
+import * as BetterScroll from '@better-scroll/core';
 import './index.scss';
 
 export interface Props extends BSL.ComponentProps {

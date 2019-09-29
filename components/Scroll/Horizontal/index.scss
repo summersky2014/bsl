@@ -1,6 +1,7 @@
 $prefix: bsl-scroll-horizontal;
 
 :global(.#{$prefix}) {
+  overflow: hidden;
   // display: flex;
   // align-items: center;
   &-wrap {

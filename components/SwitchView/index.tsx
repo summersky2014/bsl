@@ -18,7 +18,7 @@ const [CompleteStr, EmptyStr, FailStr, LoadingStr, TimeoutStr, UndefinedStr] = [
 function SwitchView(props: Props) {
   let render: React.ReactElement<HTMLDivElement, any> | null = null;
 
-  const each = (children: any) => {
+  const eachChildren = (children: any) => {
     // 根据当前状态赋予对应的视图
     React.Children.forEach(children, (child) => {
       if (render !== null) {
@@ -26,7 +26,6 @@ function SwitchView(props: Props) {
       }
       const childElement = child as React.ReactElement<HTMLDivElement, any>;
       const type = childElement && childElement.type;
-
       if (
         (props.state === 'complete' && type && type.displayName === CompleteStr) ||
         (props.state === 'empty' && type && type.displayName === EmptyStr) ||
@@ -39,19 +38,36 @@ function SwitchView(props: Props) {
       }
 
       if (render === null && childElement && childElement.props && React.Children.count(childElement.props.children)) {
-        each(childElement.props.children);
+        eachChildren(childElement.props.children);
+      }
+    });
+  };
+  const eachRender = (children: any) => {
+    React.Children.forEach(children, (child) => {
+      const childElement = child as React.ReactElement<HTMLDivElement, any>;
+      console.log(childElement);
+
+      if (childElement && childElement.props) {
+        if (typeof childElement.props.children === 'function') {
+          // @ts-ignore
+          render = childElement.props.children();
+          return;
+        }
+        if (React.Children.count(childElement.props.children)) {
+          eachRender(childElement.props.children);
+        }
       }
     });
   };
 
   if (props.children) {
-    each(props.children);
+    eachChildren(props.children);
+    eachRender(render);
     // 如果没有找到对应的视图，就直接渲染children
     if (render === null) {
       render = props.children;
     }
   }
-
   return render;
 }
 

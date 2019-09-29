@@ -3,7 +3,7 @@ const path = require('path');
 
 const vendors = [
   'axios',
-  'better-scroll',
+  '@better-scroll/core',
   'classnames',
   'core-js',
   'react',

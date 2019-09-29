@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as BetterScroll from 'better-scroll';
+import * as BetterScroll from '@better-scroll/core';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 import './index.scss';
 
