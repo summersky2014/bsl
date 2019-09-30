@@ -40,9 +40,9 @@ const defaultProps: Required<DefaultProps> = {
 
 function getSrc(host: string | undefined, src: string): string {
   const realHost = host || ImageView.defaultHost;
+
   if (src) {
     const url = isHttp(src) ? src : realHost + src;
-
     return url;
   }
 
@@ -119,7 +119,7 @@ function ImageView(props: Props) {
   return (
     <SwitchView state={state.current}>
       <SwitchView.Complete>
-        <img className={className} id={id} style={props.style} data-state="complete" src={src} onClick={onClick} />
+        <img className={className} id={id} style={props.style} data-state="complete" src={getSrc(host, src)} onClick={onClick} />
       </SwitchView.Complete>
       <SwitchView.Empty>
         <img className={className} id={id} style={props.style} data-state="empty" src={emptySrc} />

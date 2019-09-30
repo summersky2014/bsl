@@ -531,7 +531,7 @@
      user-select: none;
    }
    
-   &[data-state=error] {
+   &[data-state=fail] {
      color: #ff0000;
    }
  

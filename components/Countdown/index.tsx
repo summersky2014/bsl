@@ -12,7 +12,7 @@ interface Props extends BSL.ComponentProps {
   value: number | string;
   /** 倒计时还未开始前的文本 */
   label: string;
-  onClick?: () => void;
+  onClick?: () => boolean;
 }
 
 function Countdown(props: Props) {
@@ -51,7 +51,7 @@ function Countdown(props: Props) {
         removeListener(countdown);
       }
     };
-  });
+  }, [time, disabled, start]);
 
   return (
     <button
@@ -59,12 +59,12 @@ function Countdown(props: Props) {
       id={id}
       style={style}
       disabled={disabled}
+      type="button"
       onClick={() => {
         if (disabled === false) {
-          setDisabled(true);
-          setStart(true);
-          if (onClick) {
-            onClick();
+          if ((onClick && onClick()) || !onClick) {
+            setDisabled(true);
+            setStart(true);
           }
         }
       }}
