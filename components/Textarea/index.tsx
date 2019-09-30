@@ -62,7 +62,7 @@ function Textarea(props: Props) {
             props.onChange(e.target.value);
           }
         }}
-        onKeyUp={(e) => {
+        onKeyDown={(e) => {
           if (auto && preRef.current && e.keyCode === 13) {
             preRef.current.textContent += ' ';
           }
@@ -70,7 +70,11 @@ function Textarea(props: Props) {
         rows={rows}
       />
       {wordCount ? (
-        <div className={classNames(`${prefixCls}-wordcount`, wordCountCls)}>{props.value.length}/{maxLength}</div>
+        <div className={classNames(`${prefixCls}-wordcount`, wordCountCls)}>
+          <span className={`${prefixCls}-wordcount-current`}>{props.value.length}</span>
+          <span className={`${prefixCls}-wordcount-split`}>/</span>
+          <span className={`${prefixCls}-wordcount-max`}>{maxLength}</span>
+        </div>
       ) : null}
     </div>
   );
