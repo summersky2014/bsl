@@ -31,8 +31,8 @@ export default function webpackConfig(params: WebpackConfig): Config {
         NODE_ENV: JSON.stringify(env),
         version: JSON.stringify(version),
         outputDir: JSON.stringify(outputDir),
-        publicPath: JSON.stringify(publicPath),
-      },
+        publicPath: JSON.stringify(publicPath)
+      }
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new SpriteLoaderPlugin(),
@@ -50,7 +50,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
     options: {
       ident: 'postcss',
       plugins: [
-        require('autoprefixer')(),
+        require('autoprefixer')()
       ],
       sourceMap: isDev
     }
@@ -64,9 +64,9 @@ export default function webpackConfig(params: WebpackConfig): Config {
     loader: 'sass-resources-loader',
     options: {
       resources: [
-        path.resolve(__dirname, '../styles/mixins.scss'),
+        path.resolve(__dirname, '../styles/mixins.scss')
       ]
-    },
+    }
   }];
 
   if (cssModule !== false) {
@@ -107,7 +107,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
   // else  {
   //   plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
   // }
-
   return {
     entry,
     devtool: isDev ? 'inline-source-map' : false,
@@ -127,7 +126,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
           ...tsInclude
         ],
         options: {
-          // eslintPath: path.resolve(dirname, './.eslintrc.js'),
           // tsConfigFile: path.resolve(dirname, './tsconfig.json'),
         }
       }, {
@@ -149,7 +147,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
             const srcIndex = filePath.indexOf(indexOfStr);
             const symbolId = filePath.substr(srcIndex + indexOfStr.length).replace('.svg', '').replace(/\/|\\/g, '_');
             return symbolId;
-        },
+          },
           spriteFilename: addVersion ? `/svg/sprite_${pkg.version}.svg` : `/svg/sprite.svg`
         }
       }, {
@@ -196,18 +194,18 @@ export default function webpackConfig(params: WebpackConfig): Config {
               warnings: false,
               // 删除所有的 console 语句
               // 还可以兼容ie浏览器
-              drop_console: true,
+              'drop_console': true,
               // 内嵌定义了但是只用到一次的变量
-              collapse_vars: true,
+              'collapse_vars': true,
               // 提取出出现多次但是没有定义成变量去引用的静态值
-              reduce_vars: true
+              'reduce_vars': true
             },
             output: {
               // 最紧凑的输出
               beautify: false,
               // 删除所有的注释
-              comments: false,
-            },
+              comments: false
+            }
           }
         })
       ]

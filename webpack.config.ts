@@ -8,7 +8,7 @@ webpackConfig = {
   entry: {
     PageStack: resolve('examples/PageStack'),
     Container: resolve('examples/Container'),
-    Icon: resolve('examples/Icon'),
+    Icon: resolve('examples/Icon')
   },
   dirname: __dirname,
   addVersion: false,

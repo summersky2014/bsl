@@ -24,8 +24,8 @@ function webpackConfig(params) {
                 NODE_ENV: JSON.stringify(env),
                 version: JSON.stringify(version),
                 outputDir: JSON.stringify(outputDir),
-                publicPath: JSON.stringify(publicPath),
-            },
+                publicPath: JSON.stringify(publicPath)
+            }
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new SpriteLoaderPlugin(),
@@ -43,7 +43,7 @@ function webpackConfig(params) {
             options: {
                 ident: 'postcss',
                 plugins: [
-                    require('autoprefixer')(),
+                    require('autoprefixer')()
                 ],
                 sourceMap: isDev
             }
@@ -57,9 +57,9 @@ function webpackConfig(params) {
             loader: 'sass-resources-loader',
             options: {
                 resources: [
-                    path.resolve(__dirname, '../styles/mixins.scss'),
+                    path.resolve(__dirname, '../styles/mixins.scss')
                 ]
-            },
+            }
         }];
     if (cssModule !== false) {
         extract.unshift({
@@ -79,6 +79,7 @@ function webpackConfig(params) {
             manifest: require('../vender/manifest.json')
         }));
     }
+    console.log(path.resolve(dirname, './.eslintrc.js'));
     return {
         entry,
         devtool: isDev ? 'inline-source-map' : false,
@@ -97,7 +98,9 @@ function webpackConfig(params) {
                         path.resolve(dirname, 'src'),
                         ...tsInclude
                     ],
-                    options: {}
+                    options: {
+                        eslintPath: path.resolve(dirname, './.eslintrc.js')
+                    }
                 }, {
                     test: /\.(ts|tsx)$/,
                     loaders: ['ts-loader'],
@@ -161,14 +164,14 @@ function webpackConfig(params) {
                         ecma: 5,
                         compress: {
                             warnings: false,
-                            drop_console: true,
-                            collapse_vars: true,
-                            reduce_vars: true
+                            'drop_console': true,
+                            'collapse_vars': true,
+                            'reduce_vars': true
                         },
                         output: {
                             beautify: false,
-                            comments: false,
-                        },
+                            comments: false
+                        }
                     }
                 })
             ]
