@@ -35,6 +35,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/no-empty-interface': 0,
+    '@typescript-eslint/camelcase': 0,
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'comma-dangle': ['warn', {
       'arrays': 'never',
