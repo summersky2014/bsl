@@ -74,7 +74,7 @@ const Link = (props: Props) => {
 };
 
 Link.go = function(params: Omit<Params, 'replace'>): void {
-  link({ ...params, replace: false, });
+  link({ ...params, replace: false });
 };
 Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void {
   link({ ...params, replace: true });

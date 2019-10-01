@@ -13,7 +13,7 @@ interface State {
 // 对route中返回的page element手动创建
 function getRoute(nextProps: Props): JSX.Element {
   appData.currentPageId++;
-  const appRoute = (props: { key: number, location: Props['location'] }) => {
+  const appRoute = (props: { key: number; location: Props['location'] }) => {
     return (
       <Switch location={props.location}>
         {nextProps.children}
@@ -90,7 +90,7 @@ class PageStack extends React.Component<BaseProps, State> {
 
     return {
       route: prevState.route,
-      pathname: nextProps.location.pathname,
+      pathname: nextProps.location.pathname
     };
   }
 

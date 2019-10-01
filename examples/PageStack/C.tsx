@@ -2,27 +2,44 @@ import * as React from 'react';
 import PageComponent from '../../app/PageComponent';
 import Link from '../../components/Link';
 
-class C extends PageComponent {
-  constructor(props: any, state: any) {
+interface State {
+  content: string;
+}
+
+class C extends PageComponent<any, State> {
+  constructor(props: any, state: State) {
     super(props, state);
     this.init();
   }
 
+  public state: State = {
+    content: ''
+  }
+
   public componentDidMount(): void {
-    console.log('componentDidMount, C页面进入了');
+    this.setState({
+      content: 'componentDidMount, C页面进入了'
+    });
   }
 
   public pageLeave(): void {
-    console.log('C页面离开了');
+    this.setState({
+      content: 'C页面离开了'
+    });
   }
 
   public pageEnter(): void {
-    console.log('C页面进入了');
+    this.setState({
+      content: 'C页面进入了'
+    });
   }
 
   public pageRender(): JSX.Element {
     return (
-      <div id="goBack" onClick={Link.goBack}>当前页面C，点击回到上一页</div>
+      <React.Fragment>
+        <div></div>
+        <div id="goBack" onClick={Link.goBack}>当前页面C，点击回到上一页</div>
+      </React.Fragment>
     );
   }
 }

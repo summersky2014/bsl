@@ -12,6 +12,8 @@ const vendors = [
     'react-router-dom',
     'exif-js',
     'swipe-js-iso',
+    'create-subscription',
+    'intersection-observer'
 ];
 module.exports = {
     output: {

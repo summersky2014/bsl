@@ -3,7 +3,7 @@ import { History } from 'history';
 import PageComponent from './PageComponent';
 
 interface AppData {
-  pages: PageComponent[];
+  pages: PageComponent<any, any>[];
   scrollLocation: number[];
   history: History | undefined;
   inputFoucs: boolean;
@@ -17,7 +17,7 @@ export interface AppBaseProps {
   children: JSX.Element[] | JSX.Element;
 }
 
-export interface AppProps extends AppBaseProps, BSL.PageProps<any> {
+export interface AppProps extends AppBaseProps, BSL.PageProps<{}> {
   history: History;
 }
 
@@ -34,11 +34,11 @@ const appData: AppData = {
   /** 运行时的环境变量 */
   env: process.env.NODE_ENV as BSL.Env,
   /** 当前页面id */
-  currentPageId: 1,
+  currentPageId: 1
 };
 
 /* 获取上N个页面的类声明 */
-function getPrevPageClassDeclaration(prevCount: number): PageComponent | undefined {
+function getPrevPageClassDeclaration<P = {}, S = {}>(prevCount: number): PageComponent<P, S> | undefined {
   return appData.pages[appData.pages.length - prevCount];
 }
 
@@ -85,5 +85,5 @@ export {
   getPrevPageClassDeclaration,
   isReplaceAction,
   push,
-  pop,
+  pop
 };

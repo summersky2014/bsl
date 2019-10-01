@@ -34,7 +34,7 @@ const Demo = () => {
         <Container style={style.item}>6</Container>
         <Container style={style.item}>7</Container>
       </Container>
-      <br/>
+      <br />
       <Container justifyContent="space-between" style={style.container}>
         <Container style={style.item}>1</Container>
         <Container style={style.item}>2</Container>

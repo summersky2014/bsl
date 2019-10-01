@@ -1,4 +1,4 @@
-import { createContext,  } from 'react';
+import { createContext } from 'react';
 import { createSubscription } from 'create-subscription';
 import { appData } from './core';
 

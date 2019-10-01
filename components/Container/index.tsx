@@ -34,7 +34,7 @@ const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>
         [`${prefixCls}-alignContent-${alignContent}`]: !!alignContent,
         [`${prefixCls}-order-${order}`]: !!order,
         [`${prefixCls}-flex-${flex}`]: !!flex,
-        [`${prefixCls}-alignSelf-${alignSelf}`]: !!alignSelf,
+        [`${prefixCls}-alignSelf-${alignSelf}`]: !!alignSelf
       })}
       style={style}
       id={id}
@@ -45,4 +45,6 @@ const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>
     </div>
   );
 });
+
+Container.displayName = 'Container';
 export default Container;

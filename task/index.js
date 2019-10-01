@@ -92,15 +92,12 @@ function webpackConfig(params) {
             rules: [{
                     test: /\.(ts|tsx)$/,
                     enforce: 'pre',
-                    loader: 'tslint-loader',
+                    loader: 'eslint-loader',
                     include: [
                         path.resolve(dirname, 'src'),
                         ...tsInclude
                     ],
-                    options: {
-                        configFile: path.resolve(dirname, './tslint.json'),
-                        tsConfigFile: path.resolve(dirname, './tsconfig.json'),
-                    }
+                    options: {}
                 }, {
                     test: /\.(ts|tsx)$/,
                     loaders: ['ts-loader'],

@@ -60,7 +60,7 @@ function Toast(props: Props) {
         [prefixCls]: true,
         [`${prefixCls}-fade`]: fade,
         [`${prefixCls}-mask`]: mask,
-        [`${prefixCls}-nomask`]: !mask,
+        [`${prefixCls}-nomask`]: !mask
       })}
     >
       <ToastPure {...props}>{props.children}</ToastPure>
@@ -68,7 +68,7 @@ function Toast(props: Props) {
   );
 }
 
-Toast.show = function(content: string, icon: ToastProps['type'], duration: number = 3000) {
+Toast.show = function(content: string, icon: ToastProps['type'], duration = 3000) {
   Toast.close();
   container = getContainer();
   ReactDom.render((

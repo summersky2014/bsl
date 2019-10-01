@@ -7,8 +7,8 @@ interface State {
   count: number;
 }
 
-class A extends PageComponent {
-  constructor(props: any, state: State) {
+class A extends PageComponent<any, State> {
+  constructor(props: {}, state: State) {
     super(props, state);
     this.init();
   }
@@ -45,7 +45,6 @@ class A extends PageComponent {
 
   public pageRender(): JSX.Element {
     // push新路由后，render函数不会被触发
-    console.log(this.state.count);
     return (
       <div>
         <div id="Astatus">status: {this.state.status}</div>

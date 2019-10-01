@@ -1,7 +1,7 @@
 interface WebpackConfig {
   dirname: string;
   entry: {
-    [key: string]: any;
+    [key: string]: string;
   };
   /** 文件输出路径 */
   outputDir?: string;
@@ -16,7 +16,7 @@ interface WebpackConfig {
   /** 是否使用CSS Module */
   cssModule?: boolean;
   /** webpack插件 */
-  plugins?: any[];
+  plugins?: string[];
 }
 
 declare let webpackConfig: WebpackConfig;

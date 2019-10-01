@@ -26,5 +26,4 @@ webpackConfig = {
     }),
   ]
 };
-
 module.exports = docsTask(webpackConfig);

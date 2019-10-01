@@ -121,14 +121,14 @@ export default function webpackConfig(params: WebpackConfig): Config {
       rules: [{
         test: /\.(ts|tsx)$/,
         enforce: 'pre',
-        loader: 'tslint-loader',
+        loader: 'eslint-loader',
         include: [
           path.resolve(dirname, 'src'),
           ...tsInclude
         ],
         options: {
-          configFile: path.resolve(dirname, './tslint.json'),
-          tsConfigFile: path.resolve(dirname, './tsconfig.json'),
+          // eslintPath: path.resolve(dirname, './.eslintrc.js'),
+          // tsConfigFile: path.resolve(dirname, './tsconfig.json'),
         }
       }, {
         test: /\.(ts|tsx)$/,

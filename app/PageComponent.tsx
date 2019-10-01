@@ -7,8 +7,8 @@ export interface PageProps<Match> extends BSL.PageProps<Match> {
   entrytime: number;
 }
 
-abstract class PageComponent extends React.Component<any, any> {
-  constructor(props: any, state: any) {
+abstract class PageComponent<P, S> extends React.Component<P, S> {
+  constructor(props: P, state: S) {
     super(props, state);
 
     if (appData.env === 'development') {
@@ -26,11 +26,11 @@ abstract class PageComponent extends React.Component<any, any> {
   }
 
   /** 当前页面id */
-  private pageId: number = 0;
+  private pageId = 0;
   /** 根元素的引用 */
   private readonly rootElemRef: React.RefObject<HTMLDivElement>;
   /** 是否调用了init方法 */
-  private isCallInit: boolean = false;
+  private isCallInit = false;
   /** 进入页面的时间 */
   public entrytime: number = Date.now();
   /** 当获取这个属性时，得到已经停留了的时间 */
@@ -41,7 +41,7 @@ abstract class PageComponent extends React.Component<any, any> {
 
   /** Page初始化时调用 */
   protected init(): void {
-    appData.pages.push(this as PageComponent);
+    appData.pages.push(this as PageComponent<{}, {}>);
     push(this.props as any);
     this.isCallInit = true;
 
@@ -49,14 +49,20 @@ abstract class PageComponent extends React.Component<any, any> {
   }
 
   /** 执行后退路由的操作时，会在动画完成后调用 */
-  // tslint:disable-next-line:no-empty
-  public pageEnter(): void {}
+  public pageEnter(): void {
+    // 需要子类来实现
+  }
+
   /** 执行push操作时，会在动画完成后调用上一个页面的pageLeave */
-  // tslint:disable-next-line:no-empty
-  public pageLeave(): void {}
+  public pageLeave(): void {
+    // 需要子类来实现
+  }
+
   /** 当页面处于激活状态时触发，即后退到当前页或跳入到当前页都会触发 */
-  // tslint:disable-next-line:no-empty
-  public pageActive(): void {}
+  public pageActive(): void {
+    // 需要子类来实现
+  }
+
   /** 子类的页面渲染函数，用来替代render函数 */
   public abstract pageRender(): any;
 
