@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
@@ -33,6 +34,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/ban-ts-ignore': 0,
+    '@typescript-eslint/no-empty-interface': 0,
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'comma-dangle': ['warn', {
       'arrays': 'never',

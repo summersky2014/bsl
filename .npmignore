@@ -13,6 +13,7 @@ package-lock.json
 tsconfig.json
 tsconfig.task.json
 tsconfig.test.json
-tslint.json
+.eslintrc.js
 webpack.config.ts
 webpack.docs.ts
+style-mock.js

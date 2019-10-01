@@ -25,5 +25,8 @@
         "task",
         "typings",
         "hooks"
+    ],
+    "files": [
+        "./webpack.config.ts", "./webpack.docs.ts"
     ]
 }

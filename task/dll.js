@@ -19,16 +19,16 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../vender'),
         filename: '[name].js',
-        library: '[name]_[chunkhash]',
+        library: '[name]_[chunkhash]'
     },
     entry: {
-        vendor: vendors,
+        vendor: vendors
     },
     plugins: [
         new webpack.DllPlugin({
             path: './vender/manifest.json',
             name: '[name]_[chunkhash]',
-            context: 'bsl',
-        }),
-    ],
+            context: 'bsl'
+        })
+    ]
 };

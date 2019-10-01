@@ -23,7 +23,7 @@ webpackConfig = {
       to: 'css/antd.min.css'
     }], {
       copyUnmodified: true
-    }),
+    })
   ]
 };
 module.exports = docsTask(webpackConfig);

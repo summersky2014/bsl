@@ -36,6 +36,9 @@ function webpackConfig(params) {
             filename: addVersion ? `css/[name]_${version}.css` : 'css/[name].css',
             allChunks: true
         }),
+        new webpack.WatchIgnorePlugin([
+            /\.d\.ts$/
+        ]),
         ...addPlugins
     ];
     const extract = [{
@@ -79,7 +82,6 @@ function webpackConfig(params) {
             manifest: require('../vender/manifest.json')
         }));
     }
-    console.log(path.resolve(dirname, './.eslintrc.js'));
     return {
         entry,
         devtool: isDev ? 'inline-source-map' : false,
@@ -98,12 +100,10 @@ function webpackConfig(params) {
                         path.resolve(dirname, 'src'),
                         ...tsInclude
                     ],
-                    options: {
-                        eslintPath: path.resolve(dirname, './.eslintrc.js')
-                    }
+                    options: {}
                 }, {
                     test: /\.(ts|tsx)$/,
-                    loaders: ['ts-loader'],
+                    loader: 'ts-loader',
                     include: [
                         path.resolve(dirname, 'src'),
                         path.resolve(dirname, './node_modules/bsl'),

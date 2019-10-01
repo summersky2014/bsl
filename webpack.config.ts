@@ -1,7 +1,7 @@
-/// <reference path="./typings/webpackConfig.d.ts" />
-
 const task = require('./task').default;
+// @ts-ignore
 const path = require('path');
+// @ts-ignore
 const resolve = (filePath) => path.resolve(__dirname, filePath);
 
 webpackConfig = {

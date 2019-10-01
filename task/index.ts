@@ -43,6 +43,9 @@ export default function webpackConfig(params: WebpackConfig): Config {
       filename: addVersion ? `css/[name]_${version}.css` : 'css/[name].css',
       allChunks: true
     }),
+    new webpack.WatchIgnorePlugin([
+      /\.d\.ts$/
+    ]),
     ...addPlugins
   ];
   const extract: any[] = [{
@@ -130,7 +133,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
         }
       }, {
         test: /\.(ts|tsx)$/,
-        loaders: ['ts-loader'],
+        loader: 'ts-loader',
         include: [
           path.resolve(dirname, 'src'),
           path.resolve(dirname, './node_modules/bsl'),
