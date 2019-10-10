@@ -98,7 +98,7 @@ function Form(props: Props) {
             request({
               api,
               data,
-              method
+              method: method || 'post'
             }).then((res) => {
               state.current = 'complete';
               if (onFinally) {

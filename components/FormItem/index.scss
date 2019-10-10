@@ -8,6 +8,13 @@ $prefix: bsl-formitem;
     fill: #ff7777;
     border-radius: 50%;
     cursor: pointer;
-    margin-left: 12px;
+  }
+
+  &-pormpt-box {
+    padding-left: 12px;
+  }
+
+  :global(.bsl-input) {
+    width: 100%;
   }
 }

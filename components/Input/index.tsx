@@ -4,6 +4,7 @@ import { appData } from '../../app/core';
 import { FromTypeProps } from '../Form';
 import Helper from './Helper';
 import memoAreEqual from '../../utils/memoAreEqual';
+import variable from '../../utils/variable';
 
 type Omit_onChange = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 type Omit_onChange_value = Omit<Omit_onChange, 'value'>;
@@ -15,6 +16,7 @@ interface HTMLInputElementExtends extends HTMLInputElement {
 export interface Props extends Omit_onChange_value, FromTypeProps<string> {
 }
 
+const prefixCls = 'bsl-input';
 function Input(props: Props) {
   const { onFocus, onChange, type, state, className, value } = props;
   const inputRef = React.useRef<null | HTMLInputElementExtends>(null);
@@ -22,7 +24,7 @@ function Input(props: Props) {
   return (
     <input
       {...props}
-      className={classNames('bsl_component', className)}
+      className={classNames(variable.bslComponent, prefixCls, className)}
       ref={inputRef}
       data-state={state}
       autoComplete={type === 'password' ? 'new-password' : undefined}

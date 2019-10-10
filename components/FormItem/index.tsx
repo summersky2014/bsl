@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import Container, { Props as ContainerProps } from '../Container';
 import Icon from '../Icon';
 import variable from '../../utils/variable';
@@ -19,7 +20,7 @@ export interface Props extends ContainerProps {
 
 const prefixCls = 'bsl-formitem';
 function FormItem(props: Props) {
-  const { children, requiredPrompt, validatePrompt } = props;
+  const { className, children, requiredPrompt, validatePrompt } = props;
   const [promptVisible, setPromptVisible] = React.useState(false);
   const itemRef = React.useRef<HTMLElement | null>(null);
   const containerRef = React.createRef<HTMLDivElement>();
@@ -51,31 +52,34 @@ function FormItem(props: Props) {
       alignItems="center"
       justifyContent="space-between"
       {...props}
+      className={classNames(prefixCls, className)}
       ref={containerRef}
     >
       {children}
-      <Icon
-        className={`${prefixCls}-prompt`}
-        src={svgFile.prompt}
-        onClick={() => {
-          const state = itemRef.current!.dataset['state'] as Type;
+      <div className={`${prefixCls}-pormpt-box`}>
+        <Icon
+          className={`${prefixCls}-prompt`}
+          src={svgFile.prompt}
+          onClick={() => {
+            const state = itemRef.current!.dataset['state'] as Type;
 
-          if (state === 'empty' && requiredPrompt) {
-            toast(requiredPrompt);
-          } else if (state === 'empty' && !requiredPrompt) {
-            console.warn('缺少requiredPrompt');
-          }
+            if (state === 'empty' && requiredPrompt) {
+              toast(requiredPrompt);
+            } else if (state === 'empty' && !requiredPrompt) {
+              console.warn('缺少requiredPrompt');
+            }
 
-          if (state === 'fail' && validatePrompt) {
-            toast(validatePrompt);
-          } else if (state === 'fail' && !validatePrompt) {
-            console.warn('缺少validatePrompt');
-          }
-        }}
-        style={{
-          display: promptVisible ? 'block' : 'none'
-        }}
-      />
+            if (state === 'fail' && validatePrompt) {
+              toast(validatePrompt);
+            } else if (state === 'fail' && !validatePrompt) {
+              console.warn('缺少validatePrompt');
+            }
+          }}
+          style={{
+            display: promptVisible ? 'block' : 'none'
+          }}
+        />
+      </div>
     </Container>
   );
 }
