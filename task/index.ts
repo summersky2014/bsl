@@ -18,6 +18,7 @@ const isDev = env === 'development' ? true : false;
 
 export default function webpackConfig(params: WebpackConfig): Config {
   const { entry, dirname, publicPath, vender, cssModule } = params;
+  const sassResources = params.sassResources || [];
   const addPlugins = params.plugins || [];
   const addVersion = params.addVersion === false ? false : true;
   const outputDir = params.outputDir || 'build';
@@ -67,7 +68,9 @@ export default function webpackConfig(params: WebpackConfig): Config {
     loader: 'sass-resources-loader',
     options: {
       resources: [
-        path.resolve(__dirname, '../styles/mixins.scss')
+        path.resolve(__dirname, '../styles/mixins.scss'),
+        path.resolve(__dirname, '../styles/variable.scss'),
+        ...sassResources
       ]
     }
   }];

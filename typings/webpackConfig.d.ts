@@ -17,6 +17,8 @@ interface WebpackConfig {
   cssModule?: boolean;
   /** webpack插件 */
   plugins?: string[];
+  /** sass文件资源，用于全局引用 */
+  sassResources?: string[];
 }
 
 declare let webpackConfig: WebpackConfig;
