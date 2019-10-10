@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PageComponent from '../app/PageComponent';
 import { Route } from 'react-router-dom';
 
 export interface RoutesConifg {
@@ -10,7 +9,7 @@ export interface RoutesConifg {
    */
   pathParams?: Record<string, number>;
   linkParams?: (...args: any[]) => (string | number)[];
-  component: typeof PageComponent;
+  component: Function;
 }
 
 export default function(config: Record<string, RoutesConifg>) {
