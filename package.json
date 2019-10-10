@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {

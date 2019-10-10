@@ -11,6 +11,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 function webpackConfig(params) {
     const { entry, dirname, publicPath, vender, cssModule } = params;
+    const sassResources = params.sassResources || [];
     const addPlugins = params.plugins || [];
     const addVersion = params.addVersion === false ? false : true;
     const outputDir = params.outputDir || 'build';
@@ -60,7 +61,9 @@ function webpackConfig(params) {
             loader: 'sass-resources-loader',
             options: {
                 resources: [
-                    path.resolve(__dirname, '../styles/mixins.scss')
+                    path.resolve(__dirname, '../styles/mixins.scss'),
+                    path.resolve(__dirname, '../styles/variable.scss'),
+                    ...sassResources
                 ]
             }
         }];
