@@ -16,9 +16,20 @@ export interface Props extends BSL.ComponentProps  {
   title?: string;
   /** 主体内容 */
   children?: any;
+  /**
+   * 取消按钮的文本
+   * @default 取消
+   */
   dismissText?: string;
+  /**
+   * 确认按钮的文本
+   * @default 多按钮时“确定”，单按钮时“知道了”
+   */
   okText?: string;
-  /** 是否只有确认按钮 */
+  /** 
+   * 是否只有确认按钮 
+   *  @default false
+   */
   onlyOk?: boolean;
   onOk?: () => void;
   onClose?: () => void;
@@ -76,15 +87,15 @@ function Modal(props: Props) {
       {title ? <div className={`${prefixCls}-title`}>{title}</div> : null}
       <div className={`${prefixCls}-body`}>{children}</div>
       <Container className={`${prefixCls}-footer`} justifyContent="space-between">
-      {!onlyOk ? (
-        <React.Fragment>
-          <div className={`${prefixCls}-footer-dismiss`} onClick={onClose} >{dismissText || '取消'}</div>
-          <div className={`${prefixCls}-footer-sep`} />
-          <div className={`${prefixCls}-footer-ok`} onClick={onOk}>{okText || '确定'}</div>
-        </React.Fragment>
-      ) : (
-        <div className={`${prefixCls}-footer-button`} onClick={onOk}>{okText || '知道了'}</div>
-      )}
+        {!onlyOk ? (
+          <React.Fragment>
+            <div className={`${prefixCls}-footer-dismiss`} onClick={onClose} >{dismissText || '取消'}</div>
+            <div className={`${prefixCls}-footer-sep`} />
+            <div className={`${prefixCls}-footer-ok`} onClick={onOk}>{okText || '确定'}</div>
+          </React.Fragment>
+        ) : (
+          <div className={`${prefixCls}-footer-button`} onClick={onOk}>{okText || '知道了'}</div>
+        )}
       </Container>
     </Mask>
   );
