@@ -9,7 +9,7 @@ const checkCircle = require('../../assets/check-circle.svg');
 
 interface Props extends BSL.ComponentProps {
   active: boolean | undefined;
-  children: any;
+  children?: any;
 }
 
 const prefixCls = 'bsl-radio';
@@ -24,7 +24,7 @@ const Radio = (props: Props) => {
     >
       <Icon className={`${prefixCls}-select`} src={checkCircle} hide={!props.active} />
       <div className={classNames(`${prefixCls}-unselect`, variable.bslComponent)} data-hide={props.active} />
-      <div className={`${prefixCls}-text`}>{children}</div>
+      {children ? <div className={`${prefixCls}-text`}>{children}</div> : null}
     </div>
   );
 };
