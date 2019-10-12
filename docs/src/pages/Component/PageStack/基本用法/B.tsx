@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PageComponent from '../../app/PageComponent';
-import Link from '../../components/Link';
+import PageComponent from '../../../../../../app/PageComponent';
+import Link from '../../../../../../components/Link';
 
 interface State {
   status: string;

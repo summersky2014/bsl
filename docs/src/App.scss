@@ -21,7 +21,7 @@ a {
 
 .main {
   display: grid;
-  grid-template-rows: auto 100px;
+  grid-template-rows: auto 25px;
   grid-area: main;
   grid-template-areas: (
     "content"
@@ -35,4 +35,10 @@ a {
   background: #fff;
   padding: 25px 50px;
   border-radius: 3px;
+}
+
+.footer {
+  display: flex;
+  grid-area: footer;
+  color: rgba(0,0,0,.65);
 }

@@ -1,0 +1,19 @@
+.component {
+  flex: 1;
+  padding-right: 30px;
+  height: 680px;
+  margin-top: -7px;
+
+  pre {
+    &:first-child {
+      height: 100%;
+      background: #fff !important;
+
+      code {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+      }
+    }
+  }
+}

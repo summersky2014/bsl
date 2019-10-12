@@ -37,7 +37,7 @@ function Carousel(props: Props) {
       stopPropagation: props.stopPropagation,
       swiping: props.swiping,
       transitionEnd: props.transitionEnd,
-      callback: props.callback,
+      callback: props.callback
     };
     if (elemRef.current) {
       if (swipe.current) {

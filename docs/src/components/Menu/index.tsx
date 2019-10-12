@@ -1,153 +1,142 @@
-// import yj from 'yuejia/typings';
-// import * as React from 'react';
-// import * as style from './index.scss';
-// import * as classNames from 'classnames';
-// import config from '../../../config';
-// import Container from 'yuejia/component/Container';
-// import Icon from 'yuejia/component/Icon';
-// import Link from 'yuejia/component/Link';
+import BSL from '../../../../typings';
+import * as React from 'react';
+import * as styles from './index.scss';
+import * as classNames from 'classnames';
 
-// interface Props extends yj.PageProps<any> {
-// }
+import menus from '../../config/menus';
+import variable from '../../../../utils/variable';
+import Container from '../../../../components/Container';
+import Icon from '../../../../components/Icon';
+import Link from '../../../../components/Link';
 
-// interface State {
-//   open: Map<string, boolean>;
-//   lastPathname: string;
-// }
+interface Props extends BSL.PageProps<any> {
+}
 
-// interface ItemProps {
-//   title: string;
-//   arrow: boolean;
-//   active: boolean;
-//   open: boolean;
-//   path?: string;
-//   onClick: (title: string) => void;
-// }
+interface ItemProps {
+  title: string;
+  arrow: boolean;
+  active: boolean;
+  open: boolean;
+  path?: string;
+  onClick: (title: string) => void;
+}
 
-// interface SubProps {
-//   children: any;
-//   active: boolean;
-//   path?: string;
-// }
+interface SubProps {
+  children: any;
+  active: boolean;
+  path?: string;
+}
 
-// function link(path?: string): void {
-//   if (path) {
-//     Link.go(path);
-//   }
-// }
+const triangularSvg = variable.svgRootPath + require('./triangular.svg').id;
+const logoPng = require('./logo.png');
 
-// const Title = (props: ItemProps) => {
-//   const { active, title, arrow, open, onClick, path } = props;
+function link(path?: string): void {
+  if (path) {
+    Link.go({ url: path });
+  }
+}
 
-//   return (
-//     <Container
-//       className={classNames(style.title, {
-//         [style.active]: active,
-//         [style.open]: open
-//       })}
-//       justifyContent="space-between"
-//       onClick={() => {
-//         if (path) {
-//           link(path);
-//         } else {
-//           onClick(title);
-//         }
-//       }}
-//     >
-//       <div>{title}</div>
-//       {arrow && <Icon className={style.titleArrow} src={config.svgFiles.triangular} />}
-//     </Container>
-//   );
-// };
+const Title = (props: ItemProps) => {
+  const { active, title, arrow, open, onClick, path } = props;
 
-// const Sub = (props: SubProps) => (
-//   <div
-//     className={classNames(style.sub, {
-//       [style.active]: props.active
-//     })}
-//     onClick={() => link(props.path)}
-//   >{props.children}</div>
-// );
+  return (
+    <Container
+      className={classNames(styles.title, {
+        [styles.active]: active,
+        [styles.open]: open
+      })}
+      justifyContent="space-between"
+      onClick={() => {
+        if (path) {
+          link(path);
+        } else {
+          onClick(title);
+        }
+      }}
+    >
+      <div>{title}</div>
+      {arrow && <Icon className={styles.titleArrow} src={triangularSvg} />}
+    </Container>
+  );
+};
 
-// class Menu extends React.Component<Props, State> {
+const Sub = (props: SubProps) => (
+  <div
+    className={classNames(styles.sub, {
+      [styles.active]: props.active
+    })}
+    onClick={() => link(props.path)}
+  >{props.children}</div>
+);
 
-//   public state: State = {
-//     open: new Map(),
-//     lastPathname: this.props.location.pathname
-//   };
+function Menu(props: Props) {
+  const pathname = props.location.pathname;
+  const open = React.useMemo(() => new Map(), []);
+  const [, setUpdateId] = React.useState(0);
+  const toggleOpen = (title: string) => {
+    const menu = open.get(title);
 
-//   public static getDerivedStateFromProps(nextProps: Props, prevState: State): State | null {
-//     config.menus.forEach((item) => {
-//       if (item.children) {
-//         for (let i = 0; i < item.children.length; i++) {
-//           const sub = item.children[i];
+    if (menu !== undefined) {
+      open.set(title, !menu);
+    }
 
-//           if (sub.path === nextProps.location.pathname) {
-//             prevState.open.set(item.title, true);
-//             break;
-//           }
-//         }
-//       } else {
-//         if (item.path === nextProps.location.pathname) {
-//           prevState.open.set(item.title, true);
-//         }
-//       }
+    setUpdateId(Date.now());
+  };
 
-//       if (prevState.open.get((item.title)) === undefined) {
-//         prevState.open.set(item.title, false);
-//       }
-//     });
+  React.useEffect(() => {
+    menus.forEach((item) => {
+      if (item.children) {
+        for (let i = 0; i < item.children.length; i++) {
+          const sub = item.children[i];
 
-//     return {
-//       open: prevState.open,
-//       lastPathname: nextProps.location.pathname
-//     };
-//   }
+          if (sub.path === pathname) {
+            open.set(item.title, true);
+            break;
+          }
+        }
+      } else {
+        if (item.path === pathname) {
+          open.set(item.title, true);
+        }
+      }
 
-//   private toggleOpen = (title: string) => {
-//     const menu = this.state.open.get(title);
+      if (open.get((item.title)) === undefined) {
+        open.set(item.title, false);
+      }
+    });
+    setUpdateId(Date.now());
+  }, []);
 
-//     if (menu !== undefined) {
-//       this.state.open.set(title, !menu);
-//     }
 
-//     this.setState({
-//       open: this.state.open
-//     });
-//   }
+  return (
+    <div className={styles.component}>
+      <Container className={styles.head} alignItems="center">
+        <img className={styles.logo} src={logoPng} />
+      </Container>
+      {menus.map((item, i) => {
+        const isOpen = !!(open.get(item.title) && item.children);
+        return (
+          <React.Fragment key={i}>
+            <Title
+              title={item.title}
+              path={item.path}
+              arrow={!!item.children}
+              active={item.children ? false : pathname === item.path}
+              open={isOpen}
+              onClick={toggleOpen}
+            />
+            {isOpen && item.children && item.children.map((subtitle, l) => (
+              <Sub
+                key={l}
+                active={subtitle.path === pathname}
+                path={subtitle.path}
+              >{subtitle.title}</Sub>
+            ))}
+          </React.Fragment>
+        );
+      })}
+    </div>
+  );
+}
 
-//   public render(): JSX.Element {
-//     const pathname = this.props.location.pathname;
-//     return (
-//       <div className={style.component}>
-//         <Container className={style.head} alignItems="center">
-//           <img className={style.logo} src={config.imgFiles.logo} />
-//         </Container>
-//         {config.menus.map((item, i) => {
-//           const isOpen = !!(this.state.open.get(item.title) && item.children);
-//           return (
-//             <React.Fragment key={i}>
-//               <Title
-//                 title={item.title}
-//                 path={item.path}
-//                 arrow={!!item.children}
-//                 active={item.children ? false : pathname === item.path}
-//                 open={isOpen}
-//                 onClick={this.toggleOpen}
-//               />
-//               {isOpen && item.children && item.children.map((subtitle, l) => (
-//                 <Sub
-//                   key={l}
-//                   active={subtitle.path === pathname}
-//                   path={subtitle.path}
-//                 >{subtitle.title}</Sub>
-//               ))}
-//             </React.Fragment>
-//           );
-//         })}
-//       </div>
-//     );
-//   }
-// }
-
-// export default Menu;
+export default Menu;

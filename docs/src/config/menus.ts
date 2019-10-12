@@ -13,7 +13,10 @@
 // import ComponentFormItem from '../view/pages/Component/FormItem';
 // import ComponentPicker from '../view/pages/Component/Picker';
 // import ComponentView from '../view/pages/Component/View';
-import FramePageStack from '../pages/FramePageStack';
+import QuickStart from '../pages/QuickStart';
+import ComponentContainer from '../pages/Component/Container';
+import ComponentIcon from '../pages/Component/Icon';
+import ComponentPageStack from '../pages/Component/PageStack';
 
 interface Mneu {
   /** 路由页面 */
@@ -26,24 +29,65 @@ interface Mneu {
   children?: Mneu[];
 }
 
-const menus: Mneu[] = [
-// {
-//   component: QuickStart,
-//   title: '快速开始',
-//   path: '/'
-// },
-// {
-//   component: Cli,
-//   title: 'Cli',
-//   path: '/cli'
-// },
-{
-  title: '框架',
+const menus: Mneu[] = [{
+  component: QuickStart,
+  title: '快速开始',
+  path: '/'
+}, {
+  title: '组件',
   children: [{
-    component: FramePageStack,
-    title: '页面栈',
-    path: '/frame/pageStack'
-  },
+    component: ComponentContainer,
+    title: 'Container 容器',
+    path: '/component/container'
+  }, {
+    component: ComponentIcon,
+    title: 'Icon 图标',
+    path: '/component/icon'
+  }, {
+    component: ComponentPageStack,
+    title: 'PageStack 页面栈',
+    path: '/component/pagestack'
+  }]
+  // {
+  //   component: ComponentBanner,
+  //   title: 'Banner 轮播图',
+  //   path: '/component/banner'
+  // }, {
+  //   component: ComponentButton,
+  //   title: 'Button 按钮',
+  //   path: '/component/button'
+  // }, {
+  //   component: ComponentChoice,
+  //   title: 'Chocie 选择器',
+  //   path: '/component/chocie'
+  // }, {
+  //   component: ComponentDatePicker,
+  //   title: 'DatePicker 日期选择器',
+  //   path: '/component/datepicker'
+  // }, {
+  //   component: ComponentForm,
+  //   title: 'Form 表单',
+  //   path: '/component/form'
+  // }, {
+  //   component: ComponentFormItem,
+  //   title: 'FormItem 表单项',
+  //   path: '/component/formitem'
+  // }, {
+  //   component: ComponentPicker,
+  //   title: 'Picker 弹出式选择器',
+  //   path: '/component/picker'
+  // }, {
+  //   component: ComponentView,
+  //   title: 'View 视图',
+  //   path: '/component/view'
+  // }
+// {
+//   title: '框架',
+//   children: [{
+//     component: QuickStart,
+//     title: '页面栈',
+//     path: '/frame/pageStack'
+//   },
   // {
   //   component: TutorialDatatype,
   //   title: '数据类型',
@@ -57,48 +101,9 @@ const menus: Mneu[] = [
   //   title: '发起请求',
   //   path: '/tutorial/request'
   // }
-]
-},
-// {
-//   title: '组件',
-//   children: [{
-//     component: ComponentAuth,
-//     title: 'Auth 鉴权',
-//     path: '/component/auth'
-//   }, {
-//     component: ComponentBanner,
-//     title: 'Banner 轮播图',
-//     path: '/component/banner'
-//   }, {
-//     component: ComponentButton,
-//     title: 'Button 按钮',
-//     path: '/component/button'
-//   }, {
-//     component: ComponentChoice,
-//     title: 'Chocie 选择器',
-//     path: '/component/chocie'
-//   }, {
-//     component: ComponentDatePicker,
-//     title: 'DatePicker 日期选择器',
-//     path: '/component/datepicker'
-//   }, {
-//     component: ComponentForm,
-//     title: 'Form 表单',
-//     path: '/component/form'
-//   }, {
-//     component: ComponentFormItem,
-//     title: 'FormItem 表单项',
-//     path: '/component/formitem'
-//   }, {
-//     component: ComponentPicker,
-//     title: 'Picker 弹出式选择器',
-//     path: '/component/picker'
-//   }, {
-//     component: ComponentView,
-//     title: 'View 视图',
-//     path: '/component/view'
-//   }]
-// }
-];
+}];
+// },
+
+// ];
 
 export default menus;

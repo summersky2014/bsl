@@ -1,0 +1,70 @@
+.component {
+  width: 375px;
+  height: 667px;
+  // box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.08);
+}
+
+.app-bar {
+  width: 100%;
+  height: 20px;
+  background: #303135;
+}
+
+.weixin-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  width: 100%;
+  height: 44px;
+  background: #393a3f;
+  color: #fff;
+  font-size: 16px;
+  .anticon-close {
+    position: relative;
+    top: 1px;
+    font-size: 22px;
+  }
+  .anticon-ellipsis {
+    font-size: 22px;
+    transform: rotate(90deg);
+    position: relative;
+    right: -9px;
+  }
+}
+
+.weixin-bar-left {
+  display: flex;
+  align-items: center;
+}
+
+.weixin-bar-line {
+  width: 2px;
+  height: 26px;
+  background: #2d2d31;
+  margin-left: 16px;
+  margin-right: 12px; 
+}
+
+.weixin-bar-title {
+  @include ellipsis();
+  width: 250px;
+}
+
+.webview {
+  width: 100%;
+  height: calc(100% - 66px);
+  border: 1px solid #d9d9d9;
+  border-top: 0;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.qrcodeIcon {
+  font-size: 26px;
+  cursor: pointer;
+}

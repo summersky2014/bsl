@@ -1,26 +1,30 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import PageComponent, { PageProps } from '../../../../app/PageComponent';
-
-interface Props {
-}
+import PageComponent from '../../../../../../app/PageComponent';
+import Link from '../../../../../../components/Link';
 
 interface State {
   status: string;
+  count: number;
 }
 
-interface Match {
-}
-
-class Home extends PageComponent<Props, State, Match> {
-  constructor(props: PageProps<Match>, state: State) {
+class A extends PageComponent<any, State> {
+  constructor(props: {}, state: State) {
     super(props, state);
     this.init();
   }
 
   public state: State = {
-    status: 'init'
+    status: 'init',
+    count: 0
   };
+
+  public componentDidMount(): void {
+    setInterval(() => {
+      this.setState({
+        count: this.state.count + 1
+      });
+    }, 1000);
+  }
 
   public pageEnter(): void {
     // pageEnter的执行先于页面显示，所以稍微延后一下执行
@@ -40,16 +44,17 @@ class Home extends PageComponent<Props, State, Match> {
   }
 
   public pageRender(): JSX.Element {
+    // push新路由后，render函数不会被触发
     return (
       <div>
         <div id="Astatus">status: {this.state.status}</div>
         <div id="Aleave">leave: false</div>
         <Link id="linkToB" to="/b">A to B</Link>
         <br/>
-        <Link to="/c" replace>A replace C</Link>
+        <Link id="linkToC" to="/c">A to C</Link>
       </div>
     );
   }
 }
 
-export default Home;
+export default A;

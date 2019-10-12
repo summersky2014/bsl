@@ -7,6 +7,7 @@ export interface Props extends BSL.ComponentProps {
   onClick?: BSL.OnClick<SVGElement>;
   /** svg sprite的id */
   src: string;
+  /** 是否隐藏图标，只是对display做修改，不会移除组件，适合于隐藏/显示的场景 */
   hide?: boolean;
 }
 

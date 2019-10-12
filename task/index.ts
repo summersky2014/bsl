@@ -32,7 +32,8 @@ export default function webpackConfig(params: WebpackConfig): Config {
         NODE_ENV: JSON.stringify(env),
         version: JSON.stringify(version),
         outputDir: JSON.stringify(outputDir),
-        publicPath: JSON.stringify(publicPath)
+        publicPath: JSON.stringify(publicPath),
+        addVersion: JSON.stringify(addVersion)
       }
     }),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -163,6 +164,11 @@ export default function webpackConfig(params: WebpackConfig): Config {
           name: '[path][name].[ext]',
           outputPath: 'img/'
         }
+      },{
+        test: /\.md$/,
+        use: [{
+          loader: "raw-loader"
+        }]
       }, {
         test: /\.(scss)$/,
         use: ExtractTextPlugin.extract({

@@ -19,7 +19,7 @@ export interface Props extends BSL.ComponentProps {
   newPage?: boolean;
 }
 
-interface Params {
+export interface Params {
   url: string;
   replace: boolean;
   query?: (string | number)[];

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Container from '../../components/Container';
-import '../../styles/base.scss';
+import Container from '../../../../../../components/Container';
+import '../../../../../../styles/base.scss';
 
 const style: Record<string, React.CSSProperties> = {
   container: {

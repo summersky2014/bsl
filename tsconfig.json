@@ -24,9 +24,10 @@
         "app",
         "task",
         "typings",
-        "hooks"
+        "hooks",
+        "docs"
     ],
     "files": [
-        "./webpack.config.ts", "./webpack.docs.ts"
+        "webpack.config.ts"
     ]
 }

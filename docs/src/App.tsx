@@ -3,14 +3,29 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as style from './App.scss';
 import { Route, HashRouter } from 'react-router-dom';
-import { Subscription, Context } from '../../app/core';
+import { Subscription, Context } from '../../app/Scheduler';
+import { appData } from '../../app/core';
+
 import menuConfig from './config/menus';
 import AppStack from '../../app/PageStack';
 import Alert from 'antd/lib/alert';
-// import Menu from './components/Menu';
+import Menu from './components/Menu';
 
+interface ExtendsWindow extends Window {
+  link: (route: string) => void;
+}
+
+declare const window: ExtendsWindow;
 const menu: JSX.Element[] = [];
 const isGridSupports: boolean = CSS.supports('display', 'grid');
+
+(window as ExtendsWindow).link = (route: string) => {
+  if (window.event) {
+    window.event.preventDefault();
+  }
+  appData.history!.push(route);
+};
+
 menuConfig.forEach((item) => {
   if (item.children) {
     item.children.forEach((sub) => {
@@ -33,63 +48,26 @@ const App = () => (
       />
     ) : null}
     <div className={style.container}>
-    {/* <HashRouter>
-      <Route key="首页" component={Menu} />
-    </HashRouter> */}
-    <div className={style.main}>
-      <div className={style.content}>
-        <Subscription source={{}}>
-          {(value: object) => (
-            <Context.Provider value={value}>
-              <HashRouter>
-                <AppStack>{menu}</AppStack>
-              </HashRouter>
-            </Context.Provider>
-          )}
-        </Subscription>
+      <HashRouter>
+        <Route key="首页" component={Menu as any} />
+      </HashRouter>
+      <div className={style.main}>
+        <div className={style.content}>
+          <Subscription source={{}}>
+            {(value: object) => (
+              <Context.Provider value={value}>
+                <HashRouter>
+                  <AppStack>{menu}</AppStack>
+                </HashRouter>
+              </Context.Provider>
+            )}
+          </Subscription>
+        </div>
+        {/* <Container className={style.footer} alignItems="center" justifyContent="center" flexDirection="column" /> */}
       </div>
     </div>
-  </div>
   </React.Fragment>
 );
-// class App extends React.Component {
-
-//   private isGridSupports: boolean = CSS.supports('display', 'grid');
-
-//   public render(): JSX.Element {
-//     return (
-//       <React.Fragment>
-//         {this.isGridSupports !== true ? (
-//           <Alert
-//             banner
-//             message="浏览器版本过低，推荐使用chrome 57以上的浏览器"
-//             type="error"
-//             showIcon={false}
-//             style={{ textAlign: 'center' }}
-//           />
-//         ) : null}
-//         <div className={style.container}>
-//         <HashRouter>
-//           <Route key="首页" component={Menu} />
-//         </HashRouter>
-//         <div className={style.main}>
-//           <div className={style.content}>
-//             <Subscription source={{}}>
-//               {(value: object) => (
-//                 <Context.Provider value={value}>
-//                   <HashRouter>
-//                     <AppStack>{menu}</AppStack>
-//                   </HashRouter>
-//                 </Context.Provider>
-//               )}
-//             </Subscription>
-//           </div>
-//         </div>
-//       </div>
-//       </React.Fragment>
-//     );
-//   }
-// }
 
 ReactDOM.render(
   <App />,

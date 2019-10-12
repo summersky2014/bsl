@@ -4,7 +4,8 @@ const env = process.env.NODE_ENV as Env;
 const publicPath = process.env.publicPath;
 const version = process.env.version;
 const outputDir = process.env.outputDir;
-const svgRootPath = publicPath + `svg/sprite_${version}.svg#`;
+const addVersion = process.env.addVersion;
+const svgRootPath = publicPath + `svg/sprite${addVersion ? '_' + version : ''}` + '.svg#';
 
 const variable = {
   /** 环境变量 */
