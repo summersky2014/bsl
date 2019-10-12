@@ -10,7 +10,7 @@
     "vender": "set NODE_ENV=development&&webpack --env development --mode development --progress --color --display-error-details --config ./task/dll.ts",
     "publish": "npm run vender && npm publish",
     "docs:dev": "tsc --project tsconfig.task.json && set NODE_ENV=development&&webpack --env development --mode development --watch --progress --color --display-error-details",
-    "docs:pro": "tsc --project tsconfig.task.json && set NODE_ENV=production&&webpack --env production --mode production --watch --progress --color --display-error-details",
+    "docs:pro": "tsc --project tsconfig.task.json && set NODE_ENV=production&&webpack --env production --mode production --progress --color --display-error-details",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {

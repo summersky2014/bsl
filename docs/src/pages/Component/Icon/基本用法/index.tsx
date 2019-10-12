@@ -1,15 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { rawUrl } from '../../../../config/var';
 import variable from '../../../../../../utils/variable';
 import Icon from '../../../../../../components/Icon';
 import '../../../../../../styles/base.scss';
 
-const checkCircle = rawUrl + variable.svgRootPath + require('./assets/cross-circle.svg').id;
-const checkCircleO =rawUrl + variable.svgRootPath + require('./assets/check-circle-o.svg').id;
-const crossCircle = rawUrl + variable.svgRootPath + require('./assets/cross-circle.svg').id;
-const crossCirclO = rawUrl + variable.svgRootPath + require('./assets/cross-circle-o.svg').id;
+const checkCircle =  variable.svgRootPath + require('./assets/cross-circle.svg').id;
+const checkCircleO = variable.svgRootPath + require('./assets/check-circle-o.svg').id;
+const crossCircle =  variable.svgRootPath + require('./assets/cross-circle.svg').id;
+const crossCirclO =  variable.svgRootPath + require('./assets/cross-circle-o.svg').id;
 
 const style: Record<string, React.CSSProperties> = {
   icon: {

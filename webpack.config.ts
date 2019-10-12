@@ -16,7 +16,7 @@ webpackConfig = {
   addVersion: false,
   vender: false,
   outputDir: './docs/dist/',
-  publicPath: '/docs/dist/',
+  publicPath: '/bsl/docs/dist/',
   tsInclude: [
     nodePath.resolve(__dirname, 'docs'),
     nodePath.resolve(__dirname, 'component'),
