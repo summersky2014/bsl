@@ -4,6 +4,7 @@ import * as styles from './index.scss';
 import * as classNames from 'classnames';
 
 import menus from '../../config/menus';
+import { rawUrl } from '../../config/var';
 import variable from '../../../../utils/variable';
 import Container from '../../../../components/Container';
 import Icon from '../../../../components/Icon';
@@ -27,8 +28,8 @@ interface SubProps {
   path?: string;
 }
 
-const triangularSvg = variable.svgRootPath + require('./triangular.svg').id;
-const logoPng = require('./logo.png');
+const triangularSvg = rawUrl + variable.svgRootPath + require('./triangular.svg').id;
+const logoPng = rawUrl + require('./logo.png');
 
 function link(path?: string): void {
   if (path) {
