@@ -46,6 +46,7 @@
   ],
   "dependencies": {
     "@better-scroll/core": "next",
+    "@better-scroll/wheel": "^2.0.0-beta.2",
     "@types/classnames": "^2.2.7",
     "@types/node": "^10.12.21",
     "@types/react": "^16.8.1",
