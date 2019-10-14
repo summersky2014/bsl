@@ -21,7 +21,7 @@ export type OnClick<T extends Value> = (event: React.MouseEvent<HTMLDivElement>,
 export interface Props<T extends Value> extends BaseProps<T>, FromTypeProps<T[]> {
   onChange: (value: any[], item: T, index: number) => boolean;
   /** 更新id，用于判断data和value是否更新 */
-  updateId: number;
+  updateId: number | string;
   /** item是data遍历的项, index是遍历的索引，value是选中的值 */
   children: (item: T, active: boolean, index: number) => any;
   /** 是否禁用 */
@@ -64,7 +64,7 @@ function createNewValue<T extends Value>(props: Props<T>, nextValue: T): T[] {
 
 function onClick<T extends Value>(event: React.MouseEvent<HTMLDivElement>, props: Props<T>, item: T, index: number): void {
   const { onChange, disabled, multiple, value, max } = props;
-
+  
   if (disabled) {
     return;
   }
@@ -78,6 +78,7 @@ function onClick<T extends Value>(event: React.MouseEvent<HTMLDivElement>, props
 
   if (((max && value.length < max) || max === undefined)) {
     const newValue = createNewValue<T>(props, item);
+    
     // 小于max数量时
     if (onChange) {
       onChange(newValue, item, index);
@@ -112,7 +113,7 @@ function Choice<T extends Value>(props: Props<T>) {
           <div
             className={classNames(`${prefixCls}-item`, itemCls) }
             style={{
-              userSelect: 'none',
+              userSelect: 'none'
             }}
             key={item.id}
             onClick={(e) => onClick(e, props, item, i)}

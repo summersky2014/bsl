@@ -16,7 +16,7 @@ abstract class Helper<T> {
     }
   }
 
-  protected required: boolean = false;
+  protected required = false;
   public abstract value: Dispatcher<T>;
   public abstract state: Type;
   public abstract onChange(value: T): boolean;

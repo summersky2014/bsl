@@ -26,9 +26,9 @@ export default function useIntersectionObserver(
   htmlElementRef: React.RefObject<HTMLElement>,
   callback: () => void,
   options?: {
-    once?: boolean,
-    POLL_INTERVAL?: number,
-    USE_MUTATION_OBSERVER?: boolean
+    once?: boolean;
+    POLL_INTERVAL?: number;
+    USE_MUTATION_OBSERVER?: boolean;
   }
 ): IntersectionObserverExtends {
   const intersectionObserver = React.useMemo(() => {
@@ -40,13 +40,10 @@ export default function useIntersectionObserver(
       }
       callback();
       if (once) {
-        disconnect();
+        intersectionObserver.disconnect();
       }
     });
   }, []) as IntersectionObserverExtends;
-  const disconnect = () => {
-    intersectionObserver.disconnect();
-  };
 
   React.useEffect(() => {
     if (htmlElementRef.current) {
@@ -60,7 +57,7 @@ export default function useIntersectionObserver(
       }
       intersectionObserver.observe(htmlElementRef.current);
     }
-    return disconnect;
+    return intersectionObserver.disconnect;
   }, [htmlElementRef.current]);
 
   return intersectionObserver;

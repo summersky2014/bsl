@@ -7,7 +7,7 @@ class Dispatcher<T> {
    * @param value
    * @param isSaveRawData 对bigint、boolean、number、string不受影响，对object、array起作用。对于大数据时，关闭此项会提高性能
    */
-  constructor(value: T, isSaveRawData: boolean = true) {
+  constructor(value: T, isSaveRawData = true) {
     const type = typeof value;
     this.value = value;
 
@@ -31,7 +31,7 @@ class Dispatcher<T> {
   private value: T;
   private rawData: T | undefined;
   public readonly type!: Type;
-  public id: number = 1;
+  public id = 1;
 
   public set(value: T): void;
   public set(key: keyof T, value: T[keyof T]): void;

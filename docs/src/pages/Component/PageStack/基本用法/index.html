@@ -12,8 +12,13 @@
         const scriptTime = new Date().getTime();
         const body = document.getElementsByTagName('body')[0];
         const script = document.createElement('script');
+        const head = document.getElementsByTagName('head')[0];
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '../../../../../dist/css/PageStack.css?time=' + scriptTime;
         script.type = 'text/javascript';
         script.src = '../../../../../dist/js/PageStack.js?time=' + scriptTime;
+        head.appendChild(link);
         body.appendChild(script);
       })();
     </script>

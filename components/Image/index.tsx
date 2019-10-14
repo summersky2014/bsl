@@ -39,6 +39,7 @@ const defaultProps: Required<DefaultProps> = {
 };
 
 function getSrc(host: string | undefined, src: string): string {
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const realHost = host || ImageView.defaultHost;
 
   if (src) {

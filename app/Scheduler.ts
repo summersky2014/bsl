@@ -10,7 +10,7 @@ export interface Listen {
 }
 
 let subscribeCallback: (model: object) => void;
-let rafId: number | undefined = 1;
+let rafId: number | undefined;
 /** 更新锁 */
 let updateLock = true;
 /** 锁枕 */

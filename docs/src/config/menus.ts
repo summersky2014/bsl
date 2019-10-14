@@ -7,13 +7,15 @@
 // import ComponentAuth from '../view/pages/Component/Auth';
 // import ComponentBanner from '../view/pages/Component/Banner';
 // import ComponentButton from '../view/pages/Component/Button';
-// import ComponentChoice from '../view/pages/Component/Choice';
+
 // import ComponentDatePicker from '../view/pages/Component/DatePicker';
 // import ComponentForm from '../view/pages/Component/Form';
 // import ComponentFormItem from '../view/pages/Component/FormItem';
 // import ComponentPicker from '../view/pages/Component/Picker';
 // import ComponentView from '../view/pages/Component/View';
 import QuickStart from '../pages/QuickStart';
+import ComponentCarousel from '../pages/Component/Carousel';
+import ComponentChoice from '../pages/Component/Choice';
 import ComponentContainer from '../pages/Component/Container';
 import ComponentIcon from '../pages/Component/Icon';
 import ComponentPageStack from '../pages/Component/PageStack';
@@ -36,6 +38,14 @@ const menus: Mneu[] = [{
 }, {
   title: '组件',
   children: [{
+    component: ComponentCarousel,
+    title: 'Carousel 走马灯',
+    path: '/component/carousel'
+  }, {
+    component: ComponentChoice,
+    title: 'Choice 选择',
+    path: '/component/choice'
+  }, {
     component: ComponentContainer,
     title: 'Container 容器',
     path: '/component/container'

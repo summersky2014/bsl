@@ -10,6 +10,7 @@ export interface Props {
 
 function Phone(props: Props) {
   const { path } = props;
+  const url = location.origin + location.pathname + path;
 
   return (
     <div className={style.component}>
@@ -19,7 +20,7 @@ function Phone(props: Props) {
           <div className={style.weixinBarLeft}>
             <div className={style.weixinBarTitle}>鼠标放到右侧二维码上可以扫</div>
           </div>
-          <Popover content={<QRCode value={path} />}>
+          <Popover content={<QRCode value={url} />}>
             <Icon className={style.qrcodeIcon} type="qrcode" />
           </Popover>
         </div>
