@@ -75,7 +75,7 @@ const Demo = () => {
       </Choice>
       <br />
 
-      <h2>switch(无默认值)</h2>
+      <h2>开关(无默认值)</h2>
       <Choice
         data={switchData}
         value={switchHelper.value.get()}
