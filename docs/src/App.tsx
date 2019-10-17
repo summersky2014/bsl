@@ -8,7 +8,7 @@ import { appData } from '../../app/core';
 
 import menuConfig from './config/menus';
 import AppStack from '../../app/PageStack';
-import Alert from 'antd/lib/alert';
+import { Alert } from 'antd';
 import Menu from './components/Menu';
 
 interface ExtendsWindow extends Window {
