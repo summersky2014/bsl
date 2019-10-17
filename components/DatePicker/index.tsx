@@ -7,15 +7,23 @@ import createRangeDate from '../../utils/createRangeDate';
 import dateformat, { Mode } from '../../utils/dateformat';
 
 export interface DefaultProps {
+  /**
+   * 最小日期
+   * @default 2000-01-01
+   */
   minDate?: Date;
+  /**
+   * 最大日期
+   * @default 2030-01-01
+   */
   maxDate?: Date;
   mode?: Mode;
 }
 
 const defaultProps: Required<DefaultProps> = {
   minDate: new Date(2000, 0, 1, 0, 0),
-  maxDate: new Date(2030, 0, 1, 23, 0),
-  mode: 'yyMMddHHmm',
+  maxDate: new Date(2030, 0, 1, 0, 0),
+  mode: 'yyMMddHHmm'
 };
 function DatePicker(props: Omit<PikcerProps, 'updateId'>  & BaseDefaultProps & DefaultProps & FromTypeProps<Value[]>) {
   const data = React.useMemo(() => createRangeDate({

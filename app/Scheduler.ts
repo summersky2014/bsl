@@ -32,7 +32,7 @@ const Subscription: React.ComponentFactory<any, any> = createSubscription({
 function updateLoop(): void {
   const listensLength = listens.size;
   frameLock = false;
-
+  
   if (listensLength) {
     const time = Date.now();
     listens.forEach((listen) => {

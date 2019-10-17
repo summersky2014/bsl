@@ -33,6 +33,8 @@ interface Props extends Base {
   updateId: number | string;
 }
 
+export const itemHeight = 34;
+
 /** 计算显示区域内居中的序号 */
 function calcNum(): number {
   const rootHeight = itemHeight * 7;
@@ -47,7 +49,6 @@ function calcNum(): number {
 }
 
 BetterScroll.default.use(Wheel);
-export const itemHeight: number = 34;
 export const num: number = calcNum();
 const prefixCls = 'bsl-picker-item';
 
@@ -134,5 +135,6 @@ function Item(props: Props) {
     </div>
   );
 }
+
 
 export default Item;

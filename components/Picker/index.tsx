@@ -85,7 +85,7 @@ const defaultProps: Required<DefaultProps> = {
   dismissText: '取消',
   okText: '确定',
   placeholder: '请选择',
-  format: (value) => value.map((item) => item.label).join(','),
+  format: (value) => value.map((item) => item.label).join(',')
 };
 
 function initCascadeData(props: Props) {
@@ -108,9 +108,6 @@ function initCascadeData(props: Props) {
 function Picker(props: Props) {
   const { updateId, dismissText, okText, title, placeholder, buttonCls, onPopup, disabled, rightIcon } = props;
   const [visible, setVisible] = React.useState(false);
-  // tslint:disable-next-line: max-line-length
-  // const [stateValue, setStateValue] = React.useState<Value[]>(props.value.length ? JSON.parse(JSON.stringify(props.value)) : initCascadeData(props));
-  // const stateValue = React.useMemo(() => new Dispatcher()), [props.value.id]);
   const stateValue = React.useMemo(() => {
     return {
       current: props.value.length ? JSON.parse(JSON.stringify(props.value)) : initCascadeData(props)
@@ -127,7 +124,6 @@ function Picker(props: Props) {
   const onScrollEnd = (currentCol: number, currentValue: Value, allValue: Value[]) => {
     stateValue.current = allValue;
     update();
-    // setStateValue(allValue);
   };
   const onCreate = (data: Data[][]) => {
     foramtData = data;

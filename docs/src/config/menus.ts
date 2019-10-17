@@ -1,24 +1,18 @@
-// import QuickStart from '../view/pages/QuickStart';
-// import Cli from '../view/pages/Cli';
-// import TutorialBehavior from '../view/pages/Tutorial/Behavior';
-// import TutorialDatatype from '../view/pages/Tutorial/Datatype';
-// import TutorialForm from '../view/pages/Tutorial/Form';
-// import TutorialRequest from '../view/pages/Tutorial/Request';
-// import ComponentAuth from '../view/pages/Component/Auth';
-// import ComponentBanner from '../view/pages/Component/Banner';
-// import ComponentButton from '../view/pages/Component/Button';
-
-// import ComponentDatePicker from '../view/pages/Component/DatePicker';
-// import ComponentForm from '../view/pages/Component/Form';
-// import ComponentFormItem from '../view/pages/Component/FormItem';
-// import ComponentPicker from '../view/pages/Component/Picker';
-// import ComponentView from '../view/pages/Component/View';
 import QuickStart from '../pages/QuickStart';
 import ComponentCarousel from '../pages/Component/Carousel';
 import ComponentChoice from '../pages/Component/Choice';
 import ComponentContainer from '../pages/Component/Container';
+import ComponentCountdown from '../pages/Component/Countdown';
+import ComponentDatePicker from '../pages/Component/DatePicker';
+import ComponentDownload from '../pages/Component/Download';
+import ComponentForm from '../pages/Component/Form';
 import ComponentIcon from '../pages/Component/Icon';
+import ComponentImage from '../pages/Component/Image';
+import ComponentInput from '../pages/Component/Input';
+import ComponentLink from '../pages/Component/Link';
+import ComponentMask from '../pages/Component/Mask';
 import ComponentPageStack from '../pages/Component/PageStack';
+
 
 interface Mneu {
   /** 路由页面 */
@@ -50,9 +44,41 @@ const menus: Mneu[] = [{
     title: 'Container 容器',
     path: '/component/container'
   }, {
+    component: ComponentCountdown,
+    title: 'Countdown 倒计时',
+    path: '/component/countdown'
+  }, {
+    component: ComponentDatePicker,
+    title: 'DatePicker 日期选择器',
+    path: '/component/datepicker'
+  }, {
+    component: ComponentDownload,
+    title: 'Download 下载',
+    path: '/component/download'
+  }, {
+    component: ComponentForm,
+    title: 'Form 表单',
+    path: '/component/form'
+  }, {
     component: ComponentIcon,
     title: 'Icon 图标',
     path: '/component/icon'
+  }, {
+    component: ComponentImage,
+    title: 'Image 图片',
+    path: '/component/image'
+  }, {
+    component: ComponentInput,
+    title: 'Input 输入框',
+    path: '/component/intpu'
+  }, {
+    component: ComponentLink,
+    title: 'Link 链接',
+    path: '/component/link'
+  }, {
+    component: ComponentMask,
+    title: 'Mask 遮罩层',
+    path: '/component/mask'
   }, {
     component: ComponentPageStack,
     title: 'PageStack 页面栈',

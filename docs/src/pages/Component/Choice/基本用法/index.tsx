@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+
 import { Subscription, Context } from '../../../../../../app/Scheduler';
 import Choice, { ChoiceHelper } from '../../../../../../components/Choice';
 import Radio from '../../../../../../components/Radio';
@@ -25,6 +26,7 @@ const App = () => {
     </Subscription>
   );
 };
+
 const Demo = () => {
   // 单选无默认值的
   const radioHelper = React.useMemo(() => new ChoiceHelper(), []);
@@ -34,7 +36,7 @@ const Demo = () => {
   const checkboxHelper = React.useMemo(() => new ChoiceHelper(), []);
   // switch无默认值的
   const switchHelper = React.useMemo(() => new ChoiceHelper(), []);
-
+  
   return (
     <div>
       <h2>单选(有默认值)</h2>

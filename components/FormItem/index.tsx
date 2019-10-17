@@ -8,7 +8,7 @@ import { Type } from '../SwitchView';
 import './index.scss';
 
 const svgFile = {
-  prompt: variable.svgRootPath + require('../../assets/prompt.svg').id,
+  prompt: variable.svgRootPath + require('../../assets/prompt.svg').id
 };
 
 export interface Props extends ContainerProps {

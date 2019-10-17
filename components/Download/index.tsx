@@ -18,7 +18,7 @@ interface DefaultProps {
 }
 
 const defaultProps: Required<DefaultProps> = {
-  responseType: 'text',
+  responseType: 'text'
 };
 
 function Download(props: Props) {

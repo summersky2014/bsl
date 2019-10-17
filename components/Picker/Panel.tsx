@@ -22,7 +22,7 @@ export interface Props extends BSL.ComponentProps, Base {
 }
 
 /** 设置格式化后的数据 */
-function formatData(stateData: Data[][], value: Value[], propsData: Data[], startCol: number = 0): Data[][] {
+function formatData(stateData: Data[][], value: Value[], propsData: Data[], startCol = 0): Data[][] {
   const newData: Data[][] = stateData;
   const each = (eachData: Data[]) => {
     // 判断数据是否为空

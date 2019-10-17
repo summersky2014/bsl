@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DatePicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (function() {
+        const scriptTime = new Date().getTime();
+        const body = document.getElementsByTagName('body')[0];
+        const script = document.createElement('script');
+        const head = document.getElementsByTagName('head')[0];
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '../../../../../dist/css/DatePicker.css?time=' + scriptTime;
+        script.type = 'text/javascript';
+        script.src = '../../../../../dist/js/DatePicker.js?time=' + scriptTime;
+        head.appendChild(link);
+        body.appendChild(script);
+      })();
+    </script>
+  </body>
+</html> 

@@ -40,7 +40,7 @@ function getMinuteData(minDate: Date, maxDate: Date): DateData {
     min: createRangeData(minDate.getMinutes(), 59, unit),
     max: createRangeData(0, maxDate.getMinutes(), unit),
     normal: createRangeData(0, 59, unit),
-    between: createRangeData(minDate.getMinutes(), maxDate.getMinutes(), unit),
+    between: createRangeData(minDate.getMinutes(), maxDate.getMinutes(), unit)
   };
 }
 
@@ -51,7 +51,7 @@ function getHourData(minDate: Date, maxDate: Date): DateData {
     min: createRangeData(minDate.getHours(), 23, unit),
     max: createRangeData(0, maxDate.getHours(), unit),
     normal: createRangeData(0, 23, unit),
-    between: createRangeData(minDate.getHours(), maxDate.getHours(), unit),
+    between: createRangeData(minDate.getHours(), maxDate.getHours(), unit)
   };
 }
 
@@ -62,7 +62,7 @@ function getYearData(minDate: Date, maxDate: Date): DateData {
     min: [],
     max: [],
     normal: [],
-    between: createRangeData(minDate.getFullYear(), maxDate.getFullYear(), unit),
+    between: createRangeData(minDate.getFullYear(), maxDate.getFullYear(), unit)
   };
 }
 
@@ -73,7 +73,7 @@ function getMonthData(minDate: Date, maxDate: Date): DateData {
     min: createRangeData(minDate.getMonth() + 1, 12, unit),
     max: createRangeData(1, maxDate.getMonth() + 1, unit),
     normal: createRangeData(1, 12, unit),
-    between: createRangeData(minDate.getMonth() + 1, maxDate.getMonth() + 1, unit),
+    between: createRangeData(minDate.getMonth() + 1, maxDate.getMonth() + 1, unit)
   };
 }
 

@@ -12,7 +12,13 @@ webpackConfig = {
     Carousel: nodePath.resolve(__dirname, examplePath, './Carousel/基本用法/index.tsx'),
     Choice: nodePath.resolve(__dirname, examplePath, './Choice/基本用法/index.tsx'),
     Container: nodePath.resolve(__dirname, examplePath, './Container/基本用法/index.tsx'),
+    Countdown: nodePath.resolve(__dirname, examplePath, './Countdown/基本用法/index.tsx'),
+    DatePicker: nodePath.resolve(__dirname, examplePath, './DatePicker/基本用法/index.tsx'),
+    Download: nodePath.resolve(__dirname, examplePath, './Download/基本用法/index.tsx'),
+    Form: nodePath.resolve(__dirname, examplePath, './Form/基本用法/index.tsx'),
     Icon: nodePath.resolve(__dirname, examplePath, './Icon/基本用法/index.tsx'),
+    Image: nodePath.resolve(__dirname, examplePath, './Image/基本用法/index.tsx'),
+    Mask: nodePath.resolve(__dirname, examplePath, './Mask/基本用法/index.tsx'),
     PageStack: nodePath.resolve(__dirname, examplePath, './PageStack/基本用法/index.tsx')
   },
   dirname: __dirname,

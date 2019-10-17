@@ -13,13 +13,13 @@ function getRangDate(date: Date): Value[] {
 
   return [{
     label: year,
-    value: year,
+    value: year
   }, {
     label: month,
-    value: month,
+    value: month
   }, {
     label: day,
-    value: day,
+    value: day
   }];
 }
 

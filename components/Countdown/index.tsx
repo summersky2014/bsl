@@ -28,6 +28,7 @@ function Countdown(props: Props) {
     if (disabled && start) {
       const targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
       countdown = (currentTime: number, overTime: number) => {
+        
         if (overTime >= 1000) {
           const remainingTime = isTimestamp ? targetTimestamp - currentTime : time - 1000;
 
@@ -52,7 +53,7 @@ function Countdown(props: Props) {
       }
     };
   }, [time, disabled, start]);
-
+  
   return (
     <button
       className={className}

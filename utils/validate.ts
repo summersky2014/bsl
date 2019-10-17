@@ -57,7 +57,7 @@ export default {
   idcard: (value: string) => {
     const regexp = new RegExp(pattern.idcard);
     return regexp.test(value);
-  },
+  }
   // /** emoji */
   // emoji: /\ud83c[\udf00-\udfff]|\ud83d[\udc00-\ude4f]|\ud83d[\ude80-\udeff]/g
 };

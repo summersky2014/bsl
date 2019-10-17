@@ -32,9 +32,26 @@ function Popup(props: Props) {
   const [realVisible, setRealVisible] = React.useState(false);
   const [setTimeOut, clearTimeOut] = useTimeout();
   /** 是否处于动画执行的状态中 */
-  let isAnimationing: boolean = false;
+  let isAnimationing = false;
   const animationListener = React.useRef<ListenerCallback>();
   const lazyCloseListener = React.useRef<ListenerCallback>();
+  /** 延迟关闭 */
+  const lazyClose = (callback?: () => void) => {
+    if (props.animation) {
+      lazyCloseListener.current = setTimeOut(() => {
+        setClosing(false);
+        setRealVisible(false);
+        if (callback) {
+          callback();
+        } 
+      }, 300);
+    } else {
+      setRealVisible(false);
+      if (callback) {
+        callback();
+      }
+    }
+  };
   /** 动画进行中 */
   const onAnimation = (onAnimationVisible: boolean, callback?: () => void) => {
     if (isAnimationing) {
@@ -57,23 +74,7 @@ function Popup(props: Props) {
       }, 300);
     }
   };
-  /** 延迟关闭 */
-  const lazyClose = (callback?: () => void) => {
-    if (props.animation) {
-      lazyCloseListener.current = setTimeOut(() => {
-        setClosing(false);
-        setRealVisible(false);
-        if (callback) {
-          callback();
-        }
-      }, 300);
-    } else {
-      setRealVisible(false);
-      if (callback) {
-        callback();
-      }
-    }
-  };
+ 
   const onClose = (e: React.MouseEvent<HTMLDivElement>) => {
     if (props.onClose) {
       props.onClose(e, false);
@@ -94,7 +95,7 @@ function Popup(props: Props) {
   React.useEffect(() => {
     onAnimation(props.visible);
   }, [props.visible]);
-
+  
   return (
     <Mask
       {...props}
