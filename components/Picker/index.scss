@@ -20,6 +20,7 @@ $prefix: bsl-picker;
     height: 100%;
     text-align: center;
     flex: 1;
+    user-select: none;
   
     &-text {
       font-size: 14px;
@@ -96,12 +97,15 @@ $prefix: bsl-picker;
       // flex: 1;
       text-align: center;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      cursor: pointer;
     }
 
     &-title {
       flex: 1;
       color: #666;
       cursor: default;
+      user-select: none;
     }
   }
 

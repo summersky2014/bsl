@@ -19,7 +19,11 @@ webpackConfig = {
     Icon: nodePath.resolve(__dirname, examplePath, './Icon/基本用法/index.tsx'),
     Image: nodePath.resolve(__dirname, examplePath, './Image/基本用法/index.tsx'),
     Mask: nodePath.resolve(__dirname, examplePath, './Mask/基本用法/index.tsx'),
-    PageStack: nodePath.resolve(__dirname, examplePath, './PageStack/基本用法/index.tsx')
+    Modal: nodePath.resolve(__dirname, examplePath, './Modal/基本用法/index.tsx'),
+    Picker: nodePath.resolve(__dirname, examplePath, './Picker/基本用法/index.tsx'),
+    Popup: nodePath.resolve(__dirname, examplePath, './Popup/基本用法/index.tsx'),
+    PageStack: nodePath.resolve(__dirname, examplePath, './PageStack/基本用法/index.tsx'),
+    RequestView: nodePath.resolve(__dirname, examplePath, './RequestView/基本用法/index.tsx')
   },
   dirname: __dirname,
   addVersion: false,
@@ -35,8 +39,17 @@ webpackConfig = {
   ],
   plugins: [
     new CopyPlugin([{
-      from: './node_modules/antd/dist/antd.min.css',
-      to: 'css/antd.min.css'
+      from: './node_modules/antd/es/style/index.css',
+      to: 'css/antd.css'
+    }, {
+      from: './node_modules/antd/es/alert/style/index.css',
+      to: 'css/antd.alert.css'
+    }, {
+      from: './node_modules/antd/es/icon/style/index.css',
+      to: 'css/antd.icon.css'
+    }, {
+      from: './node_modules/antd/es/popover/style/index.css',
+      to: 'css/antd.popover.css'
     }], {
       copyUnmodified: true
     })

@@ -21,6 +21,8 @@ export interface Base {
   itemCls?: string;
   /** 选项文本的样式 */
   textCls?: string;
+  /** 是否是DatePicker组件在调用，仅在库内部使用 */
+  _datepicker?: boolean;
 }
 
 interface Props extends Base {
@@ -65,7 +67,9 @@ function Item(props: Props) {
   const elemRef = React.createRef<HTMLDivElement>();
   const wheel = React.useRef<BetterScroll.default>();
   const propsData = React.useRef<Data[]>();
+  const isDidUpdate = React.useRef(false);
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
+
 
   React.useEffect(() => {
     const timer = () => {
@@ -110,10 +114,15 @@ function Item(props: Props) {
   }, []);
 
   React.useEffect(() => {
-    if (wheel.current) {
+    if (wheel.current && isDidUpdate.current) {
       wheel.current.refresh();
+      if (!props._datepicker) {
+        
+        wheel.current.wheelTo(0);
+      }
     }
     propsData.current = props.data;
+    isDidUpdate.current = true;
   }, [props.updateId]);
 
   return (

@@ -6,7 +6,7 @@
         "strict": true,
         "moduleResolution": "node",
         "module": "esnext",
-        "target": "es5",
+        "target": "esnext",
         "experimentalDecorators": true,
         "noUnusedLocals": true,
         "sourceMap": true,

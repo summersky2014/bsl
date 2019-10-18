@@ -39,6 +39,7 @@ function DatePicker(props: Omit<PikcerProps, 'updateId'>  & BaseDefaultProps & D
       updateId={0}
       cascade
       format={props.format ? props.format : (value) =>  dateformat(value.slice(), props.mode!)}
+      _datepicker
     />
   );
 }

@@ -90,13 +90,14 @@ const defaultProps: Required<DefaultProps> = {
 
 function initCascadeData(props: Props) {
   const newAllValue: Value[] = [];
+
   const each = (data: Data, index: number) => {
     newAllValue[index] = {
       value: data.value,
       label: data.label
     };
 
-    if (data.children) {
+    if (data.children && data.children.length) {
       each(data.children[0], ++index);
     }
   };
@@ -123,6 +124,7 @@ function Picker(props: Props) {
   let foramtData: Data[][];
   const onScrollEnd = (currentCol: number, currentValue: Value, allValue: Value[]) => {
     stateValue.current = allValue;
+    
     update();
   };
   const onCreate = (data: Data[][]) => {

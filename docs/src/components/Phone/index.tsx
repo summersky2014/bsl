@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as style from './index.scss';
-import { Icon, Popover } from 'antd';
 import * as QRCode from 'qrcode.react';
+import Icon from 'antd/es/icon';
+import Popover from 'antd/es/popover';
 
 export interface Props {
   path: string;

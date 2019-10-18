@@ -1,3 +1,4 @@
+import * as React from 'react';
 import QuickStart from '../pages/QuickStart';
 import ComponentCarousel from '../pages/Component/Carousel';
 import ComponentChoice from '../pages/Component/Choice';
@@ -11,8 +12,12 @@ import ComponentImage from '../pages/Component/Image';
 import ComponentInput from '../pages/Component/Input';
 import ComponentLink from '../pages/Component/Link';
 import ComponentMask from '../pages/Component/Mask';
+import ComponentModal from '../pages/Component/Modal';
+import ComponentPicker from '../pages/Component/Picker';
+import ComponentPopup from '../pages/Component/Popup';
 import ComponentPageStack from '../pages/Component/PageStack';
-
+import ComponentRadio from '../pages/Component/Radio';
+import ComponentRequestView from '../pages/Component/RequestView';
 
 interface Mneu {
   /** 路由页面 */
@@ -80,66 +85,30 @@ const menus: Mneu[] = [{
     title: 'Mask 遮罩层',
     path: '/component/mask'
   }, {
+    component: ComponentModal,
+    title: 'Modal 模态框',
+    path: '/component/modal'
+  }, {
+    component: ComponentPicker,
+    title: 'Picker 选择框',
+    path: '/component/picker'
+  }, {
+    component: ComponentPopup,
+    title: 'Popup 弹出层',
+    path: '/component/popup'
+  }, {
     component: ComponentPageStack,
     title: 'PageStack 页面栈',
     path: '/component/pagestack'
+  }, {
+    component: ComponentRadio,
+    title: 'Radio 单选框',
+    path: '/component/radio'
+  }, {
+    component: ComponentRequestView,
+    title: 'RequestView 请求视图',
+    path: '/component/requestview'
   }]
-  // {
-  //   component: ComponentBanner,
-  //   title: 'Banner 轮播图',
-  //   path: '/component/banner'
-  // }, {
-  //   component: ComponentButton,
-  //   title: 'Button 按钮',
-  //   path: '/component/button'
-  // }, {
-  //   component: ComponentChoice,
-  //   title: 'Chocie 选择器',
-  //   path: '/component/chocie'
-  // }, {
-  //   component: ComponentDatePicker,
-  //   title: 'DatePicker 日期选择器',
-  //   path: '/component/datepicker'
-  // }, {
-  //   component: ComponentForm,
-  //   title: 'Form 表单',
-  //   path: '/component/form'
-  // }, {
-  //   component: ComponentFormItem,
-  //   title: 'FormItem 表单项',
-  //   path: '/component/formitem'
-  // }, {
-  //   component: ComponentPicker,
-  //   title: 'Picker 弹出式选择器',
-  //   path: '/component/picker'
-  // }, {
-  //   component: ComponentView,
-  //   title: 'View 视图',
-  //   path: '/component/view'
-  // }
-// {
-//   title: '框架',
-//   children: [{
-//     component: QuickStart,
-//     title: '页面栈',
-//     path: '/frame/pageStack'
-//   },
-  // {
-  //   component: TutorialDatatype,
-  //   title: '数据类型',
-  //   path: '/tutorial/datatype'
-  // }, {
-  //   component: TutorialForm,
-  //   title: '表单',
-  //   path: '/tutorial/form'
-  // }, {
-  //   component: TutorialRequest,
-  //   title: '发起请求',
-  //   path: '/tutorial/request'
-  // }
 }];
-// },
-
-// ];
 
 export default menus;

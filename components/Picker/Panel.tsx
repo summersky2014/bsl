@@ -6,7 +6,7 @@ import './index.scss';
 
 export interface Base extends ItemBase {
   /** 在onScollEnd后触发，用于判断哪些列需要保持原来的选中索引，哪些列需要初始化为0 */
-  formatSelectedCol?: (currentCol: number, value: Value[]) => number[];
+  // formatSelectedCol?: (currentCol: number, value: Value[]) => number[];
   /** 是否级联 */
   cascade?: boolean;
   updateId: number;
@@ -90,8 +90,10 @@ function switchData(cascade: Props['cascade'], stateData: Data[][], value: Value
 
 const prefixCls = 'bsl-picker';
 function Panel(props: Props) {
-  const { className, id, style, itemCls, textCls, updateId, onCreate, onScrollEnd, formatSelectedCol } = props;
+  const { className, id, style, itemCls, textCls, updateId, onCreate, onScrollEnd, _datepicker } = props;
   const propsValue = React.useRef(props.value);
+  /** 是否将选择归零 */
+  const isReturnTozero = props.cascade && !_datepicker;
   let data = React.useMemo(() => switchData(props.cascade, [], props.value, props.data, 0), [updateId]);
 
   React.useEffect(() => {
@@ -119,31 +121,34 @@ function Panel(props: Props) {
               key={col}
               data={item}
               updateId={props.cascade !== true || col === 0 ? 0 : (props.value[col - 1] ? props.value[col - 1].value : col)}
+              _datepicker={props.cascade && _datepicker}
               value={props.value[col]}
               itemCls={itemCls}
               textCls={textCls}
               onScrollEnd={(currentValue, selectIndex) => {
                 const newValue = JSON.parse(JSON.stringify(propsValue.current));
                 newValue[col] = currentValue;
-
-                if (formatSelectedCol) {
-                  const indexs = formatSelectedCol(col, newValue);
-                  indexs.forEach((selectIndexValue, i) => {
-                    newValue[i] = {
-                      label: data[i][selectIndexValue].label,
-                      value: data[i][selectIndexValue].value
-                    };
-                  });
-                } else if (props.cascade) {
-                  // 将currentCol后续的列初始化为0，重置子项列表的选中项
-                  // for (let i = col + 1; i < data.length; i++) {
-                  //   newValue[i] = {
-                  //     label: data[i][0].label,
-                  //     value: data[i][0].value
-                  //   };
-                  // }
-                }
                 data = switchData(props.cascade, data, newValue, props.data, col);
+
+                // if (formatSelectedCol) {
+                //   const indexs = formatSelectedCol(col, newValue);
+                //   indexs.forEach((selectIndexValue, i) => {
+                //     newValue[i] = {
+                //       label: data[i][selectIndexValue].label,
+                //       value: data[i][selectIndexValue].value
+                //     };
+                //   });
+                // }
+                if (isReturnTozero) {
+                  // 将currentCol后续的列初始化为0，重置子项列表的选中项
+                  for (let i = col + 1; i < data.length; i++) {
+                    newValue[i] = {
+                      label: data[i][0].label,
+                      value: data[i][0].value
+                    };
+                  }
+                }
+
                 if (onScrollEnd) {
                   onScrollEnd(col, currentValue, newValue);
                 }
