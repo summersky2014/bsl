@@ -85,7 +85,7 @@ function Toast(props: Props) {
   );
 }
 
-Toast.show = function(content: string, icon: 'complete' | 'fail', duration = 3000) {
+Toast.show = function(content: string, icon?: 'complete' | 'fail', duration = 3000) {
   Toast.close();
   container = getContainer();
   ReactDom.render((
