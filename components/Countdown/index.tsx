@@ -12,12 +12,13 @@ interface Props extends BSL.ComponentProps {
   /** 时间戳或倒计时毫秒或时间字符串，当number不足13位时value处理成倒计时毫秒 */
   value: number | string;
   /** 倒计时还未开始前的文本 */
-  label: string;
+  label?: string;
   onClick?: () => boolean;
 }
 
 function Countdown(props: Props) {
-  const { className, id, style,  value, children, label, onClick } = props;
+  const { className, id, style,  value, children, onClick } = props;
+  const label = props.label || '';
   const isTimestamp = typeof value === 'string' || value.toString().length === 13;
   const defaultTime = isTimestamp ? 0 : value as number;
   const [time, setTime] = React.useState<number>(defaultTime);
@@ -61,7 +62,7 @@ function Countdown(props: Props) {
       id={id}
       style={style}
     >
-      {time ? children(dateformatReturnObject(time)) : ''}
+      {time ? children(dateformatReturnObject(time)) : label}
     </div>
   ) : (
     <button
