@@ -1,5 +1,6 @@
 import BSL from '../../typings';
 import axios, { Canceler, AxiosRequestConfig } from 'axios';
+import isHttp from '../../utils/isHttp';
 
 interface OnUploadProgress extends AxiosRequestConfig {
   api: string;
@@ -38,7 +39,7 @@ function UploadProgress(): [(config: OnUploadProgress) => void, (() => void) | n
       cancelToken: new axios.CancelToken((cancel) => {
         cancelToken = cancel;
       }),
-      url: axios.defaults.baseURL + api,
+      url: isHttp(api) ? api : axios.defaults.baseURL + api,
       // url: 'http://127.0.0.1:3000/api/weibo/setField',
       method: 'post',
       onUploadProgress(progressEvent: ProgressEvent) {

@@ -5,6 +5,7 @@ import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler
 import Form from '../../../../../../components/Form';
 import FormItem from '../../../../../../components/FormItem';
 import Input, { InputHelper } from '../../../../../../components/Input';
+import Textarea, { TextareaHelper } from '../../../../../../components/Textarea';
 import '../../../../../../styles/base.scss';
 
 const styles: Record<string, React.CSSProperties> = {
@@ -36,6 +37,7 @@ const App = () => {
 
 const Demo = () => {
   const inputHelper = React.useMemo(() => new InputHelper({ required: true }), []);
+  const textareaHelper = React.useMemo(() => new TextareaHelper({ required: true }), []);
 
   React.useEffect(() => {
     dispatch();
@@ -51,6 +53,21 @@ const Demo = () => {
           style={styles.input}
         />
       </FormItem>
+      <br/>
+
+      <FormItem>
+        <Textarea
+          value={textareaHelper.value.get()}
+          state={textareaHelper.state}
+          onChange={textareaHelper.onChange}
+          style={styles.input}
+          placeholder="字数节点的样式需要自己写样式来调整"
+          maxLength={100}
+          wordCount
+        />
+      </FormItem>
+      <br/>
+
       <button type="submit" style={styles.button}>提交</button>
     </Form>
   );

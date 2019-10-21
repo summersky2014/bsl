@@ -4,6 +4,10 @@
   opacity: 0;
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .bsl-toast-mask {
@@ -1377,6 +1381,53 @@ blockquote {
     -webkit-transform: translate3d(0, 100%, 0);
             transform: translate3d(0, 100%, 0);
   }
+}
+.bsl-textarea {
+  width: 100%;
+  line-height: 1.3;
+  resize: none;
+  color: inherit;
+  font-size: inherit;
+  padding: inherit;
+  padding: 0;
+}
+
+.bsl-textarea-wrap {
+  position: relative;
+  min-height: 100px;
+}
+
+.bsl-textarea-hidecode, .bsl-textarea::-webkit-input-placeholder {
+  font-size: inherit;
+  line-height: 1.3;
+}
+
+.bsl-textarea-auto {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.bsl-textarea-hidecode {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  opacity: 0;
+  min-height: inherit;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.bsl-textarea-hidecode-hidden {
+  display: none;
+}
+
+.bsl-textarea-wordcount {
+  position: absolute;
+  font-size: 14px;
+  color: #999999;
 }
 .bsl-formitem-prompt {
   width: 20px;

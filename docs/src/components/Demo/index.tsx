@@ -12,7 +12,7 @@ function Demo(props: Props) {
   const [code, setCode] = React.useState('');
   const { title, component } = props;
   const baseUrl = `docs/src/pages/Component/${component}/${title}/index`;
-
+  
   React.useEffect(() => {
     fetch(baseUrl + '.tsx').then((response) => {
       return response.text();

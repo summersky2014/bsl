@@ -5,14 +5,19 @@ import { appData } from '../../app/core';
 import { FromTypeProps } from '../Form';
 import TextareaHelper from './Helper';
 import memoAreEqual from '../../utils/memoAreEqual';
+import variable from '../../utils/variable';
 import './index.scss';
 
 interface Props extends BSL.ComponentProps, DefaultProps, FromTypeProps<string> {
   disabled?: boolean;
   placeholder?: string;
+  /** 最大字数 */
   maxLength?: number;
+  /** 是否显示字数 */
   wordCount?: boolean;
+  /** 字数节点类名 */
   wordCountCls?: string;
+  onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
 interface DefaultProps {
@@ -25,7 +30,7 @@ interface DefaultProps {
 const prefixCls = 'bsl-textarea';
 
 function Textarea(props: Props) {
-  const { auto, id, className, disabled, placeholder, wordCount, wordCountCls } = props;
+  const { auto, id, className, disabled, placeholder, wordCount, wordCountCls, state, onFocus } = props;
   const rows = props.rows || 5;
   const maxLength = props.maxLength;
   const preRef = React.createRef<HTMLPreElement>();
@@ -37,11 +42,16 @@ function Textarea(props: Props) {
   }, [props.value]);
 
   return (
-    <div className={classNames(`${prefixCls}-wrap`, className)}>
+    <div
+      className={classNames(variable.bslComponent, `${prefixCls}-wrap`, className)}
+      style={props.style}
+      id={props.id}
+      data-state={state}
+    >
       <pre
         className={classNames({
           [`${prefixCls}-hidecode`]: auto,
-          [`${prefixCls}-hidecode-hidden`]: !auto,
+          [`${prefixCls}-hidecode-hidden`]: !auto
         })}
         ref={preRef}
       />
@@ -62,6 +72,7 @@ function Textarea(props: Props) {
             props.onChange(e.target.value);
           }
         }}
+        onFocus={onFocus}
         onKeyDown={(e) => {
           if (auto && preRef.current && e.keyCode === 13) {
             preRef.current.textContent += ' ';

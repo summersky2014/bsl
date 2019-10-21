@@ -52,7 +52,7 @@ function compressImg(file: File, afterWidth: number): Promise<[string, Blob] | u
   return new Promise((resolve, reject) => {
     const hidCanvas = document.createElement('canvas');
     let hidCtx: CanvasRenderingContext2D | null = null;
-    let result: string = '';
+    let result = '';
 
     //生成隐藏画布
     if (hidCanvas.getContext) {

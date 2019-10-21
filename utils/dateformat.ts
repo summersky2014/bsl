@@ -12,7 +12,8 @@ export type Mode = (
   'yyMM' | 'yyMMdd' | 'yyMMddHH' | 'yyMMddHHmm' | 'auto'
 );
 
-interface ReturnObject {
+export interface ReturnObject {
+  time: number;
   day: number;
   hour: number;
   min: number;
@@ -114,6 +115,7 @@ export  function dateformatReturnObject(date: string | number | Date | Value[]):
   const sec = minRemainde > 0 ? Math.floor(minRemainde / SEC) : 0;
 
   return {
+    time: newTime,
     day, hour, min, sec
   };
 }

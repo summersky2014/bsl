@@ -119,7 +119,7 @@ function HorizontalScroll(props: Props) {
         className={`${prefixCls}-wrap`}
         ref={wrapRef}
         style={{
-          width: scrollWidth,
+          width: scrollWidth
         }}
       >{props.children}</div>
     </div>

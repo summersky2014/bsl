@@ -20,7 +20,11 @@ const prefixCls = 'bsl-upload';
 function UploadView(props: Props) {
   const { className, children, src, process, onRemove, disabled } = props;
   return (
-    <div className={classNames(prefixCls, className)}>
+    <div 
+      className={classNames(prefixCls, className)}
+      id={props.id}
+      style={props.style}
+    >
       <Icon
         className={classNames(`${prefixCls}-addIcon bsl_component`, {
           ['bsl_component_hide']: src

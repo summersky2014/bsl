@@ -3,6 +3,7 @@ import * as React from 'react';
 import Toast from '../Toast';
 import { Type } from '../SwitchView';
 import Input from '../Input';
+import Textarea from '../Textarea';
 import Picker from '../Picker';
 import Choice from '../Choice';
 import RequestView, { Props as RequestProps } from '../RequestView';
@@ -31,7 +32,7 @@ export interface FromTypeProps<Value> {
   state: Type;
 }
 
-const formComponent = [Input, Picker, Choice];
+const formComponent = [Input, Textarea, Picker, Choice];
 
 /**
  * 表单检验，会遍历子组件为表单类型的组件

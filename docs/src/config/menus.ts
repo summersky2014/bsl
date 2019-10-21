@@ -18,6 +18,15 @@ import ComponentPopup from '../pages/Component/Popup';
 import ComponentPageStack from '../pages/Component/PageStack';
 import ComponentRadio from '../pages/Component/Radio';
 import ComponentRequestView from '../pages/Component/RequestView';
+import ComponentScroll from '../pages/Component/Scroll';
+import ComponentScrollLoader from '../pages/Component/ScrollLoader';
+import ComponentStateView from '../pages/Component/StateView';
+import ComponentTab from '../pages/Component/Tab';
+import ComponentTabBar from '../pages/Component/TabBar';
+import ComponentText from '../pages/Component/Text';
+import ComponentTextarea from '../pages/Component/Textarea';
+import ComponentToast from '../pages/Component/Toast';
+import ComponentUpload from '../pages/Component/Upload';
 
 interface Mneu {
   /** 路由页面 */
@@ -75,7 +84,7 @@ const menus: Mneu[] = [{
   }, {
     component: ComponentInput,
     title: 'Input 输入框',
-    path: '/component/intpu'
+    path: '/component/input'
   }, {
     component: ComponentLink,
     title: 'Link 链接',
@@ -108,6 +117,42 @@ const menus: Mneu[] = [{
     component: ComponentRequestView,
     title: 'RequestView 请求视图',
     path: '/component/requestview'
+  }, {
+    component: ComponentScroll,
+    title: 'Scroll 滚动条',
+    path: '/component/scroll'
+  }, {
+    component: ComponentScrollLoader,
+    title: 'ScrollLoader 滚动加载器',
+    path: '/component/scrollloader'
+  }, {
+    component: ComponentStateView,
+    title: 'StateView 状态视图',
+    path: '/component/stateview'
+  }, {
+    component: ComponentTab,
+    title: 'Tab 选项卡',
+    path: '/component/tab'
+  }, {
+    component: ComponentTabBar,
+    title: 'TabBar 底部导航条',
+    path: '/component/tabbar'
+  }, {
+    component: ComponentText,
+    title: 'Text 文本',
+    path: '/component/text'
+  }, {
+    component: ComponentTextarea,
+    title: 'Textarea 文本域',
+    path: '/component/textarea'
+  }, {
+    component: ComponentToast,
+    title: 'Toast 提示',
+    path: '/component/toast'
+  }, {
+    component: ComponentUpload,
+    title: 'Upload 上传',
+    path: '/component/upload'
   }]
 }];
 

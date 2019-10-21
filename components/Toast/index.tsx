@@ -8,16 +8,30 @@ import { getContainer } from '../../utils/getContainer';
 import useTimeout, {  ListenerCallback } from '../../hooks/anyuseTimeout';
 import './index.scss';
 
-interface Props extends ToastProps, BSL.ComponentProps {
-  duration?: number;
+interface Props extends ToastProps, BSL.ComponentProps, DefaultProps {
+  /** 是否添加遮罩层
+   * @default loading状态默认添加
+   */
   mask?: boolean;
+  /** 关闭时触发 */
+  onClose?: () => void;
+}
+
+interface DefaultProps {
+  /**
+   * 持续时间
+   * @default 3000ms
+   */
+  duration?: number;
 }
 
 export const prefixCls = 'bsl-toast';
+const defaultProps: Required<DefaultProps> = {
+  duration: 3000
+};
 let container: HTMLElement | null = null;
-
 function Toast(props: Props) {
-  const { mask, className, duration } = props;
+  const { mask, className, duration, onClose, type } = props;
   const [fade, setFade] = React.useState(false);
   const [setTimeOut, clearTimeOut] = useTimeout();
 
@@ -26,13 +40,16 @@ function Toast(props: Props) {
     let unmountCallback: ListenerCallback | undefined;
     const close = () => {
       setFade(false);
-      unmountCallback = setTimeOut(function unmountTimer() {
+      unmountCallback = setTimeOut(() => {
         Toast.close();
+        if (onClose) {
+          onClose();
+        }
       }, 300);
     };
     const startCloseTimer = () => {
-      if (duration) {
-        closeCallback = setTimeOut(function closeTimer() {
+      if (duration && type !== 'loading') {
+        closeCallback = setTimeOut(() => {
           close();
         }, duration - 300);
       }
@@ -53,7 +70,7 @@ function Toast(props: Props) {
 
     return clearCloseTimer;
   }, []);
-
+  
   return (
     <div
       className={classNames(className, {
@@ -68,7 +85,7 @@ function Toast(props: Props) {
   );
 }
 
-Toast.show = function(content: string, icon: ToastProps['type'], duration = 3000) {
+Toast.show = function(content: string, icon: 'complete' | 'fail', duration = 3000) {
   Toast.close();
   container = getContainer();
   ReactDom.render((
@@ -92,4 +109,5 @@ Toast.loading = function(content: string) {
   ), container);
 };
 
+Toast.defaultProps = defaultProps;
 export default Toast;

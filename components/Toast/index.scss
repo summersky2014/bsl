@@ -8,6 +8,7 @@ $prefix: bsl-toast;
   z-index: 1000;
   opacity: 0;
   transition: opacity 0.3s;
+  user-select: none;
 
   @mixin fade-effect() {
     animation-duration: 0.3s;

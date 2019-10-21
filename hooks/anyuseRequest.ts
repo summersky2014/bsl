@@ -64,7 +64,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, C
           }
         });
       }
-
+      
       axios({
         ...option,
         data: contentType === 'application/json' ? postData : urlSearchParams,

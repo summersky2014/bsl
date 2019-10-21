@@ -1,13 +1,14 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import { addListener, removeListener, ListenerCallback } from '../../app/Scheduler';
+import { dateformatReturnObject, ReturnObject } from '../../utils/dateformat';
 import newDate from '../../utils/newDate';
 
 interface Props extends BSL.ComponentProps {
   /**
    * @param remainingTime 剩余时间
    */
-  children: (remainingTime: number) => any;
+  children: (remainingTime: ReturnObject) => any;
   /** 时间戳或倒计时毫秒或时间字符串，当number不足13位时value处理成倒计时毫秒 */
   value: number | string;
   /** 倒计时还未开始前的文本 */
@@ -17,7 +18,7 @@ interface Props extends BSL.ComponentProps {
 
 function Countdown(props: Props) {
   const { className, id, style,  value, children, label, onClick } = props;
-  const isTimestamp = value.toString().length === 13;
+  const isTimestamp = typeof value === 'string' || value.toString().length === 13;
   const defaultTime = isTimestamp ? 0 : value as number;
   const [time, setTime] = React.useState<number>(defaultTime);
   const [disabled, setDisabled] = React.useState(false);
@@ -25,13 +26,12 @@ function Countdown(props: Props) {
 
   React.useEffect(() => {
     let countdown: ListenerCallback | undefined;
-    if (disabled && start) {
+    if ((disabled && start) || !onClick) {
       const targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
-      countdown = (currentTime: number, overTime: number) => {
-        
+      countdown = (currentTime: number, overTime: number) => { 
         if (overTime >= 1000) {
           const remainingTime = isTimestamp ? targetTimestamp - currentTime : time - 1000;
-
+          
           if (remainingTime > 0) {
             setTime(remainingTime);
           } else if (countdown) {
@@ -44,6 +44,7 @@ function Countdown(props: Props) {
         }
         return false;
       };
+      
       addListener(countdown);
     }
 
@@ -54,7 +55,15 @@ function Countdown(props: Props) {
     };
   }, [time, disabled, start]);
   
-  return (
+  return !onClick ? (
+    <div
+      className={className}
+      id={id}
+      style={style}
+    >
+      {time ? children(dateformatReturnObject(time)) : ''}
+    </div>
+  ) : (
     <button
       className={className}
       id={id}
@@ -63,14 +72,14 @@ function Countdown(props: Props) {
       type="button"
       onClick={() => {
         if (disabled === false) {
-          if ((onClick && onClick()) || !onClick) {
+          if ((onClick && onClick())) {
             setDisabled(true);
             setStart(true);
           }
         }
       }}
     >
-      {disabled ? children(time) : label}
+      {disabled ? children(dateformatReturnObject(time)) : label}
     </button>
   );
 }

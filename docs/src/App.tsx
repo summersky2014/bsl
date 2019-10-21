@@ -4,27 +4,14 @@ import * as ReactDOM from 'react-dom';
 import * as style from './App.scss';
 import { Route, HashRouter } from 'react-router-dom';
 import { Subscription, Context } from '../../app/Scheduler';
-import { appData } from '../../app/core';
 
 import menuConfig from './config/menus';
 import AppStack from '../../app/PageStack';
 import Alert from 'antd/es/alert';
 import Menu from './components/Menu';
 
-interface ExtendsWindow extends Window {
-  link: (route: string) => void;
-}
-
-declare const window: ExtendsWindow;
 const menu: JSX.Element[] = [];
 const isGridSupports: boolean = CSS.supports('display', 'grid');
-
-(window as ExtendsWindow).link = (route: string) => {
-  if (window.event) {
-    window.event.preventDefault();
-  }
-  appData.history!.push(route);
-};
 
 menuConfig.forEach((item) => {
   if (item.children) {

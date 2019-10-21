@@ -22,9 +22,10 @@ const Demo = () => {
   React.useEffect(() => {
     dispatch();
   }, []);
-  
+
   return (
     <div>
+      <h2>获取验证码</h2>
       <Countdown
         value={60000}
         label="获取验证码"
@@ -33,7 +34,15 @@ const Demo = () => {
           return true;
         }}
       >
-        {(time) => <div>{Math.ceil(time / 1000)}秒后重试</div>}
+        {(value) => <div>{Math.ceil(value.time / 1000)}秒后重试</div>}
+      </Countdown>
+
+      <h2>日期倒计时</h2>
+      <Countdown
+        value="2030-01-01"
+        label="日期倒计时"
+      >
+        {(value) => <div>{value.day}天{value.hour}时{value.min}分{value.sec}秒</div>}
       </Countdown>
     </div>
   );

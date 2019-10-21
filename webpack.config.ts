@@ -23,7 +23,13 @@ webpackConfig = {
     Picker: nodePath.resolve(__dirname, examplePath, './Picker/基本用法/index.tsx'),
     Popup: nodePath.resolve(__dirname, examplePath, './Popup/基本用法/index.tsx'),
     PageStack: nodePath.resolve(__dirname, examplePath, './PageStack/基本用法/index.tsx'),
-    RequestView: nodePath.resolve(__dirname, examplePath, './RequestView/基本用法/index.tsx')
+    RequestView: nodePath.resolve(__dirname, examplePath, './RequestView/基本用法/index.tsx'),
+    Scroll: nodePath.resolve(__dirname, examplePath, './Scroll/基本用法/index.tsx'),
+    ScrollLoader: nodePath.resolve(__dirname, examplePath, './ScrollLoader/基本用法/index.tsx'),
+    Tab: nodePath.resolve(__dirname, examplePath, './Tab/基本用法/index.tsx'),
+    Text: nodePath.resolve(__dirname, examplePath, './Text/基本用法/index.tsx'),
+    Toast: nodePath.resolve(__dirname, examplePath, './Toast/基本用法/index.tsx'),
+    Upload: nodePath.resolve(__dirname, examplePath, './Upload/基本用法/index.tsx')
   },
   dirname: __dirname,
   addVersion: false,

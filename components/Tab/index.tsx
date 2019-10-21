@@ -10,11 +10,8 @@ export interface Props<T extends Value> extends BSL.ComponentProps, Pick<BasePro
 }
 
 function Tab<T extends Value>(props: Props<T>) {
-  const { className, updateId, itemCls, value } = props;
+  const { updateId, itemCls, value } = props;
   const data = props.data;
-  // tslint:disable-next-line: max-line-length
-  // const stateValue = React.useMemo(() => new Dispatcher<BaseProps<BaseData>['value']>([data[0]]), [props.value ? props.value.toString() : '']);
-  // const [stateValue, setStateValue] = React.useState<BaseProps<BaseData>['value']>([data[0]]);
   const onChange = (newValue: Value[]) => {
     value.set(newValue as T[]);
     if (props.onChange) {
@@ -25,7 +22,7 @@ function Tab<T extends Value>(props: Props<T>) {
 
   return (
     <Choice
-      className={className}
+      {...props}
       itemCls={itemCls}
       data={data}
       value={value.get()}

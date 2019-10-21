@@ -59,6 +59,7 @@ function RequestView(props: Props) {
         setType('loading');
       }
     }, 300);
+
     request(props).then((res) => {
       cacheKey = res.cacheKey;
 

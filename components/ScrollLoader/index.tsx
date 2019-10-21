@@ -30,7 +30,7 @@ interface DefaultProps extends Pick<RequestProps, 'refreshId'> {
 
 const prefixCls = 'bsl-scrollloader';
 const defaultProps: DefaultProps = {
-  refreshId: 0,
+  refreshId: 0
 };
 
 function ScrollLoader(props: Props) {
@@ -49,6 +49,8 @@ function ScrollLoader(props: Props) {
   };
   const loaderRender = () => {
     switch (state) {
+      case '':
+        return <div></div>;
       case 'loading':
         return <div>{loadingText || '正在加载中...'}</div>;
       case 'over':
@@ -63,6 +65,7 @@ function ScrollLoader(props: Props) {
   useIntersectionObserver(elemRef, () => {
     if (loaderComplete.current !== true && (loaderState.current === 'loading' || loaderState.current === '')) {
       loaderComplete.current = true;
+      updateState('loading');
 
       listenerCallback.current = setTimeOut(() => {
         onLoader().then(() => {
@@ -83,15 +86,21 @@ function ScrollLoader(props: Props) {
     };
   }, []);
 
-  React.useEffect(() => {
-    updateState(props.sourceDataLength % props.pageSize !== 0 && props.sourceDataLength !== 0 ? 'over' : 'loading');
-  }, [props.sourceDataLength]);
+  // React.useEffect(() => {
+  //   updateState(props.sourceDataLength % props.pageSize !== 0 && props.sourceDataLength !== 0 ? 'over' : 'loading');
+  // }, [props.sourceDataLength]);
 
   return (
     <React.Fragment>
       <RequestView
         {...props}
         refreshId={loaderRefreshId + props.refreshId}
+        onComplete={(res: BSL.RequestResponse<any[]>) => {
+          updateState('');
+          if (props.onComplete) {
+            props.onComplete(res);
+          }
+        }}
         onEmpty={(res: BSL.RequestResponse<any[]>) => {
           updateState(isSourceDataEmpty ? 'empty' : 'over');
           if (props.onEmpty) {
@@ -130,7 +139,7 @@ function ScrollLoader(props: Props) {
         id={id}
         style={props.style}
         ref={elemRef}
-        data-hide={state === '' || isSourceDataEmpty}
+        data-hide={isSourceDataEmpty}
       >
         {loaderRender()}
       </div>
