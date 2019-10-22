@@ -1,5 +1,9 @@
 import * as React from 'react';
+
 import QuickStart from '../pages/QuickStart';
+// 教程
+import TutorialChangeStyle from '../pages/Tutorial/修改组件样式';
+// 组件
 import ComponentCarousel from '../pages/Component/Carousel';
 import ComponentChoice from '../pages/Component/Choice';
 import ComponentContainer from '../pages/Component/Container';
@@ -43,6 +47,13 @@ const menus: Mneu[] = [{
   component: QuickStart,
   title: '快速开始',
   path: '/'
+}, {
+  title: '教程',
+  children: [{
+    component: TutorialChangeStyle,
+    title: '修改组件样式',
+    path: '/tutorial/changestyle'
+  }]
 }, {
   title: '组件',
   children: [{

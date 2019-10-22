@@ -57,7 +57,9 @@ export default function useIntersectionObserver(
       }
       intersectionObserver.observe(htmlElementRef.current);
     }
-    return intersectionObserver.disconnect;
+    return () => {
+      intersectionObserver.disconnect();
+    };
   }, [htmlElementRef.current]);
 
   return intersectionObserver;
