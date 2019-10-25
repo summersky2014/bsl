@@ -1,4 +1,5 @@
 import BSL from '../typings';
+import * as React from 'react';
 import axios, { AxiosRequestConfig, Canceler, Method } from 'axios';
 import RequestView from '../components/RequestView';
 
@@ -21,9 +22,9 @@ export interface Option extends Omit_url_method {
 
 export const cacheData: Map<string, any> = new Map();
 
-function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, Canceler | null, (key: string) => void] {
+function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, React.MutableRefObject<Canceler | null>, (key: string) => void] {
   const clearCache = (key: string) => cacheData.delete(key);
-  let cancelToken: (() => void) | null = null;
+  const cancelToken = React.useRef<(() => void) | null>(null);
   const request = (option: Option): Promise<BSL.RequestResponse<any>> => {
     return new Promise((resolve, reject) => {
       const { api } = option;
@@ -71,7 +72,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, C
         url: api,
         method,
         cancelToken: new axios.CancelToken((cancel) => {
-          cancelToken = () => cancel('cancel');
+          cancelToken.current = () => cancel('cancel');
         })
       }).then((res) => {
         if (res.status === 200) {

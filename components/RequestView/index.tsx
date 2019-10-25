@@ -111,8 +111,8 @@ function RequestView(props: Props) {
         clearCache(cacheKey);
       }
 
-      if (cancelToken) {
-        cancelToken();
+      if (cancelToken.current) {
+        cancelToken.current();
       }
 
       if (timer.current) {

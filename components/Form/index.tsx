@@ -68,8 +68,8 @@ function Form(props: Props) {
 
   React.useEffect(() => {
     return () => {
-      if (cancelToken) {
-        cancelToken();
+      if (cancelToken.current) {
+        cancelToken.current();
       }
     };
   }, []);
