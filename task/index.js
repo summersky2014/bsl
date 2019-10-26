@@ -103,8 +103,7 @@ function webpackConfig(params) {
                     include: [
                         path.resolve(dirname, 'src'),
                         ...tsInclude
-                    ],
-                    options: {}
+                    ]
                 }, {
                     test: /\.(ts|tsx)$/,
                     loader: 'ts-loader',
@@ -133,6 +132,13 @@ function webpackConfig(params) {
                     options: {
                         name: '[path][name].[ext]',
                         outputPath: 'img/'
+                    }
+                }, {
+                    test: /\.html$/,
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        outputPath: 'html/'
                     }
                 }, {
                     test: /\.md$/,

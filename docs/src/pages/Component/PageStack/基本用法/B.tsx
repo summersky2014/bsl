@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PageComponent from '../../../../../../app/PageComponent';
 import Link from '../../../../../../components/Link';
+import setDocumetTitle from '../../../../../../utils/setDocumetTitle/setDocumetTitle';
 
 interface State {
   status: string;
@@ -22,6 +23,10 @@ class B extends PageComponent<any, State> {
         status: 'pageActive'
       });
     }, 100);
+  }
+
+  public componentDidMount() {
+    setDocumetTitle('B');
   }
 
   public pageRender(): JSX.Element {

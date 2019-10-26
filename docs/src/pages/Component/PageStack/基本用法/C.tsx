@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PageComponent from '../../../../../../app/PageComponent';
 import Link from '../../../../../../components/Link';
+import setDocumetTitle from '../../../../../../utils/setDocumetTitle/setDocumetTitle';
 
 interface State {
   content: string;
@@ -17,6 +18,7 @@ class C extends PageComponent<any, State> {
   }
 
   public componentDidMount(): void {
+    setDocumetTitle('C');
     this.setState({
       content: 'componentDidMount, C页面进入了'
     });

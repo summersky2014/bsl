@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PageComponent from '../../../../../../app/PageComponent';
 import Link from '../../../../../../components/Link';
+import setDocumetTitle from '../../../../../../utils/setDocumetTitle/setDocumetTitle';
 
 interface State {
   status: string;
@@ -19,6 +20,7 @@ class A extends PageComponent<any, State> {
   };
 
   public componentDidMount(): void {
+    setDocumetTitle('A');
     setInterval(() => {
       this.setState({
         count: this.state.count + 1

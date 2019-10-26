@@ -87,23 +87,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
         localIdentName: '[local]_[hash:base64:5]'
       }
     });
-    // extract.unshift({
-    //   loader: 'dts-css-modules-loader',
-    //   options: {
-    //     namedExport: true,
-    //   }
-    // }, {
-    //   loader: 'css-loader',
-    //   options: {
-    //     modules: {
-    //       mode: 'local',
-    //       localIdentName: '[local]_[hash:base64:5]',
-    //     },
-    //     localsConvention: 'camelCaseOnly',
-    //     // localIdentName: '[local]_[hash:base64:5]',
-    //     onlyLocals: true,
-    //   }
-    // });
   }
   if (isDev && vender !== false) {
     plugins.push(new webpack.DllReferencePlugin({
@@ -131,10 +114,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
         include: [
           path.resolve(dirname, 'src'),
           ...tsInclude
-        ],
-        options: {
-          // tsConfigFile: path.resolve(dirname, './tsconfig.json'),
-        }
+        ]
       }, {
         test: /\.(ts|tsx)$/,
         loader: 'ts-loader',
@@ -163,6 +143,13 @@ export default function webpackConfig(params: WebpackConfig): Config {
         options: {
           name: '[path][name].[ext]',
           outputPath: 'img/'
+        }
+      }, {
+        test: /\.html$/,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+          outputPath: 'html/'
         }
       },{
         test: /\.md$/,
