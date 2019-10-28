@@ -86,9 +86,9 @@ function ScrollLoader(props: Props) {
     };
   }, []);
 
-  // React.useEffect(() => {
-  //   updateState(props.sourceDataLength % props.pageSize !== 0 && props.sourceDataLength !== 0 ? 'over' : 'loading');
-  // }, [props.sourceDataLength]);
+  React.useEffect(() => {
+    updateState(props.sourceDataLength % props.pageSize !== 0 && props.sourceDataLength !== 0 ? 'over' : '');
+  }, [props.sourceDataLength]);
 
   return (
     <React.Fragment>
