@@ -1,6 +1,6 @@
+import BSL from '../../typings';
 import Helper, { Options } from '../Form/Helper';
 import Dispatcher from '../../app/Dispatcher';
-import { Type } from '../SwitchView';
 import { Value } from './index';
 
 class ChoiceHelper<T extends Value> extends Helper<T[]> {
@@ -11,7 +11,7 @@ class ChoiceHelper<T extends Value> extends Helper<T[]> {
   }
 
   public value!: Dispatcher<T[]>;
-  public state: Type = 'undefined';
+  public state: BSL.RequestState = 'undefined';
 
   public onChange = (value: T[]) => {
     const isEmpty = value.length === 0 || (value[0] && (value[0].id === undefined || value[0].id === null));

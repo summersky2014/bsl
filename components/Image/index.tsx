@@ -1,7 +1,6 @@
 import BSL from '../../typings';
-// import * as style from './index.scss';
 import * as React from 'react';
-import SwitchView, { Type } from '../SwitchView';
+import SwitchView from '../SwitchView';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import useTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
 import isHttp from '../../utils/isHttp';
@@ -52,15 +51,15 @@ function getSrc(host: string | undefined, src: string): string {
 
 function ImageView(props: Props) {
   const { src, onClick, emptySrc, timeoutView, loadingSrc, failSrc, host, className, id } = props;
-  const [, setRenderId] = React.useState<Type>('undefined');
-  const state = React.useRef<Type>('undefined');
+  const [, setRenderId] = React.useState<BSL.RequestState>('undefined');
+  const state = React.useRef<BSL.RequestState>('undefined');
   const elemRef = React.createRef<HTMLDivElement>();
   const [setTimeOut, clearTimeOut] = useTimeout();
   const timeout = props.timeout ? props.timeout : ImageView.defaultTimeout;
   const timeoutTimer = React.useRef<ListenerCallback>();
   const loadingTimer = React.useRef<ListenerCallback>();
   const imageObj = React.useMemo(() => new Image(0, 0), []);
-  const setState = (newSstate: Type) => {
+  const setState = (newSstate: BSL.RequestState) => {
     state.current = newSstate;
     setRenderId(newSstate);
   };

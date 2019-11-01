@@ -1,10 +1,10 @@
+import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Container, { Props as ContainerProps } from '../Container';
 import Icon from '../Icon';
 import variable from '../../utils/variable';
 import Toast from '../Toast';
-import { Type } from '../SwitchView';
 import './index.scss';
 
 const svgFile = {
@@ -34,7 +34,7 @@ function FormItem(props: Props) {
   };
   const setPromptVisibleFn = function() {
     if (itemRef.current) {
-      const state = itemRef.current.dataset['state'] as Type;
+      const state = itemRef.current.dataset['state'] as BSL.RequestState;
       setPromptVisible(state === 'fail' || state === 'empty' ? true : false);
     }
   };
@@ -61,7 +61,7 @@ function FormItem(props: Props) {
           className={`${prefixCls}-prompt`}
           src={svgFile.prompt}
           onClick={() => {
-            const state = itemRef.current!.dataset['state'] as Type;
+            const state = itemRef.current!.dataset['state'] as BSL.RequestState;
 
             if (state === 'empty' && requiredPrompt) {
               toast(requiredPrompt);

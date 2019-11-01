@@ -32,8 +32,9 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       const createKey = () => JSON.stringify({ api: option.api, params: option.params, data: option.data });
       const method = ((option.method || (axios.defaults.method)) || 'get').toLocaleUpperCase() as Method;
       const defualtData = RequestView.defaultData;
-      const contentType = axios.defaults.headers['content-type'] || axios.defaults.headers['Content-Type'];
+      const contentType = option.headers && option.headers['content-type'] || axios.defaults.headers['content-type'];
       const postData: Record<string, string | number | boolean | object> = {};
+      const isFormData = option.data && option.data instanceof FormData;
 
       // 判断是否有缓存
       if (option.cache) {
@@ -49,7 +50,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
         }
       }
 
-      if (defualtData && method === 'POST') {
+      if (defualtData && method === 'POST' && !isFormData ) {
         Object.keys((defualtData)).forEach((key) => {
           urlSearchParams.append(key, defualtData[key]);
           postData[key] = defualtData[key];
@@ -57,7 +58,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       }
 
       // 去除object中值为undefined的字段
-      if (option.data) {
+      if (option.data && !isFormData ) {
         Object.keys((option.data)).forEach((key) => {
           if (option.data[key] !== undefined) {
             urlSearchParams.append(key, option.data[key]);
@@ -68,7 +69,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       
       axios({
         ...option,
-        data: contentType === 'application/json' ? postData : urlSearchParams,
+        data: isFormData ? option.data : (contentType === 'application/json' ? postData : urlSearchParams),
         url: api,
         method,
         cancelToken: new axios.CancelToken((cancel) => {

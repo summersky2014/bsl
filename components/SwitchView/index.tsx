@@ -1,10 +1,9 @@
+import BSL from '../../typings';
 import * as React from 'react';
 
-/** 状态类型 */
-export type Type = 'complete' | 'empty' | 'fail'  | 'loading' | 'timeout' | 'undefined';
 export interface Props {
   /** 当前的状态类型 */
-  state: Type;
+  state: BSL.RequestState;
   children?: any;
 }
 
@@ -12,7 +11,6 @@ interface StateComponentProps {
   children: any;
 }
 
-// tslint:disable-next-line: max-line-length
 const [CompleteStr, EmptyStr, FailStr, LoadingStr, TimeoutStr, UndefinedStr] = ['Complete', 'Empty', 'Fail', 'Loading', 'Timeout', 'Undefined'];
 
 function SwitchView(props: Props) {

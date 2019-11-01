@@ -1,7 +1,7 @@
+import BSL from '../../typings';
 import Helper, { Options } from '../Form/Helper';
 import Dispatcher from '../../app/Dispatcher';
 import validate from '../../utils/validate';
-import { Type } from '../SwitchView';
 
 interface TextareaOptions extends Options<string> {
   validate?: ((value: string) => boolean) | keyof typeof validate;
@@ -14,7 +14,7 @@ class TextareaHelper extends Helper<string> {
   }
 
   public value!: Dispatcher<string>;
-  public state: Type = 'undefined';
+  public state: BSL.RequestState = 'undefined';
 
   public onChange = (value: string) => {
     if (!value && this.required) {

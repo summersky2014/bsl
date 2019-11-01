@@ -2,7 +2,7 @@ import BSL from '../../typings';
 import * as React from 'react';
 import { appData } from '../../app/core';
 import { ListenerCallback } from '../../app/Scheduler';
-import SwtichView, { Type } from '../SwitchView';
+import SwtichView from '../SwitchView';
 import anyuseRequest, { Option as RequestOption } from '../../hooks/anyuseRequest';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 
@@ -10,6 +10,10 @@ export interface Props extends RequestOption, BSL.ComponentProps {
   children?: (data: any) => any;
   /** 用于刷新接口， 触发useEffect */
   refreshId?: any;
+  /** 是否禁用 */
+  disiabled?: boolean;
+  /** 只处于loading视图状态下时才触发 */
+  onLoading?: () => void;
   /** 请求成功 */
   onComplete?: (response: BSL.RequestResponse<any>) => void;
   /** 请求成功，但数据为空 */
@@ -21,7 +25,9 @@ export interface Props extends RequestOption, BSL.ComponentProps {
 }
 
 function RequestView(props: Props) {
-  const { api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty } = props;
+  const {
+    api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled
+  } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const [request, cancelToken, clearCache] = anyuseRequest();
   /** 重试接口时，遇到相同状态不会重新render，dataId保证能正确执行render */
@@ -29,13 +35,14 @@ function RequestView(props: Props) {
   /** 用于重试接口，触发useEffect */
   const [retryId, setRetryId] = React.useState(0);
   const responseData = React.useRef<any>();
-  const typeRef = React.useRef<Type>('undefined');
+  const typeRef = React.useRef<BSL.RequestState>('undefined');
   const paramsStr = JSON.stringify(params);
   const dataStr = JSON.stringify(data);
   const initRoute = appData.currentPageId;
   const timer = React.useRef<ListenerCallback | null>();
+  const prevRefreshId = React.useRef(refreshId);
   let cacheKey: string | undefined;
-  const setType = (typeValue: Type, res?: any) => {
+  const setType = (typeValue: BSL.RequestState, res?: any) => {
     typeRef.current = typeValue;
     responseData.current = res;
 
@@ -54,15 +61,20 @@ function RequestView(props: Props) {
   };
 
   React.useEffect(() => {
+    if (disiabled) {
+      return;
+    }
     timer.current = setTimeOut(() => {
-      if (typeRef.current === 'undefined') {
+      if (typeRef.current === 'undefined' || prevRefreshId.current !== refreshId) {
         setType('loading');
+        if (onLoading) {
+          onLoading();
+        }
       }
     }, 300);
-
     request(props).then((res) => {
       cacheKey = res.cacheKey;
-
+      
       if (onFinally) {
         onFinally(res);
       }
@@ -110,7 +122,7 @@ function RequestView(props: Props) {
       if (cache === 'page' && cacheKey && initRoute !== appData.currentPageId) {
         clearCache(cacheKey);
       }
-
+  
       if (cancelToken.current) {
         cancelToken.current();
       }
@@ -119,7 +131,7 @@ function RequestView(props: Props) {
         clearTimeOut(timer.current);
       }
     };
-  }, [api, paramsStr, dataStr, refreshId, retryId]);
+  }, [api, paramsStr, dataStr, refreshId, retryId, disiabled]);
 
   return children ? (
     <div

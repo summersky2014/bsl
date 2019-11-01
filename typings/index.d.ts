@@ -6,7 +6,8 @@ import { Location } from 'history';
 declare namespace BSL {
   /** 运行时的环境变量 */
   type Env = 'development' | 'production' | 'prerelease';
-  type RequestStatus = 'start' | 'end' | undefined;
+  /** 状态类型 */
+  type RequestState = 'complete' | 'empty' | 'fail'  | 'loading' | 'timeout' | 'undefined';
   type OnClick<T> = (e: React.MouseEvent<T>, ...args: any[]) => void;
   /** 响应码 */
   type ResponseCode = (

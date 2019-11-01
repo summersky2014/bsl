@@ -1,7 +1,6 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import Toast from '../Toast';
-import { Type } from '../SwitchView';
 import Input from '../Input';
 import Textarea from '../Textarea';
 import Picker from '../Picker';
@@ -11,6 +10,7 @@ import anyuseRequest from '../../hooks/anyuseRequest';
 
 export interface Props extends BSL.ComponentProps {
   api?: RequestProps['api'];
+  headers?: RequestProps['headers'];
   data?: RequestProps['data'];
   method?: RequestProps['method'];
   /** 请求成功 */
@@ -29,7 +29,14 @@ export interface Props extends BSL.ComponentProps {
 export interface FromTypeProps<Value> {
   onChange: (value: Value, ...args: any[]) => boolean;
   value: Value;
-  state: Type;
+  state: BSL.RequestState;
+}
+
+function isMutableRefObject(obj: React.MutableRefObject<any>) {
+  if (Object.keys(obj).length === 1 && obj.current) {
+    return true;
+  }
+  return false;
 }
 
 const formComponent = [Input, Textarea, Picker, Choice];
@@ -63,7 +70,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
 
 function Form(props: Props) {
   const { className, id, style, children, onSubmitBefore, onSubmit, api, data, method, onComplete, onFail, onFinally } = props;
-  const state = React.useRef<Type>('undefined');
+  const state = React.useRef<BSL.RequestState>('undefined');
   const [request, cancelToken] = anyuseRequest();
 
   React.useEffect(() => {
@@ -98,8 +105,9 @@ function Form(props: Props) {
             state.current = 'loading';
             request({
               api,
-              data,
-              method: method || 'post'
+              data: isMutableRefObject(data) ? data.current : data,
+              method: method || 'post',
+              headers: props.headers
             }).then((res) => {
               state.current = 'complete';
               if (onFinally) {

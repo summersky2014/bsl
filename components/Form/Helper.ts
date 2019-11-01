@@ -1,6 +1,6 @@
 
+import BSL from '../../typings';
 import Dispatcher from '../../app/Dispatcher';
-import { Type } from '../SwitchView';
 
 export interface Options<T> {
   defaultValue?: T;
@@ -18,7 +18,7 @@ abstract class Helper<T> {
 
   protected required = false;
   public abstract value: Dispatcher<T>;
-  public abstract state: Type;
+  public abstract state: BSL.RequestState;
   public abstract onChange(value: T): boolean;
 }
 
