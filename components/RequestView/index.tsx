@@ -6,7 +6,7 @@ import SwtichView from '../SwitchView';
 import anyuseRequest, { Option as RequestOption } from '../../hooks/anyuseRequest';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 
-export interface Props extends RequestOption, BSL.ComponentProps {
+export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
   children?: (data: any) => any;
   /** 用于刷新接口， 触发useEffect */
   refreshId?: any;
@@ -24,6 +24,17 @@ export interface Props extends RequestOption, BSL.ComponentProps {
   onFinally?: (response?: BSL.RequestResponse<any>) => void;
 }
 
+interface DefaultProps {
+  /** 
+   * 是否使用失败视图和超时视图的点击重试功能
+   * @default true
+   */
+  useRetry?: boolean;
+}
+
+const defaultProps: Required<DefaultProps> = {
+  useRetry: true
+}
 function RequestView(props: Props) {
   const {
     api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled
@@ -54,7 +65,7 @@ function RequestView(props: Props) {
   };
 
   const onRetry = () => {
-    if (typeRef.current === 'fail' || typeRef.current === 'timeout') {
+    if ((typeRef.current === 'fail' || typeRef.current === 'timeout') && props.useRetry) {
       typeRef.current = 'undefined';
       setRetryId(retryId + 1);
     }
@@ -112,9 +123,8 @@ function RequestView(props: Props) {
       }
       if (err.message.includes('timeout of') && err.message.includes('ms exceeded')) {
         setType('timeout');
-      } else if (err.message === 'Network Error') {
-        setType('fail');
       } else {
+        setType('fail');
         throw err;
       }
     });
@@ -149,6 +159,7 @@ function RequestView(props: Props) {
   ) : null;
 }
 
+RequestView.defaultProps = defaultProps;
 RequestView.Complete = SwtichView.Complete;
 RequestView.Empty = SwtichView.Empty;
 RequestView.Fail = SwtichView.Fail;
