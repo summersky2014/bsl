@@ -19,7 +19,7 @@ export interface Props extends Omit_onChange_value, FromTypeProps<string> {
 export const prefixCls = 'bsl-input';
 function Input(props: Props) {
   const { onFocus, onChange, type, state, className, value } = props;
-  const inputRef = React.useRef<null | HTMLInputElementExtends>(null);
+  const inputRef = React.createRef<HTMLInputElementExtends>();
 
   return (
     <input

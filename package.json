@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -89,7 +89,7 @@
     "swipe-js-iso": "^2.1.5",
     "terser-webpack-plugin": "^1.2.1",
     "ts-loader": "^5.3.3",
-    "typescript": "^3.6.4",
+    "typescript": "^3.7.2",
     "typings-for-css-modules-loader": "1.7.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.2.1"

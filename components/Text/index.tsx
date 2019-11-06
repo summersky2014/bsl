@@ -16,7 +16,6 @@ export interface Props extends BSL.ComponentProps {
   justify?: boolean;
 }
 
-
 function Text(props: Props) {
   return (
     <div

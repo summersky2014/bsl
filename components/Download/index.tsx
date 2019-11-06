@@ -24,7 +24,7 @@ const defaultProps: Required<DefaultProps> = {
 function Download(props: Props) {
   const { src, children, callback, failback } = props;
   const [process, setProcess] = React.useState(0);
-  let cancelToken: (() => void) | null = null;
+  const cancelToken = React.useRef<(() => void) | null>(null);
 
   const onClick = () => {
     if (process >= 100) {
@@ -37,7 +37,7 @@ function Download(props: Props) {
     };
     axios({
       cancelToken: new axios.CancelToken((cancel) => {
-        cancelToken = () => cancel('cancel');
+        cancelToken.current = () => cancel('cancel');
       }),
       url: src,
       responseType: 'arraybuffer',
@@ -71,8 +71,8 @@ function Download(props: Props) {
 
   React.useEffect(() => {
     return () => {
-      if (cancelToken) {
-        cancelToken();
+      if (cancelToken.current) {
+        cancelToken.current();
       }
     };
   }, []);

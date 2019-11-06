@@ -39,7 +39,6 @@ function UploadProgress(): [(config: OnUploadProgress) => void, (() => void) | n
         cancelToken = cancel;
       }),
       url: isHttp(api) ? api : axios.defaults.baseURL + api,
-      // url: 'http://127.0.0.1:3000/api/weibo/setField',
       method: 'post',
       onUploadProgress(progressEvent: ProgressEvent) {
         if (progressEvent.lengthComputable) {

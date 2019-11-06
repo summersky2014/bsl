@@ -29,7 +29,7 @@ export interface Params {
 function link(params: Params): void {
   const { url, replace, query, newPage } = params;
   const qsurl = query ? `${url}/${query.join('/')}` : url;
-  if (appData.history!.location.pathname !== qsurl) {
+  if (appData.history?.location.pathname !== qsurl) {
     if (newPage) {
       window.open(qsurl, '_blank');
     } else {

@@ -7,6 +7,12 @@ import styles from './style';
 import * as Swipe from 'swipe-js-iso';
 import memoAreEqual from '../../utils/memoAreEqual';
 
+interface ISwipe {
+  kill(): void;
+  getPos(): number;
+  slide(index: number, slideDuration: number | undefined): void;
+}
+
 interface Props extends BSL.ComponentProps {
   index: number;
   children: any;
@@ -48,7 +54,7 @@ interface Props extends BSL.ComponentProps {
 function Carousel(props: Props) {
   const elemRef = React.createRef<HTMLDivElement>();
   const { id, className, index, speed, auto, continuous, disableScroll, stopPropagation, children, updateId } = props;
-  const swipe = React.useRef<any>();
+  const swipe = React.useRef<ISwipe | null>();
 
   React.useEffect(() => {
     const swipeOptions = {
@@ -63,20 +69,20 @@ function Carousel(props: Props) {
       callback: props.callback
     };
     if (elemRef.current) {
-      if (swipe.current) {
-        swipe.current.kill();
-      }
-      swipe.current = Swipe(elemRef.current, swipeOptions);
+      swipe.current?.kill();
+      swipe.current = Swipe(elemRef.current, swipeOptions) as ISwipe;
     }
     return () => {
-      swipe.current.kill();
+      swipe.current?.kill();
       swipe.current = null;
     };
   }, [speed, auto, continuous, stopPropagation, disableScroll, updateId]);
 
   React.useEffect(() => {
-    if (swipe.current && swipe.current.getPos() !== props.index) {
-      swipe.current.slide(props.index, props.slideDuration);
+    if (swipe.current) {
+      if (swipe.current.getPos() !== props.index) {
+        swipe.current.slide(props.index, props.slideDuration);
+      }
     }
   }, [index]);
 
