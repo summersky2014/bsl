@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Download from '../../../../../../components/Download';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const styles: Record<string, React.CSSProperties> = {
   button: {

@@ -1,8 +1,10 @@
 import BSL from '../../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import * as BetterScroll from '@better-scroll/core';
-import './index.scss';
 
 export interface Props extends BSL.ComponentProps {
   children: JSX.Element[] | JSX.Element;
@@ -18,7 +20,6 @@ function getNumberByComputed(computed: string | null): number {
   return isNaN(float) ? 0 : Math.ceil(float);
 }
 
-const prefixCls = 'bsl-scroll-horizontal';
 function HorizontalScroll(props: Props) {
   const elemRef = React.createRef<HTMLDivElement>();
   const wrapRef = React.createRef<HTMLDivElement>();
@@ -36,7 +37,7 @@ function HorizontalScroll(props: Props) {
 
       for (let i = 0; i < children.length; i++) {
         const child = children[i];
-        child.classList.add(`${prefixCls}-item`);
+        child.classList.add(css(styles.item));
         const isAbsolute = getComputedStyle(child).position === 'absolute';
 
         if (!isAbsolute) {
@@ -107,7 +108,7 @@ function HorizontalScroll(props: Props) {
 
   return (
     <div
-      className={classNames(prefixCls, props.className)}
+      className={classNames(css(styles.root), props.className)}
       style={props.style}
       ref={elemRef}
       onClick={(e) => {
@@ -116,7 +117,7 @@ function HorizontalScroll(props: Props) {
       }}
     >
       <div
-        className={`${prefixCls}-wrap`}
+        className={css(styles.wrap)}
         ref={wrapRef}
         style={{
           width: scrollWidth

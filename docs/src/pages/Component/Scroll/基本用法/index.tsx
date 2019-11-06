@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Horizontal from '../../../../../../components/Scroll/Horizontal';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const style: Record<string, React.CSSProperties> = {
   horizontal: {

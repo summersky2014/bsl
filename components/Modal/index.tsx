@@ -2,10 +2,12 @@ import BSL from '../../typings';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import Mask from '../Mask';
 import Container from '../Container';
 import { getContainer } from '../../utils/getContainer';
-import './index.scss';
 
 export interface Props extends BSL.ComponentProps  {
   /**
@@ -39,8 +41,6 @@ interface ShowProps extends Omit<Props, 'visible'> {
 }
 
 let container: HTMLElement | null = null;
-const prefixCls = 'bsl-modal';
-
 function Modal(props: Props) {
   const { title, okText, dismissText, children, onlyOk } = props;
   const [stateVisible, setStateVisible] = React.useState(false);
@@ -78,23 +78,23 @@ function Modal(props: Props) {
 
   return (
     <Mask
-      contentCls={classNames(prefixCls, props.className)}
+      contentCls={classNames(css(styles.root), props.className)}
       style={props.style}
       id={props.id}
       visible={realVisible}
       closable={false}
     >
-      {title ? <div className={`${prefixCls}-title`}>{title}</div> : null}
-      <div className={`${prefixCls}-body`}>{children}</div>
-      <Container className={`${prefixCls}-footer`} justifyContent="space-between">
+      {title ? <div className={css(styles.title)}>{title}</div> : null}
+      <div className={css(styles.body)}>{children}</div>
+      <Container className={css(styles.footer)} justifyContent="space-between">
         {!onlyOk ? (
           <React.Fragment>
-            <div className={`${prefixCls}-footer-dismiss`} onClick={onClose} >{dismissText || '取消'}</div>
-            <div className={`${prefixCls}-footer-sep`} />
-            <div className={`${prefixCls}-footer-ok`} onClick={onOk}>{okText || '确定'}</div>
+            <div className={css(styles.dismiss)} onClick={onClose} >{dismissText || '取消'}</div>
+            <div className={css(styles.sep)} />
+            <div className={css(styles.ok)} onClick={onOk}>{okText || '确定'}</div>
           </React.Fragment>
         ) : (
-          <div className={`${prefixCls}-footer-button`} onClick={onOk}>{okText || '知道了'}</div>
+          <div className={css(styles.button)} onClick={onOk}>{okText || '知道了'}</div>
         )}
       </Container>
     </Mask>

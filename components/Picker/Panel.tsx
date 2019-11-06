@@ -1,8 +1,10 @@
 import BSL from '../../typings';
 import * as React from 'react';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import Item, { Base as ItemBase , Data, itemHeight, num, Value } from './Item';
 import variable from '../../utils/variable';
-import './index.scss';
 
 export interface Base extends ItemBase {
   /** 在onScollEnd后触发，用于判断哪些列需要保持原来的选中索引，哪些列需要初始化为0 */
@@ -88,7 +90,6 @@ function switchData(cascade: Props['cascade'], stateData: Data[][], value: Value
   }
 }
 
-const prefixCls = 'bsl-picker';
 function Panel(props: Props) {
   const { className, id, style, itemCls, textCls, updateId, onCreate, onScrollEnd, _datepicker } = props;
   const propsValue = React.useRef(props.value);
@@ -112,10 +113,10 @@ function Panel(props: Props) {
       id={id}
       style={style}
     >
-      <div className={`${prefixCls}-panel`}>
-        <div className={`${prefixCls}-mask`} style={{ backgroundSize: `100% ${itemHeight * num}px` }} />
-        <div className={`${prefixCls}-indicator`} style={{ top: `${itemHeight * num}px` }} />
-        <div className={`${prefixCls}-content`}>
+      <div className={css(styles.panel)}>
+        <div className={css(styles.mask)} style={{ backgroundSize: `100% ${itemHeight * num}px` }} />
+        <div className={css(styles.indicator)} style={{ top: `${itemHeight * num}px` }} />
+        <div className={css(styles.content)}>
           {data.map((item, col) => (
             <Item
               key={col}

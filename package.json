@@ -57,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^2.3.2",
     "@typescript-eslint/parser": "^2.3.2",
     "@ungap/url-search-params": "^0.1.2",
+    "aphrodite": "^2.4.0",
     "autoprefixer": "^9.4.7",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.3",

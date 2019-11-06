@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Mask from '../../../../../../components/Mask';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const style: Record<string, React.CSSProperties> = {
   content: {

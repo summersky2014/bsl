@@ -3,7 +3,8 @@ import * as ReactDOM from 'react-dom';
 
 import variable from '../../../../../../utils/variable';
 import Icon from '../../../../../../components/Icon';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const checkCircle =  variable.svgRootPath + require('./assets/cross-circle.svg').id;
 const checkCircleO = variable.svgRootPath + require('./assets/check-circle-o.svg').id;

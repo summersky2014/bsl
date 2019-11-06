@@ -1,8 +1,9 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
 import isPassiveSupported from '../../utils/isPassiveSupported';
-import './index.scss';
 
 export interface Props extends BSL.ComponentProps {
   children: any;
@@ -16,7 +17,6 @@ export interface Props extends BSL.ComponentProps {
   contentCls?: string;
 }
 
-const prefixCls = 'bsl-mask';
 function Dialog(props: Props) {
   const { children, maskCls, className, contentCls, style } = props;
   const elemRef = React.createRef<HTMLDivElement>();
@@ -27,7 +27,7 @@ function Dialog(props: Props) {
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-
+    
     if (props.closable && props.onClose) {
       props.onClose(e);
     }
@@ -47,16 +47,16 @@ function Dialog(props: Props) {
 
   return (
     <div
-      className={classNames(prefixCls, className)}
+      className={classNames(css(styles.root), className)}
       style={style}
     >
       <div
-        className={classNames(`${prefixCls}-bg`, maskCls)}
+        className={classNames(css(styles.bg), maskCls)}
         onClick={onClick}
         ref={elemRef}
       />
       <div
-        className={classNames(`${prefixCls}-content`, contentCls)}
+        className={classNames(css(styles.content), contentCls)}
         onClick={stopPropagation}
       >{children}</div>
     </div>

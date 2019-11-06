@@ -10,7 +10,7 @@
         "experimentalDecorators": true,
         "noUnusedLocals": true,
         "sourceMap": true,
-        "lib": ["dom", "scripthost", "es5", "es2015"]
+        "lib": ["dom", "scripthost", "esnext"]
     },
     "exclude": [
         "node_modules",
@@ -25,7 +25,8 @@
         "task",
         "typings",
         "hooks",
-        "docs"
+        "docs",
+        "styles"
     ],
     "files": [
         "webpack.config.ts"

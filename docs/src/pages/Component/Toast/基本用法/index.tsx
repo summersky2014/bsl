@@ -4,7 +4,8 @@ import * as ReactDOM from 'react-dom';
 import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
 import Toast from '../../../../../../components/Toast';
 import { ToastProps } from '../../../../../../components/Toast/Toast';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const style: Record<string, React.CSSProperties> = {
   button: {

@@ -506,7 +506,6 @@ blockquote {
   margin: 0;
   padding: 0;
 }
-
 .bsl_component[data-placeholder=true] {
   color: #b2b2b2;
 }
@@ -529,178 +528,17 @@ blockquote {
   display: none;
 }
 
+.bsl-formitem .bsl-input {
+  width: 100%;
+}
+
+.bsl-textarea ::-webkit-input-placeholder {
+  font-size: inherit;
+  line-height: 1.3;
+}
+
 ::-webkit-input-placeholder {
   color: #b2b2b2;
-}
-.bsl-mask {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  z-index: 10;
-  top: 0;
-  left: 0;
-}
-
-.bsl-mask-content {
-  position: absolute;
-  outline: 0;
-  z-index: 2;
-}
-
-.bsl-mask-bg {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  background-color: rgba(55, 55, 55, 0.6);
-}
-.bsl-popup-fadein {
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-          animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-  opacity: 0;
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
-}
-
-.bsl-popup-fadeout {
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-          animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
-}
-
-.bsl-popup-fadein {
-  -webkit-animation-name: rmcPopupPickerFadeIn_14avn;
-          animation-name: rmcPopupPickerFadeIn_14avn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-
-.bsl-popup-fadeout {
-  -webkit-animation-name: rmcPopupPickerFadeOut_DegxS;
-          animation-name: rmcPopupPickerFadeOut_DegxS;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-
-@-webkit-keyframes rmcPopupPickerFadeIn_14avn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes rmcPopupPickerFadeIn_14avn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes rmcPopupPickerFadeOut_DegxS {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes rmcPopupPickerFadeOut_DegxS {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.bsl-popup-enter {
-  -webkit-transform: translate3d(0, 100%, 0);
-          transform: translate3d(0, 100%, 0);
-}
-
-.bsl-popup-enter, .bsl-popup-leave {
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-          animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
-}
-
-.bsl-popup-enter {
-  -webkit-animation-name: rmcPopupPickerSlideFadeIn_3vsG4;
-          animation-name: rmcPopupPickerSlideFadeIn_3vsG4;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-
-.bsl-popup-leave {
-  -webkit-animation-name: rmcPopupPickerSlideFadeOut_3QPBQ;
-          animation-name: rmcPopupPickerSlideFadeOut_3QPBQ;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-
-@-webkit-keyframes rmcPopupPickerSlideFadeIn_3vsG4 {
-  0% {
-    -webkit-transform: translate3d(0, 100%, 0);
-            transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes rmcPopupPickerSlideFadeIn_3vsG4 {
-  0% {
-    -webkit-transform: translate3d(0, 100%, 0);
-            transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
-
-@-webkit-keyframes rmcPopupPickerSlideFadeOut_3QPBQ {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 100%, 0);
-            transform: translate3d(0, 100%, 0);
-  }
-}
-
-@keyframes rmcPopupPickerSlideFadeOut_3QPBQ {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 100%, 0);
-            transform: translate3d(0, 100%, 0);
-  }
 }
 .popup_2qsMS {
   bottom: 0;

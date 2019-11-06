@@ -1,23 +1,3 @@
-.bsl-carousel {
-  overflow: hidden;
-  visibility: hidden;
-  position: relative;
-}
-
-.bsl-carousel-wrapper {
-  overflow: hidden;
-  position: relative;
-}
-
-.bsl-carousel-child {
-  float: left;
-  width: 100%;
-  position: relative;
-  -webkit-transition-property: -webkit-transform;
-  transition-property: -webkit-transform;
-  transition-property: transform;
-  transition-property: transform, -webkit-transform;
-}
 @charset "UTF-8";
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
@@ -526,7 +506,6 @@ blockquote {
   margin: 0;
   padding: 0;
 }
-
 .bsl_component[data-placeholder=true] {
   color: #b2b2b2;
 }
@@ -547,6 +526,15 @@ blockquote {
 
 .bsl_component[data-hide=true], .bsl_component_hide {
   display: none;
+}
+
+.bsl-formitem .bsl-input {
+  width: 100%;
+}
+
+.bsl-textarea ::-webkit-input-placeholder {
+  font-size: inherit;
+  line-height: 1.3;
 }
 
 ::-webkit-input-placeholder {

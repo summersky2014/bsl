@@ -6,7 +6,8 @@ import Form from '../../../../../../components/Form';
 import FormItem from '../../../../../../components/FormItem';
 import Input, { InputHelper } from '../../../../../../components/Input';
 import Textarea, { TextareaHelper } from '../../../../../../components/Textarea';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const styles: Record<string, React.CSSProperties> = {
   input: {

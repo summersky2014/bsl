@@ -4,7 +4,8 @@ import * as styles from './index.scss';
 
 import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
 import Popup from '../../../../../../components/Popup';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const style: Record<string, React.CSSProperties> = {
   button: {
@@ -43,6 +44,8 @@ const Demo = () => {
       <Popup
         contentCls={styles.popup}
         visible={visible}
+        onClose={() => setVisible(false)}
+        closable
       >
         <div>这里是内容</div>
       </Popup>

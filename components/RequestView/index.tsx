@@ -34,7 +34,7 @@ interface DefaultProps {
 
 const defaultProps: Required<DefaultProps> = {
   useRetry: true
-}
+};
 function RequestView(props: Props) {
   const {
     api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled

@@ -4,7 +4,8 @@ import * as ReactDOM from 'react-dom';
 import axios from 'axios';
 import BSL from '../../../../../../typings';
 import RequestView from '../../../../../../components/RequestView';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 // 将请求结果转换为内置格式
 axios.defaults.transformResponse = (data: string, headers) => {

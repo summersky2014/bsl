@@ -1,7 +1,8 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
-import './index.scss';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
 
 export interface Props extends BSL.ComponentProps {
   prefixCls?: string;
@@ -17,25 +18,26 @@ export interface Props extends BSL.ComponentProps {
   onClick?: BSL.OnClick<HTMLDivElement>;
 }
 
-const prefixCls = 'bsl-container';
 const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>) => {
+  // @ts-ignore
   const {
     className, style, flexDirection, flexWrap, justifyContent, alignItems, alignContent, children, order, id,
     flex, alignSelf, onClick
   } = props;
+  
   return (
     <div
-      className={classNames(prefixCls, className, {
-        [`${prefixCls}-flex`]: !!(justifyContent || alignItems || alignSelf || flexDirection),
-        [`${prefixCls}-flexDirection-${flexDirection}`]: !!flexDirection,
-        [`${prefixCls}-flexWrap-${flexWrap}`]: !!flexWrap,
-        [`${prefixCls}-justifyContent-${justifyContent}`]: !!justifyContent,
-        [`${prefixCls}-alignItems-${alignItems}`]: !!alignItems,
-        [`${prefixCls}-alignContent-${alignContent}`]: !!alignContent,
-        [`${prefixCls}-order-${order}`]: !!order,
-        [`${prefixCls}-flex-${flex}`]: !!flex,
-        [`${prefixCls}-alignSelf-${alignSelf}`]: !!alignSelf
-      })}
+      className={classNames(css(
+        !!(justifyContent || alignItems || alignSelf || flexDirection) && styles.flex,
+        !!flexDirection && styles[`flexDirection-${flexDirection}` as keyof typeof styles],
+        !!flexWrap && styles[`flexWrap-${flexWrap}` as keyof typeof styles],
+        !!justifyContent && styles[`justifyContent-${justifyContent}` as keyof typeof styles],
+        !!alignItems && styles[`alignItems-${alignItems}` as keyof typeof styles],
+        !!alignContent && styles[`alignContent-${alignContent}` as keyof typeof styles],
+        !!alignSelf && styles[`alignSelf-${alignSelf}` as keyof typeof styles],
+        order !== undefined && styles[`order-${order}` as keyof typeof styles],
+        flex !== undefined && styles[`flex-${flex}` as keyof typeof styles]
+      ), className)}
       style={style}
       id={id}
       ref={ref}

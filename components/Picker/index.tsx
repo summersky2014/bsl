@@ -1,5 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import Panel, { Base as PanelBase, Props as PanelProps } from './Panel';
 import { Value, Data } from './Item';
 import Popup from '../Popup';
@@ -79,7 +82,6 @@ function getValueWhenOverDataLength(props: Props, stateValue: Value[]): Value[] 
   return null;
 }
 
-const prefixCls = 'bsl-picker';
 const defaultProps: Required<DefaultProps> = {
   rightIcon: true,
   dismissText: '取消',
@@ -170,26 +172,26 @@ function Picker(props: Props) {
   return (
     <React.Fragment>
       <div
-        className={classNames(buttonCls, `${prefixCls}-button`, 'bsl_component')}
+        className={classNames(buttonCls, css(styles.button), variable.bslComponent)}
         onClick={toogleVisible}
         data-state={props.state}
         data-placeholder={!(value && value.length)}
       >
         <div
-          className={`${prefixCls}-label bsl_component`}
+          className={classNames(css(styles.label), variable.bslComponent)}
           data-disabled={disabled}
           data-placeholder={!(value && value.length)}
         >{label}</div>
-        {rightIcon && <Icon className={`${prefixCls}-icon`} src={rightSvg} />}
+        {rightIcon && <Icon className={css(styles.icon)} src={rightSvg} />}
       </div>
       <Popup
         visible={visible}
-        contentCls={`${prefixCls}-popup`}
+        contentCls={css(styles.popup)}
       >
-        <div className={`${prefixCls}-popup-header`}>
-          <div className={`${prefixCls}-popup-button ${prefixCls}-popup-header-left`} onClick={toogleVisible}>{dismissText}</div>
-          {title && <div className={`${prefixCls}-popup-button ${prefixCls}-popup-title`}>{title}</div>}
-          <div className={`${prefixCls}-popup-button ${prefixCls}-popup-header-right`} onClick={onOk}>{okText}</div>
+        <div className={css(styles.popupHeader)}>
+          <div className={css(styles.popupButton, styles.popupHeaderLeft)} onClick={toogleVisible}>{dismissText}</div>
+          {title && <div className={css(styles.popupButton, styles.popupTitle)}>{title}</div>}
+          <div className={css(styles.popupButton, styles.popupHeaderRight)} onClick={onOk}>{okText}</div>
         </div>
         <Panel
           {...props}

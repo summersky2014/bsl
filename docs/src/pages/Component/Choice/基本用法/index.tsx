@@ -4,7 +4,8 @@ import * as ReactDOM from 'react-dom';
 import { Subscription, Context } from '../../../../../../app/Scheduler';
 import Choice, { ChoiceHelper } from '../../../../../../components/Choice';
 import Radio from '../../../../../../components/Radio';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 interface Data {
   label: string;

@@ -518,28 +518,3 @@
    margin: 0;
    padding: 0;
  }
- 
- :global(.bsl_component) {
-   &[data-placeholder=true] {
-     color: #b2b2b2;
-   }
- 
-   &[disabled=true], &[data-disabled=true] {
-     color: #dddddd;
-     pointer-events: none;
-     cursor: not-allowed !important;
-     user-select: none;
-   }
-   
-   &[data-state=fail] {
-     color: #ff0000;
-   }
- 
-   &[data-hide=true], &_hide {
-     display: none;
-   }
- }
- 
- ::-webkit-input-placeholder {
-   color: #b2b2b2;
- }

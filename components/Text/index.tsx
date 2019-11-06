@@ -1,7 +1,8 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
-import './index.scss';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
 
 export interface Props extends BSL.ComponentProps {
   onClick?: BSL.OnClick<HTMLDivElement>;
@@ -15,21 +16,23 @@ export interface Props extends BSL.ComponentProps {
   justify?: boolean;
 }
 
-const prefixCls = 'bsl-text';
+
 function Text(props: Props) {
   return (
     <div
-      className={classNames(prefixCls, props.className, {
-        [`${prefixCls}-ellipsis`]: props.ellipsis,
-        [`${prefixCls}-ellipsis-lines`]: !!(props.ellipsisLines && props.ellipsisLines > 0),
-        [`${prefixCls}-justify`]: props.justify,
-        [`${prefixCls}-line-clamp-${props.ellipsisLines}`]: !!props.ellipsisLines
-      })}
-      style={props.style}
+      className={classNames(css(
+        props.ellipsis && styles.ellipsis,
+        !!(props.ellipsisLines && props.ellipsisLines > 0) && styles.ellipsisLines,
+        props.justify && styles.justify
+      ), props.className)}
+      style={{
+        WebkitLineClamp: props.ellipsisLines,
+        ...props.style
+      }}
       onClick={props.onClick}
     >
       {props.justify && typeof props.children === 'string' ? props.children.split('').map((item, i) => (
-        <div className={`${prefixCls}-justify-item`} key={item + i}>{item}</div>
+        <div className={css(styles.justifyItem)} key={item + i}>{item}</div>
       )) : props.children}
     </div>
   );

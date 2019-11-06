@@ -1,9 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import styles from './style';
+import { css } from 'aphrodite/no-important';
+
 import * as BetterScroll from '@better-scroll/core';
 import Wheel from '@better-scroll/wheel';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
-import './index.scss';
 
 export interface Value {
   value: string | number;
@@ -36,7 +38,6 @@ interface Props extends Base {
 }
 
 export const itemHeight = 34;
-
 /** 计算显示区域内居中的序号 */
 function calcNum(): number {
   const rootHeight = itemHeight * 7;
@@ -53,7 +54,7 @@ function calcNum(): number {
 BetterScroll.default.use(Wheel);
 export const num: number = calcNum();
 const prefixCls = 'bsl-picker-item';
-
+const textStyleCls = css(styles.itemText);
 function getIndex(data: Data[], value: Value) {
   if (value) {
     const index = data.findIndex((item) => item.value === value.value);
@@ -96,7 +97,7 @@ function Item(props: Props) {
         rotate: 0,
         adjustTime: 300,
         wheelWrapperClass: `${prefixCls}-col`,
-        wheelItemClass: `${prefixCls}-text`
+        wheelItemClass: textStyleCls
       },
       swipeTime: 1000,
       bounceTime: 300,
@@ -127,7 +128,7 @@ function Item(props: Props) {
 
   return (
     <div
-      className={classNames(prefixCls, itemCls)}
+      className={classNames(css(styles.item), itemCls)}
       ref={elemRef}
       style={{
         padding: `${itemHeight * num}px 0`
@@ -137,7 +138,7 @@ function Item(props: Props) {
         {props.data.map((item, i) => (
           <div
             key={item.value}
-            className={classNames(`${prefixCls}-text`, textCls)}
+            className={classNames(textStyleCls, textCls)}
           >{item.label}</div>
         ))}
       </div>

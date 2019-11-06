@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PageComponent from '../../../../../app/PageComponent';
 import Markdown from '../../../components/Markdown';
-import Demo from '../../../components/Demo';
 import doc from './doc.md';
 
 interface Props {
@@ -20,7 +19,6 @@ class Page extends PageComponent<Props, State> {
     return (
       <div>
         <Markdown source={doc} />
-        <Demo component="Container" title="基本用法" />
       </div>
     );
   }

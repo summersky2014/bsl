@@ -1,11 +1,13 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import { RouteComponentProps } from 'react-router';
 import Icon from '../Icon';
 import Choice, { Value, Props as ChoiceProps } from '../Choice';
 import Link from '../Link';
-import './index.scss';
 
 interface TabBarData extends Value {
   icon: string;
@@ -16,7 +18,6 @@ export interface Props<T extends Value> extends RouteComponentProps, BSL.Compone
   itemCls?: string;
 }
 
-const prefixCls = 'bsl-tabbar';
 function TabBar(props: Props<TabBarData>) {
   const { className, id, data, itemCls } = props;
   const selectedIndex = data.findIndex((item) => item.pathname === props.location.pathname);
@@ -25,8 +26,8 @@ function TabBar(props: Props<TabBarData>) {
 
   return (
     <Choice
-      className={classNames(prefixCls, className)}
-      itemCls={classNames(`${prefixCls}-item`, itemCls)}
+      className={classNames(css(styles.root), className)}
+      itemCls={classNames(css(styles.item), itemCls)}
       id={id}
       style={props.style}
       data={data}
@@ -48,8 +49,8 @@ function TabBar(props: Props<TabBarData>) {
     >
       {(item, active) => (
         <React.Fragment>
-          <Icon className={`${prefixCls}-icon`} src={(item as TabBarData).icon} />
-          <div className={`${prefixCls}-text`}>{item.id}</div>
+          <Icon className={css(styles.icon)} src={(item as TabBarData).icon} />
+          <div className={css(styles.text)}>{item.id}</div>
         </React.Fragment>
       )}
     </Choice>

@@ -23,7 +23,7 @@ function Markdown(props: Props) {
         } else {
           linkElem[0].onclick = (e) => {
             e.preventDefault();
-            appData.history!.push(linkElem[0].href.replace(location.origin, ''));
+            appData.history!.push(linkElem[0].href.replace(location.origin, '').replace('#/', ''));
           };
         }
       }

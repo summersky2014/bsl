@@ -16,7 +16,7 @@ interface HTMLInputElementExtends extends HTMLInputElement {
 export interface Props extends Omit_onChange_value, FromTypeProps<string> {
 }
 
-const prefixCls = 'bsl-input';
+export const prefixCls = 'bsl-input';
 function Input(props: Props) {
   const { onFocus, onChange, type, state, className, value } = props;
   const inputRef = React.useRef<null | HTMLInputElementExtends>(null);

@@ -3,7 +3,8 @@ import * as ReactDOM from 'react-dom';
 
 import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
 import DatePicker, { DatePickerHelper } from '../../../../../../components/DatePicker';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const App = () => {
   return (

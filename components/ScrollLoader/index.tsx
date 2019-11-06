@@ -1,10 +1,13 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
+import variable from '../../utils/variable';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
 import RequestView, { Props as RequestProps } from '../RequestView';
-import './index.scss';
 
 type State = 'loading' | 'empty' | 'over' | 'fail' | '';
 interface Props extends BSL.ComponentProps, RequestProps {
@@ -28,7 +31,6 @@ interface Props extends BSL.ComponentProps, RequestProps {
 interface DefaultProps extends Pick<RequestProps, 'refreshId'> {
 }
 
-const prefixCls = 'bsl-scrollloader';
 const defaultProps: DefaultProps = {
   refreshId: 0
 };
@@ -135,7 +137,7 @@ function ScrollLoader(props: Props) {
         )}
       </RequestView>
       <div
-        className={classNames(prefixCls, className, 'bsl_component')}
+        className={classNames(css(styles.root), className, variable.bslComponent)}
         id={id}
         style={props.style}
         ref={elemRef}

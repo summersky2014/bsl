@@ -1,10 +1,14 @@
 import BSL from '../../typings';
 import * as React from 'react';
+import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import variable from '../../utils/variable';
 import compressImg from './compressImg';
 import UploadView from './UploadView';
 import Icon from '../Icon';
-import './index.scss';
+
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -84,17 +88,17 @@ function Upload(props: Props) {
       onRemove={onRemove}
     >
       <input
-        className={`${prefixCls}-input`}
+        className={classNames(css(styles.input), `${prefixCls}-input`)}
         type="file"
         onChange={onChange}
         disabled={!!src || disabled}
         accept={mode === 'image' ? 'image/*' : undefined}
       />
       {mode === 'image' ? (
-        <img className={`${prefixCls}-img bsl_component`} src={src} data-hide={!src} />
+        <img className={classNames(css(styles.img), variable.bslComponent, `${prefixCls}-img`)} src={src} data-hide={!src} />
       ) : (
         <Icon
-          className={`${prefixCls}-fileIcon bsl_component`}
+          className={classNames(css(styles.fileIcon), variable.bslComponent, `${prefixCls}-fileIcon`)}
           src={fileSvg}
           style={{
             display: src ? 'block' : 'none'

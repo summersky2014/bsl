@@ -1,11 +1,13 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
+import variable from '../../utils/variable';
 import Container, { Props as ContainerProps } from '../Container';
 import Icon from '../Icon';
-import variable from '../../utils/variable';
 import Toast from '../Toast';
-import './index.scss';
 
 const svgFile = {
   prompt: variable.svgRootPath + require('../../assets/prompt.svg').id
@@ -56,9 +58,9 @@ function FormItem(props: Props) {
       ref={containerRef}
     >
       {children}
-      <div className={`${prefixCls}-pormpt-box`}>
+      <div className={css(styles.pormptBox)}>
         <Icon
-          className={`${prefixCls}-prompt`}
+          className={css(styles.prompt)}
           src={svgFile.prompt}
           onClick={() => {
             const state = itemRef.current!.dataset['state'] as BSL.RequestState;

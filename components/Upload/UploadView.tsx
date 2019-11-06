@@ -1,9 +1,11 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import Icon from '../Icon';
 import variable from '../../utils/variable';
-import './index.scss';
 
 const addSvg = variable.svgRootPath + require('../../assets/add.svg').id;
 const clearSvg = variable.svgRootPath + require('../../assets/clear.svg').id;
@@ -21,27 +23,26 @@ function UploadView(props: Props) {
   const { className, children, src, process, onRemove, disabled } = props;
   return (
     <div 
-      className={classNames(prefixCls, className)}
+      className={classNames(css(styles.root), prefixCls, className)}
       id={props.id}
       style={props.style}
     >
       <Icon
-        className={classNames(`${prefixCls}-addIcon bsl_component`, {
-          ['bsl_component_hide']: src
-        })}
+        className={classNames(css(styles.addIcon), variable.bslComponent, `${prefixCls}-addIcon`)}
+        hide={!!src}
         src={addSvg}
       />
       {children}
       {process !== undefined && src ? (
         <div
-          className={`${prefixCls}-notUploaded`}
+          className={classNames(css(styles.notUploaded), `${prefixCls}-notUploaded`)}
           style={{
             height: (100 - process) + '%'
           }}
         />
       ) : null}
       {src && onRemove && !disabled ? (
-        <Icon className={`${prefixCls}-clear`} src={clearSvg} onClick={onRemove} />
+        <Icon className={classNames(css(styles.clear), `${prefixCls}-clear`)} src={clearSvg} onClick={onRemove} />
       ) : null}
     </div>
   );

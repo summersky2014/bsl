@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Carousel from '../../../../../../components/Carousel';
 import Image from '../../../../../../components/Image';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const slide1 = require('./assets/slide1.png');
 const slide2 = require('./assets/slide2.png');

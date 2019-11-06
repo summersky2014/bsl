@@ -4,7 +4,8 @@ import * as ReactDOM from 'react-dom';
 import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
 import Picker, { PickerHelper } from '../../../../../../components/Picker';
 import district from './district';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const colData = [
   [

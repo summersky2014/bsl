@@ -4,7 +4,8 @@ import * as ReactDOM from 'react-dom';
 import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
 import Tab from '../../../../../../components/Tab';
 import Dispatcher from '../../../../../../app/Dispatcher';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const style: Record<string, React.CSSProperties> = {
   container: {

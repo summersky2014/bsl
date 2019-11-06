@@ -1,10 +1,12 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { css } from 'aphrodite/no-important';
+import styles from './style';
+
 import Mask, { Props as MaskProps } from '../Mask';
 import { Props as DialogProps } from '../Mask/Dialog';
 import useTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
-import './index.scss';
 
 export interface Props extends DialogProps, MaskProps, DefaultProps {
 }
@@ -22,7 +24,6 @@ export interface View {
   prefixCls?: string;
 }
 
-const prefixCls = 'bsl-popup';
 const defaultProps: Required<DefaultProps> = {
   animation: true
 };
@@ -101,14 +102,14 @@ function Popup(props: Props) {
       {...props}
       id={id}
       visible={realVisible}
-      maskCls={classNames(maskCls, {
-        [`${prefixCls}-fadein`]: props.animation,
-        [`${prefixCls}-fadeout`]: props.animation && closing
-      })}
-      contentCls={classNames(contentCls, {
-        [`${prefixCls}-enter`]: props.animation,
-        [`${prefixCls}-leave`]: props.animation && closing
-      })}
+      maskCls={classNames(maskCls, css(
+        props.animation && styles.fadein,
+        props.animation && closing && styles.fadeout
+      ))}
+      contentCls={classNames(contentCls, css(
+        props.animation && styles.enter,
+        props.animation && closing && styles.leave
+      ))}
       onClose={onClose}
     >
       {children}

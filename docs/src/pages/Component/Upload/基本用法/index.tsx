@@ -5,7 +5,8 @@ import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler
 import Upload from '../../../../../../components/Upload';
 import Toast from '../../../../../../components/Toast';
 import useProgress from '../../../../../../components/Upload/useProgress';
-import '../../../../../../styles/base.scss';
+import '../../../../../../styles/normalize.scss';
+import '../../../../../../styles/bsl.scss';
 
 const style = {
   container: {

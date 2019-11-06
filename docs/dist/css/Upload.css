@@ -1,99 +1,3 @@
-.bsl-toast {
-  position: fixed;
-  z-index: 1000;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.bsl-toast-mask {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-     -moz-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-     -moz-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-}
-
-.bsl-toast-nomask {
-  max-width: 50%;
-  width: auto;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
-}
-
-.bsl-toast-text {
-  min-width: 60px;
-  max-width: 200px;
-  border-radius: 3px;
-  color: #fff;
-  background-color: rgba(58, 58, 58, 0.9);
-  padding: 12px 15px;
-  text-align: center;
-  font-size: 14px;
-}
-
-.bsl-toast-text-label {
-  line-height: 1.5;
-}
-
-.bsl-toast-text-icon {
-  border-radius: 5px;
-  padding: 15px;
-}
-
-.bsl-toast-text-info {
-  margin-top: 8px;
-}
-
-.bsl-toast-fade {
-  opacity: 1;
-}
-
-.bsl-toast-icon {
-  margin: 0 auto;
-  width: 36px;
-  height: 36px;
-  fill: #fff;
-}
-
-.bsl-toast-icon-loading {
-  -webkit-animation: cirle-anim_1GUAc 1s linear infinite;
-          animation: cirle-anim_1GUAc 1s linear infinite;
-}
-
-@-webkit-keyframes cirle-anim_1GUAc {
-  100% {
-    -webkit-transform: rotate(360deg) translateZ(0);
-            transform: rotate(360deg) translateZ(0);
-  }
-}
-
-@keyframes cirle-anim_1GUAc {
-  100% {
-    -webkit-transform: rotate(360deg) translateZ(0);
-            transform: rotate(360deg) translateZ(0);
-  }
-}
 @charset "UTF-8";
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
@@ -602,7 +506,6 @@ blockquote {
   margin: 0;
   padding: 0;
 }
-
 .bsl_component[data-placeholder=true] {
   color: #b2b2b2;
 }
@@ -625,79 +528,15 @@ blockquote {
   display: none;
 }
 
+.bsl-formitem .bsl-input {
+  width: 100%;
+}
+
+.bsl-textarea ::-webkit-input-placeholder {
+  font-size: inherit;
+  line-height: 1.3;
+}
+
 ::-webkit-input-placeholder {
   color: #b2b2b2;
-}
-.bsl-upload {
-  width: 58px;
-  height: 58px;
-  border: 1px solid #cccccc;
-  position: relative;
-}
-
-.bsl-upload-addIcon, .bsl-upload-fileIcon {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.bsl-upload-addIcon {
-  width: 28px;
-  height: 28px;
-  fill: #cccccc;
-}
-
-.bsl-upload-fileIcon {
-  width: 40px;
-  height: 40px;
-  fill: #6a7fa5;
-}
-
-.bsl-upload-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-}
-
-.bsl-upload-img {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-}
-
-.bsl-upload-notUploaded {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.85);
-  pointer-events: none;
-  -webkit-transition: height 0.3s;
-  transition: height 0.3s;
-}
-
-.bsl-upload-clear {
-  width: 20px;
-  height: 20px;
-  fill: #e94f4f;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  -webkit-transform: translate(50%, -50%);
-          transform: translate(50%, -50%);
-  background: #fff;
-  border-radius: 50%;
 }

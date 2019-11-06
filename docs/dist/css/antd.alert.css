@@ -72,6 +72,7 @@
   line-height: 22px;
   background-color: transparent;
   border: none;
+  outline: none;
   cursor: pointer;
 }
 .ant-alert-close-icon .anticon-close {
@@ -125,7 +126,7 @@
 .ant-alert-with-description .ant-alert-description {
   display: block;
 }
-.ant-alert.ant-alert-close {
+.ant-alert.ant-alert-closing {
   height: 0 !important;
   margin: 0;
   padding-top: 0;

@@ -41,7 +41,8 @@ webpackConfig = {
     nodePath.resolve(__dirname, 'component'),
     nodePath.resolve(__dirname, 'hooks'),
     nodePath.resolve(__dirname, 'utils'),
-    nodePath.resolve(__dirname, 'app')
+    nodePath.resolve(__dirname, 'app'),
+    nodePath.resolve(__dirname, 'styles')
   ],
   plugins: [
     new CopyPlugin([{
