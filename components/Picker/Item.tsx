@@ -128,7 +128,7 @@ function Item(props: Props) {
 
   return (
     <div
-      className={classNames(css(styles.item), itemCls)}
+      className={classNames(css(styles.item), itemCls, prefixCls)}
       ref={elemRef}
       style={{
         padding: `${itemHeight * num}px 0`
@@ -138,7 +138,7 @@ function Item(props: Props) {
         {props.data.map((item, i) => (
           <div
             key={item.value}
-            className={classNames(textStyleCls, textCls)}
+            className={classNames(textStyleCls, textCls, `${prefixCls}-text`)}
           >{item.label}</div>
         ))}
       </div>

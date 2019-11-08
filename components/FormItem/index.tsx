@@ -59,9 +59,9 @@ function FormItem(props: Props) {
       ref={containerRef}
     >
       {children}
-      <div className={css(styles.pormptBox)}>
+      <div className={classNames(css(styles.pormptBox), `${prefixCls}-pormptBox`)}>
         <Icon
-          className={css(styles.prompt)}
+          className={classNames(css(styles.prompt), `${prefixCls}-prompt`)}
           src={svgFile.prompt}
           onClick={() => {
             const state = itemRef.current!.dataset['state'] as BSL.RequestState;

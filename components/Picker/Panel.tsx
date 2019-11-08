@@ -1,4 +1,5 @@
 import BSL from '../../typings';
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
@@ -90,6 +91,7 @@ function switchData(cascade: Props['cascade'], stateData: Data[][], value: Value
   }
 }
 
+const prefixCls = 'bsl-picker-panpel';
 function Panel(props: Props) {
   const { className, id, style, itemCls, textCls, updateId, onCreate, onScrollEnd, _datepicker } = props;
   const propsValue = React.useRef(props.value);
@@ -113,10 +115,10 @@ function Panel(props: Props) {
       id={id}
       style={style}
     >
-      <div className={css(styles.panel)}>
-        <div className={css(styles.mask)} style={{ backgroundSize: `100% ${itemHeight * num}px` }} />
-        <div className={css(styles.indicator)} style={{ top: `${itemHeight * num}px` }} />
-        <div className={css(styles.content)}>
+      <div className={classNames(css(styles.panel), `${prefixCls}-panel`)}>
+        <div className={classNames(css(styles.mask), `${prefixCls}-mask`)} style={{ backgroundSize: `100% ${itemHeight * num}px` }} />
+        <div className={classNames(css(styles.indicator), `${prefixCls}-indicator`)} style={{ top: `${itemHeight * num}px` }} />
+        <div className={classNames(css(styles.content), `${prefixCls}-content`)}>
           {data.map((item, col) => (
             <Item
               key={col}
