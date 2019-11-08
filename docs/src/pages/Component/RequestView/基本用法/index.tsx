@@ -28,7 +28,14 @@ const Demo = () => {
         {(data) => (
           <React.Fragment>
             <RequestView.Loading>加载中...</RequestView.Loading>
-            <RequestView.Complete>加载成功：{JSON.stringify(data._id)}</RequestView.Complete>
+            <RequestView.Complete>
+              {() => (
+                <div>
+                  <div>成功视图需要用一个函数包裹起来，以防止出现data为空的情况</div>
+                  <div>加载成功：{JSON.stringify(data._id)}</div>
+                </div>
+              )}
+            </RequestView.Complete>
             <RequestView.Fail>加载失败</RequestView.Fail>
             <RequestView.Empty>空视图</RequestView.Empty>
             <RequestView.Timeout>超时视图</RequestView.Timeout>
