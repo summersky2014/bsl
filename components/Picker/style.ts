@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    width: '100%'
+    width: '100%',
+    cursor: 'pointer'
   },
   label: {
     width: '100%',

@@ -30,7 +30,7 @@ const Demo = () => {
     <div>
       <h2>年月日选择</h2>
       <DatePicker
-        value={yymmddHelper.value.get()}
+        value={yymmddHelper.getValue()}
         onChange={yymmddHelper.onChange}
         state={yymmddHelper.state}
         mode="yyMMdd"

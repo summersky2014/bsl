@@ -8,6 +8,7 @@ import { RouteComponentProps } from 'react-router';
 import Icon from '../Icon';
 import Choice, { Value, Props as ChoiceProps } from '../Choice';
 import Link from '../Link';
+import memoAreEqual from '../../utils/memoAreEqual';
 
 interface TabBarData extends Value {
   icon: string;
@@ -32,7 +33,7 @@ function TabBar(props: Props<TabBarData>) {
       style={props.style}
       data={data}
       value={value}
-      updateId={valueUpdateId}
+      // updateId={valueUpdateId}
       state="undefined"
       onChange={(newValue) => {
         const newPathname = (newValue[0] as TabBarData).pathname;
@@ -58,7 +59,9 @@ function TabBar(props: Props<TabBarData>) {
 }
 
 function areEqual(prevProps: Props<TabBarData>, nextProps: Props<TabBarData>): boolean {
-  return prevProps.location.pathname === nextProps.location.pathname;
+  return memoAreEqual(prevProps, nextProps, (key) => {
+    return key === 'location' ? prevProps.location.pathname !== nextProps.location.pathname : false;
+  }); 
 }
 
 export default React.memo(TabBar, areEqual);

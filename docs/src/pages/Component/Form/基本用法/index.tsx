@@ -46,9 +46,9 @@ const Demo = () => {
 
   return (
     <Form>
-      <FormItem>
+      <FormItem requiredPrompt="输入框必填">
         <Input
-          value={inputHelper.value.get()}
+          value={inputHelper.getValue()}
           state={inputHelper.state}
           onChange={inputHelper.onChange}
           style={styles.input}
@@ -56,9 +56,9 @@ const Demo = () => {
       </FormItem>
       <br/>
 
-      <FormItem>
+      <FormItem requiredPrompt="文本域必填">
         <Textarea
-          value={textareaHelper.value.get()}
+          value={textareaHelper.getValue()}
           state={textareaHelper.state}
           onChange={textareaHelper.onChange}
           style={styles.input}

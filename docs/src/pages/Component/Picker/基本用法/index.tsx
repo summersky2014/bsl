@@ -84,33 +84,27 @@ const Demo = () => {
       <h2>普通的1列</h2>
       <Picker
         data={colData}
-        value={colHelper.value.get()}
+        value={colHelper.getValue()}
         onChange={colHelper.onChange}
         state={colHelper.state}
-        updateId={0}
       />
 
       <h2>普通的3列</h2>
       <Picker
         data={multipleData}
-        value={multipleHelper.value.get()}
+        value={multipleHelper.getValue()}
         onChange={multipleHelper.onChange}
         state={multipleHelper.state}
-        updateId={0}
       />
   
       <h2>级联的3列</h2>
       <Picker
         data={district}
         cascade
-        value={cascadeHelper.value.get()}
+        value={cascadeHelper.getValue()}
         onChange={cascadeHelper.onChange}
         state={cascadeHelper.state}
-        updateId={0}
       />
-      {/* 
-
-      */}
     </div>
   );
 };

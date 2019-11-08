@@ -47,9 +47,5 @@ function Input(props: Props) {
   );
 }
 
-function areEqual(prevProps: Props, nextProps: Props): boolean {
-  return memoAreEqual(prevProps, nextProps);
-}
-
 export { Helper as InputHelper };
-export default React.memo(Input, areEqual);
+export default React.memo(Input, memoAreEqual);

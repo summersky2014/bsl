@@ -6,7 +6,7 @@ import styles from './style';
 
 import { appData } from '../../app/core';
 import { FromTypeProps } from '../Form';
-import TextareaHelper from './Helper';
+import TextareaHelper from '../Input/Helper';
 import memoAreEqual from '../../utils/memoAreEqual';
 import variable from '../../utils/variable';
 
@@ -83,9 +83,5 @@ function Textarea(props: Props) {
   );
 }
 
-function areEqual(prevProps: Props, nextProps: Props): boolean {
-  return memoAreEqual(prevProps, nextProps);
-}
-
 export { TextareaHelper };
-export default React.memo(Textarea, areEqual);
+export default React.memo(Textarea, memoAreEqual);

@@ -1,5 +1,6 @@
 import BSL from '../../typings';
 import * as React from 'react';
+import variable from '../../utils/variable';
 
 export interface Props {
   /** 当前的状态类型 */
@@ -15,6 +16,16 @@ const [CompleteStr, EmptyStr, FailStr, LoadingStr, TimeoutStr, UndefinedStr] = [
 
 function SwitchView(props: Props) {
   let render: React.ReactElement<HTMLDivElement, any> | null = null;
+  /** 视图数量 */
+  const view = React.useMemo(() => {
+    return {
+      [CompleteStr]: 1,
+      [EmptyStr]: 1,
+      [FailStr]: 1,
+      [LoadingStr]: 1,
+      [TimeoutStr]: 1
+    };
+  }, []);
 
   const eachChildren = (children: any) => {
     // 根据当前状态赋予对应的视图
@@ -37,6 +48,26 @@ function SwitchView(props: Props) {
 
       if (render === null && childElement && childElement.props && React.Children.count(childElement.props.children)) {
         eachChildren(childElement.props.children);
+      }
+    });
+  };
+  const statisticalView = (children: any) => {
+    // 根据当前状态赋予对应的视图
+    React.Children.forEach(children, (child) => {
+      const childElement = child as React.ReactElement<HTMLDivElement, any>;
+      const type = childElement && childElement.type;
+      if (
+        (type && type.displayName === CompleteStr) ||
+        (type && type.displayName === EmptyStr) ||
+        (type && type.displayName === FailStr) ||
+        (type && type.displayName === LoadingStr) ||
+        (type && type.displayName === TimeoutStr)
+      ) {
+        delete view[type.displayName];
+      }
+
+      if (childElement && childElement.props && React.Children.count(childElement.props.children)) {
+        statisticalView(childElement.props.children);
       }
     });
   };
@@ -65,6 +96,14 @@ function SwitchView(props: Props) {
       render = props.children;
     }
   }
+
+  if (variable.env === 'development') {
+    statisticalView(props.children);
+    Object.keys(view).forEach((item) => {
+      console.error(`缺少${item}视图，当处于${item}状态时会导致程序错误`);
+    });
+  }
+
   return render;
 }
 

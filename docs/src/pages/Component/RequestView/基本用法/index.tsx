@@ -30,6 +30,8 @@ const Demo = () => {
             <RequestView.Loading>加载中...</RequestView.Loading>
             <RequestView.Complete>加载成功：{JSON.stringify(data._id)}</RequestView.Complete>
             <RequestView.Fail>加载失败</RequestView.Fail>
+            <RequestView.Empty>空视图</RequestView.Empty>
+            <RequestView.Timeout>超时视图</RequestView.Timeout>
           </React.Fragment>
         )}
       </RequestView>

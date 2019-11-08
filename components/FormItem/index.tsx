@@ -34,7 +34,7 @@ function FormItem(props: Props) {
       Toast.show(msg, 'fail');
     }
   };
-  const setPromptVisibleFn = function() {
+  const setPromptVisibleFn = () => {
     if (itemRef.current) {
       const state = itemRef.current.dataset['state'] as BSL.RequestState;
       setPromptVisible(state === 'fail' || state === 'empty' ? true : false);
@@ -44,6 +44,7 @@ function FormItem(props: Props) {
   React.useEffect(() => {
     if (itemRef.current === null && containerRef.current) {
       itemRef.current = containerRef.current.querySelector('.' + variable.bslComponent) as HTMLElement;
+      setPromptVisibleFn();
     } else {
       setPromptVisibleFn();
     }

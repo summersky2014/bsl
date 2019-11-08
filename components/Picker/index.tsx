@@ -10,10 +10,11 @@ import Helper from './Helper';
 import { FromTypeProps } from '../Form';
 import Icon from '../Icon';
 import variable from '../../utils/variable';
+import memoAreEqual from '../../utils/memoAreEqual';
 
 const rightSvg = variable.svgRootPath + require('../../assets/rightArrow.svg').id;
 
-export interface Base extends PanelBase {
+export interface Base extends Omit<PanelBase, 'updateId'> {
   /** 点击弹出Picker的按钮的样式 */
   buttonCls?: string;
   /** 是否禁用 */
@@ -109,14 +110,14 @@ function initCascadeData(props: Props) {
 }
 
 function Picker(props: Props) {
-  const { updateId, dismissText, okText, title, placeholder, buttonCls, onPopup, disabled, rightIcon } = props;
+  const { dismissText, okText, title, placeholder, buttonCls, onPopup, disabled, rightIcon } = props;
   const [visible, setVisible] = React.useState(false);
   const stateValue = React.useMemo(() => {
     return {
-      current: props.value.length ? JSON.parse(JSON.stringify(props.value)) : initCascadeData(props)
+      current: props.value.length ? props.value : initCascadeData(props)
     };
   }, [props.value]);
-  const [, setNow] = React.useState(0);
+  const [now, setNow] = React.useState(0);
   const value = props.value;
   const format = props.format as Required<DefaultProps>['format'];
   const label = value.length ? format(props.value) : placeholder;
@@ -167,7 +168,7 @@ function Picker(props: Props) {
         // setStateValue(newStateValue);
       }
     }
-  }, [updateId]);
+  }, [value]);
 
   return (
     <React.Fragment>
@@ -199,6 +200,7 @@ function Picker(props: Props) {
           value={stateValue.current}
           onCreate={onCreate}
           onScrollEnd={onScrollEnd}
+          updateId={now}
         />
       </Popup>
     </React.Fragment>
@@ -208,4 +210,4 @@ function Picker(props: Props) {
 Picker.defaultProps = defaultProps;
 
 export { Helper as PickerHelper };
-export default Picker;
+export default React.memo(Picker, memoAreEqual);

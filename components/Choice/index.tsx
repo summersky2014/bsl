@@ -1,6 +1,7 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import produce, { Draft } from "immer";
 import { FromTypeProps } from '../../components/Form';
 import ChoiceHelper from './Helper';
 import memoAreEqual from '../../utils/memoAreEqual';
@@ -8,6 +9,7 @@ import memoAreEqual from '../../utils/memoAreEqual';
 export interface Value {
   /** 数据的唯一标示 */
   id: string | number;
+  [key: string]: string | number;
 }
 export interface BaseProps<T extends Value> extends BSL.ComponentProps {
   /** 渲染的数据 */
@@ -20,8 +22,6 @@ export type OnClick<T extends Value> = (event: React.MouseEvent<HTMLDivElement>,
 
 export interface Props<T extends Value> extends BaseProps<T>, FromTypeProps<T[]> {
   onChange: (value: any[], item: T, index: number) => boolean;
-  /** 更新id，用于判断data和value是否更新 */
-  updateId: number | string;
   /** item是data遍历的项, index是遍历的索引，value是选中的值 */
   children: (item: T, active: boolean, index: number) => any;
   /** 是否禁用 */
@@ -42,13 +42,13 @@ function createNewValue<T extends Value>(props: Props<T>, nextValue: T): T[] {
   if (multiple) {
     // 多选
     const index = value.findIndex((item) => item.id === nextValue.id);
-    if (index >= 0) {
-      value.splice(index, 1);
-    } else {
-      value.push(nextValue);
-    }
-
-    return value;
+    return produce(value, (draft) => {
+      if (index >= 0) {
+        draft.splice(index, 1);
+      } else {
+        draft.push(nextValue as Draft<T>);
+      }
+    });
   } else if (props.switch) {
     // 如果开启了switch，就会有勾选或取消勾选的功能
     if (value[0]) {
@@ -127,11 +127,5 @@ function Choice<T extends Value>(props: Props<T>) {
   );
 }
 
-function areEqual<T extends Value>(prevProps: Props<T>, nextProps: Props<T>): boolean {
-  return memoAreEqual(prevProps, nextProps, (key) => {
-    return key === 'updateId' ? nextProps.updateId !== prevProps.updateId : false;
-  });
-}
-
 export { ChoiceHelper };
-export default React.memo(Choice, areEqual);
+export default React.memo(Choice, memoAreEqual);

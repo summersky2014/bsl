@@ -8,7 +8,7 @@ import variable from '../../utils/variable';
 import compressImg from './compressImg';
 import UploadView from './UploadView';
 import Icon from '../Icon';
-
+import memoAreEqual from '../../utils/memoAreEqual';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -109,17 +109,4 @@ function Upload(props: Props) {
   );
 }
 
-function areEqual(prevProps: Props, nextProps: Props): boolean {
-  const keys = Object.keys(nextProps);
-  for (let i = 0; i < keys.length; i++) {
-    const k = keys[i] as keyof Props;
-
-    if (typeof nextProps[k] !== 'function' && nextProps[k] !== prevProps[k]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-export default React.memo(Upload, areEqual);
+export default React.memo(Upload, memoAreEqual);

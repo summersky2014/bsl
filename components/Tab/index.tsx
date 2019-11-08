@@ -1,19 +1,23 @@
 import BSL from '../../typings';
 import * as React from 'react';
-import Dispatcher from '../../app/Dispatcher';
+import * as classNames from 'classnames';
 import Choice, { BaseProps, Value, Props as ChoiceProps } from '../Choice';
+import memoAreEqual from '../../utils/memoAreEqual';
 
-export interface Props<T extends Value> extends BSL.ComponentProps, Pick<BaseProps<T>, 'data'>, Pick<ChoiceProps<T>, 'itemCls'> {
-  value: Dispatcher<BaseProps<T>['value']>;
-  updateId?: number;
-  onChange?: (newValue: Value[]) => void;
+export interface Props<T extends Value> extends BSL.ComponentProps, Pick<BaseProps<T>, 'data'>, Pick<ChoiceProps<T>,'itemCls'> {
+  value: BaseProps<T>['value'];
+  /** 单个选项卡的样式名 */
+  itemCls?: string;
+  /** 激活选项卡的样式名 */
+  activeCls?: string;
+  onChange: (newValue: Value[]) => void;
 }
 
+const prefixCls = 'bsl-tab';
 function Tab<T extends Value>(props: Props<T>) {
-  const { updateId, itemCls, value } = props;
+  const { itemCls, value } = props;
   const data = props.data;
   const onChange = (newValue: Value[]) => {
-    value.set(newValue as T[]);
     if (props.onChange) {
       props.onChange(newValue);
     }
@@ -23,16 +27,24 @@ function Tab<T extends Value>(props: Props<T>) {
   return (
     <Choice
       {...props}
+      className={classNames(prefixCls, props.className)}
       itemCls={itemCls}
       data={data}
-      value={value.get()}
-      updateId={updateId ? updateId + value.id : value.id}
+      value={value}
       onChange={onChange}
       state="undefined"
     >
-      {(item, active) => item.id}
+      {(item, active) => (
+        <div className={classNames(`${prefixCls}-item`, props.itemCls, {
+          [`${prefixCls}-active`]: active,
+          [props.activeCls || '']: active
+        })}>
+          {item.id}
+        </div>
+      )}
     </Choice>
   );
 }
 
-export default Tab;
+export { Value };
+export default React.memo(Tab, memoAreEqual);

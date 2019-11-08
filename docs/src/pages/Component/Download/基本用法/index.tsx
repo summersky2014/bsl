@@ -19,7 +19,9 @@ const Demo = () => {
   return (
     <div>
       <Download src="http://108.61.219.200/vultr.com.100MB.bin">
-        {(process) => <button style={styles.button}>{process ? `下载进度${process.toFixed(2)}%` : '开始下载'}</button>}
+        {(process, state) => (
+          <button style={styles.button}>{state === 'loading' ? `下载进度${process.toFixed(2)}%` : '开始下载'}</button>
+        )}
       </Download>
     </div>
   );

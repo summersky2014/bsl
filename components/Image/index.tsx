@@ -144,9 +144,5 @@ ImageView.defaultHost = '';
 ImageView.defaultTimeout = 30000;
 ImageView.defaultProps = defaultProps;
 
-function areEqual(prevProps: Props, nextProps: Props): boolean {
-  return memoAreEqual(prevProps, nextProps);
-}
-
 export { ImageView };
-export default React.memo(ImageView, areEqual);
+export default React.memo(ImageView, memoAreEqual);

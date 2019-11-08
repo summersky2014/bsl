@@ -2,6 +2,7 @@ import BSL from '../../typings/index';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import variable from '../../utils/variable';
+import memoAreEqual from '../../utils/memoAreEqual';
 
 export interface Props extends BSL.ComponentProps {
   onClick?: BSL.OnClick<SVGElement>;
@@ -25,4 +26,4 @@ const Icon = (props: Props) => {
   );
 };
 
-export default Icon;
+export default React.memo(Icon, memoAreEqual);

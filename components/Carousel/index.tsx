@@ -16,7 +16,6 @@ interface ISwipe {
 interface Props extends BSL.ComponentProps {
   index: number;
   children: any;
-  updateId?: boolean;
   /**
    * speed of prev and next transitions in milliseconds.
    * @default 300
@@ -53,7 +52,7 @@ interface Props extends BSL.ComponentProps {
 
 function Carousel(props: Props) {
   const elemRef = React.createRef<HTMLDivElement>();
-  const { id, className, index, speed, auto, continuous, disableScroll, stopPropagation, children, updateId } = props;
+  const { id, className, index, speed, auto, continuous, disableScroll, stopPropagation, children } = props;
   const swipe = React.useRef<ISwipe | null>();
 
   React.useEffect(() => {
@@ -72,11 +71,12 @@ function Carousel(props: Props) {
       swipe.current?.kill();
       swipe.current = Swipe(elemRef.current, swipeOptions) as ISwipe;
     }
+
     return () => {
       swipe.current?.kill();
       swipe.current = null;
     };
-  }, [speed, auto, continuous, stopPropagation, disableScroll, updateId]);
+  }, [speed, auto, continuous, stopPropagation, disableScroll]);
 
   React.useEffect(() => {
     if (swipe.current) {
@@ -102,10 +102,4 @@ function Carousel(props: Props) {
   );
 }
 
-function areEqual(prevProps: Props, nextProps: Props): boolean {
-  return memoAreEqual(prevProps, nextProps, (key) => {
-    return key === 'updateId' ? nextProps.updateId !== prevProps.updateId : false;
-  });
-}
-
-export default React.memo(Carousel, areEqual) ;
+export default React.memo(Carousel, memoAreEqual);

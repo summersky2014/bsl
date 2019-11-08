@@ -1,10 +1,11 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import axios from 'axios';
+import memoAreEqual from '../../utils/memoAreEqual';
 
 interface Props extends BSL.ComponentProps, DefaultProps {
   src: string;
-  children: (process: number) => any;
+  children: (process: number, state: BSL.RequestState) => any;
   callback?: (data: any) => void;
   failback?: (err: string) => void;
   finally?: () => void;
@@ -24,17 +25,19 @@ const defaultProps: Required<DefaultProps> = {
 function Download(props: Props) {
   const { src, children, callback, failback } = props;
   const [process, setProcess] = React.useState(0);
+  const [state, setState] = React.useState<BSL.RequestState>('undefined');
   const cancelToken = React.useRef<(() => void) | null>(null);
 
+  const onFinally = () => {
+    if (props.finally) {
+      props.finally();
+    }
+  };
   const onClick = () => {
     if (process >= 100) {
       return;
     }
-    const onFinally = () => {
-      if (props.finally) {
-        props.finally();
-      }
-    };
+    setState('loading');
     axios({
       cancelToken: new axios.CancelToken((cancel) => {
         cancelToken.current = () => cancel('cancel');
@@ -47,6 +50,10 @@ function Download(props: Props) {
           //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
           //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
           setProcess(progressEvent.loaded / progressEvent.total * 100);
+
+          if (progressEvent.loaded >= progressEvent.total) {
+            setState('complete');
+          }
         }
       }
     }).then((res) => {
@@ -54,12 +61,14 @@ function Download(props: Props) {
         callback(res.data as ArrayBuffer);
       } else if (failback) {
         failback(res.statusText);
+        setState('fail');
       }
       if (onFinally) {
         onFinally();
       }
     }).catch((err: Error) => {
       console.error(err);
+      setState('fail');
       if (failback) {
         failback(err.message);
       }
@@ -84,10 +93,10 @@ function Download(props: Props) {
       style={props.style}
       onClick={onClick}
     >
-      {children(process)}
+      {children(process, state)}
     </div>
   );
 }
 
 Download.defaultProps = defaultProps;
-export default Download;
+export default React.memo(Download, memoAreEqual) ;

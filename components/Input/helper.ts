@@ -1,6 +1,5 @@
 import BSL from '../../typings';
 import Helper, { Options } from '../Form/Helper';
-import Dispatcher from '../../app/Dispatcher';
 import validate from '../../utils/validate';
 
 interface InputOptions extends Options<string> {
@@ -13,11 +12,11 @@ class InputHelper extends Helper<string> {
     if (options && options.validate) {
       this.validate = options.validate;
     }
-    this.value = new Dispatcher(options && options.defaultValue || '');
+    this.value = options?.defaultValue || '';
   }
 
+  protected value!: string;
   private validate: InputOptions['validate'] | undefined;
-  public value!: Dispatcher<string>;
   public state: BSL.RequestState = 'undefined';
 
   public onChange = (value: string) => {
@@ -32,8 +31,9 @@ class InputHelper extends Helper<string> {
     } else {
       this.state = 'undefined';
     }
+    this.value = value;
+    this.update();
 
-    this.value.set(value);
     return this.state === 'complete' || this.state === 'undefined';
   }
 }

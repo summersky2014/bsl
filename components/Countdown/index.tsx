@@ -3,6 +3,7 @@ import * as React from 'react';
 import { addListener, removeListener, ListenerCallback } from '../../app/Scheduler';
 import { dateformatReturnObject, ReturnObject } from '../../utils/dateformat';
 import newDate from '../../utils/newDate';
+import memoAreEqual from '../../utils/memoAreEqual';
 
 interface Props extends BSL.ComponentProps {
   /**
@@ -23,11 +24,10 @@ function Countdown(props: Props) {
   const defaultTime = isTimestamp ? 0 : value as number;
   const [time, setTime] = React.useState<number>(defaultTime);
   const [disabled, setDisabled] = React.useState(false);
-  const [start, setStart] = React.useState(false);
 
   React.useEffect(() => {
     let countdown: ListenerCallback | undefined;
-    if ((disabled && start) || !onClick) {
+    if (disabled || !onClick) {
       const targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
       countdown = (currentTime: number, overTime: number) => { 
         if (overTime >= 1000) {
@@ -37,7 +37,6 @@ function Countdown(props: Props) {
             setTime(remainingTime);
           } else if (countdown) {
             setDisabled(false);
-            setStart(false);
             setTime(defaultTime);
             removeListener(countdown);
           }
@@ -54,7 +53,7 @@ function Countdown(props: Props) {
         removeListener(countdown);
       }
     };
-  }, [time, disabled, start]);
+  }, [time, disabled]);
   
   return !onClick ? (
     <div
@@ -75,7 +74,6 @@ function Countdown(props: Props) {
         if (disabled === false) {
           if ((onClick && onClick())) {
             setDisabled(true);
-            setStart(true);
           }
         }
       }}
@@ -85,4 +83,4 @@ function Countdown(props: Props) {
   );
 }
 
-export default Countdown;
+export default React.memo(Countdown, memoAreEqual);
