@@ -51,8 +51,8 @@ interface Props extends BSL.ComponentProps {
 }
 
 function Carousel(props: Props) {
-  const elemRef = React.createRef<HTMLDivElement>();
   const { id, className, index, speed, auto, continuous, disableScroll, stopPropagation, children } = props;
+  const elemRef = React.useRef<HTMLDivElement>(null);
   const swipe = React.useRef<ISwipe | null>();
 
   React.useEffect(() => {

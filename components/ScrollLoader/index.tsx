@@ -37,7 +37,7 @@ const defaultProps: DefaultProps = {
 
 function ScrollLoader(props: Props) {
   const { className, id, loadingText, overText, onLoader } = props;
-  const elemRef = React.createRef<HTMLDivElement>();
+  const elemRef = React.useRef<HTMLDivElement>(null);
   const loaderComplete = React.useRef<boolean | null>(null);
   const loaderState = React.useRef<State>('');
   const listenerCallback = React.useRef<ListenerCallback>();

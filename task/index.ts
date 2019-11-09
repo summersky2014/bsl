@@ -70,7 +70,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
     options: {
       resources: [
         path.resolve(__dirname, '../styles/mixins.scss'),
-        path.resolve(__dirname, '../styles/variable.scss'),
         ...sassResources
       ]
     }

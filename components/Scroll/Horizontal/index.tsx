@@ -21,8 +21,8 @@ function getNumberByComputed(computed: string | null): number {
 }
 
 function HorizontalScroll(props: Props) {
-  const elemRef = React.createRef<HTMLDivElement>();
-  const wrapRef = React.createRef<HTMLDivElement>();
+  const elemRef = React.useRef<HTMLDivElement>(null);
+  const wrapRef = React.useRef<HTMLDivElement>(null);
   const scroll = React.useRef<BetterScroll.default>();
   /** 上一次容器的宽度 */
   const prevFrameWidth = React.useRef<number>();

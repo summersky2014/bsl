@@ -34,7 +34,7 @@ function Textarea(props: Props) {
   const { auto, id, className, disabled, placeholder, wordCount, wordCountCls, state, onFocus } = props;
   const rows = props.rows || 5;
   const maxLength = props.maxLength;
-  const preRef = React.createRef<HTMLPreElement>();
+  const preRef = React.useRef<HTMLPreElement>(null);
 
   React.useEffect(() => {
     if (auto && preRef.current) {

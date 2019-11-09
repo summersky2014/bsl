@@ -65,7 +65,7 @@ function getIndex(data: Data[], value: Value) {
 
 function Item(props: Props) {
   const { itemCls, textCls } = props;
-  const elemRef = React.createRef<HTMLDivElement>();
+  const elemRef = React.useRef<HTMLDivElement>(null);
   const wheel = React.useRef<BetterScroll.default>();
   const propsData = React.useRef<Data[]>();
   const isDidUpdate = React.useRef(false);

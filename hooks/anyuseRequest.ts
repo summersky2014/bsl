@@ -35,6 +35,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       const contentType = option.headers && option.headers['content-type'] || axios.defaults.headers['content-type'];
       const postData: Record<string, string | number | boolean | object> = {};
       const isFormData = option.data && option.data instanceof FormData;
+      const isDataArray = Array.isArray(option.data);
 
       // 判断是否有缓存
       if (option.cache) {
@@ -50,7 +51,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
         }
       }
 
-      if (defualtData && method === 'POST' && !isFormData ) {
+      if (defualtData && method === 'POST' && !isFormData && isDataArray === false) {
         Object.keys((defualtData)).forEach((key) => {
           urlSearchParams.append(key, defualtData[key]);
           postData[key] = defualtData[key];
@@ -58,7 +59,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       }
 
       // 去除object中值为undefined的字段
-      if (option.data && !isFormData ) {
+      if (option.data && !isFormData && isDataArray === false) {
         Object.keys((option.data)).forEach((key) => {
           if (option.data[key] !== undefined) {
             urlSearchParams.append(key, option.data[key]);
@@ -66,10 +67,10 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
           }
         });
       }
-      
+  
       axios({
         ...option,
-        data: isFormData ? option.data : (contentType === 'application/json' ? postData : urlSearchParams),
+        data: isFormData || isDataArray ? option.data : (contentType === 'application/json' ? postData : urlSearchParams),
         url: api,
         method,
         cancelToken: new axios.CancelToken((cancel) => {

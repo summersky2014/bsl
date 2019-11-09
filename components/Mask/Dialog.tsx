@@ -19,7 +19,7 @@ export interface Props extends BSL.ComponentProps {
 
 function Dialog(props: Props) {
   const { children, maskCls, className, contentCls, style } = props;
-  const elemRef = React.createRef<HTMLDivElement>();
+  const elemRef = React.useRef<HTMLDivElement>(null);
   const stopPropagation = (e: React.MouseEvent<HTMLDivElement> | Event) => {
     e.preventDefault();
     e.stopPropagation();

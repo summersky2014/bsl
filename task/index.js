@@ -63,7 +63,6 @@ function webpackConfig(params) {
             options: {
                 resources: [
                     path.resolve(__dirname, '../styles/mixins.scss'),
-                    path.resolve(__dirname, '../styles/variable.scss'),
                     ...sassResources
                 ]
             }

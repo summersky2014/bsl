@@ -14,6 +14,7 @@ interface Props extends BSL.ComponentProps {
   children?: any;
 }
 
+const prefixCls = 'bsl-radio';
 const Radio = (props: Props) => {
   const { className, id, style, children } = props;
   return (
@@ -23,7 +24,7 @@ const Radio = (props: Props) => {
       style={style}
       data-active={props.active}
     >
-      <Icon className={css(styles.select)} src={checkCircle} hide={!props.active} />
+      <Icon className={classNames(css(styles.select), `${prefixCls}-select`)} src={checkCircle} hide={!props.active} />
       <div className={classNames(css(styles.unselect), variable.bslComponent)} data-hide={props.active} />
       {children ? <div className={css(styles.text)}>{children}</div> : null}
     </div>

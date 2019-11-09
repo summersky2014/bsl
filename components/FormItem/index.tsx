@@ -25,7 +25,7 @@ function FormItem(props: Props) {
   const { className, children, requiredPrompt, validatePrompt } = props;
   const [promptVisible, setPromptVisible] = React.useState(false);
   const itemRef = React.useRef<HTMLElement | null>(null);
-  const containerRef = React.createRef<HTMLDivElement>();
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const toast = (msg: string) => {
     if (FormItem.toast) {

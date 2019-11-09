@@ -53,7 +53,7 @@ function ImageView(props: Props) {
   const { src, onClick, emptySrc, timeoutView, loadingSrc, failSrc, host, className, id } = props;
   const [, setRenderId] = React.useState<BSL.RequestState>('undefined');
   const state = React.useRef<BSL.RequestState>('undefined');
-  const elemRef = React.createRef<HTMLDivElement>();
+  const elemRef = React.useRef<HTMLDivElement>(null);
   const [setTimeOut, clearTimeOut] = useTimeout();
   const timeout = props.timeout ? props.timeout : ImageView.defaultTimeout;
   const timeoutTimer = React.useRef<ListenerCallback>();
