@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import axios from 'axios';
 import BSL from '../../../../../../typings';
 import RequestView from '../../../../../../components/RequestView';
+import { LoadingView, EmptyView, TimeoutView, FailView } from '../../../../../../components/StateView';
 import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';
 
@@ -35,10 +36,18 @@ const Demo = () => {
                 </React.Fragment>
               )}
             </RequestView.Complete>
-            <RequestView.Loading>加载中...</RequestView.Loading>
-            <RequestView.Fail>加载失败</RequestView.Fail>
-            <RequestView.Empty>空视图</RequestView.Empty>
-            <RequestView.Timeout>超时视图</RequestView.Timeout>
+            <RequestView.Loading>
+              <LoadingView />
+            </RequestView.Loading>
+            <RequestView.Fail>
+              <FailView />
+            </RequestView.Fail>
+            <RequestView.Empty>
+              <EmptyView />
+            </RequestView.Empty>
+            <RequestView.Timeout>
+              <TimeoutView />
+            </RequestView.Timeout>
           </React.Fragment>
         )}
       </RequestView>

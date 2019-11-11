@@ -3,11 +3,8 @@ import { Route } from 'react-router-dom';
 
 export interface RoutesConifg {
   base: string;
-  /**
-   * key: 字段名称
-   * value: 排序，从0开始
-   */
-  pathParams?: Record<string, number>;
+  /** 按照参数顺序排序 */
+  pathParams?: string[];
   linkParams?: (...args: any[]) => (string | number)[];
   component: Function;
 }
@@ -21,9 +18,8 @@ export default function(config: Record<string, RoutesConifg>) {
     let pathParams = '';
 
     if (item.pathParams) {
-      Object.keys(item.pathParams).forEach((k) => {
-        const paramsIndex = item.pathParams![k];
-        pathParamsKeyArr[paramsIndex] = k;
+      item.pathParams.forEach((k, i) => {
+        pathParamsKeyArr[i] = k.toString();
       });
     }
 

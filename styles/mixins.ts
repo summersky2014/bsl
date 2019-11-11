@@ -54,7 +54,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
       break;
     case 'top':
       directionStyle = {
-        width: '200', 
+        width: '200%', 
         height: 1,
         left: 0,
         top: 0
@@ -62,7 +62,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
       break;
     case 'bottom':
       directionStyle = {
-        width: '200',
+        width: '200%',
         height: 1,
         left: 0,
         bottom: 0
@@ -70,11 +70,8 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
   }
   return {
     ':after': {
-      content: '', 
-      boxSizing: 'border-box',
-      position: 'absolute',
-      top: 0,
-      left: 0, 
+      content: '""', 
+      position: 'absolute', 
       transform: 'scale(0.5)',
       transformOrigin: '0 0',
       background: color,
@@ -87,7 +84,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
 /** 清除浮动 */
 export function clearfix(): Record<string, React.CSSProperties> {
   const common: React.CSSProperties= {
-    content: '',
+    content: '""',
     display: 'table'
   };
   return {
