@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.53",
+  "version": "0.0.54",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -46,6 +46,7 @@
   ],
   "dependencies": {
     "@better-scroll/core": "next",
+    "@better-scroll/slide": "^2.0.0-beta.2",
     "@better-scroll/wheel": "^2.0.0-beta.2",
     "@types/classnames": "^2.2.7",
     "@types/node": "^10.12.21",
@@ -87,7 +88,6 @@
     "sass-resources-loader": "^1.3.3",
     "source-map-loader": "^0.2.4",
     "svg-sprite-loader": "^4.1.3",
-    "swipe-js-iso": "^2.1.5",
     "terser-webpack-plugin": "^1.2.1",
     "ts-loader": "^5.3.3",
     "typescript": "^3.7.2",

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
 import Carousel from '../../../../../../components/Carousel';
-import Image from '../../../../../../components/Image';
 import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';
 
@@ -9,26 +9,44 @@ const slide1 = require('./assets/slide1.png');
 const slide2 = require('./assets/slide2.png');
 const slide3 = require('./assets/slide3.png');
 
-const styles: Record<string, React.CSSProperties> = {
-  image: {
-    width: '100%'
-  }
+const App = () => {
+  return (
+    <Subscription source={{}}>
+      {(value: object) => (
+        <Context.Provider value={value}>
+          <Demo />
+        </Context.Provider>
+      )}
+    </Subscription>
+  );
 };
 
 const Demo = () => {
   const [index, setIndex] = React.useState(0);
+
+  // demo演示时需要的代码，实际项目中已配置好，不需要此段代码
+  React.useEffect(() => {
+    dispatch();
+  }, []);
+
   return (
     <Carousel
       index={index}
-      callback={(i) => {
+      onChange={(i) => {
         setIndex(i);
       }}
+      loop
+      dots
+      autoplay
+      style={{
+        height: 150
+      }}
     >
-      <Image style={styles.image} src={slide1} />
-      <Image style={styles.image} src={slide2} />
-      <Image style={styles.image} src={slide3} />
+      <img src={slide1} />
+      <img src={slide2} />
+      <img src={slide3} />
     </Carousel>
   );
 };
 
-ReactDOM.render(<Demo />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

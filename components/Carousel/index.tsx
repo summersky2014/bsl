@@ -4,102 +4,189 @@ import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
 
-import * as Swipe from 'swipe-js-iso';
+import * as BetterScroll from '@better-scroll/core';
+import slidePlugins from '@better-scroll/slide';
+import Slide, { BaseProps as SlideProps } from './Slide';
+import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
 import memoAreEqual from '../../utils/memoAreEqual';
+import Dots from './Dots';
 
-interface ISwipe {
-  kill(): void;
-  getPos(): number;
-  slide(index: number, slideDuration: number | undefined): void;
+export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
+  /** 滑动块的样式 */
+  slideCls?: string;
+  /** 指示器样式 */
+  dotCls?: string;
+  /** 是否开启指示器圆点 */
+  dots?: boolean;
+  /** 是否自动轮播 */
+  autoplay?: boolean;
+  /** 滑动后触发的事件 */
+  onChange: (index: number, direction: 'prev' | 'next', isAuto: boolean) => void;
 }
 
-interface Props extends BSL.ComponentProps {
+interface DefaultProps {
+  /** 当前的索引 */
   index: number;
-  children: any;
-  /**
-   * speed of prev and next transitions in milliseconds.
-   * @default 300
-   */
-  speed?: number;
-  /**
-   *  begin with auto slideshow (time in milliseconds between slides)
-   */
-  auto?: number;
-  /**  
-   * create an infinite feel with no endpoints
-   * @default true
-   */
-  continuous?: boolean;
-  /**
-   * stop any touches on this container from scrolling the page
-   * @default false
-   */
-  disableScroll?: boolean;
-  /**
-   * stop event propagation
-   * @default false
-   */
-  stopPropagation?: boolean;
-  /**
-   * speed of transition in milliseconds)
-   */
-  slideDuration?: number;
-  /**  使用0到1之间的数字调用滑动回调，表示已刷过的全宽度的百分比（例如0.5表示我们在两个图块之间） */
-  swiping?: (progress: number) => void;
-  callback?: (index: number, elem: HTMLDivElement) => void;
-  transitionEnd?: Function;
+  /** 跳转到指定索引需要的时间 */
+  goToIndexDuration?: number;
+  /** 自动间隔时间 */
+  interval?: number;
+  /** 是否开启滑动，默认为true */
+  disabled?: boolean;
 }
 
+const prefixCls = 'bsl-carousel';
+BetterScroll.default.use(slidePlugins);
+
+const defaultProps: DefaultProps = {
+  index: 0,
+  interval: 3000,
+  disabled: false,
+  goToIndexDuration: 0
+};
 function Carousel(props: Props) {
-  const { id, className, index, speed, auto, continuous, disableScroll, stopPropagation, children } = props;
+  const { autoplay, index, children, goToIndexDuration, disabled, loop, dots } = props;
+  const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const elemRef = React.useRef<HTMLDivElement>(null);
-  const swipe = React.useRef<ISwipe | null>();
-
-  React.useEffect(() => {
-    const swipeOptions = {
-      startSlide: props.index,
-      speed: props.speed,
-      auto: props.auto,
-      continuous: props.continuous,
-      disableScroll: props.disableScroll,
-      stopPropagation: props.stopPropagation,
-      swiping: props.swiping,
-      transitionEnd: props.transitionEnd,
-      callback: props.callback
-    };
-    if (elemRef.current) {
-      swipe.current?.kill();
-      swipe.current = Swipe(elemRef.current, swipeOptions) as ISwipe;
+  const bsScroll = React.useRef<BetterScroll.default>();
+  const timer = React.useRef<ListenerCallback>();
+  /** 是否是自动轮播触发的滑动 */
+  const slideIsAuto = React.useRef(false);
+  /** 是否是手指滑动触发 */
+  const slideIsTouch = React.useRef(false);
+  const count = React.Children.count(children);
+  const [width, setWidth] = React.useState(0);
+  /** 自动轮播 */
+  const slideAutoplay = () => { 
+    if (timer.current) {
+      clearTimeOut(timer.current);
     }
-
-    return () => {
-      swipe.current?.kill();
-      swipe.current = null;
-    };
-  }, [speed, auto, continuous, stopPropagation, disableScroll]);
+    if (autoplay) {
+      // 自动轮播
+      timer.current = setTimeOut(() => {
+        slideIsAuto.current = true;
+        bsScroll.current?.next();
+      }, props.interval as number);
+    }
+  };
 
   React.useEffect(() => {
-    if (swipe.current) {
-      if (swipe.current.getPos() !== props.index) {
-        swipe.current.slide(props.index, props.slideDuration);
+    if (bsScroll.current) {
+      bsScroll.current.refresh();
+    }
+  }, [count]);
+ 
+  React.useEffect(() => {
+    const onBeforeSlide = () => {
+      if (autoplay && timer.current) {
+        clearTimeOut(timer.current);
+      }
+      slideIsTouch.current = false;
+    };
+    const onAfterSlide = () => {
+      if (bsScroll.current) {
+        // 当前索引
+        const nowIndex = bsScroll.current.getCurrentPage().pageX;
+        // slide滑动的方向，通过计算索引差值来实现
+        const direction = bsScroll.current.movingDirectionX === -1 ? 'prev' : 'next';
+ 
+        props.onChange(nowIndex, direction, slideIsAuto.current || slideIsTouch.current);
+        slideAutoplay();
+        // 还原初始化状态
+        slideIsTouch.current = false;
+        slideIsAuto.current = false;
+      }
+    };
+  
+    if (elemRef.current) {
+      if (elemRef.current.clientWidth !== width) {
+        setWidth(elemRef.current.clientWidth);
+      }
+  
+      if (width) {
+        if (elemRef.current.clientHeight === 0) {
+          console.error('Carousel组件容器上没有高度，有可能会导致程序错误');
+        }
+        bsScroll.current?.destroy();
+        bsScroll.current = new BetterScroll.default(elemRef.current, {
+          scrollX: true,
+          scrollY: false,
+          momentum: false,
+          // click: true,
+          slide: {
+            loop,
+            threshold: 100
+          },
+          bounce: false,
+          stopPropagation: true
+        });
+  
+        bsScroll.current.on('scrollEnd', onAfterSlide);
+        bsScroll.current.on('beforeScrollStart', onBeforeSlide);
+        bsScroll.current.on('touchEnd', () => {
+          slideIsTouch.current = true;
+          slideAutoplay();
+        });
       }
     }
-  }, [index]);
+  }, [loop, width]);
+
+  React.useEffect(() => {
+    if (bsScroll.current) {
+      const prevIndex = bsScroll.current.getCurrentPage().pageX;
+  
+      if (index !== prevIndex) {
+        bsScroll.current.goToPage(index, 0, 0, goToIndexDuration);
+      }
+    }
+  }, [index, goToIndexDuration]);
+
+  React.useEffect(() => {
+    if (bsScroll.current) {
+      if (disabled) {
+        bsScroll.current.disable();
+      } else {
+        bsScroll.current.enable();
+      }
+    }
+  }, [disabled]);
+
+  React.useEffect(() => {
+    // 初始化自动轮播
+    slideAutoplay();
+  }, [autoplay]);
+
+  React.useEffect(() => {
+    return () => {
+      if (timer.current) {
+        clearTimeOut(timer.current);
+      }
+      if (bsScroll.current) {
+        bsScroll.current.destroy();
+      }
+    };
+  }, []);
 
   return (
     <div
-      id={id}
-      ref={elemRef}
-      className={classNames(css(styles.root), className)}
+      className={classNames(css(styles.root), prefixCls, props.className)}
       style={props.style}
+      ref={elemRef}
     >
-      <div className={css(styles.wrapper)}>
-        {React.Children.map(children, (child: React.ReactElement, i) =>  (
-          <div className={ css(styles.child)} key={child.key || i}>{child}</div>
-        ))}
-      </div>
+      {width && (
+        <Slide
+          className={props.slideCls}
+          slideWidth={width}
+          loop={loop}
+          slideCount={count}
+        >{children}</Slide>
+      )}
+      {dots && count && (
+        <Dots className={props.dotCls} activeIndex={index} count={count} />
+      )}
     </div>
   );
 }
 
+Carousel.defaultProps = defaultProps;
 export default React.memo(Carousel, memoAreEqual);
