@@ -1,9 +1,8 @@
 import BSL from '../../typings';
 import * as React from 'react';
-import * as classNames from 'classnames';
 
-import { ListenerCallback } from '../../hooks/anyuseTimeout';
 import * as TWEEN from '@tweenjs/tween.js';
+import { ListenerCallback } from '../../hooks/anyuseTimeout';
 import { addListener, removeListener } from '../../app/Scheduler';
 
 interface Props extends BSL.ComponentProps, DefaultProps {
