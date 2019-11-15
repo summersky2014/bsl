@@ -11,9 +11,10 @@ const vendors = [
     'react-router',
     'react-router-dom',
     'exif-js',
-    'swipe-js-iso',
+    'immer',
     'create-subscription',
-    'intersection-observer'
+    'intersection-observer',
+    '@tweenjs/tween.js'
 ];
 module.exports = {
     output: {

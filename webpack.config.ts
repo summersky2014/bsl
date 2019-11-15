@@ -9,6 +9,7 @@ const isDev = process.env.NODE_ENV === 'development';
 webpackConfig = {
   entry: {
     index: nodePath.resolve(__dirname, 'docs/src/App.tsx'),
+    BackTop: nodePath.resolve(__dirname, examplePath, './BackTop/基本用法/index.tsx'),
     Carousel: nodePath.resolve(__dirname, examplePath, './Carousel/基本用法/index.tsx'),
     Choice: nodePath.resolve(__dirname, examplePath, './Choice/基本用法/index.tsx'),
     Container: nodePath.resolve(__dirname, examplePath, './Container/基本用法/index.tsx'),

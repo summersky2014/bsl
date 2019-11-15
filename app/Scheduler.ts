@@ -35,6 +35,7 @@ function updateLoop(): void {
   
   if (listensLength) {
     const time = Date.now();
+
     listens.forEach((listen) => {
       // 判断listen是否存在，有可能callback里会执行removeListener，然后isten被销毁了
       if (listen) {

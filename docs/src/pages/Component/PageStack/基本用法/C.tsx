@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PageComponent from '../../../../../../app/PageComponent';
 import Link from '../../../../../../components/Link';
-import setDocumetTitle from '../../../../../../utils/setDocumetTitle/setDocumetTitle';
+import setDocumetTitle from '../../../../../../utils/setDocumetTitle';
 
 interface State {
   content: string;

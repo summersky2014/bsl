@@ -4,6 +4,7 @@ import QuickStart from '../pages/QuickStart';
 // 教程
 import TutorialChangeStyle from '../pages/Tutorial/修改组件样式';
 // 组件
+import ComponentBackTop from '../pages/Component/BackTop';
 import ComponentCarousel from '../pages/Component/Carousel';
 import ComponentChoice from '../pages/Component/Choice';
 import ComponentContainer from '../pages/Component/Container';
@@ -57,6 +58,10 @@ const menus: Mneu[] = [{
 }, {
   title: '组件',
   children: [{
+    component: ComponentBackTop,
+    title: 'BackTop 回到顶部',
+    path: '/component/backtop'
+  },{
     component: ComponentCarousel,
     title: 'Carousel 走马灯',
     path: '/component/carousel'
