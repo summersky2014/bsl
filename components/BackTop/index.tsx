@@ -1,7 +1,7 @@
 import BSL from '../../typings';
 import * as React from 'react';
 
-import * as TWEEN from '@tweenjs/tween.js';
+import TWEEN from '../../utils/tween';
 import { ListenerCallback } from '../../hooks/anyuseTimeout';
 import { addListener, removeListener } from '../../app/Scheduler';
 
@@ -69,7 +69,10 @@ function BackTop(props: Props) {
     <div 
       className={props.className}
       id={props.id}
-      style={props.style}
+      style={{
+        ...props.style,
+        display: 'none'
+      }}
       ref={rootRef}
       onClick={() => {
         if (isComplete.current === false) {
