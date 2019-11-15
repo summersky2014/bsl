@@ -23,11 +23,23 @@ interface DefaultProps {
    * @default 400
    */
   visibilityHeight?: number;
+  /**
+   * 持续时间
+   * @default 500
+   */
+  duration?: number;
+  /**
+   * 缓动函数
+   * @default TWEEN.Easing.Quartic.InOut
+   */
+  easing?: (k: number) => number;
 }
 
-const defaultProps: DefaultProps = {
+const defaultProps: Required<DefaultProps> = {
   target: window,
-  visibilityHeight: 400
+  visibilityHeight: 400,
+  duration: 500,
+  easing: TWEEN.Easing.Quartic.InOut
 };
 function getOffset(target: HTMLElement | Window) {
   if (target === window) {
@@ -46,18 +58,18 @@ function getOffset(target: HTMLElement | Window) {
 function BackTop(props: Props) {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const isComplete = React.useRef(true);
-  const duration = 500;
 
   React.useEffect(() => {
-    const listenerCallback: ListenerCallback = (time, overTime) => { 
-      TWEEN.update(overTime);
+    const listenerCallback: ListenerCallback = (time, overTime) => {
+      TWEEN.update();
       return false;
     };
     const setVisible = () => {
       rootRef.current!.style.display = getOffset(props.target!).y >= props.visibilityHeight! ? 'block' : 'none';
     };
-    addListener(listenerCallback);
+    
     setVisible();
+    addListener(listenerCallback);
     props.target!.addEventListener('scroll', setVisible);
     return () => {
       removeListener(listenerCallback);
@@ -78,11 +90,11 @@ function BackTop(props: Props) {
         if (isComplete.current === false) {
           return;
         }
-        const scroll = getOffset(props.target!);
         isComplete.current = false;
+        const scroll = getOffset(props.target!);
         new TWEEN.Tween(scroll) 
-          .to({ x: scroll.x, y: 0 }, duration)
-          .easing(TWEEN.Easing.Quadratic.InOut)
+          .to({ x: scroll.x, y: 0 }, props.duration!)
+          .easing(props.easing!)
           .onUpdate(() => {
             props.target!.scrollTo(scroll.x, scroll.y);
           })
