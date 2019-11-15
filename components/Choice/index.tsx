@@ -128,4 +128,4 @@ function Choice<T extends Value>(props: Props<T>) {
 }
 
 export { ChoiceHelper };
-export default React.memo(Choice, memoAreEqual);
+export default React.memo(Choice, memoAreEqual) as typeof Choice;
