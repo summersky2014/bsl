@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
+import { Subscription, Context, updateLoop } from '../../../../../../app/Scheduler';
 import Form from '../../../../../../components/Form';
 import FormItem from '../../../../../../components/FormItem';
 import Input, { InputHelper } from '../../../../../../components/Input';
 import Textarea, { TextareaHelper } from '../../../../../../components/Textarea';
+import Countdown from '../../../../../../components/Countdown';
 import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';
 
@@ -41,11 +42,19 @@ const Demo = () => {
   const textareaHelper = React.useMemo(() => new TextareaHelper({ required: true }), []);
 
   React.useEffect(() => {
-    dispatch();
+    updateLoop();
   }, []);
 
   return (
     <Form>
+      <Countdown
+        value="2030-01-01"
+        label="日期倒计时"
+      >
+        {(value) => <div>{value.day}天{value.hour}时{value.min}分{value.sec}秒</div>}
+      </Countdown>
+      <br/>
+
       <FormItem requiredPrompt="输入框必填">
         <Input
           value={inputHelper.getValue()}

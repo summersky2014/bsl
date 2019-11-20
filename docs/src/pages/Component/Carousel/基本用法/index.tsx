@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Subscription, Context, dispatch } from '../../../../../../app/Scheduler';
+import { Subscription, Context, updateLoop } from '../../../../../../app/Scheduler';
 import Carousel from '../../../../../../components/Carousel';
 import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';
@@ -26,7 +26,7 @@ const Demo = () => {
 
   // demo演示时需要的代码，实际项目中已配置好，不需要此段代码
   React.useEffect(() => {
-    dispatch();
+    updateLoop();
   }, []);
 
   return (

@@ -37,6 +37,7 @@ class Dispatcher<T> {
       this.prevValue = this.value;
       update(draftState);
     });
+    
     if (this.uiUpdateFun) {
       this.uiUpdateFun();
     } else {

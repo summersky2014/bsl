@@ -10,11 +10,11 @@ export interface Listen {
 }
 
 let subscribeCallback: (model: object) => void;
-let rafId: number | undefined;
 /** 更新锁 */
 let updateLock = true;
 /** 锁枕 */
 let frameLock = false;
+
 /** 向raf插入事件的数组 */
 const listens: Set<Listen> = new Set([]);
 const Context = createContext({});
@@ -28,7 +28,11 @@ const Subscription: React.ComponentFactory<any, any> = createSubscription({
   }
 });
 
-/** 更新循环, 在整个应用生命周期中每帧检测是否需要更新界面 */
+/** 
+ * 更新循环, 在整个应用生命周期中每帧检测是否需要更新界面
+ * @param time raf已经执行的时间
+ * @param intervals 更新间隔时间
+ */
 function updateLoop(): void {
   const listensLength = listens.size;
   frameLock = false;
@@ -37,7 +41,7 @@ function updateLoop(): void {
     const time = Date.now();
 
     listens.forEach((listen) => {
-      // 判断listen是否存在，有可能callback里会执行removeListener，然后isten被销毁了
+      // 判断listen是否存在，有可能callback里会执行removeListener，然后listen被销毁了
       if (listen) {
         // execTimestamp为0代表还没初始化
         if (listen.execTimestamp === 0) {
@@ -52,17 +56,13 @@ function updateLoop(): void {
     });
   }
 
+  // 如果没有触发过dispatch就不执行更新
   if (updateLock === false && subscribeCallback) {
     subscribeCallback({});
     updateLock = true;
   }
 
-  if (appData.inputFoucs && rafId) {
-    cancelAnimationFrame(rafId);
-    rafId = undefined;
-  } else {
-    rafId = requestAnimationFrame(updateLoop);
-  }
+  requestAnimationFrame(updateLoop);
 }
 
 /** 向更新循环添加回调 */
@@ -91,7 +91,10 @@ function frame(callback: () => void) {
   }
 }
 
-/** 用于数据更新 */
+/** 
+ * 用于数据更新
+ * @param time 更新间隔时间
+ */
 function dispatch(): void {
   // 判断是否是从输入框触发的，如果是就不加setTimeout，因为输入框加setTimeout在输入中文时会有BUG
   if (appData.inputFoucs) {
@@ -100,9 +103,6 @@ function dispatch(): void {
     updateLock = true;
   } else {
     updateLock = false;
-    if (rafId === undefined) {
-      updateLoop();
-    }
   }
 }
 
