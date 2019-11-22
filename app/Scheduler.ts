@@ -28,11 +28,7 @@ const Subscription: React.ComponentFactory<any, any> = createSubscription({
   }
 });
 
-/** 
- * 更新循环, 在整个应用生命周期中每帧检测是否需要更新界面
- * @param time raf已经执行的时间
- * @param intervals 更新间隔时间
- */
+/**  更新循环, 在整个应用生命周期中每帧检测是否需要更新界面 */
 function updateLoop(): void {
   const listensLength = listens.size;
   frameLock = false;

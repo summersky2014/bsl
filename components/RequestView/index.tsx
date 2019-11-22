@@ -120,6 +120,8 @@ function RequestView(props: Props) {
       }
       if (onFail) {
         onFail(err);
+      } else if (RequestView.onFail) {
+        RequestView.onFail(err);
       }
       if (err.message.includes('timeout of') && err.message.includes('ms exceeded')) {
         setType('timeout');
@@ -169,5 +171,7 @@ RequestView.Timeout = SwtichView.Timeout;
 RequestView.defaultData = null as null | Record<string, any>;
 /** 请求响应中最末端执行 */
 RequestView.onAfter = undefined as ((res: BSL.RequestResponse<any>) => void) | undefined;
+/** 统一的错误处理，仅在缺失props.onFail时使用 */
+RequestView.onFail = undefined as ((error?: Error) => void) | undefined;
 
 export default RequestView;
