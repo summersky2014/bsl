@@ -63,6 +63,8 @@ function hex() {
     style[`hex_${item[0]}`] = {
       top: item[1],
       left: item[2],
+      transform: 'scale(1)',
+      opacity: 1,
       animationName: Animasearch as any,
       animationDuration: '3s',
       animationTimingFunction: 'ease-in-out',
