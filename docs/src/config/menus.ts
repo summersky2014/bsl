@@ -3,6 +3,7 @@ import * as React from 'react';
 import QuickStart from '../pages/QuickStart';
 // 教程
 import TutorialChangeStyle from '../pages/Tutorial/修改组件样式';
+import TutorialLink from '../pages/Tutorial/路由跳转';
 // 组件
 import ComponentBackTop from '../pages/Component/BackTop';
 import ComponentCarousel from '../pages/Component/Carousel';
@@ -54,6 +55,10 @@ const menus: Mneu[] = [{
     component: TutorialChangeStyle,
     title: '修改组件样式',
     path: '/tutorial/changestyle'
+  }, {
+    component: TutorialLink,
+    title: '修改组件样式',
+    path: '/tutorial/link'
   }]
 }, {
   title: '组件',
