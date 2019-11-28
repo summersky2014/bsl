@@ -57,7 +57,7 @@ const menus: Mneu[] = [{
     path: '/tutorial/changestyle'
   }, {
     component: TutorialLink,
-    title: '修改组件样式',
+    title: '跳转路由',
     path: '/tutorial/link'
   }]
 }, {
