@@ -27,11 +27,16 @@ function Countdown(props: Props) {
 
   React.useEffect(() => {
     let countdown: ListenerCallback | undefined;
+    let targetTimestamp: number;
     if (disabled || !onClick) {
-      const targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
+      if (isTimestamp) {
+        targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
+      } else {
+        targetTimestamp = Date.now() + time;
+      }
       countdown = (currentTime: number, overTime: number) => { 
         if (overTime >= 1000) {
-          const remainingTime = isTimestamp ? targetTimestamp - currentTime : time - 1000;
+          const remainingTime = targetTimestamp - currentTime;
           
           if (remainingTime > 0) {
             setTime(remainingTime);
@@ -44,7 +49,6 @@ function Countdown(props: Props) {
         }
         return false;
       };
-      
       addListener(countdown);
     }
 
