@@ -20,6 +20,8 @@ export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
   onEmpty?: (response: BSL.RequestResponse<any>) => void;
   /** catch时执行 */
   onFail?: (error?: Error) => void;
+  /** 未登录时的回调 */
+  onNotLogin?: (response: BSL.RequestResponse<any>) => void;
   /** onFinally先于onComplete和onFail执行 */
   onFinally?: (response?: BSL.RequestResponse<any>) => void;
 }
@@ -96,6 +98,12 @@ function RequestView(props: Props) {
             onComplete(res);
           }
           break;
+        case 401:
+          setType('fail', res.data);
+          if (props.onNotLogin) {
+            props.onNotLogin(res);
+          }
+          break;
         case 404:
           setType('empty', res.data);
           if (onEmpty) {
@@ -120,8 +128,6 @@ function RequestView(props: Props) {
       }
       if (onFail) {
         onFail(err);
-      } else if (RequestView.onFail) {
-        RequestView.onFail(err);
       }
       if (err.message.includes('timeout of') && err.message.includes('ms exceeded')) {
         setType('timeout');
@@ -134,7 +140,7 @@ function RequestView(props: Props) {
       if (cache === 'page' && cacheKey && initRoute !== appData.currentPageId) {
         clearCache(cacheKey);
       }
-  
+      
       if (cancelToken.current) {
         cancelToken.current();
       }
@@ -171,7 +177,5 @@ RequestView.Timeout = SwtichView.Timeout;
 RequestView.defaultData = null as null | Record<string, any>;
 /** 请求响应中最末端执行 */
 RequestView.onAfter = undefined as ((res: BSL.RequestResponse<any>) => void) | undefined;
-/** 统一的错误处理，仅在缺失props.onFail时使用 */
-RequestView.onFail = undefined as ((error?: Error) => void) | undefined;
 
 export default RequestView;
