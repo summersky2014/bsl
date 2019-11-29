@@ -40,7 +40,7 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
   }
 
   /** Page初始化时调用 */
-  protected init(): void {
+  protected init() {
     appData.pages.push(this as PageComponent<{}, {}>);
     push(this.props as any);
     this.isCallInit = true;
@@ -49,27 +49,35 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
   }
 
   /** 执行后退路由的操作时，会在动画完成后调用 */
-  public pageEnter(): void {
+  public pageEnter() {
     // 需要子类来实现
   }
 
   /** 执行push操作时，会在动画完成后调用上一个页面的pageLeave */
-  public pageLeave(): void {
+  public pageLeave() {
     // 需要子类来实现
   }
 
   /** 当页面处于激活状态时触发，即后退到当前页或跳入到当前页都会触发 */
-  public pageActive(): void {
+  public pageActive() {
     // 需要子类来实现
   }
 
   /** 子类的页面渲染函数，用来替代render函数 */
   public abstract pageRender(): any;
 
+  public componentDidMount() {
+    this.rootElemRef.current!.style.display = 'block';
+  }
+
   public shouldComponentUpdate(): boolean {
     if (this.rootElemRef.current) {
       const visible = this.pageId === appData.currentPageId;
-      this.rootElemRef.current.style.display = visible ? 'block' : 'none';
+      const display = visible ? 'block' : 'none';
+      
+      if (this.rootElemRef.current.style.display !== display) {
+        this.rootElemRef.current.style.display = display;
+      }
       return visible;
     } else {
       return true;
@@ -78,7 +86,7 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
 
   public render(): JSX.Element {
     return (
-      <div ref={this.rootElemRef}>
+      <div ref={this.rootElemRef} style={{ display: 'none' }}>
         <Context.Consumer>
           {this.pageRender}
         </Context.Consumer>
