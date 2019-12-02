@@ -1,13 +1,21 @@
 import { StyleSheet } from 'aphrodite/no-important';
 
+const iconStyles = {
+  width: 20,
+  height: 20,
+  borderRadius: '50%',
+  cursor: 'pointer'
+}
 const styles = StyleSheet.create({
   prompt: {
-    width: 20,
-    height: 20,
+    ...iconStyles,
     background: '#ffe2e2',
-    fill: '#ff0000',
-    borderRadius: '50%',
-    cursor: 'pointer'
+    fill: '#ff0000'
+  },
+  clear: {
+    ...iconStyles,
+    background: '#fff',
+    fill: '#a7a5a2'
   },
   pormptBox: {
     paddingLeft: 12

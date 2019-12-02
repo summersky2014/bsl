@@ -14,6 +14,8 @@ interface Props extends BSL.ComponentProps {
   value: number | string;
   /** 倒计时还未开始前的文本 */
   label?: string;
+  /** 重置倒计时的标识 */
+  resetId?: any;
   onClick?: () => boolean;
 }
 
@@ -24,9 +26,16 @@ function Countdown(props: Props) {
   const defaultTime = isTimestamp ? 0 : value as number;
   const [time, setTime] = React.useState<number>(defaultTime);
   const [disabled, setDisabled] = React.useState(false);
+  const countdown = React.useRef<ListenerCallback>();
+  const reset = () => {
+    if (countdown.current) {
+      setDisabled(false);
+      setTime(defaultTime);
+      removeListener(countdown.current);
+    }
+  }
 
   React.useEffect(() => {
-    let countdown: ListenerCallback | undefined;
     let targetTimestamp: number;
     if (disabled || !onClick) {
       if (isTimestamp) {
@@ -34,30 +43,32 @@ function Countdown(props: Props) {
       } else {
         targetTimestamp = Date.now() + time;
       }
-      countdown = (currentTime: number, overTime: number) => { 
+      countdown.current = (currentTime: number, overTime: number) => { 
         if (overTime >= 1000) {
           const remainingTime = targetTimestamp - currentTime;
           
           if (remainingTime > 0) {
             setTime(remainingTime);
-          } else if (countdown) {
-            setDisabled(false);
-            setTime(defaultTime);
-            removeListener(countdown);
+          } else {
+            reset();
           }
           return true;
         }
         return false;
       };
-      addListener(countdown);
+      addListener(countdown.current);
     }
 
     return () => {
-      if (countdown) {
-        removeListener(countdown);
+      if (countdown.current) {
+        removeListener(countdown.current);
       }
     };
   }, [time, disabled]);
+
+  React.useEffect(() => {
+    reset();
+  }, [props.resetId]);
   
   return !onClick ? (
     <div

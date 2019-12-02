@@ -36,6 +36,14 @@ class InputHelper extends Helper<string> {
 
     return this.state === 'complete' || this.state === 'undefined';
   }
+
+  public clear = () => {
+    this.state = 'undefined';
+    this.value = '';
+    console.log('clear');
+    
+    this.update();
+  }
 }
 
 export default InputHelper;

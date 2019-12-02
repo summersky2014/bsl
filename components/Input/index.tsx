@@ -43,6 +43,11 @@ function Input(props: Props) {
           onFocus(e);
         }
       }}
+      onBlur={(e) => {
+        if (props.onBlur) {
+          props.onBlur(e);
+        }
+      }}
     />
   );
 }

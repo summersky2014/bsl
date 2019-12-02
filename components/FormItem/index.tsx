@@ -5,12 +5,14 @@ import { css } from 'aphrodite/no-important';
 import styles from './style';
 
 import variable from '../../utils/variable';
+import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
 import Container, { Props as ContainerProps } from '../Container';
 import Icon from '../Icon';
 import Toast from '../Toast';
 
 const svgFile = {
-  prompt: variable.svgRootPath + require('../../assets/prompt.svg').id
+  prompt: variable.svgRootPath + require('../../assets/prompt.svg').id,
+  clear: variable.svgRootPath + require('../../assets/clear.svg').id,
 };
 
 export interface Props extends ContainerProps {
@@ -18,14 +20,18 @@ export interface Props extends ContainerProps {
   validatePrompt?: string;
   /** 必填为空提示文字 */
   requiredPrompt?: string;
+  onClear?: () => void;
 }
 
 const prefixCls = 'bsl-formitem';
 function FormItem(props: Props) {
+  const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const { className, children, requiredPrompt, validatePrompt } = props;
   const [promptVisible, setPromptVisible] = React.useState(false);
+  const [clearVisbile, setClearVisible] = React.useState(false);
   const itemRef = React.useRef<HTMLElement | null>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const listenerCallback = React.useRef<ListenerCallback>();
 
   const toast = (msg: string) => {
     if (FormItem.toast) {
@@ -34,21 +40,41 @@ function FormItem(props: Props) {
       Toast.show(msg, 'fail');
     }
   };
-  const setPromptVisibleFn = () => {
-    if (itemRef.current) {
-      const state = itemRef.current.dataset['state'] as BSL.RequestState;
-      setPromptVisible(state === 'fail' || state === 'empty' ? true : false);
-    }
-  };
 
   React.useEffect(() => {
     if (itemRef.current === null && containerRef.current) {
       itemRef.current = containerRef.current.querySelector('.' + variable.bslComponent) as HTMLElement;
-      setPromptVisibleFn();
-    } else {
-      setPromptVisibleFn();
     }
-  });
+    const setPromptIconVisible = () => {
+      const state = itemRef.current!.dataset['state'] as BSL.RequestState;
+      setPromptVisible(state === 'fail' || state === 'empty' ? true : false);
+    };
+    const onFocus = () => {
+      if (props.onClear) {
+        setClearVisible(true);
+        setPromptVisible(false);
+      }
+    }
+    const onBlur = () => {
+      setPromptVisible(false);
+      listenerCallback.current = setTimeOut(() => {
+        setClearVisible(false);
+        setPromptIconVisible();
+      }, 100);
+    }
+    itemRef.current!.addEventListener('change', setPromptIconVisible);
+    itemRef.current!.addEventListener('focus', onFocus);
+    itemRef.current!.addEventListener('blur', onBlur);
+
+    return () => {
+      if (listenerCallback.current) {
+        clearTimeOut(listenerCallback.current);
+      }
+      itemRef.current!.removeEventListener('change', setPromptIconVisible);
+      itemRef.current!.removeEventListener('focus', onFocus);
+      itemRef.current!.removeEventListener('blur', onBlur);
+    }
+  }, []);
 
   return (
     <Container
@@ -80,6 +106,14 @@ function FormItem(props: Props) {
           }}
           style={{
             display: promptVisible ? 'block' : 'none'
+          }}
+        />
+        <Icon
+          className={classNames(css(styles.clear), `${prefixCls}-clear`)}
+          src={svgFile.clear}
+          onClick={props.onClear}
+          style={{
+            display: clearVisbile ? 'block' : 'none'
           }}
         />
       </div>
