@@ -22,7 +22,7 @@ class Mask extends React.Component<Props> {
 
   public render(): React.ReactPortal | null {
     const { visible, children } = this.props;
-
+ 
     return visible ? ReactDOM.createPortal(
       <Dialog
         {...this.props}

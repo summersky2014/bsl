@@ -1,12 +1,13 @@
 import { StyleSheet } from 'aphrodite/no-important';
+import device from '../../utils/device';
 
 const styles = StyleSheet.create({
   root: {
     position: 'fixed',
     width: '100%',
-    height: '100vh',
+    height: device.system === 'ios' ? window.innerHeight + 75 : '100vh',
     zIndex: 10,
-    top: 0,
+    bottom: 0,
     left: 0
   },
   content: {

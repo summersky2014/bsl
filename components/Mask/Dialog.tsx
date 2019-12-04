@@ -4,6 +4,7 @@ import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
 import isPassiveSupported from '../../utils/isPassiveSupported';
+import device from '../../utils/device';
 
 export interface Props extends BSL.ComponentProps {
   children: any;
@@ -17,13 +18,14 @@ export interface Props extends BSL.ComponentProps {
   contentCls?: string;
 }
 
+const stopPropagation = (e: React.MouseEvent<HTMLDivElement> | Event) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
 function Dialog(props: Props) {
   const { children, maskCls, className, contentCls, style } = props;
   const elemRef = React.useRef<HTMLDivElement>(null);
-  const stopPropagation = (e: React.MouseEvent<HTMLDivElement> | Event) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -34,11 +36,19 @@ function Dialog(props: Props) {
   };
 
   React.useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (device.system === 'ios') {
+      document.body.style.position= 'fixed';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
     elemRef.current!.addEventListener('touchmove', stopPropagation, isPassiveSupported ? { passive: false } : false);
 
     return () => {
-      document.body.style.overflow = '';
+      if (device.system === 'ios') {
+        document.body.style.position= 'static';
+      } else {
+        document.body.style.overflow = '';
+      }
       if (elemRef.current) {
         elemRef.current.removeEventListener('touchmove', stopPropagation);
       }
