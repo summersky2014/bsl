@@ -36,8 +36,10 @@ function Dialog(props: Props) {
   };
 
   React.useEffect(() => {
+    const scrollY = window.scrollY;
+
     if (device.system === 'ios') {
-      document.body.style.position= 'fixed';
+      document.body.style.cssText= `position: fixed;width: 100%;height: 100vh;top: -${scrollY}px`;
     } else {
       document.body.style.overflow = 'hidden';
     }
@@ -45,7 +47,8 @@ function Dialog(props: Props) {
 
     return () => {
       if (device.system === 'ios') {
-        document.body.style.position= 'static';
+        document.body.style.cssText= '';
+        window.scrollTo({ top: scrollY });
       } else {
         document.body.style.overflow = '';
       }

@@ -123,6 +123,10 @@ function RequestView(props: Props) {
         RequestView.onAfter(res);
       }
     }).catch((err: Error) => {
+      if (err.message === 'cancel') {
+        return;
+      }
+        
       if (onFinally) {
         onFinally();
       }
