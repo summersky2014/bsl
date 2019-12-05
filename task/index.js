@@ -140,6 +140,20 @@ function webpackConfig(params) {
                         outputPath: 'html/'
                     }
                 }, {
+                    test: /\.(mp3|ogg|wav)$/,
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        outputPath: 'audio/'
+                    }
+                }, {
+                    test: /\.(mp4|ogg|webm)$/,
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        outputPath: 'video/'
+                    }
+                }, {
                     test: /\.md$/,
                     use: [{
                             loader: "raw-loader"
