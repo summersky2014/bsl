@@ -2,6 +2,7 @@ import BSL from '../typings';
 import * as React from 'react';
 import { push, appData } from './core';
 import { Context } from './Scheduler';
+import variable from '../utils/variable';
 
 export interface PageProps<Match> extends BSL.PageProps<Match> {
   entrytime: number;
@@ -45,21 +46,31 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
     push(this.props as any);
     this.isCallInit = true;
 
-    this.pageActive();
+    if (variable.env === 'development') {
+      const componentDidMountCode = this.componentDidMount.toString().replace(/ /g, '').replace(/\n/g, '').replace(/\r/g, '');
+      if (componentDidMountCode !== "componentDidMount(){this.rootElemRef.current.style.display='block';this.didMount();}") {
+        console.error('PageComponent的子类不能实现componentDidMount,请改用didMount');
+      }
+    }
   }
 
   /** 执行后退路由的操作时，会在动画完成后调用 */
-  public pageEnter() {
+  public pageEnter(): void {
     // 需要子类来实现
   }
 
   /** 执行push操作时，会在动画完成后调用上一个页面的pageLeave */
-  public pageLeave() {
+  public pageLeave(): void {
     // 需要子类来实现
   }
 
   /** 当页面处于激活状态时触发，即后退到当前页或跳入到当前页都会触发 */
-  public pageActive() {
+  public pageActive(): void {
+    // 需要子类来实现
+  }
+
+  /** 用于替代componentDidMount */
+  protected didMount(): void {
     // 需要子类来实现
   }
 
@@ -68,6 +79,7 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
 
   public componentDidMount() {
     this.rootElemRef.current!.style.display = 'block';
+    this.didMount();
   }
 
   public shouldComponentUpdate(): boolean {

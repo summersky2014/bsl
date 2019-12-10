@@ -52,10 +52,13 @@ function isReplaceAction(nextProps: AppProps): boolean {
 
 /** 添加一个页面 */
 function push(nextProps: AppProps): void {
-  const currentPage = getPrevPageClassDeclaration(2);
-  // 上一个页面的离开事件
-  if (currentPage && currentPage.pageLeave) {
-    currentPage.pageLeave();
+  const currentPage = getPrevPageClassDeclaration(1)!;
+  // 页面的进入事件
+  if (currentPage.pageEnter) {
+    currentPage.pageEnter();
+  }
+  if (currentPage.pageActive) {
+    currentPage.pageActive();
   }
   window.scrollTo(0, 0);
 }
@@ -63,12 +66,19 @@ function push(nextProps: AppProps): void {
 /** 卸载一个页面 */
 function pop(nextProps: AppProps): void {
   const top = appData.scrollLocation[appData.scrollLocation.length - 1];
+  const currentPage = getPrevPageClassDeclaration(1)!;
 
+  // 页面的离开事件
+  if (currentPage.pageLeave) {
+    currentPage.pageLeave();
+  }
+  if (currentPage.pageActive) {
+    currentPage.pageActive();
+  }
   if (appData.pages.length && !isReplaceAction(nextProps)) {
     const toPage = getPrevPageClassDeclaration(2);
     // 目标页面的进入事件
-    if (toPage && toPage.pageEnter) {
-      toPage.pageEnter();
+    if (toPage) {
       // 后退回页面时，重置进入时间
       toPage.entrytime = Date.now();
     }

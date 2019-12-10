@@ -3,7 +3,7 @@ import anyuseTimeout from '../../hooks/anyuseTimeout';
 
 const iosSetDocumentTitle = require('./iosSetDocumentTitle.html');
 
-export default function setDocumetTitle(title: string): void {
+export default function setDocumentTitle(title: string): void {
   if (!title) {
     console.warn('标题为空，请设置Page.pageName');
   }

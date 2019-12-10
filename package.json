@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.68",
+  "version": "0.0.69",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -48,7 +48,6 @@
     "@better-scroll/core": "next",
     "@better-scroll/slide": "^2.0.0-beta.2",
     "@better-scroll/wheel": "^2.0.0-beta.2",
-    "@tweenjs/tween.js": "^18.4.2",
     "@types/classnames": "^2.2.7",
     "@types/node": "^10.12.21",
     "@types/react": "^16.8.1",

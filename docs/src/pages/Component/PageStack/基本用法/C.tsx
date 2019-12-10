@@ -1,10 +1,9 @@
 import * as React from 'react';
 import PageComponent from '../../../../../../app/PageComponent';
 import Link from '../../../../../../components/Link';
-import setDocumetTitle from '../../../../../../utils/setDocumetTitle';
+// import setDocumetTitle from '../../../../../../utils/setDocumentTitle';
 
 interface State {
-  content: string;
 }
 
 class C extends PageComponent<any, State> {
@@ -13,33 +12,26 @@ class C extends PageComponent<any, State> {
     this.init();
   }
 
-  public state: State = {
-    content: ''
+  public didMount() {
+    // eslint-disable-next-line no-console
+    console.log('didMount');
+  }
+  // public componentDidMount(): void {
+  //   setDocumetTitle('C');
+  //   alert('componentDidMount, C页面进入了');
+  // }
+
+  public pageLeave() {
+    alert('C页面离开了');
   }
 
-  public componentDidMount(): void {
-    setDocumetTitle('C');
-    this.setState({
-      content: 'componentDidMount, C页面进入了'
-    });
-  }
-
-  public pageLeave(): void {
-    this.setState({
-      content: 'C页面离开了'
-    });
-  }
-
-  public pageEnter(): void {
-    this.setState({
-      content: 'C页面进入了'
-    });
+  public pageEnter() {
+    alert('C页面进入了');
   }
 
   public pageRender(): JSX.Element {
     return (
       <React.Fragment>
-        <div></div>
         <div id="goBack" onClick={Link.goBack}>当前页面C，点击回到上一页</div>
       </React.Fragment>
     );

@@ -9,8 +9,11 @@ import RequestView, { Props as RequestProps } from '../RequestView';
 import anyuseRequest from '../../hooks/anyuseRequest';
 
 export interface Props extends BSL.ComponentProps {
+  children: JSX.Element | JSX.Element[];
   api?: RequestProps['api'];
   headers?: RequestProps['headers'];
+  /** 是否禁用发送请求 */
+  disabled?: boolean; 
   data?: RequestProps['data'];
   method?: RequestProps['method'];
   /** 请求成功 */
@@ -19,7 +22,6 @@ export interface Props extends BSL.ComponentProps {
   onFail?: RequestProps['onFail'];
   /** onFinally先于onComplete和onFail执行 */
   onFinally?: RequestProps['onFinally'];
-  children: JSX.Element | JSX.Element[];
   /** onSubmit前段回调，可用于拦截默认的验证逻辑 */
   onSubmitBefore?: () => boolean;
   /** onSubmit后段回调，默认验证逻辑执行之后 */
@@ -69,7 +71,9 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
 }
 
 function Form(props: Props) {
-  const { className, id, style, children, onSubmitBefore, onSubmit, api, data, method, onComplete, onFail, onFinally } = props;
+  const { 
+    className, id, style, children, onSubmitBefore, onSubmit, api, data, method, onComplete, onFail, onFinally
+  } = props;
   const state = React.useRef<BSL.RequestState>('undefined');
   const [request, cancelToken] = anyuseRequest();
 
@@ -101,7 +105,7 @@ function Form(props: Props) {
           if (onSubmit) {
             onSubmit();
           }
-          if (api && state.current !== 'loading') {
+          if (api && state.current !== 'loading' && props.disabled !== true) {
             state.current = 'loading';
             request({
               api,

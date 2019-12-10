@@ -92,7 +92,7 @@ function onClick<T extends Value>(event: React.MouseEvent<HTMLDivElement>, props
 
 function isActive<T extends Value>(value: T[], current: T): boolean {
   const index = value.findIndex((item) => {
-    return item.id === current.id;
+    return item?.id === current.id;
   });
   return index >= 0;
 }

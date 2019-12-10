@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PageComponent from '../../../../../../app/PageComponent';
 import Link from '../../../../../../components/Link';
-import setDocumetTitle from '../../../../../../utils/setDocumetTitle';
+import setDocumetTitle from '../../../../../../utils/setDocumentTitle';
 
 interface State {
   status: string;
@@ -18,6 +18,8 @@ class B extends PageComponent<any, State> {
   };
 
   public pageActive(): void {
+    console.log('aaa');
+    
     setTimeout(() => {
       this.setState({
         status: 'pageActive'
@@ -25,7 +27,7 @@ class B extends PageComponent<any, State> {
     }, 100);
   }
 
-  public componentDidMount() {
+  public didMount() {
     setDocumetTitle('B');
   }
 
@@ -34,6 +36,7 @@ class B extends PageComponent<any, State> {
       <div>
         <div id="Bstatus">status: {this.state.status}</div>
         <br/>
+        <Link to="/c">B to C</Link>
         <Link to="/c" replace>B replace C</Link>
       </div>
     );
