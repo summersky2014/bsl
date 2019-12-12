@@ -18,8 +18,6 @@ class B extends PageComponent<any, State> {
   };
 
   public pageActive(): void {
-    console.log('aaa');
-    
     setTimeout(() => {
       this.setState({
         status: 'pageActive'

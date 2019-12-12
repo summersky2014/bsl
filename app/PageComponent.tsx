@@ -32,6 +32,8 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
   private readonly rootElemRef: React.RefObject<HTMLDivElement>;
   /** 是否调用了init方法 */
   private isCallInit = false;
+  /** 子类是否重载了componentDidMount */
+  private isOverloadDidmount = true;
   /** 进入页面的时间 */
   public entrytime: number = Date.now();
   /** 当获取这个属性时，得到已经停留了的时间 */
@@ -43,14 +45,14 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
   /** Page初始化时调用 */
   protected init() {
     appData.pages.push(this as PageComponent<{}, {}>);
-    push(this.props as any);
     this.isCallInit = true;
 
     if (variable.env === 'development') {
-      const componentDidMountCode = this.componentDidMount.toString().replace(/ /g, '').replace(/\n/g, '').replace(/\r/g, '');
-      if (componentDidMountCode !== "componentDidMount(){this.rootElemRef.current.style.display='block';this.didMount();}") {
-        console.error('PageComponent的子类不能实现componentDidMount,请改用didMount');
-      }
+      setTimeout(() => {
+        if (this.isOverloadDidmount) {
+          console.error('PageComponent的子类不能实现componentDidMount,请改用didMount');
+        }
+      }, 1000);
     }
   }
 
@@ -78,6 +80,8 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
   public abstract pageRender(): any;
 
   public componentDidMount() {
+    this.isOverloadDidmount = false;
+    push(this.props as any);
     this.rootElemRef.current!.style.display = 'block';
     this.didMount();
   }
