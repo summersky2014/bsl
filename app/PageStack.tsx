@@ -59,12 +59,14 @@ class PageStack extends React.Component<BaseProps, State> {
     if (loadingElem) {
       Toast.close();
     }
-
+    
     if (nextHistory.action === 'POP') {
       pop(nextProps);
       prevState.route.pop();
+
       const page = getPrevPageClassDeclaration(1);
       if (page) {
+        page.pageEnter();
         page.pageActive();
       }
     } else {

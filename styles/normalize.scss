@@ -280,7 +280,10 @@
    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
    -webkit-text-fill-color: currentColor;
  }
- 
+  ::-webkit-input-placeholder {
+    color: #b2b2b2;
+    -webkit-text-fill-color: #b2b2b2;
+  }
  /**
   * Show the overflow in IE.
   * 1. Show the overflow in Edge.
