@@ -12,7 +12,7 @@ import Toast from '../Toast';
 
 const svgFile = {
   prompt: variable.svgRootPath + require('../../assets/prompt.svg').id,
-  clear: variable.svgRootPath + require('../../assets/clear.svg').id,
+  clear: variable.svgRootPath + require('../../assets/clear.svg').id
 };
 
 export interface Props extends ContainerProps {

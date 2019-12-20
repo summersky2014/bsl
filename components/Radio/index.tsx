@@ -7,7 +7,7 @@ import styles from './style';
 import Icon from '../Icon';
 import variable from '../../utils/variable';
 
-const checkCircle = require('../../assets/check-circle.svg');
+const checkCircle = variable.svgRootPath + require('../../assets/check-circle.svg').id;
 
 interface Props extends BSL.ComponentProps {
   active: boolean | undefined;
