@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
@@ -26,9 +27,22 @@ export interface Params {
   newPage?: boolean;
 }
 
+function getQuery(url: string) {
+  const index = url.indexOf('?');
+  if (index > 0) {
+    return url.substr(index);
+  }
+  return '';
+}
+
 function link(params: Params): void {
   const { url, replace, query, newPage } = params;
-  const qsurl = query ? `${url}/${query.join('/')}` : url;
+  let qsurl = query ? `${url}/${query.join('/')}` : url;
+
+  if (Link.defaultParams) {
+    qsurl += getQuery(url) ? Link.defaultParams : '?' + Link.defaultParams;
+  }
+
   if (appData.history?.location.pathname !== qsurl) {
     if (newPage) {
       window.open(qsurl, '_blank');
@@ -82,5 +96,9 @@ Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void 
 Link.goBack = function(): void {
   appData.history!.goBack();
 };
-
+/** 
+ * 默认参数，跳转链接时自动带上 
+ * @example Link.defaultParams = 'a=1&b=2';
+ * */
+Link.defaultParams = '';
 export default Link;

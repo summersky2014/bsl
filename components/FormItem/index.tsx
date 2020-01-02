@@ -54,14 +54,14 @@ function FormItem(props: Props) {
         setClearVisible(true);
         setPromptVisible(false);
       }
-    }
+    };
     const onBlur = () => {
       setPromptVisible(false);
       listenerCallback.current = setTimeOut(() => {
         setClearVisible(false);
         setPromptIconVisible();
       }, 100);
-    }
+    };
     itemRef.current!.addEventListener('change', setPromptIconVisible);
     itemRef.current!.addEventListener('focus', onFocus);
     itemRef.current!.addEventListener('blur', onBlur);
@@ -73,7 +73,7 @@ function FormItem(props: Props) {
       itemRef.current!.removeEventListener('change', setPromptIconVisible);
       itemRef.current!.removeEventListener('focus', onFocus);
       itemRef.current!.removeEventListener('blur', onBlur);
-    }
+    };
   }, []);
 
   return (

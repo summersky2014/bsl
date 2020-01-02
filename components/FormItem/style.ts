@@ -5,7 +5,7 @@ const iconStyles = {
   height: 20,
   borderRadius: '50%',
   cursor: 'pointer'
-}
+};
 const styles = StyleSheet.create({
   prompt: {
     ...iconStyles,

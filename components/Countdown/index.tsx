@@ -33,11 +33,11 @@ function Countdown(props: Props) {
       setTime(defaultTime);
       removeListener(countdown.current);
     }
-  }
+  };
 
   React.useEffect(() => {
     let targetTimestamp: number;
-    if (disabled || !onClick) {
+    if (disabled || !onClick) {   
       if (isTimestamp) {
         targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
       } else {
@@ -55,7 +55,7 @@ function Countdown(props: Props) {
           return true;
         }
         return false;
-      };
+      };      
       addListener(countdown.current);
     }
 
@@ -67,7 +67,9 @@ function Countdown(props: Props) {
   }, [time, disabled]);
 
   React.useEffect(() => {
-    reset();
+    if (props.resetId !== undefined) {
+      reset();
+    }
   }, [props.resetId]);
   
   return !onClick ? (

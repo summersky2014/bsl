@@ -40,8 +40,6 @@ class InputHelper extends Helper<string> {
   public clear = () => {
     this.state = 'undefined';
     this.value = '';
-    console.log('clear');
-    
     this.update();
   }
 }
