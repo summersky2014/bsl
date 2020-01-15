@@ -41,12 +41,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       if (option.cache) {
         const key = createKey();
         if (cacheData.has(key)) {
-          const response: BSL.RequestResponse<any> = {
-            data: cacheData.get(key),
-            code: 200,
-            msg: ''
-          };
-          resolve(response);
+          resolve(cacheData.get(key));
           return;
         }
       }

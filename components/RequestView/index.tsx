@@ -37,6 +37,7 @@ interface DefaultProps {
 const defaultProps: Required<DefaultProps> = {
   useRetry: true
 };
+
 function RequestView(props: Props) {
   const {
     api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled
@@ -181,5 +182,11 @@ RequestView.Timeout = SwtichView.Timeout;
 RequestView.defaultData = null as null | Record<string, any>;
 /** 请求响应中最末端执行 */
 RequestView.onAfter = undefined as ((res: BSL.RequestResponse<any>) => void) | undefined;
+const Loading = RequestView.Loading;
+const Empty = RequestView.Empty;
+const Fail = RequestView.Fail;
+const Complete = RequestView.Complete;
+const Timeout = RequestView.Timeout;
 
+export { Loading, Empty, Fail, Complete, Timeout };
 export default RequestView;

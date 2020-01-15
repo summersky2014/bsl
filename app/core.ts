@@ -54,10 +54,10 @@ function isReplaceAction(nextProps: AppProps): boolean {
 function push(nextProps: AppProps): void {
   const currentPage = getPrevPageClassDeclaration(1)!;
   // 页面的进入事件
-  if (currentPage.pageEnter) {
+  if (currentPage?.pageEnter) {
     currentPage.pageEnter();
   }
-  if (currentPage.pageActive) {
+  if (currentPage?.pageActive) {
     currentPage.pageActive();
   }
   window.scrollTo(0, 0);
@@ -69,10 +69,10 @@ function pop(nextProps: AppProps): void {
   const currentPage = getPrevPageClassDeclaration(1)!;
 
   // 页面的离开事件
-  if (currentPage.pageLeave) {
+  if (currentPage?.pageLeave) {
     currentPage.pageLeave();
   }
-  if (currentPage.pageActive) {
+  if (currentPage?.pageActive) {
     currentPage.pageActive();
   }
   if (appData.pages.length && !isReplaceAction(nextProps)) {
