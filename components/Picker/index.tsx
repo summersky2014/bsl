@@ -1,3 +1,4 @@
+import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
@@ -12,9 +13,10 @@ import Icon from '../Icon';
 import variable from '../../utils/variable';
 import memoAreEqual from '../../utils/memoAreEqual';
 
+
 const rightSvg = variable.svgRootPath + require('../../assets/rightArrow.svg').id;
 
-export interface Base extends Omit<PanelBase, 'updateId'> {
+export interface Base extends Omit<PanelBase, 'updateId'>, BSL.ComponentProps {
   /** 点击弹出Picker的按钮的样式 */
   buttonCls?: string;
   /** 是否禁用 */
@@ -174,7 +176,9 @@ function Picker(props: Props) {
   return (
     <React.Fragment>
       <div
-        className={classNames(buttonCls, css(styles.button), variable.bslComponent, prefixCls)}
+        className={classNames(buttonCls, css(styles.button), props.className, variable.bslComponent, prefixCls)}
+        id={props.id}
+        style={props.style}
         onClick={toogleVisible}
         data-state={props.state}
         data-placeholder={!(value && value.length)}
@@ -216,5 +220,5 @@ function Picker(props: Props) {
 
 Picker.defaultProps = defaultProps;
 
-export { Helper as PickerHelper };
+export { Helper as PickerHelper, Data };
 export default React.memo(Picker, memoAreEqual);
