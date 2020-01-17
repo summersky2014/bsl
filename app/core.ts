@@ -60,14 +60,15 @@ function push(nextProps: AppProps): void {
   if (currentPage?.pageActive) {
     currentPage.pageActive();
   }
+  appData.scrollLocation.push(window.scrollY);
   window.scrollTo(0, 0);
 }
 
 /** 卸载一个页面 */
 function pop(nextProps: AppProps): void {
-  const top = appData.scrollLocation[appData.scrollLocation.length - 1];
+  const top = appData.scrollLocation[appData.scrollLocation.length - 2];
   const currentPage = getPrevPageClassDeclaration(1)!;
-
+  
   // 页面的离开事件
   if (currentPage?.pageLeave) {
     currentPage.pageLeave();
@@ -83,11 +84,13 @@ function pop(nextProps: AppProps): void {
       toPage.entrytime = Date.now();
     }
   }
-
+  
   appData.pages.pop();
   appData.scrollLocation.pop();
   appData.currentPageId--;
-  window.scrollTo(0, top);
+  setTimeout(() => {
+    window.scrollTo(0, top);
+  });
 }
 
 export {
