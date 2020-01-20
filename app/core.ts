@@ -60,14 +60,14 @@ function push(nextProps: AppProps): void {
   if (currentPage?.pageActive) {
     currentPage.pageActive();
   }
-  appData.scrollLocation.push(window.scrollY);
   window.scrollTo(0, 0);
 }
 
 /** 卸载一个页面 */
 function pop(nextProps: AppProps): void {
-  const top = appData.scrollLocation[appData.scrollLocation.length - 2];
+  const top = appData.scrollLocation[appData.scrollLocation.length - 1];
   const currentPage = getPrevPageClassDeclaration(1)!;
+  console.log(appData.scrollLocation, top);
   
   // 页面的离开事件
   if (currentPage?.pageLeave) {

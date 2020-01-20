@@ -88,6 +88,7 @@ const Link = (props: Props) => {
 };
 
 Link.go = function(params: Omit<Params, 'replace'>): void {
+  appData.scrollLocation.push(window.scrollY);
   link({ ...params, replace: false });
 };
 Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void {
