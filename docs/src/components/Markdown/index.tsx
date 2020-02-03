@@ -18,7 +18,7 @@ function Markdown(props: Props) {
       const length = linkElem.length;
 
       for (let i = 0; i < length; i++) {
-        if (linkElem[0].href.indexOf(location.host) < 0) {
+        if (linkElem[0].href.indexOf(location.host) < 0 || linkElem[0].href.indexOf('/#/') === -1) {
           linkElem[0].target = '_blank';
         } else {
           linkElem[0].onclick = (e) => {

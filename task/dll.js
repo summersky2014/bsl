@@ -13,8 +13,7 @@ const vendors = [
     'exif-js',
     'immer',
     'create-subscription',
-    'intersection-observer',
-    '@tweenjs/tween.js'
+    'intersection-observer'
 ];
 module.exports = {
     output: {

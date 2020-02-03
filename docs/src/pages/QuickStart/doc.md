@@ -20,3 +20,7 @@
 ## 安装
 
 <code>npm i bsl</code>
+
+## 项目模板
+
+[下载模板](/docs/vender/project-templete.zip)

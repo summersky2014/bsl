@@ -28,13 +28,11 @@ export default function webpackConfig(params: WebpackConfig): Config {
   const tsInclude = params.tsInclude || [];
   const plugins = [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(env),
-        version: JSON.stringify(version),
-        outputDir: JSON.stringify(outputDir),
-        publicPath: JSON.stringify(publicPath),
-        addVersion: JSON.stringify(addVersion)
-      }
+      'process.env.NODE_ENV': JSON.stringify(env),
+      'process.env.version': JSON.stringify(version),
+      'process.env.outputDir': JSON.stringify(outputDir),
+      'process.env.publicPath': JSON.stringify(publicPath),
+      'process.env.addVersion': JSON.stringify(addVersion)
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new SpriteLoaderPlugin(),
