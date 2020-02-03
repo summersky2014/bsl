@@ -23,4 +23,4 @@
 
 ## 项目模板
 
-[下载模板](/docs/vender/project-templete.zip)
+[下载模板](/docs/venders/project-templete.zip)
