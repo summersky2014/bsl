@@ -67,7 +67,6 @@ function push(nextProps: AppProps): void {
 function pop(nextProps: AppProps): void {
   const top = appData.scrollLocation[appData.scrollLocation.length - 1];
   const currentPage = getPrevPageClassDeclaration(1)!;
-  console.log(appData.scrollLocation, top);
   
   // 页面的离开事件
   if (currentPage?.pageLeave) {
