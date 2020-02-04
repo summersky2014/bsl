@@ -76,7 +76,6 @@ function HorizontalScroll(props: Props) {
         scroll.current = new BetterScroll.default(elemRef.current, {
           scrollX: true,
           scrollY: false,
-          bindToWrapper: true,
           eventPassthrough: 'vertical'
         });
         setInited(true);

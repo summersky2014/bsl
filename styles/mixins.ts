@@ -33,7 +33,7 @@ export function ellipsis(): React.CSSProperties {
   };
 };
 
-export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bottom'): Record<string, React.CSSProperties> {
+export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bottom'): Record<string, React.CSSProperties | string> {
   let directionStyle!: React.CSSProperties;
   switch (direction) {
     case 'left':
@@ -69,6 +69,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
       };
   }
   return {
+    position: 'relative',
     ':after': {
       content: '""', 
       position: 'absolute', 
