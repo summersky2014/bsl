@@ -97,13 +97,15 @@ function initCascadeData(props: Props) {
   const newAllValue: Value[] = [];
 
   const each = (data: Data, index: number) => {
-    newAllValue[index] = {
-      value: data.value,
-      label: data.label
-    };
+    if (data) {
+      newAllValue[index] = {
+        value: data.value,
+        label: data.label
+      };
 
-    if (data.children && data.children.length) {
-      each(data.children[0], ++index);
+      if (data.children && data.children.length) {
+        each(data.children[0], ++index);
+      }
     }
   };
 

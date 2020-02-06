@@ -1,6 +1,6 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
 
-const size: React.CSSProperties = {
+const size: StyleDeclaration = {
   width: 19,
   height: 19
 };
@@ -9,11 +9,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignContent: 'center'
   },
-  select: size as any,
-  unselect: Object.assign({}, size, {
+  select: size,
+  unselect: {
+    ...size,
     border: '1px solid #aeaeae',
     borderRadius: '50%'
-  }),
+  },
   text: {
     fontSize: 14,
     color: '#000',

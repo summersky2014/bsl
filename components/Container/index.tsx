@@ -19,7 +19,6 @@ export interface Props extends BSL.ComponentProps {
 }
 
 const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>) => {
-  // @ts-ignore
   const {
     className, style, flexDirection, flexWrap, justifyContent, alignItems, alignContent, children, order, id,
     flex, alignSelf, onClick

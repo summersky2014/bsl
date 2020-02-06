@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { StyleDeclaration } from 'aphrodite/no-important';
 
-export const ellipsisStyle: React.CSSProperties = {
+export const ellipsisStyle: StyleDeclaration = {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   wordWrap: 'break-word'
@@ -14,7 +14,7 @@ export function rem(value: number) {
  * 多行多余字符省略
  * @param $lines 省略行数
  */
-export function ellipsisLines(lines?: number): React.CSSProperties {
+export function ellipsisLines(lines?: number): StyleDeclaration {
   return {
     display: '-webkit-box;',
     WebkitLineClamp: lines,
@@ -25,7 +25,7 @@ export function ellipsisLines(lines?: number): React.CSSProperties {
 };
 
 /** 单行省略 */
-export function ellipsis(): React.CSSProperties {
+export function ellipsis(): StyleDeclaration {
   return {
     width: 'auto',
     whiteSpace: 'nowrap',
@@ -33,8 +33,8 @@ export function ellipsis(): React.CSSProperties {
   };
 };
 
-export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bottom'): Record<string, React.CSSProperties | string> {
-  let directionStyle!: React.CSSProperties;
+export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bottom'): Record<string, StyleDeclaration | string> {
+  let directionStyle!: StyleDeclaration;
   switch (direction) {
     case 'left':
       directionStyle = {
@@ -83,8 +83,8 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
 }
 
 /** 清除浮动 */
-export function clearfix(): Record<string, React.CSSProperties> {
-  const common: React.CSSProperties= {
+export function clearfix(): Record<string, StyleDeclaration> {
+  const common: StyleDeclaration= {
     content: '""',
     display: 'table'
   };

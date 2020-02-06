@@ -1,6 +1,6 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
 
-const cirleAnim: Record<string, React.CSSProperties> = {
+const cirleAnim: Record<string, StyleDeclaration> = {
   '100%': {
     transform: 'rotate(360deg) translateZ(0)'
   }

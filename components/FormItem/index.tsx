@@ -66,6 +66,7 @@ function FormItem(props: Props) {
     itemRef.current!.addEventListener('focus', onFocus);
     itemRef.current!.addEventListener('blur', onBlur);
 
+    setPromptIconVisible();
     return () => {
       if (listenerCallback.current) {
         clearTimeOut(listenerCallback.current);
@@ -75,7 +76,7 @@ function FormItem(props: Props) {
       itemRef.current!.removeEventListener('blur', onBlur);
     };
   }, []);
-
+  
   return (
     <Container
       alignItems="center"
@@ -85,7 +86,7 @@ function FormItem(props: Props) {
       ref={containerRef}
     >
       {children}
-      <div className={classNames(css(styles.pormptBox), `${prefixCls}-pormptBox`)}>
+      <div className={classNames(css(promptVisible && styles.pormptBox), `${prefixCls}-pormptBox`)}>
         <Icon
           className={classNames(css(styles.prompt), `${prefixCls}-prompt`)}
           src={svgFile.prompt}

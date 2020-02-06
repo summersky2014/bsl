@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     fill: 'currentColor',
-    marginLeft: 10,
+    marginLeft: 5,
     width: 12,
     height: 12,
     position: 'relative',

@@ -1,7 +1,7 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
 import { border } from '../../styles/mixins';
 
-const buttonStyle: React.CSSProperties = {
+const buttonStyle: StyleDeclaration = {
   flex: 1,
   textAlign: 'center',
   fontSize: 18,
@@ -40,15 +40,18 @@ const styles = StyleSheet.create({
     position: 'relative',
     padding: '13px 0'
   },
-  dismiss: Object.assign(buttonStyle, {
+  dismiss: {
+    ...buttonStyle,
     color: '#e94f4f'
-  }),
-  ok: Object.assign(buttonStyle, {
+  },
+  ok: {
+    ...buttonStyle,
     color: '#09bb07'
-  }),
-  button: Object.assign(buttonStyle, {
+  },
+  button: {
+    ...buttonStyle,
     color: '#09bb07'
-  }),
+  },
   sep: {
     ...border('#d2d3d5', 'left'),
     width: 1,

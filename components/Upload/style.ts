@@ -1,6 +1,6 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
 
-const icon: React.CSSProperties = {
+const icon: StyleDeclaration = {
   position: 'absolute',
   left: '50%',
   top: '50%',
@@ -14,16 +14,18 @@ const styles = StyleSheet.create({
     border: '1px solid #cccccc',
     position: 'relative'
   },
-  addIcon: Object.assign({}, icon, {
+  addIcon: {
+    ...icon,
     width: 28,
     height: 28,
     fill: '#cccccc'
-  }),
-  fileIcon: Object.assign({}, icon, {
+  },
+  fileIcon: {
+    ...icon,
     width: 40,
     height: 40,
     fill: '#6a7fa5'
-  }),
+  },
   input: {
     position: 'absolute',
     top: 0,

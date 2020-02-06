@@ -1,8 +1,8 @@
 import { StyleSheet } from 'aphrodite/no-important';
 
 const iconStyles = {
-  width: 20,
-  height: 20,
+  width: 19,
+  height: 19,
   borderRadius: '50%',
   cursor: 'pointer'
 };

@@ -1,12 +1,12 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
 
-const popupEffect: React.CSSProperties = {
+const popupEffect: StyleDeclaration = {
   animationDuration: '0.3s',
   animationFillMode: 'both',
   animationTimingFunction: 'cubic-bezier(0.55, 0, 0.55, 0.2)',
   animationPlayState: 'running'
 };
-const rmcPopupPickerFadeIn: Record<string, React.CSSProperties> = {
+const rmcPopupPickerFadeIn: Record<string, StyleDeclaration> = {
   '0%': {
     opacity: 0
   },
@@ -14,7 +14,7 @@ const rmcPopupPickerFadeIn: Record<string, React.CSSProperties> = {
     opacity: 1
   }
 };
-const rmcPopupPickerFadeOut: Record<string, React.CSSProperties> = {
+const rmcPopupPickerFadeOut: Record<string, StyleDeclaration> = {
   '0%': {
     opacity: 1
   },
@@ -22,7 +22,7 @@ const rmcPopupPickerFadeOut: Record<string, React.CSSProperties> = {
     opacity: 0
   }
 };
-const rmcPopupPickerSlideFadeIn: Record<string, React.CSSProperties> = {
+const rmcPopupPickerSlideFadeIn: Record<string, StyleDeclaration> = {
   '0%': {
     transform: 'translate3d(0, 100%, 0)'
   },
@@ -30,7 +30,7 @@ const rmcPopupPickerSlideFadeIn: Record<string, React.CSSProperties> = {
     transform: 'translate3d(0, 0, 0)'
   }
 };
-const rmcPopupPickerSlideFadeOut: Record<string, React.CSSProperties> = {
+const rmcPopupPickerSlideFadeOut: Record<string, StyleDeclaration> = {
   '0%': {
     transform: 'translate3d(0, 0, 0)'
   },
@@ -39,20 +39,24 @@ const rmcPopupPickerSlideFadeOut: Record<string, React.CSSProperties> = {
   }
 };
 const styles = StyleSheet.create({
-  fadein: Object.assign({}, popupEffect, {
+  fadein: {
+    ...popupEffect,
     opacity: 0,
     animationName: rmcPopupPickerFadeIn
-  }),
-  fadeout:  Object.assign({}, popupEffect, {
+  },
+  fadeout: {
+    ...popupEffect,
     animationName: rmcPopupPickerFadeOut
-  }),
-  enter: Object.assign({}, popupEffect, {
+  },
+  enter: {
+    ...popupEffect,
     transform: 'translate3d(0, 100%, 0)',
     animationName: rmcPopupPickerSlideFadeIn
-  }),
-  leave: Object.assign({}, popupEffect, {
+  },
+  leave: {
+    ...popupEffect,
     animationName: rmcPopupPickerSlideFadeOut
-  })
+  }
 });
 
 export default styles;

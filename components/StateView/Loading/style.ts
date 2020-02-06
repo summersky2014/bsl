@@ -1,6 +1,6 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
 
-const Animasearch: Record<string, React.CSSProperties> = {
+const Animasearch: Record<string, StyleDeclaration> = {
   '0%': {
     transform: 'scale(1)',
     opacity: 1
@@ -19,7 +19,7 @@ const Animasearch: Record<string, React.CSSProperties> = {
   }
 };
 
-const rotate: Record<string, React.CSSProperties> = {
+const rotate: Record<string, StyleDeclaration> = {
   '0%': {
     transform: 'rotate(0)',
     clip: 'rect(0px, 35px, 35px, 0px)'
@@ -33,7 +33,7 @@ const rotate: Record<string, React.CSSProperties> = {
   }
 };
 
-const rotate2: Record<string, React.CSSProperties> = {
+const rotate2: Record<string, StyleDeclaration> = {
   '0%': {
     transform: 'rotate(0deg)',
     clip: 'rect(0px, 164px, 150px, 0px)'
@@ -58,7 +58,7 @@ function hex() {
     [6, 36, -21],
     [7, 36, 21]
   ];
-  const style: Record<string, React.CSSProperties> = {};
+  const style: Record<string, StyleDeclaration> = {};
   data.forEach((item) => {
     style[`hex_${item[0]}`] = {
       top: item[1],

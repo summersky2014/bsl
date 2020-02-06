@@ -1,7 +1,7 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
 
 function createOrder() {
-  const order: Record<string, React.CSSProperties> = {};
+  const order: Record<string, StyleDeclaration> = {};
   for (let i = 0; i < 10; i++) {
     order[`order-${i}`] = {
       order: i
@@ -12,7 +12,7 @@ function createOrder() {
 }
 
 function createFlex() {
-  const flex: Record<string, React.CSSProperties> = {};
+  const flex: Record<string, StyleDeclaration> = {};
   for (let i = 0; i < 10; i++) {
     flex[`flex-${i}`] = {
       flex: i
