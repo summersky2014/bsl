@@ -41,6 +41,7 @@ interface ShowProps extends Omit<Props, 'visible'> {
 }
 
 let container: HTMLElement | null = null;
+const prefixCls = 'bsl-modal';
 function Modal(props: Props) {
   const { title, okText, dismissText, children, onlyOk } = props;
   const [stateVisible, setStateVisible] = React.useState(false);
@@ -78,23 +79,23 @@ function Modal(props: Props) {
 
   return (
     <Mask
-      contentCls={classNames(css(styles.root), props.className)}
+      contentCls={classNames(css(styles.root), prefixCls, props.className)}
       style={props.style}
       id={props.id}
       visible={realVisible}
       closable={false}
     >
-      {title ? <div className={css(styles.title)}>{title}</div> : null}
-      <div className={css(styles.body)}>{children}</div>
-      <Container className={css(styles.footer)} justifyContent="space-between">
+      {title ? <div className={classNames(css(styles.title), `${prefixCls}-title`)}>{title}</div> : null}
+      <div className={classNames(css(styles.body), `${prefixCls}-body`)}>{children}</div>
+      <Container className={classNames(css(styles.footer), `${prefixCls}-footer`)} justifyContent="space-between">
         {!onlyOk ? (
           <React.Fragment>
-            <div className={css(styles.dismiss)} onClick={onClose} >{dismissText || '取消'}</div>
-            <div className={css(styles.sep)} />
-            <div className={css(styles.ok)} onClick={onOk}>{okText || '确定'}</div>
+            <div className={classNames(css(styles.dismiss), `${prefixCls}-dismiss`)} onClick={onClose} >{dismissText || '取消'}</div>
+            <div className={classNames(css(styles.sep), `${prefixCls}-sep`)} />
+            <div className={classNames(css(styles.ok), `${prefixCls}-ok`)} onClick={onOk}>{okText || '确定'}</div>
           </React.Fragment>
         ) : (
-          <div className={css(styles.button)} onClick={onOk}>{okText || '知道了'}</div>
+          <div className={classNames(css(styles.button), `${prefixCls}-button`)} onClick={onOk}>{okText || '知道了'}</div>
         )}
       </Container>
     </Mask>
