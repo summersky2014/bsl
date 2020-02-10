@@ -27,7 +27,7 @@ const Demo = () => {
   return (
     <div>
       <h2>获取验证码</h2>
-      {/* <Countdown
+      <Countdown
         value={60000}
         label="获取验证码"
         onClick={() => {
@@ -36,7 +36,7 @@ const Demo = () => {
         }}
       >
         {(value) => <div>{Math.ceil(value.time / 1000)}秒后重试</div>}
-      </Countdown> */}
+      </Countdown>
 
       <h2>日期倒计时</h2>
       <Countdown

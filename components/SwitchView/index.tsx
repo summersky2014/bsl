@@ -51,6 +51,7 @@ function SwitchView(props: Props) {
       }
     });
   };
+  // 统计RequestView下的视图数量
   const statisticalView = (children: any) => {
     // 根据当前状态赋予对应的视图
     React.Children.forEach(children, (child) => {
@@ -99,9 +100,13 @@ function SwitchView(props: Props) {
 
   if (variable.env === 'development') {
     statisticalView(props.children);
-    Object.keys(view).forEach((item) => {
-      console.error(`缺少${item}视图，当处于${item}状态时会导致程序错误`);
-    });
+    const viewKeys = Object.keys(view);
+    // 今有在视图匹配模式下进行提示
+    if (render && viewKeys.length < 5) {
+      viewKeys.forEach((item) => {
+        console.error(`缺少${item}视图，当处于${item}状态时会导致程序错误`);
+      });
+    }
   }
 
   return render;
