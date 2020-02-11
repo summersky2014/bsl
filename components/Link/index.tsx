@@ -94,8 +94,8 @@ Link.go = function(params: Omit<Params, 'replace'>): void {
 Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void {
   link({ ...params, replace: true });
 };
-Link.goBack = function(): void {
-  appData.history!.goBack();
+Link.goBack = function(count = 1): void {
+  appData.history!.go(count);
 };
 /** 
  * 默认参数，跳转链接时自动带上 
