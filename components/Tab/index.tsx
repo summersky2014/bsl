@@ -10,6 +10,8 @@ export interface Props<T extends Value> extends BSL.ComponentProps, Pick<BasePro
   itemCls?: string;
   /** 激活选项卡的样式名 */
   activeCls?: string;
+  /** 单个选项卡文字的样式名 */
+  textCls?: string;
   onChange: (newValue: Value[]) => void;
 }
 
@@ -35,7 +37,7 @@ function Tab<T extends Value>(props: Props<T>) {
       state="undefined"
     >
       {(item, active) => (
-        <div className={classNames(`${prefixCls}-item`, props.itemCls, {
+        <div className={classNames(`${prefixCls}-item`, props.textCls, {
           [`${prefixCls}-active`]: active,
           [props.activeCls || '']: active
         })}>
