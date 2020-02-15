@@ -111,14 +111,13 @@ function Carousel(props: Props) {
         bsScroll.current = new BetterScroll.default(elemRef.current, {
           scrollX: true,
           scrollY: false,
-          momentum: false,
-          // click: true,
+          momomentum: false,
+          click: true,
           slide: {
             loop,
             threshold: 100
           },
-          bounce: false,
-          stopPropagation: true
+          bounce: false
         });
   
         bsScroll.current.on('scrollEnd', onAfterSlide);

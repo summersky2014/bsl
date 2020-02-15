@@ -94,7 +94,7 @@ Link.go = function(params: Omit<Params, 'replace'>): void {
 Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void {
   link({ ...params, replace: true });
 };
-Link.goBack = function(count = 1): void {
+Link.goBack = function(count = -1): void {
   appData.history!.go(count);
 };
 /** 

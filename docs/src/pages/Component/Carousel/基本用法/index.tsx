@@ -42,7 +42,7 @@ const Demo = () => {
         height: 150
       }}
     >
-      <img src={slide1} />
+      <img src={slide1} onClick={() => alert('点击')} />
       <img src={slide2} />
       <img src={slide3} />
     </Carousel>

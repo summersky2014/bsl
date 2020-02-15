@@ -32,7 +32,7 @@ class C extends PageComponent<any, State> {
   public pageRender(): JSX.Element {
     return (
       <React.Fragment>
-        <div id="goBack" onClick={Link.goBack}>当前页面C，点击回到上一页</div>
+        <div id="goBack" onClick={() => Link.goBack()}>当前页面C，点击回到上一页</div>
       </React.Fragment>
     );
   }
