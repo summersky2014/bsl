@@ -93,7 +93,7 @@ export default function dateformat(date: string | number | Date | Value[], mode:
   return str;
 }
 
-export  function dateformatReturnObject(date: string | number | Date | Value[]): ReturnObject {
+export function dateformatReturnObject(date: string | number | Date | Value[]): ReturnObject {
   const type = typeof date;
   let newDate: Date;
 

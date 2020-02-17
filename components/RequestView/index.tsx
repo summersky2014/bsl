@@ -7,7 +7,7 @@ import anyuseRequest, { Option as RequestOption } from '../../hooks/anyuseReques
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 
 export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
-  children?: (data: any) => any;
+  children?: (data: any, code: BSL.ResponseCode) => any;
   /** 用于刷新接口， 触发useEffect */
   refreshId?: any;
   /** 是否禁用 */
@@ -48,6 +48,7 @@ function RequestView(props: Props) {
   /** 用于重试接口，触发useEffect */
   const [retryId, setRetryId] = React.useState(0);
   const responseData = React.useRef<any>();
+  const responseCode = React.useRef<BSL.ResponseCode>();
   const typeRef = React.useRef<BSL.RequestState>('undefined');
   const paramsStr = JSON.stringify(params);
   const dataStr = JSON.stringify(data);
@@ -87,7 +88,7 @@ function RequestView(props: Props) {
     }, 300);
     request(props).then((res) => {
       cacheKey = res.cacheKey;
-      
+      responseCode.current = res.code;
       if (onFinally) {
         onFinally(res);
       }
@@ -164,7 +165,7 @@ function RequestView(props: Props) {
     >
       {typeRef.current !== 'undefined' ? (
         <SwtichView state={typeRef.current}>
-          {children(responseData.current)}
+          {children(responseData.current, responseCode.current!)}
         </SwtichView>
       ) : null}
     </div>
