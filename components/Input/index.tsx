@@ -3,8 +3,8 @@ import * as classNames from 'classnames';
 import { appData } from '../../app/core';
 import { FromTypeProps } from '../Form';
 import Helper from './Helper';
-import memoAreEqual from '../../utils/memoAreEqual';
-import variable from '../../utils/variable';
+import memoAreEqual from '../../utils/system/memoAreEqual';
+import variable from '../../utils/system/variable';
 
 type Omit_onChange = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 type Omit_onChange_value = Omit<Omit_onChange, 'value'>;

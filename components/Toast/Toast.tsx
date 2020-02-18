@@ -4,7 +4,7 @@ import { css } from 'aphrodite/no-important';
 import styles from './style';
 
 import Icon from '../Icon';
-import variable from '../../utils/variable';
+import variable from '../../utils/system/variable';
 
 const svgRootPath = variable.svgRootPath;
 const svgFile = {

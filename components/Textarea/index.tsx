@@ -7,8 +7,8 @@ import styles from './style';
 import { appData } from '../../app/core';
 import { FromTypeProps } from '../Form';
 import TextareaHelper from '../Input/Helper';
-import memoAreEqual from '../../utils/memoAreEqual';
-import variable from '../../utils/variable';
+import memoAreEqual from '../../utils/system/memoAreEqual';
+import variable from '../../utils/system/variable';
 
 interface Props extends BSL.ComponentProps, DefaultProps, FromTypeProps<string> {
   disabled?: boolean;

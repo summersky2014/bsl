@@ -1,4 +1,4 @@
-import { appData } from '../app/core';
+import { appData } from '../../app/core';
 // import PageComponent from '../app/PageComponent';
 
 type InstanceoPage<T> = T extends new (...args: any) => infer R ? R : undefined;

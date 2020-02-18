@@ -7,7 +7,7 @@ import { css } from 'aphrodite/no-important';
 import styles from './style';
 
 import ToastPure, { ToastProps } from './Toast';
-import { getContainer } from '../../utils/getContainer';
+import { getContainer } from '../../utils/system/getContainer';
 import useTimeout, {  ListenerCallback } from '../../hooks/anyuseTimeout';
 
 interface Props extends ToastProps, BSL.ComponentProps, DefaultProps {

@@ -8,7 +8,7 @@ import { RouteComponentProps } from 'react-router';
 import Icon from '../Icon';
 import Choice, { Value, Props as ChoiceProps } from '../Choice';
 import Link from '../Link';
-import memoAreEqual from '../../utils/memoAreEqual';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 interface TabBarData extends Value {
   icon: string;

@@ -4,11 +4,11 @@ import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
 
-import variable from '../../utils/variable';
+import variable from '../../utils/system/variable';
 import compressImg from './compressImg';
 import UploadView from './UploadView';
 import Icon from '../Icon';
-import memoAreEqual from '../../utils/memoAreEqual';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 

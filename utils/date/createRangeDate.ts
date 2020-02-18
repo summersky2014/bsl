@@ -1,5 +1,5 @@
-import { Data } from '../components/Picker/Item';
-import { DefaultProps } from '../components/DatePicker';
+import { Data } from '../../components/Picker/Item';
+import { DefaultProps } from '../../components/DatePicker';
 import getDaysInDate from './getDaysInDate';
 
 interface Params {

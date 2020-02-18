@@ -1,6 +1,6 @@
 import BSL from '../../typings';
 import axios, { Canceler, AxiosRequestConfig } from 'axios';
-import isHttp from '../../utils/isHttp';
+import isHttp from '../../utils/is/isHttp';
 interface OnUploadProgress extends AxiosRequestConfig {
   api: string;
   /** 上传成功 */

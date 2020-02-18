@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import produce, { Draft } from "immer";
 import { FromTypeProps } from '../../components/Form';
 import ChoiceHelper from './Helper';
-import memoAreEqual from '../../utils/memoAreEqual';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 export interface Value {
   /** 数据的唯一标示 */

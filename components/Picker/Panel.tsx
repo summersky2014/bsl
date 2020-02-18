@@ -5,7 +5,7 @@ import { css } from 'aphrodite/no-important';
 import styles from './style';
 
 import Item, { Base as ItemBase , Data, itemHeight, num, Value } from './Item';
-import variable from '../../utils/variable';
+import variable from '../../utils/system/variable';
 
 export interface Base extends ItemBase {
   /** 在onScollEnd后触发，用于判断哪些列需要保持原来的选中索引，哪些列需要初始化为0 */

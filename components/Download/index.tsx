@@ -1,7 +1,7 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import axios from 'axios';
-import memoAreEqual from '../../utils/memoAreEqual';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 interface Props extends BSL.ComponentProps, DefaultProps {
   src: string;

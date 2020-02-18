@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
-import isPassiveSupported from '../../utils/isPassiveSupported';
+import isPassiveSupported from '../../utils/is/isPassiveSupported';
 import device from '../../utils/device';
 
 export interface Props extends BSL.ComponentProps {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Dialog, { Props as DialogProps } from './Dialog';
-import { getContainer, removeContainer } from '../../utils/getContainer';
+import { getContainer, removeContainer } from '../../utils/system/getContainer';
 
 export interface Props extends DialogProps {
   /** 显示状态 */

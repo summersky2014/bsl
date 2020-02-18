@@ -3,9 +3,9 @@ import * as React from 'react';
 import SwitchView from '../SwitchView';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import useTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
-import isHttp from '../../utils/isHttp';
-import memoAreEqual from '../../utils/memoAreEqual';
-import variable from '../../utils/variable';
+import isHttp from '../../utils/is/isHttp';
+import memoAreEqual from '../../utils/system/memoAreEqual';
+import variable from '../../utils/system/variable';
 
 const imageSvg = variable.svgRootPath + require('./image.svg').id;
 interface Props extends BSL.ComponentProps, DefaultProps {

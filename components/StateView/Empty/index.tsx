@@ -2,7 +2,7 @@ import * as React from 'react';
 import Icon from '../../Icon';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
-import variable from '../../../utils/variable';
+import variable from '../../../utils/system/variable';
 
 type Render = (() => JSX.Element) | JSX.Element | undefined;
 

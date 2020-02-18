@@ -1,6 +1,6 @@
 import leftPad from './leftPad';
 import newDateFn from './newDate';
-import { Value } from '../components/Picker/Item';
+import { Value } from '../../components/Picker/Item';
 
 /**
  * 日期模式

@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
 
-import variable from '../../utils/variable';
+import variable from '../../utils/system/variable';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
 import RequestView, { Props as RequestProps } from '../RequestView';

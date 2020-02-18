@@ -8,7 +8,7 @@ import * as BetterScroll from '@better-scroll/core';
 import slidePlugins from '@better-scroll/slide';
 import Slide, { BaseProps as SlideProps } from './Slide';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
-import memoAreEqual from '../../utils/memoAreEqual';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 import Dots from './Dots';
 
 export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {

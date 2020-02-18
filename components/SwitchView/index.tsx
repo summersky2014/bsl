@@ -1,6 +1,6 @@
 import BSL from '../../typings';
 import * as React from 'react';
-import variable from '../../utils/variable';
+import variable from '../../utils/system/variable';
 
 export interface Props {
   /** 当前的状态类型 */

@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from '../Empty/style';
 
-import variable from '../../../utils/variable';
+import variable from '../../../utils/system/variable';
 import Icon from '../../Icon';
 
 type Render = (() => JSX.Element) | JSX.Element | undefined;

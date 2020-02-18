@@ -4,7 +4,7 @@ import * as styles from './index.scss';
 import * as classNames from 'classnames';
 
 import menus from '../../config/menus';
-import variable from '../../../../utils/variable';
+import variable from '../../../../utils/system/variable';
 import Container from '../../../../components/Container';
 import Icon from '../../../../components/Icon';
 import Link from '../../../../components/Link';

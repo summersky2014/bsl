@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import variable from '../../../../../../utils/variable';
+import variable from '../../../../../../utils/system/variable';
 import Icon from '../../../../../../components/Icon';
 import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';

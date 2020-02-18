@@ -7,7 +7,7 @@ import styles from './style';
 
 import Mask from '../Mask';
 import Container from '../Container';
-import { getContainer } from '../../utils/getContainer';
+import { getContainer } from '../../utils/system/getContainer';
 
 export interface Props extends BSL.ComponentProps  {
   /**

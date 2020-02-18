@@ -10,8 +10,8 @@ import Popup from '../Popup';
 import Helper from './Helper';
 import { FromTypeProps } from '../Form';
 import Icon from '../Icon';
-import variable from '../../utils/variable';
-import memoAreEqual from '../../utils/memoAreEqual';
+import variable from '../../utils/system/variable';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 
 const rightSvg = variable.svgRootPath + require('../../assets/rightArrow.svg').id;

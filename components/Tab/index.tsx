@@ -2,7 +2,7 @@ import BSL from '../../typings';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Choice, { BaseProps, Value, Props as ChoiceProps } from '../Choice';
-import memoAreEqual from '../../utils/memoAreEqual';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 export interface Props<T extends Value> extends BSL.ComponentProps, Pick<BaseProps<T>, 'data'>, Pick<ChoiceProps<T>,'itemCls'> {
   value: BaseProps<T>['value'];

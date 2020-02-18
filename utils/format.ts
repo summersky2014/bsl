@@ -11,3 +11,4 @@ export function telFormat(tel: string) {
 
   return newStr;
 }
+

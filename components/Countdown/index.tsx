@@ -1,9 +1,9 @@
 import BSL from '../../typings';
 import * as React from 'react';
 import { addListener, removeListener, ListenerCallback } from '../../app/Scheduler';
-import { dateformatReturnObject, ReturnObject } from '../../utils/dateformat';
-import newDate from '../../utils/newDate';
-import memoAreEqual from '../../utils/memoAreEqual';
+import { dateformatReturnObject, ReturnObject } from '../../utils/date/dateformat';
+import newDate from '../../utils/date/newDate';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 interface Props extends BSL.ComponentProps {
   /**

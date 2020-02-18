@@ -5,7 +5,7 @@ import { css } from 'aphrodite/no-important';
 import styles from './style';
 
 import Icon from '../Icon';
-import variable from '../../utils/variable';
+import variable from '../../utils/system/variable';
 
 const addSvg = variable.svgRootPath + require('../../assets/add.svg').id;
 const clearSvg = variable.svgRootPath + require('../../assets/clear.svg').id;

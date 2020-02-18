@@ -1,8 +1,8 @@
 import BSL from '../../typings/index';
 import * as React from 'react';
 import * as classNames from 'classnames';
-import variable from '../../utils/variable';
-import memoAreEqual from '../../utils/memoAreEqual';
+import variable from '../../utils/system/variable';
+import memoAreEqual from '../../utils/system/memoAreEqual';
 
 export interface Props extends BSL.ComponentProps {
   onClick?: BSL.OnClick<SVGElement>;
