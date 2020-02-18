@@ -1,6 +1,6 @@
 /// <reference path="./type.d.ts" />
 import { ImageView } from '../../components/Image';
-import isHttp from '../../utils/isHttp';
+import isHttp from '../../utils/is/isHttp';
 
 declare const wx: typeof WechatJSSDK;
 const { hex_sha1 } = require('./sha1.js');
@@ -134,7 +134,7 @@ export function onShare(params: OnShareParams): void {
         imgUrl,
         success: callback
       });
-    })
+    });
   });
 }
 
