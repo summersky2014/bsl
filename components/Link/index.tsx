@@ -5,8 +5,11 @@ import * as classNames from 'classnames';
 import { appData } from '../../app/core';
 
 export interface Props extends BSL.ComponentProps {
-  /** 前往的页面 */
-  to: string;
+  /** 
+   * 前往的页面
+   * 数字代表回退的页数
+   * */
+  to: string | number;
   /** 是否替换当前路由 */
   replace?: boolean;
   children?: any;
@@ -69,18 +72,18 @@ const Link = (props: Props) => {
         e.stopPropagation();
         const pathname = appData.history!.location.pathname;
 
-        if (onBefore) {
-          onBefore(pathname, to);
-        }
-
-        if (replace) {
-          link({ url: to, replace: true, query, newPage });
+        if (typeof to === 'string') {
+          if (onBefore) {
+            onBefore(pathname, to);
+          }
+          
+          link({ url: to, replace: replace ? true : false, query, newPage });
+ 
+          if (onAfter) {
+            onAfter(pathname, to);
+          }
         } else {
-          link({ url: to, replace: false, query, newPage });
-        }
-
-        if (onAfter) {
-          onAfter(pathname, to);
+          Link.back(to);
         }
       }}
     >{children}</div>
@@ -94,7 +97,7 @@ Link.go = function(params: Omit<Params, 'replace'>): void {
 Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void {
   link({ ...params, replace: true });
 };
-Link.goBack = function(count = -1): void {
+Link.back = function(count = -1): void {
   appData.history!.go(count);
 };
 /** 
