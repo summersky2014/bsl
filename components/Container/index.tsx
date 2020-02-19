@@ -6,7 +6,7 @@ import styles from './style';
 
 export interface Props extends BSL.ComponentProps {
   prefixCls?: string;
-  children?: any | any[];
+  children?: BSL.ReactElement | BSL.ReactElement[];
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
   flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
   justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
@@ -27,7 +27,7 @@ const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>
   return (
     <div
       className={classNames(css(
-        !!(justifyContent || alignItems || alignSelf || flexDirection) && styles.flex,
+        !!(justifyContent || alignItems || alignSelf || flexDirection || flexWrap) && styles.flex,
         !!flexDirection && styles[`flexDirection-${flexDirection}` as keyof typeof styles],
         !!flexWrap && styles[`flexWrap-${flexWrap}` as keyof typeof styles],
         !!justifyContent && styles[`justifyContent-${justifyContent}` as keyof typeof styles],

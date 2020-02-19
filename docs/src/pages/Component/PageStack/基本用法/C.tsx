@@ -10,29 +10,19 @@ class C extends PageComponent<any, State> {
   constructor(props: any, state: State) {
     super(props, state);
     this.init();
+    // @ts-ignore
+    window.status = 0;
   }
 
-  public didMount() {
-    // eslint-disable-next-line no-console
-    console.log('didMount');
-  }
-  // public componentDidMount(): void {
-  //   setDocumetTitle('C');
-  //   alert('componentDidMount, C页面进入了');
-  // }
-
-  public pageLeave() {
-    alert('C页面离开了');
-  }
-
-  public pageEnter() {
-    alert('C页面进入了');
+  public pageActive() {
+    // @ts-ignore
+    window.status++;
   }
 
   public pageRender(): JSX.Element {
     return (
       <React.Fragment>
-        <div id="goBack" onClick={() => Link.goBack()}>当前页面C，点击回到上一页</div>
+        <div id="replace" onClick={() => Link.replace({ url: '/' })}>回到首页</div>
       </React.Fragment>
     );
   }
