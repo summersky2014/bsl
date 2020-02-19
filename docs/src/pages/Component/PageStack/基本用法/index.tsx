@@ -37,6 +37,7 @@ class App extends React.Component {
             <HashRouter>
               <AppStack>
                 <Route exact key="a" path="/" component={A} />
+                <Route exact key="aa" path="/a" component={A} />
                 <Route exact key="b" path="/b" component={B} />
                 <Route exact key="c" path="/c" component={C} />
               </AppStack>
@@ -44,6 +45,7 @@ class App extends React.Component {
             <HashRouter>
               <Switch>
                 <Route exact key="a" path="/" component={AppTabBar} />
+                <Route exact key="a" path="/a" component={AppTabBar} />
                 <Route exact key="b" path="/b" component={AppTabBar} />
                 <Route exact key="c" path="/c" component={AppTabBar} />
               </Switch>

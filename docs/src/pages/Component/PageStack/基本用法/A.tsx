@@ -15,15 +15,12 @@ class A extends PageComponent<any, State> {
   }
 
   public state: State = {
-    status: '',
+    status: 'init',
     count: 0
   };
 
   public didMount(): void {
     setDocumetTitle('A');
-    this.setState({
-      status: 'init'
-    });
     setInterval(() => {
       this.setState({
         count: this.state.count + 1
@@ -35,8 +32,9 @@ class A extends PageComponent<any, State> {
     // push新路由后，render函数不会被触发
     return (
       <div>
-        <div id="count">{this.state.count}</div>
+        <div>{this.state.count}</div>
         <div id="Astatus">status: {this.state.status}</div>
+        <div id="Aleave">leave: false</div>
         <Link id="linkToB" to="/b">A to B</Link>
         <br/>
         <Link id="linkToC" to="/c">A to C</Link>

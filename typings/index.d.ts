@@ -9,7 +9,6 @@ declare namespace BSL {
   /** 状态类型 */
   type RequestState = 'complete' | 'empty' | 'fail'  | 'loading' | 'timeout' | 'undefined';
   type OnClick<T> = (e: React.MouseEvent<T>, ...args: any[]) => void;
-  type ReactElement = React.ReactElement<any> | (React.ReactElement<any>[]) | string | number | boolean | null | ReactElement[];
   /** 响应码 */
   type ResponseCode = (
     /** 请求成功，对应complete状态 */
