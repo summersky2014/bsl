@@ -85,7 +85,7 @@ function FormItem(props: Props) {
       className={classNames(prefixCls, className)}
       ref={containerRef}
     >
-      {children ? children : null}
+      {children}
       <div className={classNames(css(promptVisible && styles.pormptBox), `${prefixCls}-pormptBox`)}>
         <Icon
           className={classNames(css(styles.prompt), `${prefixCls}-prompt`)}

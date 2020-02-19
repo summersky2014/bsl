@@ -56,17 +56,17 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
     }
   }
 
-  /** 会在页面进入时触发，和didMount的区别在于，这个会每次触 */
+  /** 执行后退路由的操作时，会在动画完成后调用 */
   public pageEnter(): void {
     // 需要子类来实现
   }
 
-  /** 执行pop操作时，会在动画完成后调用当前页面的pageLeave */
+  /** 执行push操作时，会在动画完成后调用上一个页面的pageLeave */
   public pageLeave(): void {
     // 需要子类来实现
   }
 
-  /** pageEnter和pageLeave这2种生命周期合二为一 */
+  /** 当页面处于激活状态时触发，即后退到当前页或跳入到当前页都会触发 */
   public pageActive(): void {
     // 需要子类来实现
   }
