@@ -15,7 +15,8 @@ function createFlex() {
   const flex: Record<string, StyleDeclaration> = {};
   for (let i = 0; i < 10; i++) {
     flex[`flex-${i}`] = {
-      flex: i
+      flex: i,
+      flexGrow: i
     };
   }
 
