@@ -6,7 +6,7 @@ import Textarea from '../Textarea';
 import Picker from '../Picker';
 import Choice from '../Choice';
 import RequestView, { Props as RequestProps } from '../RequestView';
-import anyuseRequest from '../../hooks/anyuseRequest';
+import useRequest from '../../hooks/useRequest';
 
 export interface Props extends BSL.ComponentProps {
   children: JSX.Element | JSX.Element[];
@@ -75,7 +75,7 @@ function Form(props: Props) {
     className, id, style, children, onSubmitBefore, onSubmit, api, data, method, onComplete, onFail, onFinally
   } = props;
   const state = React.useRef<BSL.RequestState>('undefined');
-  const [request, cancelToken] = anyuseRequest();
+  const [request, cancelToken] = useRequest();
 
   React.useEffect(() => {
     return () => {

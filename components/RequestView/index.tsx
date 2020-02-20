@@ -3,7 +3,7 @@ import * as React from 'react';
 import { appData } from '../../app/core';
 import { ListenerCallback } from '../../app/Scheduler';
 import SwtichView from '../SwitchView';
-import anyuseRequest, { Option as RequestOption } from '../../hooks/anyuseRequest';
+import useRequest, { Option as RequestOption } from '../../hooks/useRequest';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 
 export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
@@ -42,7 +42,7 @@ function RequestView(props: Props) {
     api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled
   } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
-  const [request, cancelToken, clearCache] = anyuseRequest();
+  const [request, cancelToken, clearCache] = useRequest();
   /** 重试接口时，遇到相同状态不会重新render，dataId保证能正确执行render */
   const [, setDataId] = React.useState(0);
   /** 用于重试接口，触发useEffect */
