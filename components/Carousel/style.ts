@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     transform: 'translate3d(0, 0, 0)'
   },
   sideHidden: {
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   slideItem: {
     display: 'block',

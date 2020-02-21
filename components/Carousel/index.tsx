@@ -20,11 +20,15 @@ export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   dots?: boolean;
   /** 是否自动轮播 */
   autoplay?: boolean;
-  /** 滑动后触发的事件 */
-  onChange?: (index: number, direction: 'prev' | 'next', isAuto: boolean) => void;
   /** 是否在垂直方向开启滚动 */
   eventPassthrough?: boolean;
   refreshId?: string | number;
+  /** 调用refresh之后触发 */
+  onRefresh?: () => void;
+  /** 滑动后触发的事件 */
+  onChange?: (index: number, direction: 'prev' | 'next', isAuto: boolean) => void;
+  /** 触发时机：slide 的 currentPage 值将要改变时,先于onRefresh触发 */
+  slideWillChange?: (pageX: number) => void;
 }
 
 interface DefaultProps {
@@ -116,7 +120,7 @@ function Carousel(props: Props) {
         bsScroll.current = new BetterScroll.default(elemRef.current, {
           scrollX: true,
           scrollY: false,
-          momomentum: false,
+          momentum: false,
           eventPassthrough: eventPassthrough ? 'vertical' : undefined,
           click: true,
           slide: {
@@ -128,6 +132,13 @@ function Carousel(props: Props) {
         
         if (index !== 0) {
           bsScroll.current.goToPage(index, 0, 0, 0);
+        }
+
+        if (props.onRefresh) {
+          bsScroll.current.on('refresh', props.onRefresh);
+        }
+        if (props.slideWillChange) {
+          bsScroll.current.on('slideWillChange', props.slideWillChange);
         }
         bsScroll.current.on('scrollEnd', onAfterSlide);
         bsScroll.current.on('beforeScrollStart', onBeforeSlide);

@@ -22,6 +22,7 @@ const App = () => {
 };
 
 const Demo = () => {
+  // @ts-ignore
   const [index, setIndex] = React.useState(0);
 
   // demo演示时需要的代码，实际项目中已配置好，不需要此段代码
@@ -32,19 +33,21 @@ const Demo = () => {
   return (
     <Carousel
       index={index}
-      onChange={(i) => {
-        setIndex(i);
-      }}
-      loop
+      // onChange={(i) => {
+      //   console.log(i);
+        
+      //   setIndex(i);
+      // }}
+      // loop
       dots
-      autoplay
+      // autoplay
       style={{
         height: 150
       }}
     >
-      <img src={slide1} onClick={() => alert('点击')} />
-      <img src={slide2} />
-      <img src={slide3} />
+      <img src={slide1}  />
+      <img src={slide2}  />
+      <img src={slide3}  />
     </Carousel>
   );
 };
