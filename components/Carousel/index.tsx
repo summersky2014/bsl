@@ -24,6 +24,7 @@ export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   onChange?: (index: number, direction: 'prev' | 'next', isAuto: boolean) => void;
   /** 是否在垂直方向开启滚动 */
   eventPassthrough?: boolean;
+  refreshId?: string | number;
 }
 
 interface DefaultProps {
@@ -47,7 +48,7 @@ const defaultProps: DefaultProps = {
   goToIndexDuration: 0
 };
 function Carousel(props: Props) {
-  const { autoplay, index, children, goToIndexDuration, disabled, loop, dots, eventPassthrough } = props;
+  const { autoplay, index, children, goToIndexDuration, disabled, loop, dots, eventPassthrough, refreshId } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const elemRef = React.useRef<HTMLDivElement>(null);
   const bsScroll = React.useRef<BetterScroll.default>();
@@ -76,7 +77,7 @@ function Carousel(props: Props) {
     if (bsScroll.current) {
       bsScroll.current.refresh();
     }
-  }, [count]);
+  }, [count, refreshId]);
   
   React.useEffect(() => {
     const onBeforeSlide = () => {
