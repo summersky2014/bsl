@@ -21,12 +21,14 @@ export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   /** 是否自动轮播 */
   autoplay?: boolean;
   /** 滑动后触发的事件 */
-  onChange: (index: number, direction: 'prev' | 'next', isAuto: boolean) => void;
+  onChange?: (index: number, direction: 'prev' | 'next', isAuto: boolean) => void;
+  /** 是否在垂直方向开启滚动 */
+  eventPassthrough?: boolean;
 }
 
 interface DefaultProps {
   /** 当前的索引 */
-  index: number;
+  index?: number;
   /** 跳转到指定索引需要的时间 */
   goToIndexDuration?: number;
   /** 自动间隔时间 */
@@ -45,7 +47,7 @@ const defaultProps: DefaultProps = {
   goToIndexDuration: 0
 };
 function Carousel(props: Props) {
-  const { autoplay, index, children, goToIndexDuration, disabled, loop, dots } = props;
+  const { autoplay, index, children, goToIndexDuration, disabled, loop, dots, eventPassthrough } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const elemRef = React.useRef<HTMLDivElement>(null);
   const bsScroll = React.useRef<BetterScroll.default>();
@@ -75,7 +77,7 @@ function Carousel(props: Props) {
       bsScroll.current.refresh();
     }
   }, [count]);
- 
+  
   React.useEffect(() => {
     const onBeforeSlide = () => {
       if (autoplay && timer.current) {
@@ -90,7 +92,9 @@ function Carousel(props: Props) {
         // slide滑动的方向，通过计算索引差值来实现
         const direction = bsScroll.current.movingDirectionX === -1 ? 'prev' : 'next';
  
-        props.onChange(nowIndex, direction, slideIsAuto.current || slideIsTouch.current);
+        if (props.onChange) {
+          props.onChange(nowIndex, direction, slideIsAuto.current || slideIsTouch.current);
+        }
         slideAutoplay();
         // 还原初始化状态
         slideIsTouch.current = false;
@@ -112,6 +116,7 @@ function Carousel(props: Props) {
           scrollX: true,
           scrollY: false,
           momomentum: false,
+          eventPassthrough: eventPassthrough ? 'vertical' : undefined,
           click: true,
           slide: {
             loop,
@@ -119,7 +124,10 @@ function Carousel(props: Props) {
           },
           bounce: false
         });
-  
+        
+        if (index !== 0) {
+          bsScroll.current.goToPage(index, 0, 0, 0);
+        }
         bsScroll.current.on('scrollEnd', onAfterSlide);
         bsScroll.current.on('beforeScrollStart', onBeforeSlide);
         bsScroll.current.on('touchEnd', () => {
@@ -174,14 +182,14 @@ function Carousel(props: Props) {
     >
       {width && (
         <Slide
-          className={props.slideCls}
+          className={classNames(props.slideCls, eventPassthrough === undefined && styles.sideHidden)}
           slideWidth={width}
           loop={loop}
           slideCount={count}
         >{children}</Slide>
       )}
       {dots && count && (
-        <Dots className={props.dotCls} activeIndex={index} count={count} />
+        <Dots className={props.dotCls} activeIndex={index!} count={count} />
       )}
     </div>
   );

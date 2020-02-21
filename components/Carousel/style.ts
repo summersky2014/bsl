@@ -12,9 +12,11 @@ const styles = StyleSheet.create({
     position: 'relative',
     left: 0,
     top: 0,
-    overflow: 'hidden',
     whiteSpace: 'nowrap',
     transform: 'translate3d(0, 0, 0)'
+  },
+  sideHidden: {
+    overflow: 'hidden',
   },
   slideItem: {
     display: 'block',
