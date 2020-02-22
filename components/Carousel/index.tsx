@@ -22,7 +22,10 @@ export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   autoplay?: boolean;
   /** 是否在垂直方向开启滚动 */
   eventPassthrough?: boolean;
+  /** 更新内容重构dom */
   refreshId?: string | number;
+  /** 刷新之后是否自动跳转到当前index */
+  refreshAfterAutoGotoPage?: boolean;
   /** 调用refresh之后触发 */
   onRefresh?: () => void;
   /** 滑动后触发的事件 */
@@ -80,6 +83,9 @@ function Carousel(props: Props) {
   React.useEffect(() => {
     if (bsScroll.current) {
       bsScroll.current.refresh();
+      if (props.refreshAfterAutoGotoPage) {
+        bsScroll.current.goToPage(index, 0, 0, 0);
+      }
     }
   }, [count, refreshId]);
   
