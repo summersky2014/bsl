@@ -32,10 +32,7 @@
     "preset": "jest-puppeteer",
     "testMatch": [
       "**/__tests__/tests/**/*.spec.js"
-    ],
-    "moduleNameMapper": {
-      ".+\\.(css|scss)$": "<rootDir>/style-mock.js"
-    }
+    ]
   },
   "browserslist": [
     "Firefox > 20",
