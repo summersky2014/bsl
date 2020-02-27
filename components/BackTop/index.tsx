@@ -1,6 +1,7 @@
 import BSL from '../../typings';
 import * as React from 'react';
-
+import * as classNames from 'classnames';
+import variable from '../../utils/system/variable';
 import TWEEN from '../../utils/tween';
 import { ListenerCallback } from '../../hooks/anyuseTimeout';
 import { addListener, removeListener } from '../../app/Scheduler';
@@ -79,7 +80,7 @@ function BackTop(props: Props) {
 
   return (
     <div 
-      className={props.className}
+      className={classNames(variable.bslComponent, props.className)}
       id={props.id}
       style={{
         ...props.style,

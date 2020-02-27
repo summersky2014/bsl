@@ -55,7 +55,7 @@ const Demo = () => {
       <div style={styles.text}>11</div>
       <div style={styles.text}>12</div>
       <div style={styles.text}>13</div>
-      <BackTop style={styles.backTop}>
+      <BackTop className="test" id="backtop" style={styles.backTop}>
         <div>回到顶部</div>
       </BackTop>
     </div>

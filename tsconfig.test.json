@@ -8,7 +8,7 @@
         "inlineSources": false,
         "moduleResolution": "node",
         "module": "commonjs",
-        "target": "esnext",
+        "target": "es2015",
         "experimentalDecorators": true,
         "preserveConstEnums": true,
         "noUnusedLocals": true,

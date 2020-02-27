@@ -7,25 +7,14 @@ import '@testing-library/jest-dom/extend-expect';
 import variable from '../../utils/system/variable';
 
 describe('Icon', () => {
-  it('className', async () => {
+  it('基本功能', async () => {
     act(() => {
       ReactDOM.render((
-        <div>
-          <Icon id="test1" src="test.svg" />
-        </div>
+        <Icon id="test1" src="test.svg" />
       ), root);
     });
+
     expect(root.querySelector('#test1')).toHaveClass(variable.bslComponent);
-  });
- 
-  it('src', async () => {
-    act(() => {
-      ReactDOM.render((
-        <div>
-          <Icon id="test1" src="test.svg" />
-        </div>
-      ), root);
-    });
     expect(root.querySelector('#test1')).toContainHTML('<use xlink:href="test.svg"></use>');
   });
 });
