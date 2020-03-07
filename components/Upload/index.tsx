@@ -21,12 +21,14 @@ interface Props extends BSL.ComponentProps {
   /** 档图片模式时才有compressSrc和blob */
   onChange: (e: ChangeEvent, file: File, compressSrc?: string, blob?: Blob) => void;
   onRemove?: () => void;
+  /** 点击加号 */
+  onAddClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
 }
 
 const fileSvg = variable.svgRootPath + require('../../assets/file.svg').id;
 const prefixCls = 'bsl-upload';
 function Upload(props: Props) {
-  const { className, disabled, mode } = props;
+  const { className, disabled, mode, onAddClick } = props;
   const target = React.useRef<HTMLInputElement | null>(null);
   const [src, setSrc] = React.useState(props.src || '');
   const onChange = (e: ChangeEvent) => {
@@ -60,10 +62,12 @@ function Upload(props: Props) {
 
     setSrc('');
   };
-
+  
   React.useEffect(() => {
     if (props.src !== undefined) {
       setSrc(props.src);
+    } else {
+      setSrc('');
     }
 
     if (props.src === '' && target.current) {
@@ -93,6 +97,11 @@ function Upload(props: Props) {
         onChange={onChange}
         disabled={!!src || disabled}
         accept={mode === 'image' ? 'image/*' : undefined}
+        onClick={(event) => {
+          if (onAddClick) {
+            onAddClick(event);
+          }
+        }}
       />
       {mode === 'image' ? (
         <img className={classNames(css(styles.img), variable.bslComponent, `${prefixCls}-img`)} src={src} data-hide={!src} />
