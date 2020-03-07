@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.94",
+  "version": "0.0.95",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -102,7 +102,7 @@
     "@types/react-syntax-highlighter": "^11.0.1",
     "@types/react-test-renderer": "^16.9.0",
     "@types/showdown": "^1.9.3",
-    "antd": "^3.26.12",
+    "antd": "^4.0.1",
     "copy-webpack-plugin": "^5.0.2",
     "http-server": "^0.11.1",
     "jest": "^25.1.0",

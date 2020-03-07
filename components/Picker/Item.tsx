@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import styles from './style';
 import { css } from 'aphrodite/no-important';
 
-import * as BetterScroll from '@better-scroll/core';
+import BetterScroll from '@better-scroll/core';
 import Wheel from '@better-scroll/wheel';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 
@@ -51,7 +51,7 @@ function calcNum(): number {
   return value;
 }
 
-BetterScroll.default.use(Wheel);
+BetterScroll.use(Wheel);
 export const num: number = calcNum();
 const prefixCls = 'bsl-picker-item';
 const textStyleCls = css(styles.itemText);
@@ -66,7 +66,7 @@ function getIndex(data: Data[], value: Value) {
 function Item(props: Props) {
   const { itemCls, textCls } = props;
   const elemRef = React.useRef<HTMLDivElement>(null);
-  const wheel = React.useRef<BetterScroll.default>();
+  const wheel = React.useRef<BetterScroll>();
   const propsData = React.useRef<Data[]>();
   const isDidUpdate = React.useRef(false);
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
@@ -89,7 +89,7 @@ function Item(props: Props) {
     const onScrollEnd = () => {
       setTimeOut(timer, 16);
     };
-    wheel.current = new BetterScroll.default(elemRef.current!, {
+    wheel.current = new BetterScroll(elemRef.current!, {
       scrollX: false,
       scrollY: true,
       wheel: {

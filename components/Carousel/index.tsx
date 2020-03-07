@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
 
-import * as BetterScroll from '@better-scroll/core';
+import BetterScroll from '@better-scroll/core';
 import slidePlugins from '@better-scroll/slide';
 import Slide, { BaseProps as SlideProps } from './Slide';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
@@ -46,7 +46,7 @@ interface DefaultProps {
 }
 
 const prefixCls = 'bsl-carousel';
-BetterScroll.default.use(slidePlugins);
+BetterScroll.use(slidePlugins);
 
 const defaultProps: DefaultProps = {
   index: 0,
@@ -58,7 +58,7 @@ function Carousel(props: Props) {
   const { autoplay, index, children, goToIndexDuration, disabled, loop, dots, eventPassthrough, refreshId } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const elemRef = React.useRef<HTMLDivElement>(null);
-  const bsScroll = React.useRef<BetterScroll.default>();
+  const bsScroll = React.useRef<BetterScroll>();
   const timer = React.useRef<ListenerCallback>();
   /** 是否是自动轮播触发的滑动 */
   const slideIsAuto = React.useRef(false);
@@ -123,7 +123,7 @@ function Carousel(props: Props) {
           console.error('Carousel组件容器上没有高度，有可能会导致程序错误');
         }
         bsScroll.current?.destroy();
-        bsScroll.current = new BetterScroll.default(elemRef.current, {
+        bsScroll.current = new BetterScroll(elemRef.current, {
           scrollX: true,
           scrollY: false,
           momentum: false,

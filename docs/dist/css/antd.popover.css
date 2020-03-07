@@ -10,7 +10,7 @@
   color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
   font-variant: tabular-nums;
-  line-height: 1.5;
+  line-height: 1.5715;
   list-style: none;
   -webkit-font-feature-settings: 'tnum';
           font-feature-settings: 'tnum';
@@ -31,6 +31,10 @@
   position: absolute;
   background: rgba(255, 255, 255, 0.01);
   content: '';
+}
+.ant-popover-rtl {
+  direction: rtl;
+  text-align: right;
 }
 .ant-popover-hidden {
   display: none;
@@ -58,9 +62,9 @@
 .ant-popover-inner {
   background-color: #fff;
   background-clip: padding-box;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15) \9;
           box-shadow: 0 0 8px rgba(0, 0, 0, 0.15) \9;
 }
@@ -69,8 +73,8 @@
     /* IE10+ */
   }
   .ant-popover-inner {
-    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   }
 }
 .ant-popover-title {
@@ -80,7 +84,7 @@
   padding: 5px 16px 4px;
   color: rgba(0, 0, 0, 0.85);
   font-weight: 500;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #f0f0f0;
 }
 .ant-popover-inner-content {
   padding: 12px 16px;
@@ -101,12 +105,23 @@
 .ant-popover-message-title {
   padding-left: 22px;
 }
+.ant-popover-rtl .ant-popover-message-title {
+  padding-right: 22px;
+  padding-left: 16px;
+}
 .ant-popover-buttons {
   margin-bottom: 4px;
   text-align: right;
 }
+.ant-popover-rtl .ant-popover-buttons {
+  text-align: left;
+}
 .ant-popover-buttons button {
   margin-left: 8px;
+}
+.ant-popover-rtl .ant-popover-buttons button {
+  margin-right: 8px;
+  margin-left: 0;
 }
 .ant-popover-arrow {
   position: absolute;
@@ -117,7 +132,6 @@
   border-style: solid;
   border-width: 4.24264069px;
   -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 .ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow,
@@ -134,7 +148,6 @@
 .ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow {
   left: 50%;
   -webkit-transform: translateX(-50%) rotate(45deg);
-      -ms-transform: translateX(-50%) rotate(45deg);
           transform: translateX(-50%) rotate(45deg);
 }
 .ant-popover-placement-topLeft > .ant-popover-content > .ant-popover-arrow {
@@ -157,7 +170,6 @@
 .ant-popover-placement-right > .ant-popover-content > .ant-popover-arrow {
   top: 50%;
   -webkit-transform: translateY(-50%) rotate(45deg);
-      -ms-transform: translateY(-50%) rotate(45deg);
           transform: translateY(-50%) rotate(45deg);
 }
 .ant-popover-placement-rightTop > .ant-popover-content > .ant-popover-arrow {
@@ -180,7 +192,6 @@
 .ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow {
   left: 50%;
   -webkit-transform: translateX(-50%) rotate(45deg);
-      -ms-transform: translateX(-50%) rotate(45deg);
           transform: translateX(-50%) rotate(45deg);
 }
 .ant-popover-placement-bottomLeft > .ant-popover-content > .ant-popover-arrow {
@@ -203,7 +214,6 @@
 .ant-popover-placement-left > .ant-popover-content > .ant-popover-arrow {
   top: 50%;
   -webkit-transform: translateY(-50%) rotate(45deg);
-      -ms-transform: translateY(-50%) rotate(45deg);
           transform: translateY(-50%) rotate(45deg);
 }
 .ant-popover-placement-leftTop > .ant-popover-content > .ant-popover-arrow {

@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
 import styles from './style';
 
-import * as BetterScroll from '@better-scroll/core';
+import BetterScroll from '@better-scroll/core';
 
 export interface Props extends BSL.ComponentProps {
   children: JSX.Element[] | JSX.Element;
@@ -23,7 +23,7 @@ function getNumberByComputed(computed: string | null): number {
 function HorizontalScroll(props: Props) {
   const elemRef = React.useRef<HTMLDivElement>(null);
   const wrapRef = React.useRef<HTMLDivElement>(null);
-  const scroll = React.useRef<BetterScroll.default>();
+  const scroll = React.useRef<BetterScroll>();
   /** 上一次容器的宽度 */
   const prevFrameWidth = React.useRef<number>();
   const [scrollWidth, setScrollWidth] = React.useState<string | number>('inherit');
@@ -73,7 +73,7 @@ function HorizontalScroll(props: Props) {
       if (scroll.current) {
         scroll.current.destroy();
       } else if (elemRef.current) {
-        scroll.current = new BetterScroll.default(elemRef.current, {
+        scroll.current = new BetterScroll(elemRef.current, {
           scrollX: true,
           scrollY: false,
           eventPassthrough: 'vertical'

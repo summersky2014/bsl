@@ -33,14 +33,12 @@ const Demo = () => {
   return (
     <Carousel
       index={index}
-      // onChange={(i) => {
-      //   console.log(i);
-        
-      //   setIndex(i);
-      // }}
-      // loop
+      onChange={(i) => {
+        setIndex(i);
+      }}
+      loop
       dots
-      // autoplay
+      autoplay
       style={{
         height: 150
       }}

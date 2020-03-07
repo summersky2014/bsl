@@ -1,6 +1,6 @@
 import BSL from '../../../typings';
 import * as React from 'react';
-import * as BetterScroll from '@better-scroll/core';
+import BetterScroll from '@better-scroll/core';
 
 export interface Props extends BSL.ComponentProps {
   children: any;
@@ -10,7 +10,7 @@ export interface Props extends BSL.ComponentProps {
 function VerticalScroll(props: Props) {
   const { className, style, children, contentCls, id } = props;
   const elemRef = React.useRef<HTMLDivElement>(null);
-  const scroll = React.useRef<BetterScroll.default>();
+  const scroll = React.useRef<BetterScroll>();
   
   React.useEffect(() => {
     if (scroll.current) {
@@ -19,7 +19,7 @@ function VerticalScroll(props: Props) {
   });
 
   React.useEffect(() => {
-    scroll.current = new BetterScroll.default(elemRef.current!, {
+    scroll.current = new BetterScroll(elemRef.current!, {
       scrollX: false,
       scrollY: true,
       eventPassthrough: 'horizontal'

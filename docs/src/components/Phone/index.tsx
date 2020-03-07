@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as style from './index.scss';
 import * as QRCode from 'qrcode.react';
-import Icon from 'antd/es/icon';
+import { QrcodeOutlined } from '@ant-design/icons';
 import Popover from 'antd/es/popover';
 
 export interface Props {
@@ -21,7 +21,7 @@ function Phone(props: Props) {
             <div className={style.weixinBarTitle}>鼠标放到右侧二维码上可以扫</div>
           </div>
           <Popover content={<QRCode value={url} />}>
-            <Icon className={style.qrcodeIcon} type="qrcode" />
+            <QrcodeOutlined className={style.qrcodeIcon} />
           </Popover>
         </div>
       </div>
