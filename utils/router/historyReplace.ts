@@ -7,10 +7,17 @@ interface ExtendsWinodw extends Window {
 
 declare const window: ExtendsWinodw;
 
+function getValue(value: string | undefined | null) {
+  if (value && value !== 'undefined' && value !== 'null') {
+    return value;
+  }
+  return '';
+}
+
 function getRoute(): string | null {
   const urlp = new URLSearchParams(window.location.search);
-  const routeKey = urlp.get('route') ||  urlp.get('?route') || urlp.get('%3Froute') || urlp.get('%3froute') || window.route;
-  const forward = urlp.get('forward') ||  urlp.get('?forward') || urlp.get('%3Fforward') || urlp.get('%3fforward') || window.forward;
+  const routeKey = getValue(urlp.get('route')) || getValue(urlp.get('?route')) || getValue(urlp.get('%3Froute')) || getValue(urlp.get('%3froute')) || window.route;
+  const forward = getValue(urlp.get('forward')) || getValue(urlp.get('?forward')) || getValue(urlp.get('%3Fforward')) || getValue(urlp.get('%3fforward')) || window.forward;
 
   return routeKey || forward;
 }
@@ -31,7 +38,7 @@ function hexToString(hex: string): string {
 
 export default function historyReplace(customRoute?: string): void {
   const hash = window.location.hash;
-
+  
   // 如果有自定义路由，优先跳转自定义路由
   if (customRoute) {
     const history = History.createHashHistory();
