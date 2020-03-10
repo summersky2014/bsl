@@ -76,9 +76,10 @@ function compressImg(file: File, afterWidth: number): Promise<[string, Blob] | u
         orientation = parseInt(EXIF.getTag(image.src, 'Orientation'));
         orientation = orientation ? orientation : 1;
       });
-
+      // 只对图片做放小图片，如果图片本来比屏幕尺寸小就使用本身的尺寸
+      const width = afterWidth < upImgWidth ? afterWidth : upImgWidth;
       //压缩换算后的图片高度
-      const afterHeight = afterWidth * upImgHeight / upImgWidth;
+      const afterHeight = width * upImgHeight / upImgWidth;
 
       if (upImgWidth < 10 || upImgWidth < 10) {
         alert('请不要上传过小的图片');

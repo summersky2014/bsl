@@ -9,6 +9,7 @@ import compressImg from './compressImg';
 import UploadView from './UploadView';
 import Icon from '../Icon';
 import memoAreEqual from '../../utils/system/memoAreEqual';
+import device from '../../utils/device';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -39,7 +40,7 @@ function Upload(props: Props) {
     if (files) {
       const file = files[0];
       if (mode === 'image') {
-        compressImg(file, 750).then((result) => {
+        compressImg(file, device.width * devicePixelRatio).then((result) => {
           if (result) {
             setSrc(result[0]);
             props.onChange(e, file, result[0], result[1]);
@@ -96,7 +97,7 @@ function Upload(props: Props) {
         type="file"
         onChange={onChange}
         disabled={!!src || disabled}
-        accept={mode === 'image' ? 'image/*' : undefined}
+        accept={mode === 'image' ? 'image/gif,image/jpeg,image/jpg,image/png' : undefined}
         onClick={(event) => {
           if (onAddClick) {
             onAddClick(event);
