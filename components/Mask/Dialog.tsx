@@ -53,6 +53,7 @@ function Dialog(props: Props) {
         document.body.style.overflow = '';
       }
       if (elemRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         elemRef.current.removeEventListener('touchmove', stopPropagation);
       }
     };

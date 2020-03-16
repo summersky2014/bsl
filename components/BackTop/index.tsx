@@ -76,6 +76,7 @@ function BackTop(props: Props) {
       removeListener(listenerCallback);
       props.target!.removeEventListener('scroll', setVisible);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

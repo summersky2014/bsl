@@ -87,6 +87,7 @@ function Carousel(props: Props) {
         bsScroll.current.goToPage(index, 0, 0, 0);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, refreshId]);
   
   React.useEffect(() => {
@@ -154,6 +155,7 @@ function Carousel(props: Props) {
         });
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loop, width]);
 
   React.useEffect(() => {
@@ -179,6 +181,7 @@ function Carousel(props: Props) {
   React.useEffect(() => {
     // 初始化自动轮播
     slideAutoplay();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoplay]);
 
   React.useEffect(() => {
@@ -190,6 +193,7 @@ function Carousel(props: Props) {
         bsScroll.current.destroy();
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

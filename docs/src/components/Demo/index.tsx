@@ -19,7 +19,7 @@ function Demo(props: Props) {
     }).then((str) => {
       setCode(str.replace(/..\/..\/..\/..\/..\/../g, 'bsl'));
     });
-  }, []);
+  }, [baseUrl]);
 
   return (
     <div>

@@ -86,11 +86,11 @@ function ScrollLoader(props: Props) {
         clearTimeOut(listenerCallback.current);
       }
     };
-  }, []);
+  }, [clearTimeOut]);
 
   React.useEffect(() => {
     updateState(props.sourceDataLength % props.pageSize !== 0 && props.sourceDataLength !== 0 ? 'over' : '');
-  }, [props.sourceDataLength]);
+  }, [props.pageSize, props.sourceDataLength]);
 
   return (
     <React.Fragment>

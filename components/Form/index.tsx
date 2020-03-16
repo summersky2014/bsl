@@ -80,9 +80,11 @@ function Form(props: Props) {
   React.useEffect(() => {
     return () => {
       if (cancelToken.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         cancelToken.current();
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

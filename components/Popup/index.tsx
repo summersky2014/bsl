@@ -91,10 +91,11 @@ function Popup(props: Props) {
         clearTimeOut(lazyCloseListener.current);
       }
     };
-  }, []);
+  }, [clearTimeOut]);
 
   React.useEffect(() => {
     onAnimation(props.visible);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.visible]);
   
   return (

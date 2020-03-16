@@ -64,12 +64,14 @@ function Countdown(props: Props) {
         removeListener(countdown.current);
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time, disabled]);
 
   React.useEffect(() => {
     if (props.resetId !== undefined) {
       reset();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.resetId]);
   
   return !onClick ? (

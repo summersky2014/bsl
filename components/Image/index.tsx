@@ -114,6 +114,7 @@ function ImageView(props: Props) {
       imageObj.removeEventListener('error', onError);
       imageObj.removeEventListener('load', onLoad);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -11,7 +11,7 @@ module.exports = {
       'version': 'detect',
     }
   },
-  plugins: ['@typescript-eslint', 'react', 'jsx-control-statements'],
+  plugins: ['@typescript-eslint', 'react', 'jsx-control-statements', 'react-hooks'],
   env: {
     browser: true,
     node: true,
@@ -50,5 +50,7 @@ module.exports = {
     'react/jsx-no-undef': [2, { allowGlobals: true }],
     'jsx-control-statements/jsx-use-if-tag': 0,
     'jsx-control-statements/jsx-jcs-no-undef': 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 };

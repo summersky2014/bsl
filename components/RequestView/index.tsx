@@ -55,7 +55,7 @@ function RequestView(props: Props) {
   const initRoute = appData.currentPageId;
   const timer = React.useRef<ListenerCallback | null>();
   const prevRefreshId = React.useRef(refreshId);
-  let cacheKey: string | undefined;
+  const cacheKey = React.useRef<string>('');
   const setType = (typeValue: BSL.RequestState, res?: any) => {
     typeRef.current = typeValue;
     responseData.current = res;
@@ -87,7 +87,7 @@ function RequestView(props: Props) {
       }
     }, 300);
     request(props).then((res) => {
-      cacheKey = res.cacheKey;
+      cacheKey.current = res.cacheKey || '';
       responseCode.current = res.code;
       if (onFinally) {
         onFinally(res);
@@ -142,11 +142,12 @@ function RequestView(props: Props) {
       }
     });
     return () => {
-      if (cache === 'page' && cacheKey && initRoute !== appData.currentPageId) {
-        clearCache(cacheKey);
+      if (cache === 'page' && cacheKey.current && initRoute !== appData.currentPageId) {
+        clearCache(cacheKey.current);
       }
       
       if (cancelToken.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         cancelToken.current();
       }
 
@@ -154,7 +155,8 @@ function RequestView(props: Props) {
         clearTimeOut(timer.current);
       }
     };
-  }, [api, paramsStr, dataStr, refreshId, retryId, disiabled]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [api, paramsStr, dataStr, refreshId, retryId, disiabled, cache]);
 
   return children ? (
     <div

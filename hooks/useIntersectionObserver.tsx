@@ -43,6 +43,7 @@ export default function useIntersectionObserver(
         intersectionObserver.disconnect();
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) as IntersectionObserverExtends;
 
   React.useEffect(() => {
@@ -60,6 +61,7 @@ export default function useIntersectionObserver(
     return () => {
       intersectionObserver.disconnect();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [htmlElementRef.current]);
 
   return intersectionObserver;

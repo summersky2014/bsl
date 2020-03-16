@@ -105,8 +105,8 @@ function Menu(props: Props) {
       }
     });
     setUpdateId(Date.now());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   return (
     <div className={styles.component}>

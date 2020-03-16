@@ -75,6 +75,7 @@ function FormItem(props: Props) {
       itemRef.current!.removeEventListener('focus', onFocus);
       itemRef.current!.removeEventListener('blur', onBlur);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (

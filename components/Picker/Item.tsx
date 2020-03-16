@@ -112,6 +112,7 @@ function Item(props: Props) {
       }
       clearTimeOut(timer);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -124,6 +125,7 @@ function Item(props: Props) {
     }
     propsData.current = props.data;
     isDidUpdate.current = true;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.updateId]);
 
   return (

@@ -57,7 +57,6 @@ function Toast(props: Props) {
       }
     };
     const clearCloseTimer = () => {
-
       if (closeCallback) {
         clearTimeOut(closeCallback);
       }
@@ -71,6 +70,7 @@ function Toast(props: Props) {
     setFade(true);
 
     return clearCloseTimer;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (

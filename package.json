@@ -69,6 +69,7 @@
     "eslint-loader": "^3.0.2",
     "eslint-plugin-jsx-control-statements": "^2.2.1",
     "eslint-plugin-react": "^7.15.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
     "exif-js": "^2.3.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",

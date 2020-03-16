@@ -121,6 +121,7 @@ function Picker(props: Props) {
     return {
       current: props.value.length ? props.value : initCascadeData(props)
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.value]);
   const [now, setNow] = React.useState(0);
   const value = props.value;
@@ -173,6 +174,7 @@ function Picker(props: Props) {
         // setStateValue(newStateValue);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   return (

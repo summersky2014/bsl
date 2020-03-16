@@ -97,12 +97,14 @@ function Panel(props: Props) {
   const propsValue = React.useRef(props.value);
   /** 是否将选择归零 */
   const isReturnTozero = props.cascade && !_datepicker;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   let data = React.useMemo(() => switchData(props.cascade, [], props.value, props.data, 0), [updateId]);
 
   React.useEffect(() => {
     if (onCreate) {
       onCreate(data);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {

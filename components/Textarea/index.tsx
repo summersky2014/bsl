@@ -40,7 +40,7 @@ function Textarea(props: Props) {
     if (auto && preRef.current) {
       preRef.current.textContent = props.value;
     }
-  }, [props.value]);
+  }, [auto, props.value]);
 
   return (
     <div
