@@ -74,12 +74,6 @@ function Upload(props: Props) {
     if (props.src === '' && target.current) {
       target.current.value = '';
     }
-
-    return () => {
-      if (target.current) {
-        target.current = null;
-      }
-    };
   }, [props.src]);
 
   return (
