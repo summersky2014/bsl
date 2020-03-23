@@ -8,19 +8,23 @@
   <body>
     <div id="root"></div>
     <script>
-      (function() {
-        const scriptTime = new Date().getTime();
-        const body = document.getElementsByTagName('body')[0];
-        const script = document.createElement('script');
-        const head = document.getElementsByTagName('head')[0];
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '../../../../../dist/css/Container.css?time=' + scriptTime;
-        script.type = 'text/javascript';
-        script.src = '../../../../../dist/js/Container.js?time=' + scriptTime;
-        head.appendChild(link);
-        body.appendChild(script);
-      })();
+      window.onerror = function(e) {
+        alert(e)
+      }
+      // (function() {
+      //   // var scriptTime = new Date().getTime();
+      //   // var body = document.getElementsByTagName('body')[0];
+      //   // var script = document.createElement('script');
+      //   // var head = document.getElementsByTagName('head')[0];
+      //   // var link = document.createElement('link');
+      //   // link.rel = 'stylesheet';
+      //   // link.href = '../../../../../dist/css/Container.css?time=' + scriptTime;
+      //   // script.type = 'text/javascript';
+      //   // script.src = '../../../../../dist/js/Container.js?time=' + scriptTime;
+      //   // head.appendChild(link);
+      //   // body.appendChild(script);
+      // })();
     </script>
+    <script src="../../../../../dist/js/Container.js?time=11"></script>
   </body>
 </html> 

@@ -1,7 +1,7 @@
-import BSL from '../../typings';
-import * as React from 'react';
-import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
+import * as classNames from 'classnames';
+import * as React from 'react';
+import BSL from '../../typings';
 import styles from './style';
 
 export interface Props extends BSL.ComponentProps {

@@ -1,14 +1,14 @@
-/// <reference path="../../typings/index.d.ts" />
+import Alert from 'antd/es/alert';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as style from './App.scss';
-import { Route, HashRouter } from 'react-router-dom';
-import { Subscription, Context } from '../../app/Scheduler';
-
-import menuConfig from './config/menus';
+import { HashRouter, Route } from 'react-router-dom';
 import AppStack from '../../app/PageStack';
-import Alert from 'antd/es/alert';
+import { Context, Subscription } from '../../app/Scheduler';
+import '../../utils/polyfill';
+import * as style from './App.scss';
 import Menu from './components/Menu';
+import menuConfig from './config/menus';
+/// <reference path="../../typings/index.d.ts" />
 
 const menu: JSX.Element[] = [];
 const isGridSupports: boolean = CSS.supports('display', 'grid');

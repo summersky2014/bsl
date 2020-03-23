@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PageComponent from '../../../../../app/PageComponent';
-import Markdown from '../../../components/Markdown';
 import Demo from '../../../components/Demo';
+import Markdown from '../../../components/Markdown';
 import doc from './doc.md';
 
 interface Props {
