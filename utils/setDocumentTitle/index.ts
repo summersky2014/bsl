@@ -1,5 +1,5 @@
-import device from '../device';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
+import device from '../device';
 
 const iosSetDocumentTitle = require('./iosSetDocumentTitle.html');
 
@@ -19,5 +19,6 @@ export default function setDocumentTitle(title: string): void {
     document.body.appendChild(iframe);
   }
 
+  document.title = '';
   document.title = title;
 }
