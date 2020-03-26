@@ -19,6 +19,5 @@ export default function setDocumentTitle(title: string): void {
     document.body.appendChild(iframe);
   }
 
-  document.title = '';
   document.title = title;
 }
