@@ -321,12 +321,12 @@ export interface CSSPropertiesComplete {
   /**
      * Sets the width of an element's border radius.
      */
-  borderRadius?: CSSWideKeyword | string | number;
+  borderRadius?: CSSWideKeyword | string;
 
   /**
      * Shorthand property that defines the border-width, border-style and border-color of an element's right border in a single declaration. Note that you can use the corresponding longhand properties to set specific individual properties of the right border — border-right-width, border-right-style and border-right-color.
      */
-  borderRight?: CSSWideKeyword | string | number;
+  borderRight?: CSSWideKeyword | string;
 
   /**
      * Sets the color of an element's right border. This page explains the border-right-color value, but often you will find it more convenient to fix the border's right color as part of a shorthand set, either border-right or border-color.
@@ -426,7 +426,7 @@ export interface CSSPropertiesComplete {
   /**
      * This property specifies how far an absolutely positioned box's bottom margin edge is offset above the bottom edge of the box's containing block. For relatively positioned boxes, the offset is with respect to the bottom edges of the box itself (i.e., the box is given a position in the normal flow, then offset from that position according to these properties).
      */
-  bottom?: CSSWideKeyword | string | number;
+  bottom?: CSSWideKeyword | string;
 
   /**
      * Obsolete.
@@ -839,7 +839,7 @@ export interface CSSPropertiesComplete {
      * Specifies the size of the font. Used to compute em and ex units.
      * See CSS 3 font-size property https://www.w3.org/TR/css-fonts-3/#propdef-font-size
      */
-  fontSize?: CSSWideKeyword | string | number;
+  fontSize?: CSSWideKeyword | string;
 
   /**
      * The font-size-adjust property adjusts the font-size of the fallback fonts defined with font-family, so that the x-height is the same no matter what font is used. This preserves the readability of the text when fallback happens.
@@ -1011,12 +1011,12 @@ export interface CSSPropertiesComplete {
   /**
      * Sets the left edge of an element
      */
-  left?: CSSWideKeyword | string | number;
+  left?: CSSWideKeyword | string;
 
   /**
      * The letter-spacing CSS property specifies the spacing behavior between text characters.
      */
-  letterSpacing?: CSSWideKeyword | string | number;
+  letterSpacing?: CSSWideKeyword | string;
 
   /**
      * Deprecated. Gets or sets line-breaking rules for text in selected languages such as Japanese, Chinese, and Korean.
@@ -1054,27 +1054,27 @@ export interface CSSPropertiesComplete {
   /**
      * The margin property is shorthand to allow you to set all four margins of an element at once. Its equivalent longhand properties are margin-top, margin-right, margin-bottom and margin-left. Negative values are also allowed.
      */
-  margin?: CSSWideKeyword | string | number;
+  margin?: CSSWideKeyword | string;
 
   /**
      * margin-bottom sets the bottom margin of an element.
      */
-  marginBottom?: CSSWideKeyword | string | number;
+  marginBottom?: CSSWideKeyword | string;
 
   /**
      * margin-left sets the left margin of an element.
      */
-  marginLeft?: CSSWideKeyword | string | number;
+  marginLeft?: CSSWideKeyword | string;
 
   /**
      * margin-right sets the right margin of an element.
      */
-  marginRight?: CSSWideKeyword | string | number;
+  marginRight?: CSSWideKeyword | string;
 
   /**
      * margin-top sets the top margin of an element.
      */
-  marginTop?: CSSWideKeyword | string | number;
+  marginTop?: CSSWideKeyword | string;
 
   /**
      * The marquee-direction determines the initial direction in which the marquee content moves.
@@ -1218,27 +1218,27 @@ export interface CSSPropertiesComplete {
      * The padding optional CSS property sets the required padding space on one to four sides of an element. The padding area is the space between an element and its border. Negative values are not allowed but decimal values are permitted. The element size is treated as fixed, and the content of the element shifts toward the center as padding is increased.
      * The padding property is a shorthand to avoid setting each side separately (padding-top, padding-right, padding-bottom, padding-left).
      */
-  padding?: CSSWideKeyword | string | number;
+  padding?: CSSWideKeyword | string;
 
   /**
      * The padding-bottom CSS property of an element sets the padding space required on the bottom of an element. The padding area is the space between the content of the element and its border. Contrary to margin-bottom values, negative values of padding-bottom are invalid.
      */
-  paddingBottom?: CSSWideKeyword | string | number;
+  paddingBottom?: CSSWideKeyword | string;
 
   /**
      * The padding-left CSS property of an element sets the padding space required on the left side of an element. The padding area is the space between the content of the element and its border. Contrary to margin-left values, negative values of padding-left are invalid.
      */
-  paddingLeft?: CSSWideKeyword | string | number;
+  paddingLeft?: CSSWideKeyword | string;
 
   /**
      * The padding-right CSS property of an element sets the padding space required on the right side of an element. The padding area is the space between the content of the element and its border. Contrary to margin-right values, negative values of padding-right are invalid.
      */
-  paddingRight?: CSSWideKeyword | string | number;
+  paddingRight?: CSSWideKeyword | string;
 
   /**
      * The padding-top CSS property of an element sets the padding space required on the top of an element. The padding area is the space between the content of the element and its border. Contrary to margin-top values, negative values of padding-top are invalid.
      */
-  paddingTop?: CSSWideKeyword | string | number;
+  paddingTop?: CSSWideKeyword | string;
 
   /**
      * The page-break-after property is supported in all major browsers. With CSS3, page-break-* properties are only aliases of the break-* properties. The CSS3 Fragmentation spec defines breaks for all CSS box fragmentation.
@@ -1599,7 +1599,7 @@ export interface CSSPropertiesComplete {
   /**
      * This property specifies how far an absolutely positioned box's top margin edge is offset below the top edge of the box's containing block. For relatively positioned boxes, the offset is with respect to the top edges of the box itself (i.e., the box is given a position in the normal flow, then offset from that position according to these properties).
      */
-  top?: CSSWideKeyword | string | number;
+  top?: CSSWideKeyword | string;
 
   /**
      * Determines whether touch input may trigger default behavior supplied by the user agent, such as panning or zooming.

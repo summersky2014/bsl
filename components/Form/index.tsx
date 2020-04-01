@@ -1,12 +1,12 @@
-import BSL from '../../typings';
 import * as React from 'react';
-import Toast from '../Toast';
-import Input from '../Input';
-import Textarea from '../Textarea';
-import Picker from '../Picker';
-import Choice from '../Choice';
-import RequestView, { Props as RequestProps } from '../RequestView';
 import useRequest from '../../hooks/useRequest';
+import BSL from '../../typings';
+import Choice from '../Choice';
+import Input from '../Input';
+import Picker from '../Picker';
+import RequestView, { Props as RequestProps } from '../RequestView';
+import Textarea from '../Textarea';
+import Toast from '../Toast';
 
 export interface Props extends BSL.ComponentProps {
   children: JSX.Element | JSX.Element[];
@@ -51,6 +51,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
   React.Children.forEach(children, (child) => {
     for (let i = 0; i < formComponent.length; i++) {
       const type = child.type;
+
       if (type === formComponent[i]) {
         const props = child.props as FromTypeProps<any>;
         if (props.onChange(props.value) === false) {
