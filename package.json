@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.0.96",
+  "version": "0.0.97",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -46,6 +46,7 @@
     "@better-scroll/slide": "^2.0.0-beta.2",
     "@better-scroll/wheel": "^2.0.0-beta.2",
     "@types/classnames": "^2.2.7",
+    "@types/inline-style-prefixer": "^5.0.0",
     "@types/node": "^10.12.21",
     "@types/react": "^16.8.1",
     "@types/react-dom": "^16.0.11",
@@ -74,6 +75,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "immer": "^5.0.0",
+    "inline-style-prefixer": "^6.0.0",
     "intersection-observer": "^0.7.0",
     "markdown-loader": "^5.1.0",
     "node-sass": "^4.13.1",
