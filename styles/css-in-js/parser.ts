@@ -72,7 +72,7 @@ function each(cssProperties: CSSProperties, callback: Callback) {
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const item = cssProperties[key];
-    if (typeof item === 'object') {
+    if (typeof item === 'object' && Array.isArray(item) === false) {
       each(item as any, callback);
     } else {
       callback(key, cssProperties[key] as string);
@@ -90,8 +90,15 @@ function parser<T>(sheetDefinition: SheetDefinition<T>) {
     const wrap = newSheet[key as keyof typeof sheetDefinition];
     const rules: string[] = [];
     const stylePrefix = prefix(wrap);
+    
     each(stylePrefix as any, (rule, value) => {
-      rules.push(`${cssRuleFormat(key, rule)}: ${value}`);
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          rules.push(`${cssRuleFormat(key, rule)}: ${item}`);
+        });
+      } else {
+        rules.push(`${cssRuleFormat(key, rule)}: ${value}`);
+      }
     });
     css += `
       .${key} { ${rules.join(';')} }

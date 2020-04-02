@@ -275,7 +275,6 @@ export interface CSSPropertiesComplete {
      * Specifies different corner clipping effects, such as scoop (inner curves), bevel (straight cuts) or notch (cut-off rectangles). Works along with border-radius to specify the size of each corner effect.
      */
   borderCornerShape?: CSSWideKeyword | string;
-
   /**
      * The property border-image-source is used to set the image to be used instead of the border style. If this is set to none the border-style is used instead.
      */
@@ -1303,7 +1302,8 @@ export interface CSSPropertiesComplete {
   /**
      * The position property controls the type of positioning used by an element within its parent elements. The effect of the position property depends on a lot of factors, for example the position property of parent elements.
      */
-  position?: CSSWideKeyword | 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed';
+  position?: CSSWideKeyword | 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed' 
+  | 'absolute !important' | 'static !important' | 'relative !important'| 'sticky !important' | 'fixed !important';
 
   /**
      * Obsolete: unsupported.

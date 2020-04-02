@@ -9,7 +9,6 @@ import Icon from '../Icon';
 import Toast from '../Toast';
 import styles from './style';
 
-
 const svgFile = {
   prompt: variable.svgRootPath + require('../../assets/prompt.svg').id,
   clear: variable.svgRootPath + require('../../assets/clear.svg').id
@@ -77,7 +76,7 @@ function FormItem(props: Props) {
     };
     const onSubmit = () => {
       setTimeout(setPromptIconVisible);
-    }
+    };
  
     itemRef.current!.addEventListener('change', setPromptIconVisible);
     itemRef.current!.addEventListener('focus', onFocus);

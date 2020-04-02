@@ -1,6 +1,6 @@
 import BSL from '../../typings';
-import Helper, { Options } from '../Form/Helper';
 import validate from '../../utils/validate';
+import Helper, { Options } from '../Form/Helper';
 
 interface InputOptions extends Options<string> {
   validate?: ((value: string) => boolean) | keyof typeof validate;
@@ -33,7 +33,7 @@ class InputHelper extends Helper<string> {
     }
     this.value = value;
     this.update();
-
+    
     return this.state === 'complete' || this.state === 'undefined';
   }
 
