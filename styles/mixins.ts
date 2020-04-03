@@ -38,7 +38,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
   switch (direction) {
     case 'left':
       directionStyle = {
-        width: 1, 
+        width: '1px', 
         height: '200%',
         left: 0,
         top: 0
@@ -46,7 +46,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
       break;
     case 'rgiht':
       directionStyle = {
-        width: 1, 
+        width: '1px', 
         height: '200%',
         right: 0,
         top: 0
@@ -55,7 +55,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
     case 'top':
       directionStyle = {
         width: '200%', 
-        height: 1,
+        height: '1px',
         left: 0,
         top: 0
       };
@@ -63,7 +63,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
     case 'bottom':
       directionStyle = {
         width: '200%',
-        height: 1,
+        height: '1px',
         left: 0,
         bottom: 0
       };
