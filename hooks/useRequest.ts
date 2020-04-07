@@ -1,7 +1,7 @@
-import BSL from '../typings';
-import * as React from 'react';
 import axios, { AxiosRequestConfig, Canceler, Method } from 'axios';
+import * as React from 'react';
 import RequestView from '../components/RequestView';
+import BSL from '../typings';
 
 type Omit_url = Omit<AxiosRequestConfig, 'url'>;
 type Omit_url_method = Omit<Omit_url, 'method'>;
@@ -57,7 +57,11 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       if (option.data && !isFormData && isDataArray === false) {
         Object.keys((option.data)).forEach((key) => {
           if (option.data[key] !== undefined) {
-            urlSearchParams.append(key, option.data[key]);
+            if (Array.isArray(option.data[key])) {
+              urlSearchParams.append(key, JSON.stringify(option.data[key]));
+            } else {
+              urlSearchParams.append(key, option.data[key]);
+            }
             postData[key] = option.data[key];
           }
         });
