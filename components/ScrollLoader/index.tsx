@@ -1,13 +1,12 @@
-import BSL from '../../typings';
-import * as React from 'react';
-import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
-import styles from './style';
-
-import variable from '../../utils/system/variable';
-import useIntersectionObserver from '../../hooks/useIntersectionObserver';
+import * as classNames from 'classnames';
+import * as React from 'react';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
+import useIntersectionObserver from '../../hooks/useIntersectionObserver';
+import BSL from '../../typings';
+import variable from '../../utils/system/variable';
 import RequestView, { Props as RequestProps } from '../RequestView';
+import styles from './style';
 
 type State = 'loading' | 'empty' | 'over' | 'fail' | '';
 interface Props extends BSL.ComponentProps, RequestProps {
@@ -15,6 +14,14 @@ interface Props extends BSL.ComponentProps, RequestProps {
   pageSize: number;
   /** 滚动到底时触发 */
   onLoader: () => Promise<void>;
+  /** 加载状态容器的样式名 */
+  loaderCls?: string;
+  /** 加载完成的样式名 */
+  overCls?: string;
+  /** 加载失败的样式名 */
+  failCls?: string;
+  /** 加载中样式名  */
+  loadingCls?: string;
   /** 默认：正在加载中... */
   loadingText?: string;
   /** 默认：已经加载到底了 */
@@ -35,8 +42,9 @@ const defaultProps: DefaultProps = {
   refreshId: 0
 };
 
+const prefixCls = 'bsl-scrollLoader';
 function ScrollLoader(props: Props) {
-  const { className, id, loadingText, overText, onLoader } = props;
+  const { id, loadingText, overText, onLoader } = props;
   const elemRef = React.useRef<HTMLDivElement>(null);
   const loaderComplete = React.useRef<boolean | null>(null);
   const loaderState = React.useRef<State>('');
@@ -54,11 +62,16 @@ function ScrollLoader(props: Props) {
       case '':
         return <div></div>;
       case 'loading':
-        return <div>{loadingText || '正在加载中...'}</div>;
+        return <div className={props.loadingCls}>{loadingText || '正在加载中...'}</div>;
       case 'over':
-        return <div>{overText || '已经加载到底了'}</div>;
+        return <div className={props.overCls}>{overText || '已经加载到底了'}</div>;
       case 'fail':
-        return <div onClick={() => setLoaderRefreshId(loaderRefreshId + 1)}>加载失败，点击重新加载</div>;
+        return (
+          <div 
+            className={props.failCls}
+            onClick={() => setLoaderRefreshId(loaderRefreshId + 1)}
+          >加载失败，点击重新加载</div>
+        );
       default:
         return null;
     }
@@ -96,6 +109,7 @@ function ScrollLoader(props: Props) {
     <React.Fragment>
       <RequestView
         {...props}
+        className={classNames(prefixCls, props.className)}
         refreshId={loaderRefreshId + props.refreshId}
         onComplete={(res: BSL.RequestResponse<any[]>) => {
           updateState('');
@@ -137,7 +151,7 @@ function ScrollLoader(props: Props) {
         )}
       </RequestView>
       <div
-        className={classNames(css(styles.root), className, variable.bslComponent)}
+        className={classNames(css(styles.root), props.loaderCls, variable.bslComponent)}
         id={id}
         style={props.style}
         ref={elemRef}
