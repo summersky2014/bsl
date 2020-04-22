@@ -199,6 +199,8 @@ export interface CSSPropertiesComplete {
      */
   backgroundRepeat?: CSSWideKeyword | string;
 
+  backgroundSize?: CSSWideKeyword | string;
+
   /**
      * Obsolete - spec retired, not implemented.
      */
