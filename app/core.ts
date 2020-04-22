@@ -1,5 +1,5 @@
-import BSL from '../typings';
 import { History } from 'history';
+import BSL from '../typings';
 import PageComponent from './PageComponent';
 
 interface AppData {
@@ -14,7 +14,7 @@ interface AppData {
 export interface AppBaseProps {
   /** 路由改变时触发 */
   onRouteChange?: (pathname: string) => void;
-  children: JSX.Element[] | JSX.Element;
+  children: any;
 }
 
 export interface AppProps extends AppBaseProps, BSL.PageProps<{}> {

@@ -1,101 +1,105 @@
-import { History } from 'history';
-import BSL from '../typings';
-import PageComponent from './PageComponent';
+import * as React from 'react';
+import { Switch, withRouter } from 'react-router-dom';
+import Toast, { prefixCls } from '../components/Toast';
+import { AppBaseProps as BaseProps, appData, AppProps as Props, getPrevPageClassDeclaration, pop } from './core';
+import { updateLoop } from './Scheduler';
 
-interface AppData {
-  pages: PageComponent<any, any>[];
-  scrollLocation: number[];
-  history: History | undefined;
-  inputFoucs: boolean;
-  env: BSL.Env;
-  currentPageId: number;
+interface State {
+  /** 当前匹配的路由 */
+  route: JSX.Element[];
+  pathname: string;
 }
 
-export interface AppBaseProps {
-  /** 路由改变时触发 */
-  onRouteChange?: (pathname: string) => void;
-  children: any;
-}
+// 对route中返回的page element手动创建
+function getRoute(nextProps: Props): JSX.Element {
+  appData.currentPageId++;
+  const appRoute = (props: { key: number; location: Props['location'] }) => {
+    return (
+      <Switch location={props.location}>
+        {nextProps.children}
+      </Switch>
+    );
+  };
 
-export interface AppProps extends AppBaseProps, BSL.PageProps<{}> {
-  history: History;
-}
-
-/** 应用运行时的数据 */
-const appData: AppData = {
-  /** 储存页面 */
-  pages: [],
-  /** 离开页面时记录的滚动条位置 */
-  scrollLocation: [],
-  /** react-router传递下来的history */
-  history: undefined,
-  /** 是否处于input foucs状态，用于解决中文输入的BUG */
-  inputFoucs: false,
-  /** 运行时的环境变量 */
-  env: process.env.NODE_ENV as BSL.Env,
-  /** 当前页面id */
-  currentPageId: 1
-};
-
-/* 获取上N个页面的类声明 */
-function getPrevPageClassDeclaration<P = {}, S = {}>(prevCount: number): PageComponent<P, S> | undefined {
-  return appData.pages[appData.pages.length - prevCount];
-}
-
-/** 是否是replace动作 */
-function isReplaceAction(nextProps: AppProps): boolean {
-  const action = nextProps.history.action;
-  const isReplace = action === 'REPLACE';
-
-  return isReplace;
-}
-
-/** 添加一个页面 */
-function push(nextProps: AppProps): void {
-  const currentPage = getPrevPageClassDeclaration(1)!;
-  // 页面的进入事件
-  if (currentPage?.pageEnter) {
-    currentPage.pageEnter();
-  }
-  if (currentPage?.pageActive) {
-    currentPage.pageActive();
-  }
-  window.scrollTo(0, 0);
-}
-
-/** 卸载一个页面 */
-function pop(nextProps: AppProps): void {
-  const top = appData.scrollLocation[appData.scrollLocation.length - 1];
-  const currentPage = getPrevPageClassDeclaration(1)!;
-  
-  // 页面的离开事件
-  if (currentPage?.pageLeave) {
-    currentPage.pageLeave();
-  }
-  if (currentPage?.pageActive) {
-    currentPage.pageActive();
-  }
-  if (appData.pages.length && !isReplaceAction(nextProps)) {
-    const toPage = getPrevPageClassDeclaration(2);
-    // 目标页面的进入事件
-    if (toPage) {
-      // 后退回页面时，重置进入时间
-      toPage.entrytime = Date.now();
-    }
-  }
-  
-  appData.pages.pop();
-  appData.scrollLocation.pop();
-  appData.currentPageId--;
-  setTimeout(() => {
-    window.scrollTo(0, top);
+  return React.createElement(appRoute, {
+    key: appData.currentPageId,
+    location: nextProps.location
   });
 }
 
-export {
-  appData,
-  getPrevPageClassDeclaration,
-  isReplaceAction,
-  push,
-  pop
-};
+class PageStack extends React.Component<BaseProps, State> {
+  constructor(props: BaseProps, state: State) {
+    super(props, state);
+
+    appData.history = (props as Props).history;
+  }
+
+  public state: State = {
+    route: [getRoute(this.props as Props)],
+    pathname: (this.props as Props).location.pathname
+  };
+
+  public shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
+    const props = this.props as Props;
+    return nextProps.location.pathname !== props.location.pathname;
+  }
+
+  public componentDidMount(): void {
+    updateLoop();
+  }
+
+  public static getDerivedStateFromProps(nextProps: Props, prevState: State): State | null {
+    if (nextProps.location.pathname === prevState.pathname) {
+      return null;
+    }
+    const nextHistory = nextProps.history;
+    const loadingElem = document.querySelector('.' + prefixCls + '-loading');
+
+    // 防止Toast.loading卡死页面
+    if (loadingElem) {
+      Toast.close();
+    }
+    
+    if (nextHistory.action === 'POP') {
+      pop(nextProps);
+      prevState.route.pop();
+
+      const page = getPrevPageClassDeclaration(1);
+      if (page) {
+        page.pageEnter();
+        page.pageActive();
+      }
+    } else {
+      if (nextHistory.action === 'REPLACE') {
+        // pop当前页面
+        pop(nextProps);
+        prevState.route.pop();
+      }
+
+      appData.scrollLocation.push(window.scrollY);
+      prevState.route.push(getRoute(nextProps));
+    }
+
+    if (prevState.route.length === 0) {
+      appData.scrollLocation.push(window.scrollY);
+      prevState.route.push(getRoute(nextProps));
+    }
+
+    // 路由改变事件
+    if (nextProps.onRouteChange) {
+      nextProps.onRouteChange(nextProps.location.pathname);
+    }
+
+    return {
+      route: prevState.route,
+      pathname: nextProps.location.pathname
+    };
+  }
+
+  public render(): JSX.Element[] {
+    return this.state.route;
+  }
+}
+
+// @ts-ignore
+export default withRouter(PageStack) as typeof PageStack;
