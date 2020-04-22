@@ -959,7 +959,7 @@ export interface CSSPropertiesComplete {
   /**
      * Sets the height of an element. The content area of the element height does not include the padding, border, and margin of the element.
      */
-  height?: CSSWideKeyword | string | number;
+  height?: CSSWideKeyword | string;
 
   /**
      * Specifies the minimum number of characters in a hyphenated word
