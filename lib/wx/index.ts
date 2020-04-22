@@ -1,6 +1,6 @@
-/// <reference path="./type.d.ts" />
 import { ImageView } from '../../components/Image';
 import isHttp from '../../utils/is/isHttp';
+/// <reference path="./type.d.ts" />
 
 declare const wx: typeof WechatJSSDK;
 const { hex_sha1 } = require('./sha1.js');
@@ -140,4 +140,16 @@ export function onShare(params: OnShareParams): void {
 
 export function chooseWXPay(options: WechatJSSDK.chooseWxPayOptions) {
   wx.chooseWXPay(options);
+}
+
+/** 跳转回小程序 */
+export function navigateBack(params?: { delta?: number;success?: Function;fail?: Function;complete?: Function; }) {
+  //@ts-ignore
+  wx.miniProgram.navigateBack(params);
+}
+
+/** 获取当前环境是否为小程序 */
+export function getEnv(callback: (res: { miniprogram: boolean }) => void) {
+  // @ts-ignore
+  wx.miniProgram.getEnv(callback);
 }
