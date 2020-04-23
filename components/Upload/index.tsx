@@ -1,15 +1,15 @@
-import BSL from '../../typings';
-import * as React from 'react';
-import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
-import styles from './style';
-
-import variable from '../../utils/system/variable';
-import compressImg from './compressImg';
-import UploadView from './UploadView';
-import Icon from '../Icon';
-import memoAreEqual from '../../utils/system/memoAreEqual';
+import * as classNames from 'classnames';
+import * as React from 'react';
+import BSL from '../../typings';
 import device from '../../utils/device';
+import memoAreEqual from '../../utils/system/memoAreEqual';
+import variable from '../../utils/system/variable';
+import Icon from '../Icon';
+import compressImg from './compressImg';
+import styles from './style';
+import UploadView from './UploadView';
+
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -91,7 +91,8 @@ function Upload(props: Props) {
         type="file"
         onChange={onChange}
         disabled={!!src || disabled}
-        accept={mode === 'image' ? 'image/gif,image/jpeg,image/jpg,image/png' : undefined}
+        capture={device.system === 'android' ? 'camera' : undefined}
+        accept={mode === 'image' ? 'image/*' : undefined}
         onClick={(event) => {
           if (onAddClick) {
             onAddClick(event);
