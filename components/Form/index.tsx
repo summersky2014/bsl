@@ -26,6 +26,10 @@ export interface Props extends BSL.ComponentProps {
   onSubmitBefore?: () => boolean;
   /** onSubmit后段回调，默认验证逻辑执行之后 */
   onSubmit?: () => void;
+  /** 提交时，表单有错误内容的提示语
+   * @default 请检查提交内容
+   */
+  toastText?: string;
 }
 
 export interface FromTypeProps<Value> {
@@ -47,7 +51,7 @@ const formComponent = [Input, Textarea, Picker, Choice];
  * 表单检验，会遍历子组件为表单类型的组件
  * @param children true为检验通过，false为未通过
  */
-function formCheck(children: React.ReactElement | React.ReactElement[] , error: { count: number }): void {
+function formCheck(children: React.ReactElement | React.ReactElement[] , error: { count: number }, toastText = '请检查提交内容'): void {
   React.Children.forEach(children, (child) => {
     for (let i = 0; i < formComponent.length; i++) {
       const type = child.type;
@@ -57,7 +61,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
         if (props.onChange(props.value) === false) {
           // 只在第一个错误提醒一次
           if (error.count === 0) {
-            Toast.show('请检查提交内容', 'fail');
+            Toast.show(toastText, 'fail');
           }
           error.count++;
         }
@@ -66,7 +70,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
       }
     }
     if (child && child.props && child.props.children) {
-      formCheck(child.props.children, error);
+      formCheck(child.props.children, error, toastText);
     }
   });
 }
@@ -102,7 +106,7 @@ function Form(props: Props) {
         }
 
         // 表单校验
-        formCheck(children, error);
+        formCheck(children, error, props.toastText);
 
         if (error.count === 0) {
           if (onSubmit) {
