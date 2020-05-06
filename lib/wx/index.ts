@@ -18,8 +18,8 @@ interface OnShareParams {
 interface InitConfigParams {
   appId: string;
   ticket: string;
-  apiList: WechatJSSDK.JSApiList[];
   routerMode: 'hash' | 'browser';
+  apiList?: WechatJSSDK.JSApiList[];
 }
 /** 是否是微信浏览器 */
 export const isWxClient = !!window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i);
@@ -53,7 +53,8 @@ export function initConfig(params: InitConfigParams) {
   if (isWxClient === false) {
     return;
   }
-  const { apiList, appId, ticket, routerMode } = params;
+  const { appId, ticket, routerMode } = params;
+  const apiList = params.apiList || [];
   const timestamp = new Date().getTime().toString();
   const nonceStr = 'ak0os7h1dojn51ojvs5r8lfwsq3debsu';
   const url = routerMode === 'browser' ? window.location.href : window.location.href.split('#')[0];
@@ -65,7 +66,13 @@ export function initConfig(params: InitConfigParams) {
     timestamp,
     nonceStr,
     signature,
-    jsApiList: apiList
+    jsApiList: [
+      'hideAllNonBaseMenuItem',
+      "hideMenuItems",
+      'updateAppMessageShareData',
+      'updateTimelineShareData',
+      ...apiList
+    ]
   });
 }
 
@@ -152,12 +159,11 @@ export function navigateBack(params?: { delta?: number;success?: Function;fail?:
 
 /** 获取当前环境是否为小程序 */
 export function getEnv(callback: (res: { miniprogram: '小程序' | '公众号' | null }) => void) {
-  const ua = navigator.userAgent.toLowerCase();
-  if (ua.match(/MicroMessenger/i)) {
-    //ios的ua中无miniProgram，但都有MicroMessenger（表示是微信浏览器）
+  if (isWxClient) {
+    // ios的ua中无miniProgram，但都有MicroMessenger（表示是微信浏览器）
     // @ts-ignore
     wx.miniProgram.getEnv(callback);
-  }else{
+  } else {
     callback({ 
       miniprogram: null
     });
