@@ -1,6 +1,8 @@
+// disable-sort-imports 
+/// <reference path="./type.d.ts" />
 import { ImageView } from '../../components/Image';
 import isHttp from '../../utils/is/isHttp';
-/// <reference path="./type.d.ts" />
+
 
 declare const wx: typeof WechatJSSDK;
 const { hex_sha1 } = require('./sha1.js');
@@ -143,13 +145,21 @@ export function chooseWXPay(options: WechatJSSDK.chooseWxPayOptions) {
 }
 
 /** 跳转回小程序 */
-export function navigateBack(params?: { delta?: number;success?: Function;fail?: Function;complete?: Function; }) {
+export function navigateBack(params?: { delta?: number;success?: Function;fail?: Function;complete?: Function }) {
   //@ts-ignore
   wx.miniProgram.navigateBack(params);
 }
 
 /** 获取当前环境是否为小程序 */
-export function getEnv(callback: (res: { miniprogram: boolean }) => void) {
-  // @ts-ignore
-  wx.miniProgram.getEnv(callback);
+export function getEnv(callback: (res: { miniprogram: '小程序' | '公众号' | null }) => void) {
+  const ua = navigator.userAgent.toLowerCase();
+  if (ua.match(/MicroMessenger/i)) {
+    //ios的ua中无miniProgram，但都有MicroMessenger（表示是微信浏览器）
+    // @ts-ignore
+    wx.miniProgram.getEnv(callback);
+  }else{
+    callback({ 
+      miniprogram: null
+    });
+  }
 }
