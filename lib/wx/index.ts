@@ -162,7 +162,11 @@ export function getEnv(callback: (res: { miniprogram: '小程序' | '公众号' 
   if (isWxClient) {
     // ios的ua中无miniProgram，但都有MicroMessenger（表示是微信浏览器）
     // @ts-ignore
-    wx.miniProgram.getEnv(callback);
+    wx.miniProgram.getEnv((res) => {
+      callback({
+        miniprogram: res.miniprogram ? '小程序' : '公众号'
+      });
+    });
   } else {
     callback({ 
       miniprogram: null

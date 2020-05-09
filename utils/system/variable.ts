@@ -1,7 +1,7 @@
 type Env = 'development' | 'production' | 'prerelease';
 
 const env = process.env.NODE_ENV as Env;
-const publicPath = process.env.publicPath;
+const publicPath = process.env.publicPath || '/';
 const version = process.env.version;
 const outputDir = process.env.outputDir;
 const addVersion = process.env.addVersion;
