@@ -47,6 +47,14 @@ function isMutableRefObject(obj: React.MutableRefObject<any>) {
 
 const formComponent = [Input, Textarea, Picker, Choice];
 
+function Formtoast(msg: string) {
+  if (Form.toast) {
+    Form.toast(msg);
+  } else {
+    Toast.show(msg, 'fail');
+  }
+};
+
 /**
  * 表单检验，会遍历子组件为表单类型的组件
  * @param children true为检验通过，false为未通过
@@ -61,7 +69,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
         if (props.onChange(props.value) === false) {
           // 只在第一个错误提醒一次
           if (error.count === 0) {
-            Toast.show(toastText, 'fail');
+            Formtoast(toastText);
           }
           error.count++;
         }
@@ -112,6 +120,8 @@ function Form(props: Props) {
           if (onSubmit) {
             onSubmit();
           }
+          console.log(data);
+          
           if (api && state.current !== 'loading' && props.disabled !== true) {
             state.current = 'loading';
             request({
@@ -149,4 +159,5 @@ function Form(props: Props) {
   );
 }
 
+Form.toast = undefined as undefined | ((msg: string) => void);
 export default Form;
