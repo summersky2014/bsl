@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const path = require("path");
 const fs = require("fs");
+const path = require("path");
 const webpack = require("webpack");
 const env = process.env.NODE_ENV;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -10,7 +10,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 function webpackConfig(params) {
-    const { entry, dirname, publicPath, vender, cssModule } = params;
+    const { entry, dirname, publicPath, vender, cssModule, target, externals } = params;
     const sassResources = params.sassResources || [];
     const addPlugins = params.plugins || [];
     const addVersion = params.addVersion === false ? false : true;
@@ -124,7 +124,7 @@ function webpackConfig(params) {
                         spriteFilename: addVersion ? `/svg/sprite_${pkg.version}.svg` : `/svg/sprite.svg`
                     }
                 }, {
-                    test: /\.(png|jpg|gif)$/,
+                    test: /\.(png|jpg|gif|ico)$/,
                     loader: 'file-loader',
                     options: {
                         name: '[path][name].[ext]',
@@ -181,7 +181,7 @@ function webpackConfig(params) {
             reasons: false,
             source: false,
             modules: false,
-            excludeAssets: [/\.(png|jpg|gif)$/]
+            excludeAssets: [/\.(png|jpg|gif|ico)$/]
         },
         optimization: {
             minimizer: [
@@ -201,7 +201,9 @@ function webpackConfig(params) {
                     }
                 })
             ]
-        }
+        },
+        target: target,
+        externals: externals
     };
 }
 exports.default = webpackConfig;

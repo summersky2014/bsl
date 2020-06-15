@@ -1,24 +1,27 @@
 {
-  "compilerOptions": {
-      "jsx": "react",
-      "noEmitOnError": true,
-      "removeComments": true,
-      "sourceMap": false,
-      "strict": true,
-      "moduleResolution": "node",
-      "module": "commonjs",
-      "target": "es6",
-      "experimentalDecorators": true,
-      "noUnusedLocals": true
-  },
-  "exclude": [
-      "node_modules",
-      ".history",
-      ".vscode",
-      "dist",
-      "typings"
-  ],
-  "include": [
-      "task"
-  ]
+    "compilerOptions": {
+        "jsx": "react",
+        "noEmitOnError": true,
+        "removeComments": true,
+        "sourceMap": false,
+        "strict": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "target": "es6",
+        "experimentalDecorators": true,
+        "noUnusedLocals": true
+    },
+    "exclude": [
+        "node_modules",
+        ".history",
+        ".vscode",
+        "dist",
+        "typings"
+    ],
+    "include": [
+        "task"
+    ],
+    "files": [
+        "webpack.config.ts"
+    ]
 }

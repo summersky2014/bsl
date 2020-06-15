@@ -21,6 +21,8 @@ interface WebpackConfig {
   sassResources?: string[];
   /** webpack的target配置 */
   target?: "web" | "webworker" | "node" | "async-node" | "node-webkit" | "atom" | "electron" | "electron-renderer" | "electron-preload" | "electron-main";
+  /** webpack的externals配置 */
+  externals?: string[];
 }
 
 declare let webpackConfig: WebpackConfig;

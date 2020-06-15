@@ -17,7 +17,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 
 export default function webpackConfig(params: WebpackConfig): Config {
-  const { entry, dirname, publicPath, vender, cssModule, target } = params;
+  const { entry, dirname, publicPath, vender, cssModule, target, externals } = params;
   const sassResources = params.sassResources || [];
   const addPlugins = params.plugins || [];
   const addVersion = params.addVersion === false ? false : true;
@@ -220,6 +220,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
         })
       ]
     },
-    target: target
+    target: target,
+    externals: externals
   };
 }
