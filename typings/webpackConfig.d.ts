@@ -19,6 +19,8 @@ interface WebpackConfig {
   plugins?: string[];
   /** sass文件资源，用于全局引用 */
   sassResources?: string[];
+  /** webpack的target配置 */
+  target?: "web" | "webworker" | "node" | "async-node" | "node-webkit" | "atom" | "electron" | "electron-renderer" | "electron-preload" | "electron-main";
 }
 
 declare let webpackConfig: WebpackConfig;

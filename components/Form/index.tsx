@@ -120,8 +120,6 @@ function Form(props: Props) {
           if (onSubmit) {
             onSubmit();
           }
-          console.log(data);
-          
           if (api && state.current !== 'loading' && props.disabled !== true) {
             state.current = 'loading';
             request({

@@ -1,8 +1,8 @@
-/// <reference path="../typings/webpackConfig.d.ts" />
-import * as path from 'path';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as webpack from 'webpack';
 import BSL from '../typings';
+/// <reference path="../typings/webpackConfig.d.ts" />
 
 interface Package {
   version: string;
@@ -17,7 +17,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 
 export default function webpackConfig(params: WebpackConfig): Config {
-  const { entry, dirname, publicPath, vender, cssModule } = params;
+  const { entry, dirname, publicPath, vender, cssModule, target } = params;
   const sassResources = params.sassResources || [];
   const addPlugins = params.plugins || [];
   const addVersion = params.addVersion === false ? false : true;
@@ -135,7 +135,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
           spriteFilename: addVersion ? `/svg/sprite_${pkg.version}.svg` : `/svg/sprite.svg`
         }
       }, {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|ico)$/,
         loader: 'file-loader',
         options: {
           name: '[path][name].[ext]',
@@ -192,7 +192,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
       reasons: false,
       source: false,
       modules: false,
-      excludeAssets: [/\.(png|jpg|gif)$/]
+      excludeAssets: [/\.(png|jpg|gif|ico)$/]
     },
     optimization: {
       minimizer: [
@@ -219,6 +219,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
           }
         })
       ]
-    }
+    },
+    target: target
   };
 }
