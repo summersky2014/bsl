@@ -1,7 +1,8 @@
-import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
+import * as React from 'react';
+import { create, css } from '../../styles/css-in-js';
 
 function createOrder() {
-  const order: Record<string, StyleDeclaration> = {};
+  const order: Record<string, React.CSSProperties> = {};
   for (let i = 0; i < 10; i++) {
     order[`order-${i}`] = {
       order: i
@@ -12,7 +13,7 @@ function createOrder() {
 }
 
 function createFlex() {
-  const flex: Record<string, StyleDeclaration> = {};
+  const flex: Record<string, React.CSSProperties> = {};
   for (let i = 0; i < 10; i++) {
     flex[`flex-${i}`] = {
       flex: i,
@@ -23,97 +24,97 @@ function createFlex() {
   return flex;
 }
 
-const styles = StyleSheet.create({
-  flex: {
+const styles = create({
+  flex: css({
     display: 'flex'
-  },
-  'flexDirection-row': {
+  }),
+  'flexDirection-row': css({
     flexDirection: 'row'
-  },
-  'flexDirection-row-reverse': {
+  }),
+  'flexDirection-row-reverse': css({
     flexDirection: 'row-reverse'
-  },
-  'flexDirection-column-reverse': {
+  }),
+  'flexDirection-column-reverse': css({
     flexDirection: 'column-reverse'
-  },
-  'flexDirection-column': {
+  }),
+  'flexDirection-column': css({
     flexDirection: 'column'
-  },
-  'flexWrap-nowrap': {
+  }),
+  'flexWrap-nowrap': css({
     flexWrap: 'nowrap'
-  },
-  'flexWrap-wrap': {
+  }),
+  'flexWrap-wrap': css({
     flexWrap: 'wrap'
-  },
-  'flexWrap-wrap-reverse': {
+  }),
+  'flexWrap-wrap-reverse': css({
     flexWrap: 'wrap-reverse'
-  },
-  'justifyContent-flex-start': {
+  }),
+  'justifyContent-flex-start': css({
     justifyContent: 'flex-start'
-  },
-  'justifyContent-flex-end': {
+  }),
+  'justifyContent-flex-end': css({
     justifyContent: 'flex-end'
-  },
-  'justifyContent-center': {
+  }),
+  'justifyContent-center': css({
     justifyContent: 'center'
-  },
-  'justifyContent-space-between': {
+  }),
+  'justifyContent-space-between': css({
     justifyContent: 'space-between'
-  },
-  'justifyContent-space-around': {
+  }),
+  'justifyContent-space-around': css({
     justifyContent: 'space-around'
-  },
-  'alignItems-flex-start': {
+  }),
+  'alignItems-flex-start': css({
     alignItems: 'flex-start'
-  },
-  'alignItems-flex-end': {
+  }),
+  'alignItems-flex-end': css({
     alignItems: 'flex-end'
-  },
-  'alignItems-center': {
+  }),
+  'alignItems-center': css({
     alignItems: 'center'
-  },
-  'alignItems-baseline': {
+  }),
+  'alignItems-baseline': css({
     alignItems: 'baseline'
-  },
-  'alignItems-stretch': {
+  }),
+  'alignItems-stretch': ({
     alignItems: 'stretch'
-  },
-  'alignContent-flex-start': {
+  }),
+  'alignContent-flex-start': ({
     alignContent: 'flex-start'
-  },
-  'alignContent-flex-end': {
+  }),
+  'alignContent-flex-end': ({
     alignContent: 'flex-end'
-  },
-  'alignContent-space-between': {
+  }),
+  'alignContent-space-between': ({
     alignContent: 'space-between'
-  },
-  'alignContent-center': {
+  }),
+  'alignContent-center': ({
     alignContent: 'center'
-  },
-  'alignContent-space-around': {
+  }),
+  'alignContent-space-around': ({
     alignContent: 'space-around'
-  },
-  'alignContent-stretch': {
+  }),
+  'alignContent-stretch': ({
     alignContent: 'stretch'
-  },
-  'alignSelf-auto': {
+  }),
+  'alignSelf-auto': ({
     alignSelf: 'auto'
-  },
-  'alignSelf-flex-start': {
+  }),
+  'alignSelf-flex-start': ({
     alignSelf: 'flex-start'
-  },
-  'alignSelf-flex-end': {
+  }),
+  'alignSelf-flex-end': ({
     alignSelf: 'flex-end'
-  },
-  'alignSelf-center': {
+  }),
+  'alignSelf-center': ({
     alignSelf: 'center'
-  },
-  'alignSelf-baseline': {
+  }),
+  'alignSelf-baseline': ({
     alignSelf: 'baseline'
-  },
-  'alignSelf-stretch': {
+  }),
+  'alignSelf-stretch': ({
     alignSelf: 'stretch'
-  },
+  }),
   ...createOrder(),
   ...createFlex()
 });

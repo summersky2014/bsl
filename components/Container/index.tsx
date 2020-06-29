@@ -1,4 +1,3 @@
-import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import BSL from '../../typings';
@@ -26,7 +25,7 @@ const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>
   
   return (
     <div
-      className={classNames(css(
+      className={classNames(
         !!(justifyContent || alignItems || alignSelf || flexDirection || flexWrap) && styles.flex,
         !!flexDirection && styles[`flexDirection-${flexDirection}` as keyof typeof styles],
         !!flexWrap && styles[`flexWrap-${flexWrap}` as keyof typeof styles],
@@ -35,8 +34,8 @@ const Container = React.forwardRef((props: Props, ref: React.Ref<HTMLDivElement>
         !!alignContent && styles[`alignContent-${alignContent}` as keyof typeof styles],
         !!alignSelf && styles[`alignSelf-${alignSelf}` as keyof typeof styles],
         order !== undefined && styles[`order-${order}` as keyof typeof styles],
-        flex !== undefined && styles[`flex-${flex}` as keyof typeof styles]
-      ), className)}
+        flex !== undefined && styles[`flex-${flex}` as keyof typeof styles],
+        className)}
       style={style}
       id={id}
       ref={ref}
