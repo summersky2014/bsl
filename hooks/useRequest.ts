@@ -77,9 +77,10 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
         })
       }).then((res) => {
         if (res.status === 200) {
-          let key: string | undefined ;
+          let key: string | undefined;
           // 判断接口是否需要缓存，并将结果储存起来
-          if (option.cache) {
+          const data = res.data as BSL.RequestResponse<any>;
+          if (option.cache && data.code === 200) {
             key = createKey();
             cacheData.set(key, res.data);
           }
