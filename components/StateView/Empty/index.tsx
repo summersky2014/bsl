@@ -1,8 +1,7 @@
 import * as React from 'react';
-import Icon from '../../Icon';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
 import variable from '../../../utils/system/variable';
+import Icon from '../../Icon';
+import styles from './style';
 
 type Render = (() => JSX.Element) | JSX.Element | undefined;
 
@@ -23,9 +22,9 @@ function Empty(props: Props) {
     }
   } else {
     render = (
-      <div className={css(styles.root)}>
+      <div className={styles.root}>
         <Icon src={emptySvg} />
-        <div className={css(styles.label)}>{children || '抱歉，暂无数据'}</div>
+        <div className={styles.label}>{children || '抱歉，暂无数据'}</div>
       </div>
     );
   }

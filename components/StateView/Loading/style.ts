@@ -1,4 +1,4 @@
-import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
+import { StyleDeclaration, StyleSheet } from 'aphrodite/no-important';
 
 const Animasearch: Record<string, StyleDeclaration> = {
   '0%': {

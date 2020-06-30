@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
+import * as classNames from 'classnames';
+import * as React from 'react';
 import styles from './style';
 
 type Render = (() => JSX.Element) | JSX.Element | undefined;
