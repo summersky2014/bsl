@@ -1,12 +1,12 @@
-import BSL from 'bsl/typings';
-import * as React from 'react';
 import { css } from 'aphrodite/no-important';
+import * as React from 'react';
+import Container from '../../../../../components/Container';
+import Icon from '../../../../../components/Icon';
+import Input, { InputHelper } from '../../../../../components/Input';
+import BSL from '../../../../../typings';
+import variable from '../../../../../utils/system/variable';
 import * as styles from './style';
 
-import variable from 'bsl/utils/system/variable';
-import Container from 'bsl/components/Container';
-import Input, { InputHelper } from 'bsl/components/Input';
-import Icon from 'bsl/components/Icon';
 
 interface Props extends BSL.ComponentProps {
   onSearch: (value: string) => void;

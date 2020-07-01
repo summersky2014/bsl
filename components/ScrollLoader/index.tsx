@@ -44,7 +44,7 @@ const defaultProps: DefaultProps = {
 
 const prefixCls = 'bsl-scrollLoader';
 function ScrollLoader(props: Props) {
-  const { id, loadingText, overText, onLoader } = props;
+  const { id, loadingText, overText, onLoader, loadingCls, overCls, failCls } = props;
   const elemRef = React.useRef<HTMLDivElement>(null);
   const loaderComplete = React.useRef<boolean | null>(null);
   const loaderState = React.useRef<State>('');
@@ -62,13 +62,13 @@ function ScrollLoader(props: Props) {
       case '':
         return <div></div>;
       case 'loading':
-        return <div className={props.loadingCls}>{loadingText || '正在加载中...'}</div>;
+        return <div className={loadingCls}>{loadingText || '正在加载中...'}</div>;
       case 'over':
-        return <div className={props.overCls}>{overText || '已经加载到底了'}</div>;
+        return <div className={overCls}>{overText || '已经加载到底了'}</div>;
       case 'fail':
         return (
           <div 
-            className={props.failCls}
+            className={failCls}
             onClick={() => setLoaderRefreshId(loaderRefreshId + 1)}
           >加载失败，点击重新加载</div>
         );

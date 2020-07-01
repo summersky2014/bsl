@@ -4,7 +4,7 @@ const nodePath = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const examplePath = './docs/src/pages/Component';
 const isDev = process.env.NODE_ENV === 'development';
-webpackConfig = {
+const webpackConfig = {
     entry: {
         index: nodePath.resolve(__dirname, 'docs/src/App.tsx'),
         BackTop: nodePath.resolve(__dirname, examplePath, './BackTop/基本用法/index.tsx'),

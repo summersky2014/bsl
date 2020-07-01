@@ -1,25 +1,44 @@
-import * as React from 'react';
 import * as classNames from 'classnames';
+import * as React from 'react';
 import { appData } from '../../app/core';
-import { FromTypeProps } from '../Form';
-import Helper from './Helper';
+import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
 import memoAreEqual from '../../utils/system/memoAreEqual';
 import variable from '../../utils/system/variable';
+import { FromTypeProps } from '../Form';
+import Helper from './Helper';
 
-type Omit_onChange = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
-type Omit_onChange_value = Omit<Omit_onChange, 'value'>;
+type OmitAttributes = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'>;
+// type Omit_onChange_value = Omit<Omit_onChange, 'value'>;
 
 interface HTMLInputElementExtends extends HTMLInputElement {
   scrollIntoViewIfNeeded: () => void;
 }
 
-export interface Props extends Omit_onChange_value, FromTypeProps<string> {
+export interface Props extends OmitAttributes, FromTypeProps<string> {
 }
 
 export const prefixCls = 'bsl-input';
 function Input(props: Props) {
   const { onFocus, onChange, type, state, className, value } = props;
   const inputRef = React.useRef<HTMLInputElementExtends>(null);
+  const [setTimeOut, clearTimeOut] = anyuseTimeout();
+  const listenerCallback = React.useRef<ListenerCallback>();
+  const isFocus = React.useRef(false);
+
+  React.useEffect(() => {
+    const onResize = () => {
+      if (inputRef.current && isFocus.current && inputRef.current.scrollIntoViewIfNeeded) {
+        inputRef.current.scrollIntoViewIfNeeded();
+      }
+    };
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      if (listenerCallback.current) {
+        clearTimeOut(listenerCallback.current);
+      }
+    };
+  }, [clearTimeOut]);
 
   return (
     <input
@@ -36,14 +55,18 @@ function Input(props: Props) {
         }
       }}
       onFocus={(e) => {
-        if (inputRef.current && inputRef.current.scrollIntoViewIfNeeded) {
-          inputRef.current.scrollIntoViewIfNeeded();
-        }
+        isFocus.current = true;
+        listenerCallback.current = setTimeOut(() => {
+          if (inputRef.current && inputRef.current.scrollIntoViewIfNeeded) {
+            inputRef.current.scrollIntoViewIfNeeded();
+          }
+        }, 150);
         if (onFocus) {
           onFocus(e);
         }
       }}
       onBlur={(e) => {
+        isFocus.current = false;
         if (props.onBlur) {
           props.onBlur(e);
         }

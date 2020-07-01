@@ -1,5 +1,5 @@
-import { StyleSheet, CSSProperties } from 'aphrodite/no-important';
-import { rem } from 'bsl/styles/mixins';
+import { CSSProperties, StyleSheet } from 'aphrodite/no-important';
+import { rem } from '../../../../../styles/mixins';
 
 export const rootHeight = rem(100);
 

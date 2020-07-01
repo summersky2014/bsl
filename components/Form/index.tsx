@@ -7,6 +7,7 @@ import Picker from '../Picker';
 import RequestView, { Props as RequestProps } from '../RequestView';
 import Textarea from '../Textarea';
 import Toast from '../Toast';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 
 export interface Props extends BSL.ComponentProps {
   children: JSX.Element | JSX.Element[];
