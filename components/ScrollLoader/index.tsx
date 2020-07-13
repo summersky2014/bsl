@@ -156,9 +156,7 @@ function ScrollLoader(props: Props) {
         style={props.style}
         ref={elemRef}
         data-hide={isSourceDataEmpty}
-      >
-        {loaderRender()}
-      </div>
+      >{loaderRender()}</div>
     </React.Fragment>
   );
 }

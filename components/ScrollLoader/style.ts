@@ -5,7 +5,10 @@ const styles = StyleSheet.create({
     padding: '12px 0',
     textAlign: 'center',
     fontSize: 14,
-    color: '#333'
+    color: '#333',
+    ':empty': {
+      display: 'none'
+    }
   }
 });
 
