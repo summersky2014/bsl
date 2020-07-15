@@ -60,7 +60,7 @@ function ScrollLoader(props: Props) {
   const loaderRender = () => {
     switch (state) {
       case '':
-        return <div></div>;
+        return null;
       case 'loading':
         return <div className={loadingCls}>{loadingText || '正在加载中...'}</div>;
       case 'over':
