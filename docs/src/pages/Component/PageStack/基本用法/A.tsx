@@ -31,6 +31,10 @@ class A extends PageComponent<any, State> {
     }, 1000);
   }
 
+  // public pageEnter() {
+  //   console.log('pageEnter');
+  // }
+
   public pageRender(): JSX.Element {
     // push新路由后，render函数不会被触发
     return (

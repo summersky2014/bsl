@@ -9,6 +9,7 @@ interface AppData {
   inputFoucs: boolean;
   env: BSL.Env;
   currentPageId: number;
+  popLevel: number;
 }
 
 export interface AppBaseProps {
@@ -34,7 +35,9 @@ const appData: AppData = {
   /** 运行时的环境变量 */
   env: process.env.NODE_ENV as BSL.Env,
   /** 当前页面id */
-  currentPageId: 1
+  currentPageId: 1,
+  /** 后退的层级 */
+  popLevel: 0
 };
 
 /* 获取上N个页面的类声明 */
@@ -66,7 +69,7 @@ function push(nextProps: AppProps): void {
 /** 卸载一个页面 */
 function pop(nextProps: AppProps): void {
   const top = appData.scrollLocation[appData.scrollLocation.length - 1];
-  const currentPage = getPrevPageClassDeclaration(1)!;
+  const currentPage = getPrevPageClassDeclaration(appData.popLevel || 1)!;
   
   // 页面的离开事件
   if (currentPage?.pageLeave) {
@@ -86,7 +89,7 @@ function pop(nextProps: AppProps): void {
   
   appData.pages.pop();
   appData.scrollLocation.pop();
-  appData.currentPageId--;
+  appData.currentPageId -= appData.popLevel || 1;
   setTimeout(() => {
     window.scrollTo(0, top);
   });

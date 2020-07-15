@@ -23,6 +23,7 @@ class C extends PageComponent<any, State> {
     return (
       <React.Fragment>
         <div id="replace" onClick={() => Link.replace({ url: '/' })}>回到首页</div>
+        <div id="replace" onClick={() => Link.back(-2)}>回退2页</div>
       </React.Fragment>
     );
   }

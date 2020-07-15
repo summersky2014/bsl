@@ -62,9 +62,13 @@ class PageStack extends React.Component<BaseProps, State> {
     
     if (nextHistory.action === 'POP') {
       pop(nextProps);
-      prevState.route.pop();
-
-      const page = getPrevPageClassDeclaration(1);
+      if (appData.popLevel > 1) {
+        prevState.route.splice(prevState.route.length - appData.popLevel, appData.popLevel);
+      } else {
+        prevState.route.pop();
+      }
+      
+      const page = getPrevPageClassDeclaration(appData.popLevel || 1);
       if (page) {
         page.pageEnter();
         page.pageActive();
@@ -89,6 +93,9 @@ class PageStack extends React.Component<BaseProps, State> {
     if (nextProps.onRouteChange) {
       nextProps.onRouteChange(nextProps.location.pathname);
     }
+
+    // 初始化默认值
+    // appData.popLevel = 0;
 
     return {
       route: prevState.route,

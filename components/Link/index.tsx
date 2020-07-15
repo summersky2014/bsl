@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
+import * as React from 'react';
 import { appData } from '../../app/core';
+import BSL from '../../typings';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 
 export interface Props extends BSL.ComponentProps {
   /** 
@@ -98,6 +98,7 @@ Link.replace = function(params: Omit<Omit<Params, 'replace'>, 'newPage'>): void 
   link({ ...params, replace: true });
 };
 Link.back = function(count = -1): void {
+  appData.popLevel = -count;
   appData.history!.go(count);
 };
 /** 
