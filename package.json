@@ -1,6 +1,6 @@
 {
   "name": "bsl",
-  "version": "0.1.9",
+  "version": "0.1.15",
   "description": "基于React的框架和UI组件",
   "main": "index.js",
   "scripts": {
@@ -94,7 +94,8 @@
     "typescript": "^3.7.2",
     "typings-for-css-modules-loader": "1.7.0",
     "webpack": "^4.25.1",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.2.1",
+    "mutationobserver-shim": "^0.3.7"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.1.1",

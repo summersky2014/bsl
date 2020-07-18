@@ -8,6 +8,7 @@ import Container, { Props as ContainerProps } from '../Container';
 import Icon from '../Icon';
 import Toast from '../Toast';
 import styles from './style';
+require('mutationobserver-shim');
 
 const svgFile = {
   prompt: variable.svgRootPath + require('../../assets/prompt.svg').id,
@@ -68,7 +69,9 @@ function FormItem(props: Props) {
       }
     };
     const onBlur = () => {
-      setPromptVisible(false);
+      if (props.onClear) {
+        setPromptVisible(false);
+      }
       listenerCallback.current = setTimeOut(() => {
         setClearVisible(false);
         setPromptIconVisible();
@@ -78,6 +81,22 @@ function FormItem(props: Props) {
       setTimeout(setPromptIconVisible);
     };
  
+    // 创建一个观察器实例并传入回调函数
+    const observer = new MutationObserver((mutationsList, observer) => {
+      // Use traditional 'for loops' for IE 11
+      for(let mutation of mutationsList) {
+       if (mutation.type === 'attributes') {
+          setPromptIconVisible();
+        }
+      }
+    });
+
+    // 以上述配置开始观察目标节点
+    observer.observe(itemRef.current!, {
+      attributes: true,
+      attributeFilter: ['data-state']
+    });
+
     itemRef.current!.addEventListener('change', setPromptIconVisible);
     itemRef.current!.addEventListener('focus', onFocus);
     itemRef.current!.addEventListener('blur', onBlur);
@@ -88,13 +107,13 @@ function FormItem(props: Props) {
       if (listenerCallback.current) {
         clearTimeOut(listenerCallback.current);
       }
-
       itemRef.current!.removeEventListener('change', setPromptIconVisible);
       itemRef.current!.removeEventListener('focus', onFocus);
       itemRef.current!.removeEventListener('blur', onBlur);
       formRef.current?.removeEventListener('submit', onSubmit);
+      // 之后，可停止观察
+      observer.disconnect();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (
