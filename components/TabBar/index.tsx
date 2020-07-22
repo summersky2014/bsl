@@ -1,14 +1,14 @@
-import BSL from '../../typings';
-import * as React from 'react';
-import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
+import * as classNames from 'classnames';
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
+import BSL from '../../typings';
+import memoAreEqual from '../../utils/system/memoAreEqual';
+import Choice, { Props as ChoiceProps, Value } from '../Choice';
+import Icon from '../Icon';
+import Link from '../Link';
 import styles from './style';
 
-import { RouteComponentProps } from 'react-router';
-import Icon from '../Icon';
-import Choice, { Value, Props as ChoiceProps } from '../Choice';
-import Link from '../Link';
-import memoAreEqual from '../../utils/system/memoAreEqual';
 
 interface TabBarData extends Value {
   icon: string;
@@ -17,6 +17,9 @@ interface TabBarData extends Value {
 
 export interface Props<T extends Value> extends RouteComponentProps, BSL.ComponentProps, Pick<ChoiceProps<T>, 'data'> {
   itemCls?: string;
+  iconCls?: string;
+  activeCls?: string;
+  textCls?: string;
 }
 
 function TabBar(props: Props<TabBarData>) {
@@ -50,8 +53,17 @@ function TabBar(props: Props<TabBarData>) {
     >
       {(item, active) => (
         <React.Fragment>
-          <Icon className={css(styles.icon)} src={(item as TabBarData).icon} />
-          <div className={css(styles.text)}>{item.id}</div>
+          <Icon 
+            className={classNames(css(styles.icon), props.iconCls, {
+              [props.activeCls || '']: active
+            })}
+            src={(item as TabBarData).icon}
+          />
+          <div
+            className={classNames(css(styles.text), props.textCls, {
+              [props.activeCls || '']: active
+            })}
+          >{item.id}</div>
         </React.Fragment>
       )}
     </Choice>

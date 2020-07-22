@@ -1,13 +1,14 @@
 import { StyleSheet } from 'aphrodite/no-important';
+import { border } from '../../styles/mixins';
 
 const styles = StyleSheet.create({
   root: {
+    ...border('e3e3e3', 'top'),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
     height: 50,
-    borderTop: '1px solid #d2d2d2',
     background: '#f7f7f7',
     position: 'fixed',
     bottom: 0,
