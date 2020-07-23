@@ -3,7 +3,7 @@ import { border } from '../../styles/mixins';
 
 const styles = StyleSheet.create({
   root: {
-    ...border('e3e3e3', 'top'),
+    ...border('#e3e3e3', 'top'),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',

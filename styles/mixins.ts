@@ -33,7 +33,7 @@ export function ellipsis(): StyleDeclaration {
   };
 };
 
-export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bottom'): Record<string, StyleDeclaration | string> {
+export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bottom', position: 'before' | 'after' = 'after'): Record<string, StyleDeclaration | string> {
   let directionStyle!: StyleDeclaration;
   switch (direction) {
     case 'left':
@@ -70,7 +70,7 @@ export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bot
   }
   return {
     position: 'relative',
-    ':after': {
+    [`:${position}`]: {
       content: '""', 
       position: 'absolute', 
       transform: 'scale(0.5)',

@@ -1,12 +1,12 @@
-import BSL from '../../typings';
-import * as React from 'react';
-import * as classNames from 'classnames';
 import { css } from 'aphrodite/no-important';
+import * as classNames from 'classnames';
+import * as React from 'react';
+import BSL from '../../typings';
+import variable from '../../utils/system/variable';
+import Container from '../Container';
+import Icon from '../Icon';
 import styles from './style';
 
-import variable from '../../utils/system/variable';
-import Icon from '../Icon';
-import Container from '../Container';
 
 const checkCircle = variable.svgRootPath + require('../../assets/check-circle.svg').id;
 
@@ -15,6 +15,7 @@ interface Props extends BSL.ComponentProps {
   /** 选中图标资源地址 */
   icon?: string;
   children?: any;
+  activeCls?: string;
   /** 选中的样式 */
   selectCls?: string;
   /** 未选中的样式 */
@@ -28,7 +29,9 @@ const Radio = (props: Props) => {
   const { className, id, style, children } = props;
   return (
     <div
-      className={classNames(css(styles.root), className)}
+      className={classNames(css(styles.root), className,{
+        [props.activeCls || '']: props.active
+      })}
       id={id}
       style={style}
       data-active={props.active}

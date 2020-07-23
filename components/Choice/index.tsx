@@ -1,10 +1,10 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import produce, { Draft } from "immer";
+import produce, { Draft } from 'immer';
+import * as React from 'react';
 import { FromTypeProps } from '../../components/Form';
-import ChoiceHelper from './Helper';
+import BSL from '../../typings';
 import memoAreEqual from '../../utils/system/memoAreEqual';
+import ChoiceHelper from './Helper';
 
 export interface Value {
   /** 数据的唯一标示 */
