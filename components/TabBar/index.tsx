@@ -24,7 +24,7 @@ export interface Props<T extends Value> extends RouteComponentProps, BSL.Compone
 
 function TabBar(props: Props<TabBarData>) {
   const { className, id, data, itemCls } = props;
-  const selectedIndex = data.findIndex((item) => item.pathname === props.location.pathname);
+  const selectedIndex = data.findIndex((item) => props.location.pathname.indexOf(item.pathname) >= 0);
   const [value, setValue] = React.useState<ChoiceProps<TabBarData>['value']>([data[selectedIndex]]);
   const [valueUpdateId, setValueUpdateId] = React.useState<number>(0);
 

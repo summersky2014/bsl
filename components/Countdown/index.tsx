@@ -1,6 +1,6 @@
-import BSL from '../../typings';
 import * as React from 'react';
-import { addListener, removeListener, ListenerCallback } from '../../app/Scheduler';
+import { addListener, ListenerCallback, removeListener } from '../../app/Scheduler';
+import BSL from '../../typings';
 import { dateformatReturnObject, ReturnObject } from '../../utils/date/dateformat';
 import newDate from '../../utils/date/newDate';
 import memoAreEqual from '../../utils/system/memoAreEqual';
@@ -9,14 +9,16 @@ interface Props extends BSL.ComponentProps {
   /**
    * @param remainingTime 剩余时间
    */
-  children: (remainingTime: ReturnObject) => any;
+  children: (remainingTime: ReturnObject, currentTime?: number) => any;
   /** 时间戳或倒计时毫秒或时间字符串，当number不足13位时value处理成倒计时毫秒 */
   value: number | string;
   /** 倒计时还未开始前的文本 */
-  label?: string;
+  label?: any;
   /** 重置倒计时的标识 */
   resetId?: any;
   onClick?: () => boolean;
+  /** 倒计时结束时触发 */
+  onOver?: () => void;
 }
 
 function Countdown(props: Props) {
@@ -27,6 +29,7 @@ function Countdown(props: Props) {
   const [time, setTime] = React.useState<number>(defaultTime);
   const [disabled, setDisabled] = React.useState(false);
   const countdown = React.useRef<ListenerCallback>();
+  let currentTimeRef;
   const reset = () => {
     if (countdown.current) {
       setDisabled(false);
@@ -34,7 +37,7 @@ function Countdown(props: Props) {
       removeListener(countdown.current);
     }
   };
-
+  
   React.useEffect(() => {
     let targetTimestamp: number;
     if (disabled || !onClick) {   
@@ -44,13 +47,16 @@ function Countdown(props: Props) {
         targetTimestamp = Date.now() + time;
       }
       countdown.current = (currentTime: number, overTime: number) => { 
+        currentTimeRef = currentTime;
         if (overTime >= 1000) {
           const remainingTime = targetTimestamp - currentTime;
-          
           if (remainingTime > 0) {
             setTime(remainingTime);
           } else {
             reset();
+            if (props.onOver) {
+              props.onOver();
+            }
           }
           return true;
         }
@@ -65,7 +71,7 @@ function Countdown(props: Props) {
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time, disabled]);
+  }, [time, value, disabled]);
 
   React.useEffect(() => {
     if (props.resetId !== undefined) {
@@ -80,7 +86,7 @@ function Countdown(props: Props) {
       id={id}
       style={style}
     >
-      {time ? children(dateformatReturnObject(time)) : label}
+      {time ? children(dateformatReturnObject(time), currentTimeRef) : label}
     </div>
   ) : (
     <button
@@ -97,7 +103,7 @@ function Countdown(props: Props) {
         }
       }}
     >
-      {disabled ? children(dateformatReturnObject(time)) : label}
+      {disabled ? children(dateformatReturnObject(time), currentTimeRef) : label}
     </button>
   );
 }
