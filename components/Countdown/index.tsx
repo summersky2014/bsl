@@ -5,7 +5,7 @@ import { dateformatReturnObject, ReturnObject } from '../../utils/date/dateforma
 import newDate from '../../utils/date/newDate';
 import memoAreEqual from '../../utils/system/memoAreEqual';
 
-interface Props extends BSL.ComponentProps {
+export interface Props extends BSL.ComponentProps {
   /**
    * @param remainingTime 剩余时间
    */
@@ -29,7 +29,7 @@ function Countdown(props: Props) {
   const [time, setTime] = React.useState<number>(defaultTime);
   const [disabled, setDisabled] = React.useState(false);
   const countdown = React.useRef<ListenerCallback>();
-  let currentTimeRef;
+  const currentTimeRef = React.useRef(0);
   const reset = () => {
     if (countdown.current) {
       setDisabled(false);
@@ -40,6 +40,7 @@ function Countdown(props: Props) {
   
   React.useEffect(() => {
     let targetTimestamp: number;
+    let timer: number | NodeJS.Timer;
     if (disabled || !onClick) {   
       if (isTimestamp) {
         targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
@@ -47,7 +48,7 @@ function Countdown(props: Props) {
         targetTimestamp = Date.now() + time;
       }
       countdown.current = (currentTime: number, overTime: number) => { 
-        currentTimeRef = currentTime;
+        currentTimeRef.current = currentTime;
         if (overTime >= 1000) {
           const remainingTime = targetTimestamp - currentTime;
           if (remainingTime > 0) {
@@ -61,13 +62,19 @@ function Countdown(props: Props) {
           return true;
         }
         return false;
-      };      
+      };
+      timer = setTimeout(() => {
+        countdown.current!(Date.now(), 1000); 
+      }, 0);
       addListener(countdown.current);
     }
 
     return () => {
       if (countdown.current) {
         removeListener(countdown.current);
+      }
+      if (timer) {
+        clearTimeout(timer as number);
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,7 +93,7 @@ function Countdown(props: Props) {
       id={id}
       style={style}
     >
-      {time ? children(dateformatReturnObject(time), currentTimeRef) : label}
+      {time ? children(dateformatReturnObject(time), currentTimeRef.current) : label}
     </div>
   ) : (
     <button
@@ -103,7 +110,7 @@ function Countdown(props: Props) {
         }
       }}
     >
-      {disabled ? children(dateformatReturnObject(time), currentTimeRef) : label}
+      {disabled ? children(dateformatReturnObject(time), currentTimeRef.current) : label}
     </button>
   );
 }
