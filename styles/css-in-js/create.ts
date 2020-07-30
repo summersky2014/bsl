@@ -5,7 +5,6 @@ interface StyleElement extends HTMLStyleElement {
 }
 
 function create<T>(sheetDefinition: SheetDefinition<T>): { [K in keyof T]: string } {
-  // 这里是webpack的标记点
   const css = parser(sheetDefinition);
   const head = document.head || document.getElementsByTagName('head')[0];
   const style = document.createElement('style') as StyleElement;
