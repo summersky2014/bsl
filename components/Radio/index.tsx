@@ -1,4 +1,3 @@
-import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import BSL from '../../typings';
@@ -6,7 +5,6 @@ import variable from '../../utils/system/variable';
 import Container from '../Container';
 import Icon from '../Icon';
 import styles from './style';
-
 
 const checkCircle = variable.svgRootPath + require('../../assets/check-circle.svg').id;
 
@@ -29,7 +27,7 @@ const Radio = (props: Props) => {
   const { className, id, style, children } = props;
   return (
     <div
-      className={classNames(css(styles.root), className,{
+      className={classNames(styles.root, className,{
         [props.activeCls || '']: props.active
       })}
       id={id}
@@ -37,17 +35,17 @@ const Radio = (props: Props) => {
       data-active={props.active}
     >
       <Icon
-        className={classNames(css(styles.select), `${prefixCls}-select`, props.selectCls)}
+        className={classNames(styles.select, `${prefixCls}-select`, props.selectCls)}
         src={props.icon || checkCircle}
         hide={!props.active}
       />
       <div
-        className={classNames(css(styles.unselect), variable.bslComponent, props.unselectCls)}
+        className={classNames(styles.unselect, variable.bslComponent, props.unselectCls)}
         data-hide={props.active}
       />
       {children ? (
         <Container
-          className={classNames(css(styles.content), props.contentCls)}
+          className={classNames(styles.content, props.contentCls)}
           flex={1}
         >{children}</Container>
       ) : null}

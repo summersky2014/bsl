@@ -1,10 +1,10 @@
-import BSL from '../../typings';
 import * as React from 'react';
 import { appData } from '../../app/core';
 import { ListenerCallback } from '../../app/Scheduler';
-import SwtichView from '../SwitchView';
-import useRequest, { Option as RequestOption } from '../../hooks/useRequest';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
+import useRequest, { Option as RequestOption } from '../../hooks/useRequest';
+import BSL from '../../typings';
+import SwtichView from '../SwitchView';
 
 export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
   children?: (data: any, code: BSL.ResponseCode) => any;
@@ -19,7 +19,7 @@ export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
   /** 请求成功，但数据为空 */
   onEmpty?: (response: BSL.RequestResponse<any>) => void;
   /** catch时执行 */
-  onFail?: (error?: Error) => void;
+  onFail?: (response: Error | BSL.RequestResponse<any>) => void;
   /** 未登录时的回调 */
   onNotLogin?: (response: BSL.RequestResponse<any>) => void;
   /** onFinally先于onComplete和onFail执行 */
@@ -91,7 +91,7 @@ function RequestView(props: Props) {
       responseCode.current = res.code;
       if (onFinally) {
         onFinally(res);
-      }
+      }  
       switch (res.code) {
         case 200:
           setType('complete', res.data);
@@ -115,7 +115,7 @@ function RequestView(props: Props) {
           // 500或其他码都视为fail状态
           setType('fail');
           if (onFail) {
-            onFail();
+            onFail(res);
           }
           break;
       }
@@ -127,7 +127,7 @@ function RequestView(props: Props) {
       if (err.message === 'cancel') {
         return;
       }
-        
+
       if (onFinally) {
         onFinally();
       }

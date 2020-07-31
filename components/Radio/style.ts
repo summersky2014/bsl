@@ -1,25 +1,25 @@
-import { StyleSheet, StyleDeclaration, CSSProperties } from 'aphrodite/no-important';
+import { create, css } from '../../styles/css-in-js';
 
-const size: StyleDeclaration = {
-  width: 19,
-  height: 19
+const size = {
+  width: '19px',
+  height: '19px'
 };
-const styles = StyleSheet.create({
-  root: {
+const styles = create({
+  root: css({
     display: 'flex',
     alignItems: 'center'
-  } as CSSProperties,
-  select: size,
-  unselect: {
+  }),
+  select: css(size),
+  unselect: css({
     ...size,
     border: '1px solid #aeaeae',
     borderRadius: '50%'
-  },
-  content: {
-    fontSize: 14,
+  }),
+  content: css({
+    fontSize: '14px',
     color: '#000',
-    marginLeft: 10
-  }
+    marginLeft: '10px'
+  })
 });
 
 export default styles;

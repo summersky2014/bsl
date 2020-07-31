@@ -90,16 +90,13 @@ function Form(props: Props) {
   } = props;
   const state = React.useRef<BSL.RequestState>('undefined');
   const [request, cancelToken] = useRequest();
+  const cancel = React.useCallback(() => cancelToken.current, [cancelToken]);
 
   React.useEffect(() => {
     return () => {
-      if (cancelToken.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        cancelToken.current();
-      }
+      cancel();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cancel]);
 
   return (
     <form
