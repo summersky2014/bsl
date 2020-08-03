@@ -1,4 +1,5 @@
 import { css } from 'aphrodite/no-important';
+import variable from 'bsl/utils/system/variable';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
@@ -6,27 +7,36 @@ import BSL from '../../typings';
 import memoAreEqual from '../../utils/system/memoAreEqual';
 import Choice, { Props as ChoiceProps, Value } from '../Choice';
 import Icon from '../Icon';
-import Link from '../Link';
+import Link, { Props as LinkProps } from '../Link';
 import styles from './style';
 
+interface LinkQuery {
+  query?: LinkProps['query'];
+}
 
 interface TabBarData extends Value {
   icon: string;
   pathname: string;
 }
 
-export interface Props<T extends Value> extends RouteComponentProps, BSL.ComponentProps, Pick<ChoiceProps<T>, 'data'> {
+export interface Props<T extends Value> extends Partial<RouteComponentProps>, BSL.ComponentProps, Pick<ChoiceProps<T>, 'data'> {
   itemCls?: string;
   iconCls?: string;
   activeCls?: string;
   textCls?: string;
+  /** 没有传入RouteComponentProps时，就需要手动指定selectedIndex */
+  selectedIndex?: number;
 }
 
-function TabBar(props: Props<TabBarData>) {
+function TabBar(props: Props<TabBarData & LinkQuery>) {
   const { className, id, data, itemCls } = props;
-  const selectedIndex = data.findIndex((item) => props.location.pathname.indexOf(item.pathname) >= 0);
+  const selectedIndex = props.location ? data.findIndex((item) => props.location!.pathname.indexOf(item.pathname) >= 0) : props.selectedIndex!;
   const [value, setValue] = React.useState<ChoiceProps<TabBarData>['value']>([data[selectedIndex]]);
   const [valueUpdateId, setValueUpdateId] = React.useState<number>(0);
+
+  if (variable.env === 'development' && selectedIndex === undefined) {
+    console.error('RouteComponentProps或selectedIndex必传一个');
+  }
 
   return (
     <Choice
@@ -39,13 +49,15 @@ function TabBar(props: Props<TabBarData>) {
       // updateId={valueUpdateId}
       state="undefined"
       onChange={(newValue) => {
-        const newPathname = (newValue[0] as TabBarData).pathname;
+        const current = newValue[0] as TabBarData & LinkQuery;
+        const newPathname = current.pathname;
         const index = data.findIndex((item) => item.pathname === newPathname);
 
         setValue([data[index]]);
         setValueUpdateId(valueUpdateId + 1);
         Link.replace({
-          url: newPathname
+          url: newPathname,
+          query: current.query
         });
 
         return true;
@@ -72,7 +84,7 @@ function TabBar(props: Props<TabBarData>) {
 
 function areEqual(prevProps: Props<TabBarData>, nextProps: Props<TabBarData>): boolean {
   return memoAreEqual(prevProps, nextProps, (key) => {
-    return key === 'location' ? prevProps.location.pathname !== nextProps.location.pathname : false;
+    return key === 'location' ? prevProps.location?.pathname !== nextProps.location?.pathname : false;
   }); 
 }
 

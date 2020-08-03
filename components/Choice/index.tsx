@@ -9,7 +9,7 @@ import ChoiceHelper from './Helper';
 export interface Value {
   /** 数据的唯一标示 */
   id: string | number;
-  [key: string]: string | number;
+  [key: string]: any;
 }
 export interface BaseProps<T extends Value> extends BSL.ComponentProps {
   /** 渲染的数据 */
