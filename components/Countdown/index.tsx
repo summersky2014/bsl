@@ -22,7 +22,7 @@ export interface Props extends BSL.ComponentProps {
 }
 
 function Countdown(props: Props) {
-  const { className, id, style,  value, children, onClick } = props;
+  const { className, id, style,  value, children, onClick, onOver } = props;
   const label = props.label || '';
   const isTimestamp = typeof value === 'string' || value.toString().length === 13;
   const defaultTime = isTimestamp ? 0 : value as number;
@@ -30,17 +30,16 @@ function Countdown(props: Props) {
   const [disabled, setDisabled] = React.useState(false);
   const countdown = React.useRef<ListenerCallback>();
   const currentTimeRef = React.useRef(0);
-  const reset = () => {
+  const reset = React.useCallback(() => {
     if (countdown.current) {
       setDisabled(false);
       setTime(defaultTime);
       removeListener(countdown.current);
     }
-  };
+  }, [defaultTime]);
   
   React.useEffect(() => {
     let targetTimestamp: number;
-    let timer: number | NodeJS.Timer;
     if (disabled || !onClick) {   
       if (isTimestamp) {
         targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
@@ -55,15 +54,15 @@ function Countdown(props: Props) {
             setTime(remainingTime);
           } else {
             reset();
-            if (props.onOver) {
-              props.onOver();
+            if (onOver) {
+              onOver();
             }
           }
           return true;
         }
         return false;
       };
-      timer = setTimeout(() => {
+      setTimeout(() => {
         countdown.current!(Date.now(), 1000); 
       }, 0);
       addListener(countdown.current);
@@ -73,19 +72,14 @@ function Countdown(props: Props) {
       if (countdown.current) {
         removeListener(countdown.current);
       }
-      if (timer) {
-        clearTimeout(timer as number);
-      }
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time, value, disabled]);
+  }, [time, value, disabled, onClick, isTimestamp, reset, onOver]);
 
   React.useEffect(() => {
     if (props.resetId !== undefined) {
       reset();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.resetId]);
+  }, [props.resetId, reset]);
   
   return !onClick ? (
     <div
@@ -93,7 +87,7 @@ function Countdown(props: Props) {
       id={id}
       style={style}
     >
-      {time ? children(dateformatReturnObject(time), currentTimeRef.current) : label}
+      {time >= 0 ? children(dateformatReturnObject(time), currentTimeRef.current) : label}
     </div>
   ) : (
     <button
