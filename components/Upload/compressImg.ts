@@ -69,56 +69,53 @@ function compressImg(file: File, afterWidth: number): Promise<[string, Blob] | u
     image.onload = () => {
       const upImgWidth = image.width;
       const upImgHeight = image.height;
-      let orientation = 1;
-
       //获取图像的方位信息
-      EXIF.getData(image.src, () => {
-        orientation = parseInt(EXIF.getTag(image.src, 'Orientation'));
-        orientation = orientation ? orientation : 1;
-      });
-      // 只对图片做放小图片，如果图片本来比屏幕尺寸小就使用本身的尺寸
-      const width = afterWidth < upImgWidth ? afterWidth : upImgWidth;
-      //压缩换算后的图片高度
-      const afterHeight = width * upImgHeight / upImgWidth;
+      EXIF.getData(file as any, function() {
+        const orientation = parseInt(EXIF.getTag(file, 'Orientation'));
+        // 只对图片做放小图片，如果图片本来比屏幕尺寸小就使用本身的尺寸
+        const width = afterWidth < upImgWidth ? afterWidth : upImgWidth;
+        //压缩换算后的图片高度
+        const afterHeight = width * upImgHeight / upImgWidth;
 
-      if (upImgWidth < 10 || upImgWidth < 10) {
-        alert('请不要上传过小的图片');
-        resolve(undefined);
-        return;
-      } else if (hidCtx) {
-        if (orientation <= 4) {
-          // 设置压缩canvas区域高度及宽度
-          hidCanvas.setAttribute('height', afterHeight + 'px');
-          hidCanvas.setAttribute('width', afterWidth + 'px');
-          if (orientation === 3 || orientation === 4) {
-            hidCtx.translate(afterWidth, afterHeight);
-            hidCtx.rotate(180 * Math.PI / 180);
-          }
-        } else {
-          // 设置压缩canvas区域高度及宽度
-          hidCanvas.setAttribute('height', afterHeight + 'px');
-          hidCanvas.setAttribute('width', afterWidth + 'px');
+        if (upImgWidth < 10 || upImgWidth < 10) {
+          alert('请不要上传过小的图片');
+          resolve(undefined);
+          return;
+        } else if (hidCtx) {
+          if (orientation <= 4) {
+            // 设置压缩canvas区域高度及宽度
+            hidCanvas.setAttribute('height', afterHeight + 'px');
+            hidCanvas.setAttribute('width', afterWidth + 'px');
+            if (orientation === 3 || orientation === 4) {
+              hidCtx.translate(afterWidth, afterHeight);
+              hidCtx.rotate(180 * Math.PI / 180);
+            }
+          } else {
+            // 设置压缩canvas区域高度及宽度
+            hidCanvas.setAttribute('height', afterHeight + 'px');
+            hidCanvas.setAttribute('width', afterWidth + 'px');
 
-          if (orientation === 5 || orientation === 6) {
-            hidCtx.translate(afterHeight, 0);
-            hidCtx.rotate(90 * Math.PI / 180);
-          } else if (orientation === 7 || orientation === 8) {
-            hidCtx.translate(0, afterWidth);
-            hidCtx.rotate(270 * Math.PI / 180);
+            if (orientation === 5 || orientation === 6) {
+              hidCtx.translate(afterHeight, 0);
+              hidCtx.rotate(90 * Math.PI / 180);
+            } else if (orientation === 7 || orientation === 8) {
+              hidCtx.translate(0, afterWidth);
+              hidCtx.rotate(270 * Math.PI / 180);
+            }
           }
+
+          // canvas绘制压缩后图片
+          drawImageIOSFix(hidCtx, image, 0, 0, upImgWidth, upImgHeight, 0, 0 , afterWidth, afterHeight);
+          // 获取压缩后生成的img对象
+          result = hidCanvas.toDataURL('image/jpeg');
+          // 获取压缩后生成的blob对象
+          hidCanvas.toBlob((blob) => {
+            if (blob) {
+              resolve([result, blob]);
+            }
+          }, 'image/jpeg', 1);
         }
-
-        // canvas绘制压缩后图片
-        drawImageIOSFix(hidCtx, image, 0, 0, upImgWidth, upImgHeight, 0, 0 , afterWidth, afterHeight);
-        // 获取压缩后生成的img对象
-        result = hidCanvas.toDataURL('image/jpeg');
-        // 获取压缩后生成的blob对象
-        hidCanvas.toBlob((blob) => {
-          if (blob) {
-            resolve([result, blob]);
-          }
-        }, 'image/jpeg', 1);
-      }
+      });
     };
     reader.onload = (evt) => {
       const target = evt.target as FileReader;
