@@ -51,6 +51,7 @@ module.exports = {
     'jsx-control-statements/jsx-use-if-tag': 0,
     'jsx-control-statements/jsx-jcs-no-undef': 0,
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": 0
   }
 };
