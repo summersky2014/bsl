@@ -40,16 +40,19 @@ function Countdown(props: Props) {
   
   React.useEffect(() => {
     let targetTimestamp: number;
+    
     if (disabled || !onClick) {   
       if (isTimestamp) {
         targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
       } else {
-        targetTimestamp = Date.now() + time;
+        targetTimestamp = Date.now() + defaultTime;
       }
+
       countdown.current = (currentTime: number, overTime: number) => { 
         currentTimeRef.current = currentTime;
         if (overTime >= 1000) {
           const remainingTime = targetTimestamp - currentTime;
+          
           if (remainingTime > 0) {
             setTime(remainingTime);
           } else {
@@ -73,7 +76,7 @@ function Countdown(props: Props) {
         removeListener(countdown.current);
       }
     };
-  }, [time, value, disabled, onClick, isTimestamp, reset, onOver]);
+  }, [defaultTime, value, disabled, onClick, isTimestamp, reset, onOver]);
 
   React.useEffect(() => {
     if (props.resetId !== undefined) {
