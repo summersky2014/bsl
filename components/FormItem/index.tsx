@@ -84,8 +84,8 @@ function FormItem(props: Props) {
     // 创建一个观察器实例并传入回调函数
     const observer = new MutationObserver((mutationsList, observer) => {
       // Use traditional 'for loops' for IE 11
-      for(let mutation of mutationsList) {
-       if (mutation.type === 'attributes') {
+      for(const mutation of mutationsList) {
+        if (mutation.type === 'attributes') {
           setPromptIconVisible();
         }
       }
@@ -114,6 +114,7 @@ function FormItem(props: Props) {
       // 之后，可停止观察
       observer.disconnect();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (

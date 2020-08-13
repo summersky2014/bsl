@@ -32,10 +32,6 @@
   background: rgba(255, 255, 255, 0.01);
   content: '';
 }
-.ant-popover-rtl {
-  direction: rtl;
-  text-align: right;
-}
 .ant-popover-hidden {
   display: none;
 }
@@ -98,30 +94,19 @@
 }
 .ant-popover-message > .anticon {
   position: absolute;
-  top: 8px;
+  top: 8.0005px;
   color: #faad14;
   font-size: 14px;
 }
 .ant-popover-message-title {
   padding-left: 22px;
 }
-.ant-popover-rtl .ant-popover-message-title {
-  padding-right: 22px;
-  padding-left: 16px;
-}
 .ant-popover-buttons {
   margin-bottom: 4px;
   text-align: right;
 }
-.ant-popover-rtl .ant-popover-buttons {
-  text-align: left;
-}
 .ant-popover-buttons button {
   margin-left: 8px;
-}
-.ant-popover-rtl .ant-popover-buttons button {
-  margin-right: 8px;
-  margin-left: 0;
 }
 .ant-popover-arrow {
   position: absolute;
@@ -221,4 +206,19 @@
 }
 .ant-popover-placement-leftBottom > .ant-popover-content > .ant-popover-arrow {
   bottom: 12px;
+}
+.ant-popover-rtl {
+  direction: rtl;
+  text-align: right;
+}
+.ant-popover-rtl .ant-popover-message-title {
+  padding-right: 22px;
+  padding-left: 16px;
+}
+.ant-popover-rtl .ant-popover-buttons {
+  text-align: left;
+}
+.ant-popover-rtl .ant-popover-buttons button {
+  margin-right: 8px;
+  margin-left: 0;
 }

@@ -1,10 +1,10 @@
 import { css } from 'aphrodite/no-important';
-import variable from 'bsl/utils/system/variable';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import BSL from '../../typings';
 import memoAreEqual from '../../utils/system/memoAreEqual';
+import variable from '../../utils/system/variable';
 import Choice, { Props as ChoiceProps, Value } from '../Choice';
 import Icon from '../Icon';
 import Link, { Props as LinkProps } from '../Link';
