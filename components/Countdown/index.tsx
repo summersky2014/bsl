@@ -33,21 +33,21 @@ function Countdown(props: Props) {
   const reset = React.useCallback(() => {
     if (countdown.current) {
       setDisabled(false);
-      setTime(defaultTime);
+      if (onClick) {
+        setTime(defaultTime);
+      }
       removeListener(countdown.current);
     }
-  }, [defaultTime]);
+  }, [defaultTime, onClick]);
   
   React.useEffect(() => {
     let targetTimestamp: number;
-    
     if (disabled || !onClick) {   
       if (isTimestamp) {
         targetTimestamp = typeof value === 'number' ? value : newDate(value).getTime();
       } else {
         targetTimestamp = Date.now() + defaultTime;
       }
-
       countdown.current = (currentTime: number, overTime: number) => { 
         currentTimeRef.current = currentTime;
         if (overTime >= 1000) {
@@ -65,6 +65,7 @@ function Countdown(props: Props) {
         }
         return false;
       };
+      // 立即执行一次
       setTimeout(() => {
         countdown.current!(Date.now(), 1000); 
       }, 0);

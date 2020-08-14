@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-import { Subscription, Context, updateLoop } from '../../../../../../app/Scheduler';
+import { Context, Subscription, updateLoop } from '../../../../../../app/Scheduler';
 import Countdown from '../../../../../../components/Countdown';
-import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';
+import '../../../../../../styles/normalize.scss';
+
 
 const App = () => {
   return (
@@ -44,6 +44,13 @@ const Demo = () => {
         label="日期倒计时"
       >
         {(value) => <div>{value.day}天{value.hour}时{value.min}分{value.sec}秒</div>}
+      </Countdown>
+
+      <h2>秒数倒计时</h2>
+      <Countdown
+        value={30 * 1000}
+      >
+        {(value) => <div>{Math.floor(value.time / 1000)}秒</div>}
       </Countdown>
     </div>
   );
