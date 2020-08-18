@@ -1,15 +1,14 @@
-import BSL from '../../typings';
-import * as React from 'react';
-import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
 import BetterScroll from '@better-scroll/core';
 import slidePlugins from '@better-scroll/slide';
-import Slide, { BaseProps as SlideProps } from './Slide';
+import { css } from 'aphrodite/no-important';
+import * as classNames from 'classnames';
+import * as React from 'react';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
+import BSL from '../../typings';
 import memoAreEqual from '../../utils/system/memoAreEqual';
 import Dots from './Dots';
+import Slide, { BaseProps as SlideProps } from './Slide';
+import styles from './style';
 
 export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   /** 滑动块的样式 */
@@ -90,7 +89,7 @@ function Carousel(props: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, refreshId]);
   
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const onBeforeSlide = () => {
       if (autoplay && timer.current) {
         clearTimeOut(timer.current);
