@@ -25,3 +25,4 @@ interface WebpackConfig {
   externals?: string[];
 }
 
+declare let webpackConfig: WebpackConfig;
