@@ -1,12 +1,11 @@
-/// <reference path="./typings/webpackConfig.d.ts" />
-
-const docsTask = require('./task').default;
-const nodePath = require('path');
+import * as nodePath from 'path';
+import docsTask from './task';
 const CopyPlugin = require('copy-webpack-plugin');
 const examplePath = './docs/src/pages/Component';
 const isDev = process.env.NODE_ENV === 'development';
 
-const webpackConfig: WebpackConfig = {
+
+const webpackConfig = {
   entry: {
     index: nodePath.resolve(__dirname, 'docs/src/App.tsx'),
     BackTop: nodePath.resolve(__dirname, examplePath, './BackTop/基本用法/index.tsx'),

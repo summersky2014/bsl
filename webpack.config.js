@@ -1,6 +1,7 @@
 "use strict";
-const docsTask = require('./task').default;
-const nodePath = require('path');
+Object.defineProperty(exports, "__esModule", { value: true });
+const nodePath = require("path");
+const task_1 = require("./task");
 const CopyPlugin = require('copy-webpack-plugin');
 const examplePath = './docs/src/pages/Component';
 const isDev = process.env.NODE_ENV === 'development';
@@ -61,4 +62,4 @@ const webpackConfig = {
         })
     ]
 };
-module.exports = docsTask(webpackConfig);
+module.exports = task_1.default(webpackConfig);

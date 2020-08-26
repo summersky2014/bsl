@@ -50,7 +50,7 @@ const Demo = () => {
       <Countdown
         value={30 * 1000}
       >
-        {(value) => <div>{Math.floor(value.time / 1000)}秒</div>}
+        {(value) => <div>{Math.round(value.time / 1000)}秒</div>}
       </Countdown>
     </div>
   );
