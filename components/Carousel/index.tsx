@@ -1,5 +1,4 @@
 import BetterScroll from '@better-scroll/core';
-import slidePlugins from '@better-scroll/slide';
 import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
@@ -10,6 +9,7 @@ import Dots from './Dots';
 import Slide, { BaseProps as SlideProps } from './Slide';
 import styles from './style';
 
+const slidePlugins = require('@better-scroll/slide');
 export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   /** 滑动块的样式 */
   slideCls?: string;
@@ -45,6 +45,7 @@ interface DefaultProps {
 }
 
 const prefixCls = 'bsl-carousel';
+
 BetterScroll.use(slidePlugins);
 
 const defaultProps: DefaultProps = {
@@ -122,7 +123,7 @@ function Carousel(props: Props) {
         if (elemRef.current.clientHeight === 0) {
           console.error('Carousel组件容器上没有高度，有可能会导致程序错误');
         }
-        bsScroll.current?.destroy();
+
         bsScroll.current = new BetterScroll(elemRef.current, {
           scrollX: true,
           scrollY: false,
@@ -154,6 +155,10 @@ function Carousel(props: Props) {
         });
       }
     }
+    
+    return () => {
+      bsScroll.current?.destroy();
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loop, width]);
 

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
-import styles from './style';
-import { css } from 'aphrodite/no-important';
-
 import BetterScroll from '@better-scroll/core';
-import Wheel from '@better-scroll/wheel';
+import { css } from 'aphrodite/no-important';
+import * as classNames from 'classnames';
+import * as React from 'react';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
+import styles from './style';
+
+const Wheel = require('@better-scroll/wheel');
 
 export interface Value {
   value: string | number;
