@@ -9,20 +9,20 @@ import Textarea from '../Textarea';
 import Toast from '../Toast';
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-export interface Props extends BSL.ComponentProps {
+export interface Props<T> extends BSL.ComponentProps {
   children: JSX.Element | JSX.Element[];
-  api?: RequestProps['api'];
-  headers?: RequestProps['headers'];
+  api?: RequestProps<T>['api'];
+  headers?: RequestProps<T>['headers'];
   /** 是否禁用发送请求 */
   disabled?: boolean; 
-  data?: RequestProps['data'];
-  method?: RequestProps['method'];
+  data?: RequestProps<T>['data'];
+  method?: RequestProps<T>['method'];
   /** 请求成功 */
-  onComplete?: RequestProps['onComplete'];
+  onComplete?: RequestProps<T>['onComplete'];
   /** catch时执行 */
-  onFail?: RequestProps['onFail'];
+  onFail?: RequestProps<T>['onFail'];
   /** onFinally先于onComplete和onFail执行 */
-  onFinally?: RequestProps['onFinally'];
+  onFinally?: RequestProps<T>['onFinally'];
   /** onSubmit前段回调，可用于拦截默认的验证逻辑 */
   onSubmitBefore?: () => boolean;
   /** onSubmit后段回调，默认验证逻辑执行之后 */
@@ -84,7 +84,7 @@ function formCheck(children: React.ReactElement | React.ReactElement[] , error: 
   });
 }
 
-function Form(props: Props) {
+function Form<T>(props: Props<T>) {
   const { 
     className, id, style, children, onSubmitBefore, onSubmit, api, data, method, onComplete, onFail, onFinally
   } = props;

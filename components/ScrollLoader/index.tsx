@@ -9,7 +9,7 @@ import RequestView, { Props as RequestProps } from '../RequestView';
 import styles from './style';
 
 type State = 'loading' | 'empty' | 'over' | 'fail' | '';
-interface Props extends BSL.ComponentProps, RequestProps {
+interface Props<T> extends BSL.ComponentProps, RequestProps<T> {
   /** 分页大小 */
   pageSize: number;
   /** 滚动到底时触发 */
@@ -35,15 +35,15 @@ interface Props extends BSL.ComponentProps, RequestProps {
   onTimeoutRender?: any;
 }
 
-interface DefaultProps extends Pick<RequestProps, 'refreshId'> {
+interface DefaultProps<T> extends Pick<RequestProps<T>, 'refreshId'> {
 }
 
-const defaultProps: DefaultProps = {
+const defaultProps: DefaultProps<any> = {
   refreshId: 0
 };
 
 const prefixCls = 'bsl-scrollLoader';
-function ScrollLoader(props: Props) {
+function ScrollLoader<T>(props: Props<T>) {
   const { id, loadingText, overText, onLoader, loadingCls, overCls, failCls } = props;
   const elemRef = React.useRef<HTMLDivElement>(null);
   const loaderComplete = React.useRef<boolean | null>(null);
@@ -107,17 +107,17 @@ function ScrollLoader(props: Props) {
 
   return (
     <React.Fragment>
-      <RequestView
+      <RequestView<T>
         {...props}
         className={classNames(prefixCls, props.className)}
         refreshId={loaderRefreshId + props.refreshId}
-        onComplete={(res: BSL.RequestResponse<any[]>) => {
+        onComplete={(res) => {
           updateState('');
           if (props.onComplete) {
             props.onComplete(res);
           }
         }}
-        onEmpty={(res: BSL.RequestResponse<any[]>) => {
+        onEmpty={(res) => {
           updateState(isSourceDataEmpty ? 'empty' : 'over');
           if (props.onEmpty) {
             props.onEmpty(res);

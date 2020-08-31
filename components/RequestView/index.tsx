@@ -6,8 +6,8 @@ import useRequest, { Option as RequestOption } from '../../hooks/useRequest';
 import BSL from '../../typings';
 import SwtichView from '../SwitchView';
 
-export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
-  children?: (data: any, code: BSL.ResponseCode) => any;
+export interface Props<T> extends RequestOption, BSL.ComponentProps, DefaultProps {
+  children?: (data: T, code: BSL.ResponseCode) => any;
   /** 用于刷新接口， 触发useEffect */
   refreshId?: any;
   /** 是否禁用 */
@@ -15,15 +15,17 @@ export interface Props extends RequestOption, BSL.ComponentProps, DefaultProps {
   /** 只处于loading视图状态下时才触发 */
   onLoading?: () => void;
   /** 请求成功 */
-  onComplete?: (response: BSL.RequestResponse<any>) => void;
+  onComplete?: (response: BSL.RequestResponse<T>) => void;
   /** 请求成功，但数据为空 */
-  onEmpty?: (response: BSL.RequestResponse<any>) => void;
+  onEmpty?: (response: BSL.RequestResponse<T>) => void;
+  /** code为500时执行 */
+  onFail?: (response: BSL.RequestResponse<T>) => void;
   /** catch时执行 */
-  onFail?: (response: Error | BSL.RequestResponse<any>) => void;
+  onCatch?: (err: Error) => void;
   /** 未登录时的回调 */
-  onNotLogin?: (response: BSL.RequestResponse<any>) => void;
+  onNotLogin?: (response: BSL.RequestResponse<T>) => void;
   /** onFinally先于onComplete和onFail执行 */
-  onFinally?: (response?: BSL.RequestResponse<any>) => void;
+  onFinally?: (response?: BSL.RequestResponse<T>) => void;
 }
 
 interface DefaultProps {
@@ -37,9 +39,9 @@ interface DefaultProps {
 const defaultProps: Required<DefaultProps> = {
   useRetry: true
 };
-function RequestView(props: Props) {
+function RequestView<T>(props: Props<T>) {
   const {
-    api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled
+    api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled, onCatch
   } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const [request, cancelToken, clearCache] = useRequest();
@@ -131,8 +133,8 @@ function RequestView(props: Props) {
       if (onFinally) {
         onFinally();
       }
-      if (onFail) {
-        onFail(err);
+      if (onCatch) {
+        onCatch(err);
       }
       if (err.message.includes('timeout of') && err.message.includes('ms exceeded')) {
         setType('timeout');
