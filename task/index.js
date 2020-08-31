@@ -10,7 +10,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 function webpackConfig(params) {
-    const { entry, dirname, publicPath, vender, cssModule, target, externals } = params;
+    const { entry, dirname, publicPath, vender, cssModule, target, externals, configFile } = params;
     const sassResources = params.sassResources || [];
     const addPlugins = params.plugins || [];
     const addVersion = params.addVersion === false ? false : true;
@@ -104,6 +104,9 @@ function webpackConfig(params) {
                 }, {
                     test: /\.(ts|tsx)$/,
                     loader: 'ts-loader',
+                    options: configFile ? {
+                        configFile: path.resolve(dirname, configFile)
+                    } : undefined,
                     include: [
                         path.resolve(dirname, 'src'),
                         path.resolve(dirname, './node_modules/bsl'),

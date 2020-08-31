@@ -28,6 +28,8 @@ interface WebpackConfig {
   target?: "web" | "webworker" | "node" | "async-node" | "node-webkit" | "atom" | "electron" | "electron-renderer" | "electron-preload" | "electron-main";
   /** webpack的externals配置 */
   externals?: string[];
+  /** tsconfig的路径 */
+  configFile?: string;
 }
 
 interface Package {
@@ -43,7 +45,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 
 export default function webpackConfig(params: WebpackConfig): Config {
-  const { entry, dirname, publicPath, vender, cssModule, target, externals } = params;
+  const { entry, dirname, publicPath, vender, cssModule, target, externals, configFile } = params;
   const sassResources = params.sassResources || [];
   const addPlugins = params.plugins || [];
   const addVersion = params.addVersion === false ? false : true;
@@ -141,6 +143,9 @@ export default function webpackConfig(params: WebpackConfig): Config {
       }, {
         test: /\.(ts|tsx)$/,
         loader: 'ts-loader',
+        options: configFile ? {
+          configFile: path.resolve(dirname, configFile)
+        } : undefined,
         include: [
           path.resolve(dirname, 'src'),
           path.resolve(dirname, './node_modules/bsl'),
