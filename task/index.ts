@@ -3,11 +3,9 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import BSL from '../typings';
 
-interface WebpackConfig {
+export interface WebpackConfig {
   dirname: string;
-  entry: {
-    [key: string]: string;
-  };
+  entry: webpack.Configuration['entry'];
   /** 文件输出路径 */
   outputDir?: string;
   /** 文件加载时的路径 */
@@ -21,15 +19,16 @@ interface WebpackConfig {
   /** 是否使用CSS Module */
   cssModule?: boolean;
   /** webpack插件 */
-  plugins?: string[];
+  plugins?: webpack.Plugin[];
   /** sass文件资源，用于全局引用 */
   sassResources?: string[];
   /** webpack的target配置 */
-  target?: "web" | "webworker" | "node" | "async-node" | "node-webkit" | "atom" | "electron" | "electron-renderer" | "electron-preload" | "electron-main";
+  target?: webpack.Configuration['target'];
   /** webpack的externals配置 */
   externals?: string[];
   /** tsconfig的路径 */
   configFile?: string;
+  mode?: webpack.Configuration['mode'];
 }
 
 interface Package {
@@ -131,6 +130,7 @@ export default function webpackConfig(params: WebpackConfig): Config {
       filename: './js/' + filename,
       chunkFilename: 'js/' + filename
     },
+    mode: params.mode,
     module: {
       rules: [{
         test: /\.(ts|tsx)$/,
@@ -223,7 +223,8 @@ export default function webpackConfig(params: WebpackConfig): Config {
       reasons: false,
       source: false,
       modules: false,
-      excludeAssets: [/\.(png|jpg|gif|ico)$/]
+      excludeAssets: [/\.(png|jpg|gif|ico)$/],
+      colors: true
     },
     optimization: {
       minimizer: [

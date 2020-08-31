@@ -92,6 +92,7 @@ function webpackConfig(params) {
             filename: './js/' + filename,
             chunkFilename: 'js/' + filename
         },
+        mode: params.mode,
         module: {
             rules: [{
                     test: /\.(ts|tsx)$/,
@@ -184,7 +185,8 @@ function webpackConfig(params) {
             reasons: false,
             source: false,
             modules: false,
-            excludeAssets: [/\.(png|jpg|gif|ico)$/]
+            excludeAssets: [/\.(png|jpg|gif|ico)$/],
+            colors: true
         },
         optimization: {
             minimizer: [

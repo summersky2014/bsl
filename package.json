@@ -41,6 +41,7 @@
     "iOS >= 7",
     "Android >= 4"
   ],
+  "type": "module",
   "dependencies": {
     "@better-scroll/core": "next",
     "@better-scroll/slide": "next",
