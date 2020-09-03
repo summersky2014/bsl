@@ -108,5 +108,5 @@ class PageStack extends React.Component<BaseProps, State> {
   }
 }
 
-// @ts-ignore
-export default withRouter(PageStack) as typeof PageStack;
+
+export default withRouter(PageStack as any) as any as typeof PageStack;

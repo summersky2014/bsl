@@ -1,12 +1,12 @@
+import axios from 'axios';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-import axios from 'axios';
-import BSL from '../../../../../../typings';
 import RequestView from '../../../../../../components/RequestView';
-import { LoadingView, EmptyView, TimeoutView, FailView } from '../../../../../../components/StateView';
-import '../../../../../../styles/normalize.scss';
+import { EmptyView, FailView, LoadingView, TimeoutView } from '../../../../../../components/StateView';
 import '../../../../../../styles/bsl.scss';
+import '../../../../../../styles/normalize.scss';
+import BSL from '../../../../../../typings';
+
 
 // 将请求结果转换为内置格式
 axios.defaults.transformResponse = (data: string, headers) => {
@@ -25,7 +25,7 @@ axios.defaults.transformResponse = (data: string, headers) => {
 const Demo = () => {
   return (
     <div>
-      <RequestView api="https://registry.npm.taobao.org/bsl">
+      <RequestView<any> api="https://registry.npm.taobao.org/bsl">
         {(data) => (
           <React.Fragment>
             <RequestView.Complete>

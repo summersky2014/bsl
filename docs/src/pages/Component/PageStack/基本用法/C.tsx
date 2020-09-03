@@ -10,13 +10,6 @@ class C extends PageComponent<any, State> {
   constructor(props: any, state: State) {
     super(props, state);
     this.init();
-    // @ts-ignore
-    window.status = 0;
-  }
-
-  public pageActive() {
-    // @ts-ignore
-    window.status++;
   }
 
   public pageRender(): JSX.Element {

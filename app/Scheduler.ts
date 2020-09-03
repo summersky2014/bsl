@@ -1,5 +1,5 @@
-import { createContext } from 'react';
 import { createSubscription } from 'create-subscription';
+import { createContext } from 'react';
 import { appData } from './core';
 
 export type ListenerCallback = (currentTime: number, overTime: number) => boolean;
@@ -9,7 +9,7 @@ export interface Listen {
   callback: ListenerCallback;
 }
 
-let subscribeCallback: (model: object) => void;
+let subscribeCallback: (model: Record<string, unknown>) => void;
 /** 更新锁 */
 let updateLock = true;
 /** 锁枕 */
@@ -19,10 +19,10 @@ let frameLock = false;
 const listens: Set<Listen> = new Set([]);
 const Context = createContext({});
 const Subscription: React.ComponentFactory<any, any> = createSubscription({
-  getCurrentValue: (model: object) => {
+  getCurrentValue: (model: Record<string, unknown>) => {
     return model;
   },
-  subscribe: (model: object, callback: (model: object) => void) => {
+  subscribe: (model: Record<string, unknown>, callback: (model: Record<string, unknown>) => void) => {
     subscribeCallback = callback;
     return () => null;
   }

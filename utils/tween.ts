@@ -1,7 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable prefer-rest-params */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-// @ts-nocheck
 /**
  * Tween.js - Licensed under the MIT license
  * https://github.com/tweenjs/tween.js
@@ -11,7 +10,8 @@
  * Thank you all, you're awesome!
  */
 
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 const _Group = function () {
   this._tweens = {};
   this._tweensAddedDuringUpdate = {};

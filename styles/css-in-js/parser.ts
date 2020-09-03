@@ -17,7 +17,7 @@ function kebabifyStyleName(string: string) {
     return `-${result}`;
   }
   return result;
-};
+}
 
 /** 是否是伪类 */
 function isPseudo(key: string) {

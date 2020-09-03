@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Context, Subscription, updateLoop } from '../../../../../../app/Scheduler';
+import Popup from '../../../../../../components/Popup';
+import '../../../../../../styles/bsl.scss';
+import '../../../../../../styles/normalize.scss';
 import * as styles from './index.scss';
 
-import { Subscription, Context, updateLoop } from '../../../../../../app/Scheduler';
-import Popup from '../../../../../../components/Popup';
-import '../../../../../../styles/normalize.scss';
-import '../../../../../../styles/bsl.scss';
 
 const style: Record<string, React.CSSProperties> = {
   button: {
@@ -21,7 +21,7 @@ const style: Record<string, React.CSSProperties> = {
 const App = () => {
   return (
     <Subscription source={{}}>
-      {(value: object) => (
+      {(value: Record<string, unknown>) => (
         <Context.Provider value={value}>
           <Demo />
         </Context.Provider>

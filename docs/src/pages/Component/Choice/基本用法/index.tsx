@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-import { Subscription, Context } from '../../../../../../app/Scheduler';
+import { Context, Subscription } from '../../../../../../app/Scheduler';
 import Choice, { ChoiceHelper, Value } from '../../../../../../components/Choice';
 import Radio from '../../../../../../components/Radio';
-import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';
+import '../../../../../../styles/normalize.scss';
+
 
 interface Data extends Value {
   label: string;
@@ -18,7 +18,7 @@ const switchData: Data[] = [{ label: '同意', id: 1 }];
 const App = () => {
   return (
     <Subscription source={{}}>
-      {(value: object) => (
+      {(value: Record<string, unknown>) => (
         <Context.Provider value={value}>
           <Demo />
         </Context.Provider>

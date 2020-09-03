@@ -4,11 +4,11 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     'plugin:react/recommended',
-    'plugin:jsx-control-statements/recommended',
+    'plugin:jsx-control-statements/recommended'
   ],
   'settings': {
     'react': {
-      'version': 'detect',
+      'version': 'detect'
     }
   },
   plugins: ['@typescript-eslint', 'react', 'jsx-control-statements', 'react-hooks'],
@@ -52,6 +52,7 @@ module.exports = {
     'jsx-control-statements/jsx-jcs-no-undef': 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0
   }
 };

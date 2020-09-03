@@ -1,8 +1,8 @@
-import BSL from '../typings';
 import * as React from 'react';
-import { push, appData } from './core';
-import { Context } from './Scheduler';
+import BSL from '../typings';
 import variable from '../utils/system/variable';
+import { appData, push } from './core';
+import { Context } from './Scheduler';
 
 export interface PageProps<Match> extends BSL.PageProps<Match> {
   entrytime: number;
@@ -44,7 +44,7 @@ abstract class PageComponent<P, S> extends React.Component<P, S> {
 
   /** Page初始化时调用 */
   protected init() {
-    appData.pages.push(this as PageComponent<{}, {}>);
+    appData.pages.push(this as PageComponent<Record<string, unknown>, Record<string, unknown>>);
     this.isCallInit = true;
 
     if (variable.env === 'development') {

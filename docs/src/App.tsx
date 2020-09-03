@@ -41,7 +41,7 @@ const App = () => (
       <div className={style.main}>
         <div className={style.content}>
           <Subscription source={{}}>
-            {(value: object) => (
+            {(value: Record<string, unknown>) => (
               <Context.Provider value={value}>
                 <HashRouter>
                   <AppStack>{menu}</AppStack>

@@ -33,7 +33,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
       const method = ((option.method || (axios.defaults.method)) || 'get').toLocaleUpperCase() as Method;
       const defualtData = RequestView.defaultData;
       const contentType = option.headers && option.headers['content-type'] || axios.defaults.headers['content-type'];
-      const postData: Record<string, string | number | boolean | object> = {};
+      const postData: Record<string, string | number | boolean | Record<string, unknown>> = {};
       const isFormData = option.data && option.data instanceof FormData;
       const isDataArray = Array.isArray(option.data);
 

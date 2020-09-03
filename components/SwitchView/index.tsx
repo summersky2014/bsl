@@ -1,5 +1,5 @@
-import BSL from '../../typings';
 import * as React from 'react';
+import BSL from '../../typings';
 import variable from '../../utils/system/variable';
 
 export interface Props {
@@ -78,8 +78,8 @@ function SwitchView(props: Props) {
 
       if (childElement && childElement.props) {
         if (typeof childElement.props.children === 'function') {
-          // @ts-ignore
-          render = childElement.props.children();
+          
+          render = (childElement.props.children as () => JSX.Element)();
           return;
         }
         if (React.Children.count(childElement.props.children)) {

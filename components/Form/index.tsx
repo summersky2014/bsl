@@ -54,7 +54,7 @@ function Formtoast(msg: string) {
   } else {
     Toast.show(msg, 'fail');
   }
-};
+}
 
 /**
  * 表单检验，会遍历子组件为表单类型的组件

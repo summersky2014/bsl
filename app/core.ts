@@ -18,7 +18,7 @@ export interface AppBaseProps {
   children: any;
 }
 
-export interface AppProps extends AppBaseProps, BSL.PageProps<{}> {
+export interface AppProps extends AppBaseProps, BSL.PageProps<Record<string, unknown>> {
   history: History;
 }
 
@@ -41,7 +41,7 @@ const appData: AppData = {
 };
 
 /* 获取上N个页面的类声明 */
-function getPrevPageClassDeclaration<P = {}, S = {}>(prevCount: number): PageComponent<P, S> | undefined {
+function getPrevPageClassDeclaration<P = Record<string, unknown>, S = Record<string, unknown>>(prevCount: number): PageComponent<P, S> | undefined {
   return appData.pages[appData.pages.length - prevCount];
 }
 

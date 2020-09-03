@@ -9,7 +9,7 @@ interface State {
 }
 
 class A extends PageComponent<any, State> {
-  constructor(props: {}, state: State) {
+  constructor(props: Record<string, unknown>, state: State) {
     super(props, state);
     this.init();
   }

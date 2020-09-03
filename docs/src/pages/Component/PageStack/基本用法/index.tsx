@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Route, HashRouter, Switch, RouteComponentProps } from 'react-router-dom';
-import { Subscription, Context } from '../../../../../../app/Scheduler';
+import { HashRouter, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import AppStack from '../../../../../../app/PageStack';
+import { Context, Subscription } from '../../../../../../app/Scheduler';
 import TabBar from '../../../../../../components/TabBar';
 import A from './A';
 import B from './B';
@@ -32,7 +32,7 @@ class App extends React.Component {
   public render(): JSX.Element {
     return (
       <Subscription source={{}}>
-        {(value: object) => (
+        {(value: Record<string, unknown>) => (
           <Context.Provider value={value}>
             <HashRouter>
               <AppStack>

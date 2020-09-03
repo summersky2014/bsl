@@ -22,7 +22,7 @@ export function ellipsisLines(lines?: number): StyleDeclaration {
     whiteSpace: 'normal',
     ...ellipsisStyle
   };
-};
+}
 
 /** 单行省略 */
 export function ellipsis(): StyleDeclaration {
@@ -31,7 +31,7 @@ export function ellipsis(): StyleDeclaration {
     whiteSpace: 'nowrap',
     ...ellipsisStyle
   };
-};
+}
 
 export function border(color: string, direction: 'left' | 'rgiht' | 'top' | 'bottom', position: 'before' | 'after' = 'after'): Record<string, StyleDeclaration | string> {
   let directionStyle!: StyleDeclaration;

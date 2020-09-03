@@ -9,7 +9,7 @@ import '../../../../../../styles/normalize.scss';
 const App = () => {
   return (
     <Subscription source={{}}>
-      {(value: object) => (
+      {(value: Record<string, unknown>) => (
         <Context.Provider value={value}>
           <Demo />
         </Context.Provider>

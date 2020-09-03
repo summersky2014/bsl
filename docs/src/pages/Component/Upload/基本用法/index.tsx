@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-import { Subscription, Context, updateLoop } from '../../../../../../app/Scheduler';
-import Upload from '../../../../../../components/Upload';
+import { Context, Subscription, updateLoop } from '../../../../../../app/Scheduler';
 import Toast from '../../../../../../components/Toast';
+import Upload from '../../../../../../components/Upload';
 import useProgress from '../../../../../../components/Upload/useProgress';
-import '../../../../../../styles/normalize.scss';
 import '../../../../../../styles/bsl.scss';
+import '../../../../../../styles/normalize.scss';
+
 
 const style = {
   container: {
@@ -17,7 +17,7 @@ const style = {
 const App = () => {
   return (
     <Subscription source={{}}>
-      {(value: object) => (
+      {(value: Record<string, unknown>) => (
         <Context.Provider value={value}>
           <Demo />
         </Context.Provider>
