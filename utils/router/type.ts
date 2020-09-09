@@ -13,7 +13,7 @@ type O<T, K extends keyof T> = T[K] extends true ? string : string | null;
 type Optional<T> = {
   [K in keyof T]: O<T, K>;
 }
-export type Match<T> = Record<keyof T, string>;
+export type M<T> = Record<keyof T, string>;
 
 export default function create<T>(match: T) {
   const linkParams = (params: Optional<T>) => {
