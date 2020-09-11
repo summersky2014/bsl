@@ -83,8 +83,8 @@ function FormItem(props: Props) {
  
     // 创建一个观察器实例并传入回调函数
     const observer = new MutationObserver((mutationsList, observer) => {
-      // Use traditional 'for loops' for IE 11
-      for(const mutation of mutationsList) {
+      for (let i = 0; i < mutationsList.length; i++) {
+        const mutation = mutationsList[i];
         if (mutation.type === 'attributes') {
           setPromptIconVisible();
         }

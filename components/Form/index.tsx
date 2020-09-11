@@ -24,7 +24,7 @@ export interface Props<T> extends BSL.ComponentProps {
   /** onFinally先于onComplete和onFail执行 */
   onFinally?: RequestProps<T>['onFinally'];
   /** onSubmit前段回调，可用于拦截默认的验证逻辑 */
-  onSubmitBefore?: () => boolean;
+  onSubmitBefore?: () => Promise<boolean>;
   /** onSubmit后段回调，默认验证逻辑执行之后 */
   onSubmit?: () => void;
   /** 提交时，表单有错误内容的提示语
@@ -103,11 +103,11 @@ function Form<T>(props: Props<T>) {
       className={className}
       id={id}
       style={style}
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         const error = { count: 0 };
 
-        if (onSubmitBefore && onSubmitBefore() === false) {
+        if (onSubmitBefore && await onSubmitBefore() === false) {
           return;
         }
 
