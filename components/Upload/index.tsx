@@ -92,7 +92,7 @@ function Upload(props: Props) {
         onChange={onChange}
         disabled={!!src || disabled}
         //capture={device.system === 'android' ? 'camera' : undefined}
-        accept={mode === 'image' ? 'image/*' : undefined}
+        // accept={mode === 'image' ? 'image/*' : undefined}
         onClick={(event) => {
           if (onAddClick) {
             onAddClick(event);
