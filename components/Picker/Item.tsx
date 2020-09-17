@@ -1,11 +1,10 @@
 import BetterScroll from '@better-scroll/core';
+import Wheel from '@better-scroll/wheel';
 import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 import styles from './style';
-
-const Wheel = require('@better-scroll/wheel');
 
 export interface Value {
   value: string | number;
@@ -52,6 +51,7 @@ function calcNum(): number {
 }
 
 BetterScroll.use(Wheel);
+console.log(Wheel)
 export const num: number = calcNum();
 const prefixCls = 'bsl-picker-item';
 const textStyleCls = css(styles.itemText);
@@ -74,8 +74,7 @@ function Item(props: Props) {
 
   React.useEffect(() => {
     const timer = () => {
-      if (wheel.current && propsData.current) {
-        
+      if (wheel.current && propsData.current) {  
         const selectedIndex = wheel.current.getSelectedIndex();
         const index = propsData.current.length <= selectedIndex ? propsData.current.length - 1 : selectedIndex;
         const item = propsData.current[index] || propsData.current[0];

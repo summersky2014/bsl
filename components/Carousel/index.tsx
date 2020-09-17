@@ -1,4 +1,5 @@
 import BetterScroll from '@better-scroll/core';
+import SlidePlugins from '@better-scroll/slide';
 import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
@@ -9,7 +10,6 @@ import Dots from './Dots';
 import Slide, { BaseProps as SlideProps } from './Slide';
 import styles from './style';
 
-const slidePlugins = require('@better-scroll/slide');
 export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   /** 滑动块的样式 */
   slideCls?: string;
@@ -47,7 +47,6 @@ interface DefaultProps {
 const prefixCls = 'bsl-carousel';
 
 BetterScroll.use(slidePlugins);
-
 const defaultProps: DefaultProps = {
   index: 0,
   interval: 3000,
