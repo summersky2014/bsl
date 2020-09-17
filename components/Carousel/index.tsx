@@ -46,7 +46,7 @@ interface DefaultProps {
 
 const prefixCls = 'bsl-carousel';
 
-BetterScroll.use(slidePlugins);
+BetterScroll.use(SlidePlugins);
 const defaultProps: DefaultProps = {
   index: 0,
   interval: 3000,

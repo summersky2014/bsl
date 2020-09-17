@@ -22,7 +22,7 @@ export interface Option extends Omit_url_method {
 
 export const cacheData: Map<string, any> = new Map();
 
-function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, React.MutableRefObject<Canceler | null>, (key: string) => void] {
+function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, React.MutableRefObject<Canceler>, (key: string) => void] {
   const clearCache = (key: string) => cacheData.delete(key);
   const cancelToken = React.useRef<(() => void)>(() => null);
   const request = (option: Option): Promise<BSL.RequestResponse<any>> => {
