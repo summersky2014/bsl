@@ -48,7 +48,8 @@ function link(params: Params): void {
 
   if (appData.history?.location.pathname !== qsurl) {
     if (newPage) {
-      window.open(qsurl, '_blank');
+      const isHashMode = window.location.hash ? true : false;
+      window.open(isHashMode ? '#' + qsurl : qsurl, '_blank');
     } else {
       if (replace) {
         appData.history!.replace(qsurl);
