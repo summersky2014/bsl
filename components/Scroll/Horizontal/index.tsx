@@ -1,10 +1,9 @@
-import BSL from '../../../typings';
-import * as React from 'react';
-import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
 import BetterScroll from '@better-scroll/core';
+import { css } from 'aphrodite/no-important';
+import * as classNames from 'classnames';
+import * as React from 'react';
+import BSL from '../../../typings';
+import styles from './style';
 
 export interface Props extends BSL.ComponentProps {
   children: JSX.Element[] | JSX.Element;
