@@ -1,5 +1,4 @@
 import BetterScroll from '@better-scroll/core';
-import SlidePlugins from '@better-scroll/slide';
 import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
@@ -9,6 +8,8 @@ import memoAreEqual from '../../utils/system/memoAreEqual';
 import Dots from './Dots';
 import Slide, { BaseProps as SlideProps } from './Slide';
 import styles from './style';
+
+const SlidePlugins = require('@better-scroll/slide').default || require('@better-scroll/slide');
 
 export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   /** 滑动块的样式 */
@@ -89,7 +90,7 @@ function Carousel(props: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, refreshId]);
   
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const onBeforeSlide = () => {
       if (autoplay && timer.current) {
         clearTimeOut(timer.current);

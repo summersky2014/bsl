@@ -1,10 +1,12 @@
 import BetterScroll from '@better-scroll/core';
-import Wheel from '@better-scroll/wheel';
 import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import anyuseTimeout from '../../hooks/anyuseTimeout';
 import styles from './style';
+// import Wheel from '@better-scroll/wheel';
+
+const WheelPlugins = require('@better-scroll/wheel').default || require('@better-scroll/wheel');
 
 export interface Value {
   value: string | number;
@@ -50,8 +52,7 @@ function calcNum(): number {
   return value;
 }
 
-BetterScroll.use(Wheel);
-console.log(Wheel)
+BetterScroll.use(WheelPlugins);
 export const num: number = calcNum();
 const prefixCls = 'bsl-picker-item';
 const textStyleCls = css(styles.itemText);
