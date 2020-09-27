@@ -132,6 +132,7 @@ function Carousel(props: Props) {
           click: true,
           slide: {
             loop,
+            autoplay: false,
             threshold: 100
           },
           bounce: false
