@@ -55,7 +55,7 @@ const Demo = () => {
       </Countdown>
       <br/>
 
-      <FormItem requiredPrompt="输入框必填">
+      <FormItem requiredPrompt="输入框必填" onClear={inputHelper.clear}>
         <Input
           value={inputHelper.getValue()}
           state={inputHelper.state}
@@ -65,7 +65,7 @@ const Demo = () => {
       </FormItem>
       <br/>
 
-      <FormItem requiredPrompt="文本域必填">
+      <FormItem requiredPrompt="文本域必填" onClear={textareaHelper.clear}>
         <Textarea
           value={textareaHelper.getValue()}
           state={textareaHelper.state}

@@ -1,4 +1,3 @@
-import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
@@ -43,6 +42,7 @@ function FormItem(props: Props) {
   const formRef = React.useRef<HTMLFormElement>();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const listenerCallback = React.useRef<ListenerCallback>();
+  const isTriggerChange = React.useRef(false);
 
   const toast = (msg: string) => {
     if (FormItem.toast) {
@@ -58,27 +58,34 @@ function FormItem(props: Props) {
       formRef.current = findFormElement(itemRef.current!);
     }
 
-    const setPromptIconVisible = () => {
+    const changeIconVisible = () => {
       const state = itemRef.current!.dataset['state'] as BSL.RequestState;
-      setPromptVisible(state === 'fail' || state === 'empty' ? true : false);
+
+      if (state === 'fail' || state === 'empty') {
+        setPromptVisible(true);
+        setClearVisible(false);
+      } else {
+        setPromptVisible(false);
+        if (props.onClear && isTriggerChange.current) {
+          setClearVisible(true);
+        }
+      }
     };
     const onFocus = () => {
-      if (props.onClear) {
-        setClearVisible(true);
-        setPromptVisible(false);
-      }
+      changeIconVisible();
     };
     const onBlur = () => {
-      if (props.onClear) {
-        setPromptVisible(false);
-      }
       listenerCallback.current = setTimeOut(() => {
+        changeIconVisible();
         setClearVisible(false);
-        setPromptIconVisible();
       }, 100);
     };
     const onSubmit = () => {
-      setTimeout(setPromptIconVisible);
+      listenerCallback.current = setTimeOut(changeIconVisible, 0);
+    };
+    const onChange = () => {  
+      isTriggerChange.current = true;
+      changeIconVisible();
     };
  
     // 创建一个观察器实例并传入回调函数
@@ -86,7 +93,7 @@ function FormItem(props: Props) {
       for (let i = 0; i < mutationsList.length; i++) {
         const mutation = mutationsList[i];
         if (mutation.type === 'attributes') {
-          setPromptIconVisible();
+          changeIconVisible();
         }
       }
     });
@@ -97,21 +104,20 @@ function FormItem(props: Props) {
       attributeFilter: ['data-state']
     });
 
-    itemRef.current!.addEventListener('change', setPromptIconVisible);
+    itemRef.current!.addEventListener('input', onChange);
     itemRef.current!.addEventListener('focus', onFocus);
     itemRef.current!.addEventListener('blur', onBlur);
     formRef.current?.addEventListener('submit',onSubmit);
 
-    setPromptIconVisible();
+    changeIconVisible();
     return () => {
       if (listenerCallback.current) {
         clearTimeOut(listenerCallback.current);
       }
-      itemRef.current!.removeEventListener('change', setPromptIconVisible);
+      itemRef.current!.removeEventListener('change', onChange);
       itemRef.current!.removeEventListener('focus', onFocus);
       itemRef.current!.removeEventListener('blur', onBlur);
       formRef.current?.removeEventListener('submit', onSubmit);
-      // 之后，可停止观察
       observer.disconnect();
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,9 +132,9 @@ function FormItem(props: Props) {
       ref={containerRef}
     >
       {children ? children : null}
-      <div className={classNames(css(promptVisible && styles.pormptBox), `${prefixCls}-pormptBox`)}>
+      <div className={classNames((promptVisible || clearVisbile) && styles.iconBox, `${prefixCls}-pormptBox`)}>
         <Icon
-          className={classNames(css(styles.prompt), `${prefixCls}-prompt`)}
+          className={classNames(styles.prompt, `${prefixCls}-prompt`)}
           src={svgFile.prompt}
           onClick={() => {
             const state = itemRef.current!.dataset['state'] as BSL.RequestState;
@@ -150,7 +156,7 @@ function FormItem(props: Props) {
           }}
         />
         <Icon
-          className={classNames(css(styles.clear), `${prefixCls}-clear`)}
+          className={classNames(styles.clear, `${prefixCls}-clear`)}
           src={svgFile.clear}
           onClick={props.onClear}
           style={{
