@@ -51,15 +51,15 @@ function RequestView<T>(props: Props<T>) {
   const [retryId, setRetryId] = React.useState(0);
   const responseData = React.useRef<any>();
   const responseCode = React.useRef<BSL.ResponseCode>();
-  const typeRef = React.useRef<BSL.RequestState>('undefined');
+  const state = React.useRef<BSL.RequestState>('undefined');
   const paramsStr = JSON.stringify(params);
   const dataStr = JSON.stringify(data);
   const initRoute = appData.currentPageId;
   const timer = React.useRef<ListenerCallback | null>();
   const prevRefreshId = React.useRef(refreshId);
   const cacheKey = React.useRef<string>('');
-  const setType = (typeValue: BSL.RequestState, res?: any) => {
-    typeRef.current = typeValue;
+  const setState = (typeValue: BSL.RequestState, res?: any) => {
+    state.current = typeValue;
     responseData.current = res;
 
     if (timer.current) {
@@ -70,8 +70,8 @@ function RequestView<T>(props: Props<T>) {
   };
 
   const onRetry = () => {
-    if ((typeRef.current === 'fail' || typeRef.current === 'timeout') && props.useRetry) {
-      typeRef.current = 'undefined';
+    if ((state.current === 'fail' || state.current === 'timeout') && props.useRetry) {
+      state.current = 'undefined';
       setRetryId(retryId + 1);
     }
   };
@@ -81,8 +81,8 @@ function RequestView<T>(props: Props<T>) {
       return;
     }
     timer.current = setTimeOut(() => {
-      if (typeRef.current === 'undefined' || prevRefreshId.current !== refreshId) {
-        setType('loading');
+      if (state.current === 'undefined' || prevRefreshId.current !== refreshId) {
+        setState('loading');
         if (onLoading) {
           onLoading();
         }
@@ -96,26 +96,26 @@ function RequestView<T>(props: Props<T>) {
       }  
       switch (res.code) {
         case 200:
-          setType('complete', res.data);
+          setState('complete', res.data);
           if (onComplete) {
             onComplete(res);
           }
           break;
         case 401:
-          setType('fail', res.data);
+          setState('fail', res.data);
           if (props.onNotLogin) {
             props.onNotLogin(res);
           }
           break;
         case 404:
-          setType('empty', res.data);
+          setState('empty', res.data);
           if (onEmpty) {
             onEmpty(res);
           }
           break;
         default:
           // 500或其他码都视为fail状态
-          setType('fail');
+          setState('fail');
           if (onFail) {
             onFail(res);
           }
@@ -137,9 +137,9 @@ function RequestView<T>(props: Props<T>) {
         onCatch(err);
       }
       if (err.message.includes('timeout of') && err.message.includes('ms exceeded')) {
-        setType('timeout');
+        setState('timeout');
       } else {
-        setType('fail');
+        setState('fail');
         throw err;
       }
     });
@@ -167,8 +167,8 @@ function RequestView<T>(props: Props<T>) {
       style={props.style}
       onClick={onRetry}
     >
-      {typeRef.current !== 'undefined' ? (
-        <SwtichView state={typeRef.current}>
+      {state.current !== 'undefined' ? (
+        <SwtichView state={state.current}>
           {children(responseData.current, responseCode.current!)}
         </SwtichView>
       ) : null}

@@ -3,10 +3,9 @@ import * as React from 'react';
 import RequestView from '../components/RequestView';
 import BSL from '../typings';
 
-type Omit_url = Omit<AxiosRequestConfig, 'url'>;
-type Omit_url_method = Omit<Omit_url, 'method'>;
+type OmitRequestOption = Omit<AxiosRequestConfig, 'url' | 'method'>;
 
-export interface Option extends Omit_url_method {
+export interface Option extends OmitRequestOption {
   /** 请求接口的名称 */
   api: string;
   /**
@@ -85,8 +84,8 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
             cacheData.set(key, res.data);
           }
           resolve({
-            ...res.data,
-            key
+            ...data,
+            cacheKey: key
           });
         } else {
           const response: BSL.RequestResponse<null> = {

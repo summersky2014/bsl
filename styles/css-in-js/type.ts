@@ -723,7 +723,7 @@ export interface CSSPropertiesComplete {
      * Obsolete, do not use. This property has been renamed to align-items.
      * Specifies the alignment (perpendicular to the layout axis defined by the flex-direction property) of child elements of the object.
      */
-  flexAlign?: CSSWideKeyword | {};
+  flexAlign?: CSSWideKeyword | Record<string, any>;
 
   /**
      * The flex-basis CSS property describes the initial main size of the flex item before any free space is distributed according to the flex factors described in the flex property (flex-grow and flex-shrink).
@@ -786,18 +786,18 @@ export interface CSSPropertiesComplete {
      * Do not use. This property has been renamed to align-self
      * Specifies the alignment (perpendicular to the layout axis defined by flex-direction) of child elements of the object.
      */
-  flexItemAlign?: CSSWideKeyword | {};
+  flexItemAlign?: CSSWideKeyword | Record<string, any>;
 
   /**
      * Do not use. This property has been renamed to align-content.
      * Specifies how a flexbox's lines align within the flexbox when there is extra space along the axis that is perpendicular to the axis defined by the flex-direction property.
      */
-  flexLinePack?: CSSWideKeyword | {};
+  flexLinePack?: CSSWideKeyword | Record<string, any>;
 
   /**
      * Gets or sets a value that specifies the ordinal group that a flexbox element belongs to. This ordinal value identifies the display order for the group.
      */
-  flexOrder?: CSSWideKeyword | {};
+  flexOrder?: CSSWideKeyword | Record<string, any>;
 
   /**
      * Specifies the flex shrink factor of a flex item.
@@ -819,7 +819,7 @@ export interface CSSPropertiesComplete {
   /**
      * Flows content from a named flow (specified by a corresponding flow-into) through selected elements to form a dynamic chain of layout regions.
      */
-  flowFrom?: CSSWideKeyword | {};
+  flowFrom?: CSSWideKeyword | Record<string, any>;
 
   /**
      * The font property is shorthand that allows you to do one of two things: you can either set up six of the most mature font properties in one line, or you can set one of a choice of keywords to adopt a system font setting.
@@ -1568,7 +1568,7 @@ export interface CSSPropertiesComplete {
   /**
      * Obsolete: unsupported.
      */
-  textScript?: CSSWideKeyword | {};
+  textScript?: CSSWideKeyword | Record<string, any>;
 
   /**
      * The CSS text-shadow property applies one or more drop shadows to the text and <text-decorations> of an element. Each shadow is specified as an offset from the text, along with optional color and blur radius values.
@@ -1797,7 +1797,7 @@ export interface CSSPropertiesComplete {
      * Obsolete and unsupported. Do not use.
      * This CSS property controls the text when it reaches the end of the block in which it is enclosed.
      */
-  wrapOption?: CSSWideKeyword | {};
+  wrapOption?: CSSWideKeyword | Record<string, any>;
 
   /**
      * writing-mode specifies if lines of text are laid out horizontally or vertically, and the direction which lines of text and blocks progress.
