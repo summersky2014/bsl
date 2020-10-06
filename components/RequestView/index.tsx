@@ -11,7 +11,7 @@ export interface Props<T> extends RequestOption, BSL.ComponentProps, DefaultProp
   /** 用于刷新接口， 触发useEffect */
   refreshId?: any;
   /** 是否禁用 */
-  disiabled?: boolean;
+  disabled?: boolean;
   /** 只处于loading视图状态下时才触发 */
   onLoading?: () => void;
   /** 请求成功 */
@@ -41,7 +41,7 @@ const defaultProps: Required<DefaultProps> = {
 };
 function RequestView<T>(props: Props<T>) {
   const {
-    api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disiabled, onCatch
+    api, children, cache, params, data, refreshId, onComplete, onFail, onFinally, onEmpty, onLoading, disabled, onCatch
   } = props;
   const [setTimeOut, clearTimeOut] = anyuseTimeout();
   const [request, cancelToken, clearCache] = useRequest();
@@ -77,7 +77,7 @@ function RequestView<T>(props: Props<T>) {
   };
 
   React.useEffect(() => {
-    if (disiabled) {
+    if (disabled) {
       return;
     }
     timer.current = setTimeOut(() => {
@@ -158,7 +158,7 @@ function RequestView<T>(props: Props<T>) {
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [api, paramsStr, dataStr, refreshId, retryId, disiabled, cache]);
+  }, [api, paramsStr, dataStr, refreshId, retryId, disabled, cache]);
 
   return children ? (
     <div
