@@ -1,7 +1,7 @@
+// disable-sort-imports
 /// <reference path="./module.d.ts" />
-
-import { RouteComponentProps } from 'react-router';
 import { Location } from 'history';
+import { RouteComponentProps } from 'react-router';
 
 declare namespace BSL {
   /** 运行时的环境变量 */
@@ -47,6 +47,7 @@ declare namespace BSL {
     msg: string;
     /** 缓存数据的key */
     cacheKey?: string;
+    source: any;
   }
 }
 

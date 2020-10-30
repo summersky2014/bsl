@@ -1,4 +1,4 @@
-import * as History from 'history';
+import { createHashHistory } from 'history';
 
 interface ExtendsWinodw extends Window {
   route: string;
@@ -41,7 +41,7 @@ export default function historyReplace(customRoute?: string): void {
   
   // 如果有自定义路由，优先跳转自定义路由
   if (customRoute) {
-    const history = History.createHashHistory();
+    const history = createHashHistory();
     history.replace(customRoute);
   } else if (!hash) {
     /*
@@ -49,7 +49,7 @@ export default function historyReplace(customRoute?: string): void {
     * 如果是从分享进来的，第一次会从route参数进入跳转，后面再刷新就不会再读取route参数，可以防止刷新后回到分享进来的页面
     */
     const route = getRoute();
-    const history = History.createHashHistory();
+    const history = createHashHistory();
 
     if (route) {
       history.replace(hexToString(route));

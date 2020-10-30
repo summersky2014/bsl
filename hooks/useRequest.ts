@@ -3,9 +3,10 @@ import * as React from 'react';
 import RequestView from '../components/RequestView';
 import BSL from '../typings';
 
-type OmitRequestOption = Omit<AxiosRequestConfig, 'url' | 'method'>;
+type Omit_url = Omit<AxiosRequestConfig, 'url'>;
+type Omit_url_method = Omit<Omit_url, 'method'>;
 
-export interface Option extends OmitRequestOption {
+export interface Option extends Omit_url_method {
   /** 请求接口的名称 */
   api: string;
   /**
@@ -78,20 +79,23 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
         if (res.status === 200) {
           let key: string | undefined;
           // 判断接口是否需要缓存，并将结果储存起来
-          const data = res.data as BSL.RequestResponse<any>;
+          const data = res.data as Pick<BSL.RequestResponse<any>, 'data' | 'msg' | 'code'>;
+          const returnData: BSL.RequestResponse<any> = {
+            ...res.data,
+            source: res.data,
+            cacheKey: key,
+          }
           if (option.cache && data.code === 200) {
             key = createKey();
             cacheData.set(key, res.data);
           }
-          resolve({
-            ...data,
-            cacheKey: key
-          });
+          resolve(returnData);
         } else {
           const response: BSL.RequestResponse<null> = {
             data: null,
             code: 500,
-            msg: '网络错误'
+            msg: '网络错误',
+            source: null
           };
           resolve(response);
         }
