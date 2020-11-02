@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { Route } from 'react-router-dom';
+import PageComponent from '../../app/PageComponent';
+
+class Page extends PageComponent<any,any> {
+  public pageRender() {
+    return;
+  }
+}
 
 export interface RoutesConifg {
   base: string;
   /** 按照参数顺序排序 */
   pathParams?: string[];
   linkParams?: (...args: any[]) => (string | number)[];
-  component: Function;
+  component: typeof Page;
 }
 
 export default function(config: Record<string, RoutesConifg>) {

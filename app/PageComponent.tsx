@@ -10,8 +10,7 @@ export interface PageProps<Match> extends BSL.PageProps<Match> {
 
 abstract class PageComponent<P, S> extends React.Component<P, S> {
   constructor(props: P, state: S) {
-    super(props, state);
-
+    super(props);
     if (appData.env === 'development') {
       setTimeout(() => {
         if (this.isCallInit === false) {

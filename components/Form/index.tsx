@@ -10,12 +10,12 @@ import Toast from '../Toast';
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 export interface Props<T> extends BSL.ComponentProps {
+  api: RequestProps<T>['api'];
   children: JSX.Element | JSX.Element[];
-  api?: RequestProps<T>['api'];
   headers?: RequestProps<T>['headers'];
+  data?: RequestProps<T>['data'];
   /** 是否禁用发送请求 */
   disabled?: boolean; 
-  data?: RequestProps<T>['data'];
   method?: RequestProps<T>['method'];
   /** 请求成功 */
   onComplete?: RequestProps<T>['onComplete'];
@@ -39,9 +39,11 @@ export interface FromTypeProps<Value> {
   state: BSL.RequestState;
 }
 
-function isMutableRefObject(obj: React.MutableRefObject<any>) {
-  if (Object.keys(obj).length === 1 && obj.current) {
-    return true;
+function isMutableRefObject(obj: React.MutableRefObject<any> | undefined) {
+  if (obj) {
+    if (Object.keys(obj).length === 1 && obj.current) {
+      return true;
+    }
   }
   return false;
 }
