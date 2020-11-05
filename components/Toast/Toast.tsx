@@ -1,10 +1,9 @@
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
+import * as React from 'react';
+import variable from '../../utils/system/variable';
+import Icon from '../Icon';
 import styles from './style';
 
-import Icon from '../Icon';
-import variable from '../../utils/system/variable';
 
 const svgRootPath = variable.svgRootPath;
 const svgFile = {
@@ -23,16 +22,18 @@ const Toast = (props: ToastProps) => {
   const { type, children } = props;
 
   return type ? (
-    <div className={classNames(css(styles.text, styles.textIcon), `${prefixCls}-text`, `${prefixCls}-text-icon`)}>
+    <div className={classNames(styles.text, styles.textIcon, `${prefixCls}-text`, `${prefixCls}-text-icon`)}>
       <Icon 
-        className={classNames(css(styles.icon, type === 'loading' && styles.iconLoading), `${prefixCls}-icon`, `${prefixCls}-icon-${type}`)}
+        className={classNames(styles.icon, `${prefixCls}-icon`, `${prefixCls}-icon-${type}`, {
+          [styles.iconLoading]: type === 'loading'
+        })}
         src={svgFile[type]}
       />
-      <div className={classNames(css(styles.textInfo), `${prefixCls}-text-info`)}>{children}</div>
+      <div className={classNames(styles.textInfo, `${prefixCls}-text-info`)}>{children}</div>
     </div>
   ) : (
-    <div className={classNames(css(styles.text), `${prefixCls}-text`)}>
-      <div className={classNames(css(styles.textLabel), `${prefixCls}-text-label`)}>{children}</div>
+    <div className={classNames(styles.text, `${prefixCls}-text`)}>
+      <div className={classNames(styles.textLabel, `${prefixCls}-text-label`)}>{children}</div>
     </div>
   );
 };

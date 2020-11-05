@@ -1,12 +1,12 @@
-import { StyleSheet, StyleDeclaration } from 'aphrodite/no-important';
+import { css, CSSProperties, StyleSheet } from '../../css-in-js';
 
-const popupEffect: StyleDeclaration = {
+const popupEffect: CSSProperties = {
   animationDuration: '0.3s',
   animationFillMode: 'both',
   animationTimingFunction: 'cubic-bezier(0.55, 0, 0.55, 0.2)',
   animationPlayState: 'running'
 };
-const rmcPopupPickerFadeIn: Record<string, StyleDeclaration> = {
+const rmcPopupPickerFadeIn: Record<string, CSSProperties> = {
   '0%': {
     opacity: 0
   },
@@ -14,7 +14,7 @@ const rmcPopupPickerFadeIn: Record<string, StyleDeclaration> = {
     opacity: 1
   }
 };
-const rmcPopupPickerFadeOut: Record<string, StyleDeclaration> = {
+const rmcPopupPickerFadeOut: Record<string, CSSProperties> = {
   '0%': {
     opacity: 1
   },
@@ -22,7 +22,7 @@ const rmcPopupPickerFadeOut: Record<string, StyleDeclaration> = {
     opacity: 0
   }
 };
-const rmcPopupPickerSlideFadeIn: Record<string, StyleDeclaration> = {
+const rmcPopupPickerSlideFadeIn: Record<string, CSSProperties> = {
   '0%': {
     transform: 'translate3d(0, 100%, 0)'
   },
@@ -30,7 +30,7 @@ const rmcPopupPickerSlideFadeIn: Record<string, StyleDeclaration> = {
     transform: 'translate3d(0, 0, 0)'
   }
 };
-const rmcPopupPickerSlideFadeOut: Record<string, StyleDeclaration> = {
+const rmcPopupPickerSlideFadeOut: Record<string, CSSProperties> = {
   '0%': {
     transform: 'translate3d(0, 0, 0)'
   },
@@ -39,24 +39,24 @@ const rmcPopupPickerSlideFadeOut: Record<string, StyleDeclaration> = {
   }
 };
 const styles = StyleSheet.create({
-  fadein: {
+  fadein: css({
     ...popupEffect,
     opacity: 0,
     animationName: rmcPopupPickerFadeIn
-  },
-  fadeout: {
+  }),
+  fadeout: css({
     ...popupEffect,
     animationName: rmcPopupPickerFadeOut
-  },
-  enter: {
+  }),
+  enter: css({
     ...popupEffect,
     transform: 'translate3d(0, 100%, 0)',
     animationName: rmcPopupPickerSlideFadeIn
-  },
-  leave: {
+  }),
+  leave: css({
     ...popupEffect,
     animationName: rmcPopupPickerSlideFadeOut
-  }
+  })
 });
 
 export default styles;

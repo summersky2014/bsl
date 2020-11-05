@@ -1,6 +1,6 @@
-import { StyleDeclaration, StyleSheet } from 'aphrodite/no-important';
+import { css, CSSProperties, StyleSheet } from '../../../css-in-js';
 
-const Animasearch: Record<string, StyleDeclaration> = {
+const Animasearch: Record<string, CSSProperties> = {
   '0%': {
     transform: 'scale(1)',
     opacity: 1
@@ -19,7 +19,7 @@ const Animasearch: Record<string, StyleDeclaration> = {
   }
 };
 
-const rotate: Record<string, StyleDeclaration> = {
+const rotate: Record<string, CSSProperties> = {
   '0%': {
     transform: 'rotate(0)',
     clip: 'rect(0px, 35px, 35px, 0px)'
@@ -33,7 +33,7 @@ const rotate: Record<string, StyleDeclaration> = {
   }
 };
 
-const rotate2: Record<string, StyleDeclaration> = {
+const rotate2: Record<string, CSSProperties> = {
   '0%': {
     transform: 'rotate(0deg)',
     clip: 'rect(0px, 164px, 150px, 0px)'
@@ -58,9 +58,9 @@ function hex() {
     [6, 36, -21],
     [7, 36, 21]
   ];
-  const style: Record<string, StyleDeclaration> = {};
+  const style: Record<string, CSSProperties> = {};
   data.forEach((item) => {
-    style[`hex_${item[0]}`] = {
+    style[`hex_${item[0]}`] = css({
       top: item[1],
       left: item[2],
       transform: 'scale(1)',
@@ -70,14 +70,14 @@ function hex() {
       animationTimingFunction: 'ease-in-out',
       animationIterationCount: 'infinite',
       animationDelay: (3 / 14 * item[0]) + 's'
-    };
+    });
   });
 
   return style;
 }
 
 const styles = StyleSheet.create({
-  root: {
+  root: css({
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
       animationTimingFunction: 'linear',
       animationIterationCount: 'infinite'
     }
-  },
-  container: {
+  }),
+  container: css({
     position: 'relative',
     top: '33px',
     left: '41px',
     borderRadius: '50%'
-  },
-  hexagon: {
+  }),
+  hexagon: css({
     position: 'absolute',
     width: '40px',
     height: '23px',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
       borderRight: '20px solid transparent',
       borderTop: '11.5px solid #556C82'
     }
-  },
+  }),
   ...hex()
 });
 

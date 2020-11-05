@@ -1,5 +1,5 @@
 import BetterScroll from '@better-scroll/core';
-import { css } from 'aphrodite/no-important';
+import SlidePlugins from '@better-scroll/slide';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
@@ -8,8 +8,7 @@ import memoAreEqual from '../../utils/system/memoAreEqual';
 import Dots from './Dots';
 import Slide, { BaseProps as SlideProps } from './Slide';
 import styles from './style';
-
-const SlidePlugins = require('@better-scroll/slide').default || require('@better-scroll/slide');
+// const SlidePlugins = require('@better-scroll/slide').default || require('@better-scroll/slide');
 
 export interface Props extends BSL.ComponentProps, SlideProps, DefaultProps {
   /** 滑动块的样式 */
@@ -203,7 +202,7 @@ function Carousel(props: Props) {
 
   return (
     <div
-      className={classNames(css(styles.root), prefixCls, props.className)}
+      className={classNames(styles.root, prefixCls, props.className)}
       style={props.style}
       ref={elemRef}
     >

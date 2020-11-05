@@ -40,7 +40,7 @@ const env = process.env.NODE_ENV as BSL.Env;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 
 export default function webpackConfig(params: WebpackConfig): Config {
@@ -210,8 +210,6 @@ export default function webpackConfig(params: WebpackConfig): Config {
         moment$: 'moment/moment.js'
       },
       extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.tsx', '.ts', '.web.ts', '.scss', '.css'],
-      modules: isDev ? [path.resolve(dirname, 'node_modules')] : undefined,
-      mainFields: isDev ? ['jsnext:main', 'main'] : undefined
     },
     plugins,
     stats: {

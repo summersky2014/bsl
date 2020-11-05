@@ -1,7 +1,6 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
+import * as React from 'react';
+import BSL from '../../typings';
 import styles from './style';
 
 interface Props extends BSL.ComponentProps {
@@ -21,7 +20,8 @@ const Dots = (props: Props) => {
     item.push(
       <div
         key={i}
-        className={classNames(css(styles.dotItem, isActive && styles.dotItemActive), `${prefixCls}-item`, {
+        className={classNames(styles.dotItem, `${prefixCls}-item`, {
+          [styles.dotItemActive]: isActive,
           [`${prefixCls}-item-active`]: isActive
         })}
       />
@@ -30,7 +30,7 @@ const Dots = (props: Props) => {
 
   return (
     <div
-      className={classNames(css(styles.dot), prefixCls, className)}
+      className={classNames(styles.dot, prefixCls, className)}
       style={style}
     >
       {item}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { create, css } from '../../styles/css-in-js';
+import { css, StyleSheet } from '../../css-in-js';
 
 function createOrder() {
   const order: Record<string, React.CSSProperties> = {};
@@ -24,7 +24,7 @@ function createFlex() {
   return flex;
 }
 
-const styles = create({
+const styles = StyleSheet.create({
   flex: css({
     display: 'flex'
   }),

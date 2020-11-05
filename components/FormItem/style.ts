@@ -1,4 +1,4 @@
-import { create, css } from '../../styles/css-in-js';
+import { css, StyleSheet } from '../../css-in-js';
 
 const iconStyles = {
   width: '19px',
@@ -6,7 +6,7 @@ const iconStyles = {
   borderRadius: '50%',
   cursor: 'pointer'
 };
-const styles = create({
+const styles = StyleSheet.create({
   prompt: css({
     ...iconStyles,
     background: '#ffe2e2',

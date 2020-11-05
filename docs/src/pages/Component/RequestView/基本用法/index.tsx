@@ -15,7 +15,8 @@ axios.defaults.transformResponse = (data: string, headers) => {
     const response: BSL.RequestResponse<any> = {
       data: result,
       code: 200,
-      msg: ''
+      msg: '',
+      source: ''
     };
 
     return response;

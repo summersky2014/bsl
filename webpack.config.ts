@@ -42,23 +42,24 @@ const webpackConfig = {
     nodePath.resolve(__dirname, 'hooks'),
     nodePath.resolve(__dirname, 'utils'),
     nodePath.resolve(__dirname, 'app'),
-    nodePath.resolve(__dirname, 'styles')
+    nodePath.resolve(__dirname, 'styles'),
+    nodePath.resolve(__dirname, 'css-in-js')
   ],
   plugins: [
-    new CopyPlugin([{
-      from: './node_modules/antd/es/style/index.css',
-      to: 'css/antd.css'
-    }, {
-      from: './node_modules/antd/es/alert/style/index.css',
-      to: 'css/antd.alert.css'
-    }, {
-      from: './node_modules/antd/es/icon/style/index.css',
-      to: 'css/antd.icon.css'
-    }, {
-      from: './node_modules/antd/es/popover/style/index.css',
-      to: 'css/antd.popover.css'
-    }], {
-      copyUnmodified: true
+    new CopyPlugin({
+      patterns: [{
+        from: './node_modules/antd/es/style/index.css',
+        to: 'css/antd.css'
+      }, {
+        from: './node_modules/antd/es/alert/style/index.css',
+        to: 'css/antd.alert.css'
+      }, {
+        from: './node_modules/antd/es/icon/style/index.css',
+        to: 'css/antd.icon.css'
+      }, {
+        from: './node_modules/antd/es/popover/style/index.css',
+        to: 'css/antd.popover.css'
+      }]
     })
   ]
 };

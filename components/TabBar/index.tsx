@@ -1,4 +1,3 @@
-import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
@@ -40,8 +39,8 @@ function TabBar(props: Props<TabBarData & LinkQuery>) {
 
   return (
     <Choice
-      className={classNames(css(styles.root), className)}
-      itemCls={classNames(css(styles.item), itemCls)}
+      className={classNames(styles.root, className)}
+      itemCls={classNames(styles.item, itemCls)}
       id={id}
       style={props.style}
       data={data}
@@ -66,13 +65,13 @@ function TabBar(props: Props<TabBarData & LinkQuery>) {
       {(item, active) => (
         <React.Fragment>
           <Icon 
-            className={classNames(css(styles.icon), props.iconCls, {
+            className={classNames(styles.icon, props.iconCls, {
               [props.activeCls || '']: active
             })}
             src={(item as TabBarData).icon}
           />
           <div
-            className={classNames(css(styles.text), props.textCls, {
+            className={classNames(styles.text, props.textCls, {
               [props.activeCls || '']: active
             })}
           >{item.id}</div>

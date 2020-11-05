@@ -8,7 +8,6 @@ import '../../utils/polyfill';
 import * as style from './App.scss';
 import Menu from './components/Menu';
 import menuConfig from './config/menus';
-/// <reference path="../../typings/index.d.ts" />
 
 const menu: JSX.Element[] = [];
 const isGridSupports: boolean = CSS.supports('display', 'grid');

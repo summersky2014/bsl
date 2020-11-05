@@ -1,5 +1,4 @@
 import BetterScroll from '@better-scroll/core';
-import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import BSL from '../../../typings';
@@ -36,7 +35,7 @@ function HorizontalScroll(props: Props) {
 
       for (let i = 0; i < children.length; i++) {
         const child = children[i];
-        child.classList.add(css(styles.item));
+        child.classList.add(styles.item);
         const isAbsolute = getComputedStyle(child).position === 'absolute';
 
         if (!isAbsolute) {
@@ -106,7 +105,7 @@ function HorizontalScroll(props: Props) {
 
   return (
     <div
-      className={classNames(css(styles.root), props.className)}
+      className={classNames(styles.root, props.className)}
       style={props.style}
       ref={elemRef}
       onClick={(e) => {
@@ -115,7 +114,7 @@ function HorizontalScroll(props: Props) {
       }}
     >
       <div
-        className={css(styles.wrap)}
+        className={styles.wrap}
         ref={wrapRef}
         style={{
           width: scrollWidth

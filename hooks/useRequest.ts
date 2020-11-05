@@ -84,7 +84,7 @@ function useRequest(): [(option: Option) => Promise<BSL.RequestResponse<any>>, R
             ...res.data,
             source: res.data,
             cacheKey: key,
-          }
+          };
           if (option.cache && data.code === 200) {
             key = createKey();
             cacheData.set(key, res.data);

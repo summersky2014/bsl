@@ -1,24 +1,24 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { css, StyleSheet } from '../../css-in-js';
 
 const styles = StyleSheet.create({
-  root: {
+  root: css({
     position: 'relative',
     height: 'inherit',
     overflow: 'hidden',
     clear: 'both'
-  },
-  slide: {
+  }),
+  slide: css({
     height: 'inherit',
     position: 'relative',
     left: 0,
     top: 0,
     whiteSpace: 'nowrap',
     transform: 'translate3d(0, 0, 0)'
-  },
-  sideHidden: {
+  }),
+  sideHidden: css({
     overflow: 'hidden'
-  },
-  slideItem: {
+  }),
+  slideItem: css({
     display: 'block',
     height: '100%',
     float: 'left',
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     textDecoration: 'none',
     position: 'relative',
     zIndex: 1
-  },
-  dot: {
+  }),
+  dot: css({
     position: 'absolute',
     right: 0,
     left: 0,
@@ -36,18 +36,18 @@ const styles = StyleSheet.create({
     transform: 'translateZ(1px)',
     textAlign: 'center',
     fontSize: 0
-  },  
-  dotItem: {
+  }),  
+  dotItem: css({
     display: 'inline-block',
     margin: '0 4px',
     width: '8px',
     height: '8px',
     borderRadius: '50%',
     background: 'rgba(255, 255, 255, 0.5)'
-  },
-  dotItemActive: {
+  }),
+  dotItemActive: css({
     background: '#fff'
-  }
+  })
 });
 
 export default styles;

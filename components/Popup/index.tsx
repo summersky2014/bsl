@@ -1,12 +1,11 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
+import * as React from 'react';
+import useTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
+import BSL from '../../typings';
 import Mask, { Props as MaskProps } from '../Mask';
 import { Props as DialogProps } from '../Mask/Dialog';
-import useTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
+import styles from './style';
+
 
 export interface Props extends DialogProps, MaskProps, DefaultProps {
 }
@@ -103,14 +102,14 @@ function Popup(props: Props) {
       {...props}
       id={id}
       visible={realVisible}
-      maskCls={classNames(maskCls, css(
-        props.animation && styles.fadein,
-        props.animation && closing && styles.fadeout
-      ))}
-      contentCls={classNames(contentCls, css(
-        props.animation && styles.enter,
-        props.animation && closing && styles.leave
-      ))}
+      maskCls={classNames(maskCls, {
+        [styles.fadein]: props.animation,
+        [styles.fadeout]: closing && props.animation
+      })}
+      contentCls={classNames(contentCls, {
+        [styles.enter]: props.animation,
+        [styles.leave]: closing && props.animation
+      })}
       onClose={onClose}
     >
       {children}

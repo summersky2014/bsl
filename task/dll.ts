@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-// @ts-ignore
 const path = require('path');
 
 const vendors = [

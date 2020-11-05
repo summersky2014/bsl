@@ -5,7 +5,7 @@ import 'core-js/es6/promise';
 import 'core-js/es6/set';
 import 'core-js/es6/set';
 
-window.URLSearchParams = require('@ungap/url-search-params').default || require('@ungap/url-search-params') as URLSearchParams;
+window.URLSearchParams = require('@ungap/url-search-params').default;
 
 if (!HTMLCanvasElement.prototype.toBlob) {
   Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {

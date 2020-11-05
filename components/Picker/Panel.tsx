@@ -1,11 +1,9 @@
-import BSL from '../../typings';
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
-import Item, { Base as ItemBase , Data, itemHeight, num, Value } from './Item';
+import BSL from '../../typings';
 import variable from '../../utils/system/variable';
+import Item, { Base as ItemBase, Data, itemHeight, num, Value } from './Item';
+import styles from './style';
 
 export interface Base extends ItemBase {
   /** 在onScollEnd后触发，用于判断哪些列需要保持原来的选中索引，哪些列需要初始化为0 */
@@ -117,10 +115,10 @@ function Panel(props: Props) {
       id={id}
       style={style}
     >
-      <div className={classNames(css(styles.panel), `${prefixCls}-panel`)}>
-        <div className={classNames(css(styles.mask), `${prefixCls}-mask`)} style={{ backgroundSize: `100% ${itemHeight * num}px` }} />
-        <div className={classNames(css(styles.indicator), `${prefixCls}-indicator`)} style={{ top: `${itemHeight * num}px` }} />
-        <div className={classNames(css(styles.content), `${prefixCls}-content`)}>
+      <div className={classNames(styles.panel, `${prefixCls}-panel`)}>
+        <div className={classNames(styles.mask, `${prefixCls}-mask`)} style={{ backgroundSize: `100% ${itemHeight * num}px` }} />
+        <div className={classNames(styles.indicator, `${prefixCls}-indicator`)} style={{ top: `${itemHeight * num}px` }} />
+        <div className={classNames(styles.content, `${prefixCls}-content`)}>
           {data.map((item, col) => (
             <Item
               key={col}

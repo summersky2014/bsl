@@ -1,14 +1,14 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { css, StyleSheet } from '../../../css-in-js';
 import { clearfix } from '../../../styles/mixins';
 
 const styles = StyleSheet.create({
-  root: {
+  root: css({
     overflow: 'hidden'
-  },
+  }),
   wrap: clearfix() as any,
-  item: {
+  item: css({
     float: 'left'
-  }
+  })
 });
 
 export default styles;

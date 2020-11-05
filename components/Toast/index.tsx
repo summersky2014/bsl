@@ -1,14 +1,13 @@
-
-import BSL from '../../typings';
+import * as classNames from 'classnames';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
-import ToastPure, { ToastProps } from './Toast';
+import useTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
+import BSL from '../../typings';
 import { getContainer } from '../../utils/system/getContainer';
-import useTimeout, {  ListenerCallback } from '../../hooks/anyuseTimeout';
+import styles from './style';
+import ToastPure, { ToastProps } from './Toast';
+
+
 
 interface Props extends ToastProps, BSL.ComponentProps, DefaultProps {
   /** 是否添加遮罩层
@@ -75,11 +74,11 @@ function Toast(props: Props) {
   
   return (
     <div
-      className={classNames(css(
-        styles.root,
-        fade && styles.fade,
-        mask ? styles.mask : styles.nomask
-      ), prefixCls, className)}
+      className={classNames(styles.root, prefixCls, className, {
+        [styles.fade]: fade,
+        [styles.mask]: mask,
+        [styles.nomask]: !mask
+      })}
     >
       <ToastPure {...props}>{props.children}</ToastPure>
     </div>

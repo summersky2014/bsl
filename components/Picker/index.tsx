@@ -1,19 +1,15 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
-import Panel, { Base as PanelBase, Props as PanelProps } from './Panel';
-import { Value, Data } from './Item';
-import Popup from '../Popup';
-import Helper from './Helper';
+import * as React from 'react';
+import BSL from '../../typings';
+import memoAreEqual from '../../utils/system/memoAreEqual';
+import variable from '../../utils/system/variable';
 import { FromTypeProps } from '../Form';
 import Icon from '../Icon';
-import variable from '../../utils/system/variable';
-import memoAreEqual from '../../utils/system/memoAreEqual';
-
-
+import Popup from '../Popup';
+import Helper from './Helper';
+import { Data, Value } from './Item';
+import Panel, { Base as PanelBase, Props as PanelProps } from './Panel';
+import styles from './style';
 const rightSvg = variable.svgRootPath + require('../../assets/rightArrow.svg').id;
 
 export interface Base extends Omit<PanelBase, 'updateId'>, BSL.ComponentProps {
@@ -180,7 +176,7 @@ function Picker(props: Props) {
   return (
     <React.Fragment>
       <div
-        className={classNames(buttonCls, css(styles.button), props.className, variable.bslComponent, prefixCls)}
+        className={classNames(buttonCls, styles.button, props.className, variable.bslComponent, prefixCls)}
         id={props.id}
         style={props.style}
         onClick={toogleVisible}
@@ -188,24 +184,24 @@ function Picker(props: Props) {
         data-placeholder={!(value && value.length)}
       >
         <div
-          className={classNames(css(styles.label), variable.bslComponent, `${prefixCls}-label`)}
+          className={classNames(styles.label, variable.bslComponent, `${prefixCls}-label`)}
           data-disabled={disabled}
           data-placeholder={!(value && value.length)}
         >{label}</div>
-        {rightIcon && <Icon className={classNames(css(styles.icon), `${prefixCls}-icon`)} src={rightSvg} />}
+        {rightIcon && <Icon className={classNames(styles.icon, `${prefixCls}-icon`)} src={rightSvg} />}
       </div>
       <Popup
         visible={visible}
-        contentCls={classNames(css(styles.popup), `${prefixCls}-popup`)}
+        contentCls={classNames(styles.popup, `${prefixCls}-popup`)}
       >
-        <div className={classNames(css(styles.popupHeader), `${prefixCls}-popupHeader`)}>
+        <div className={classNames(styles.popupHeader, `${prefixCls}-popupHeader`)}>
           <div 
-            className={classNames(css(styles.popupButton, styles.popupHeaderLeft), `${prefixCls}-popupButton`, `${prefixCls}-popupHeaderLeft`)}
+            className={classNames(styles.popupButton, styles.popupHeaderLeft, `${prefixCls}-popupButton`, `${prefixCls}-popupHeaderLeft`)}
             onClick={toogleVisible}
           >{dismissText}</div>
-          {title && <div className={css(styles.popupButton, styles.popupTitle)}>{title}</div>}
+          {title && <div className={classNames(styles.popupButton, styles.popupTitle)}>{title}</div>}
           <div
-            className={classNames(css(styles.popupButton, styles.popupHeaderRight), `${prefixCls}-popupButton`, `${prefixCls}-popupHeaderRight`)}
+            className={classNames(styles.popupButton, styles.popupHeaderRight, `${prefixCls}-popupButton`, `${prefixCls}-popupHeaderRight`)}
             onClick={onOk}
           >{okText}</div>
         </div>

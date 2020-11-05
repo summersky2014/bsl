@@ -1,4 +1,3 @@
-import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import anyuseTimeout, { ListenerCallback } from '../../hooks/anyuseTimeout';
@@ -151,7 +150,7 @@ function ScrollLoader<T>(props: Props<T>) {
         )}
       </RequestView>
       <div
-        className={classNames(css(styles.root), props.loaderCls, variable.bslComponent)}
+        className={classNames(styles.root, props.loaderCls, variable.bslComponent)}
         id={id}
         style={props.style}
         ref={elemRef}

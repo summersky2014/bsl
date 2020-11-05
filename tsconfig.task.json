@@ -9,7 +9,7 @@
         "module": "commonjs",
         "target": "es6",
         "experimentalDecorators": true,
-        "noUnusedLocals": true
+        "noUnusedLocals": false
     },
     "exclude": [
         "node_modules",

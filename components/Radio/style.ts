@@ -1,10 +1,10 @@
-import { create, css } from '../../styles/css-in-js';
+import { css, StyleSheet } from '../../css-in-js';
 
 const size = {
   width: '19px',
   height: '19px'
 };
-const styles = create({
+const styles = StyleSheet.create({
   root: css({
     display: 'flex',
     alignItems: 'center'

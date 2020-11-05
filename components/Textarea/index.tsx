@@ -1,14 +1,13 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
+import * as React from 'react';
 import { appData } from '../../app/core';
-import { FromTypeProps } from '../Form';
-import TextareaHelper from '../Input/Helper';
+import BSL from '../../typings';
 import memoAreEqual from '../../utils/system/memoAreEqual';
 import variable from '../../utils/system/variable';
+import { FromTypeProps } from '../Form';
+import TextareaHelper from '../Input/Helper';
+import styles from './style';
+
 
 interface Props extends BSL.ComponentProps, DefaultProps, FromTypeProps<string> {
   disabled?: boolean;
@@ -44,15 +43,17 @@ function Textarea(props: Props) {
 
   return (
     <div
-      className={classNames(variable.bslComponent, css(styles.wrap), className)}
+      className={classNames(variable.bslComponent, styles.wrap, className)}
       style={props.style}
       id={props.id}
       data-state={state}
     >
-      <pre className={css(auto ? styles.pre : styles.preHidden)} ref={preRef} />
+      <pre className={auto ? styles.pre : styles.preHidden} ref={preRef} />
       <textarea
         id={id}
-        className={classNames(prefixCls, css(styles.root, auto && styles.auto))}
+        className={classNames(prefixCls, styles.root, {
+          [styles.auto]: auto
+        })}
         placeholder={placeholder}
         value={props.value}
         maxLength={maxLength}
@@ -66,6 +67,7 @@ function Textarea(props: Props) {
         }}
         onFocus={onFocus}
         onKeyDown={(e) => {
+          // e.key === "Enter"
           if (auto && preRef.current && e.keyCode === 13) {
             preRef.current.textContent += ' ';
           }
@@ -73,7 +75,7 @@ function Textarea(props: Props) {
         rows={rows}
       />
       {wordCount ? (
-        <div className={classNames(css(styles.wordcount), wordCountCls)}>
+        <div className={classNames(styles.wordcount, wordCountCls)}>
           <span className={`${prefixCls}-wordcount-current`}>{props.value.length}</span>
           <span className={`${prefixCls}-wordcount-split`}>/</span>
           <span className={`${prefixCls}-wordcount-max`}>{maxLength}</span>

@@ -1,7 +1,7 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { css, StyleSheet } from '../../css-in-js';
 
 const styles = StyleSheet.create({
-  root: {
+  root: css({
     padding: '12px 0',
     textAlign: 'center',
     fontSize: 14,
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     ':empty': {
       display: 'none'
     }
-  }
+  })
 });
 
 export default styles;

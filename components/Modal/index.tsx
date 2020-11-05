@@ -1,13 +1,11 @@
-import BSL from '../../typings';
+import * as classNames from 'classnames';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-
-import Mask from '../Mask';
-import Container from '../Container';
+import BSL from '../../typings';
 import { getContainer } from '../../utils/system/getContainer';
+import Container from '../Container';
+import Mask from '../Mask';
+import styles from './style';
 
 export interface Props extends BSL.ComponentProps  {
   /**
@@ -83,23 +81,23 @@ function Modal(props: Props) {
 
   return (
     <Mask
-      contentCls={classNames(css(styles.root), props.className)}
+      contentCls={classNames(styles.root, props.className)}
       style={props.style}
       id={props.id}
       visible={realVisible}
       closable={false}
     >
-      {title ? <div className={css(styles.title)}>{title}</div> : null}
-      <div className={css(styles.body)}>{children}</div>
-      <Container className={css(styles.footer)} justifyContent="space-between">
+      {title ? <div className={styles.title}>{title}</div> : null}
+      <div className={styles.body}>{children}</div>
+      <Container className={styles.footer} justifyContent="space-between">
         {!onlyOk ? (
           <React.Fragment>
-            <div className={css(styles.dismiss)} onClick={onClose} >{dismissText || '取消'}</div>
-            <div className={css(styles.sep)} />
-            <div className={css(styles.ok)} onClick={onOk}>{okText || '确定'}</div>
+            <div className={styles.dismiss} onClick={onClose} >{dismissText || '取消'}</div>
+            <div className={styles.sep} />
+            <div className={styles.ok} onClick={onOk}>{okText || '确定'}</div>
           </React.Fragment>
         ) : (
-          <div className={css(styles.button)} onClick={onOk}>{okText || '知道了'}</div>
+          <div className={styles.button} onClick={onOk}>{okText || '知道了'}</div>
         )}
       </Container>
     </Mask>

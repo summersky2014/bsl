@@ -1,6 +1,6 @@
-import { create, css } from '../../../styles/css-in-js';
+import { css, StyleSheet } from '../../../css-in-js';
 
-const styles = create({
+const styles = StyleSheet.create({
   root: css({
     position: 'absolute',
     top: '50%',

@@ -37,13 +37,7 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/camelcase': 0,
     'no-console': ['warn', { allow: ['warn', 'error'] }],
-    'comma-dangle': ['warn', {
-      'arrays': 'never',
-      'objects': 'never',
-      'imports': 'never',
-      'exports': 'never',
-      'functions': 'never'
-    }],
+    'comma-dangle': 0,
     'semi': ['warn', 'always'],
     'eqeqeq': ['warn', 'always'],
     'react/jsx-indent': [2, 2],

@@ -1,7 +1,6 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
+import * as React from 'react';
+import BSL from '../../typings';
 import styles from './style';
 
 export interface BaseProps {
@@ -38,14 +37,14 @@ const Slide = (props: Props) => {
   
   return (
     <div
-      className={classNames(css(styles.slide), prefixCls, props.className)}
+      className={classNames(styles.slide, prefixCls, props.className)}
       style={{
         width: frameWidth
       }}
     >
       {children && React.Children.map(children, (child, i) => {
         return React.cloneElement(child as React.ReactElement<any>, {
-          className: classNames(css(styles.slideItem), `${prefixCls}-item`, (child as React.ReactElement<any>).props.className),
+          className: classNames(styles.slideItem, `${prefixCls}-item`, (child as React.ReactElement<any>).props.className),
           style: {
             width: slideWidth,
             ...(child as React.ReactElement<any>).props.style

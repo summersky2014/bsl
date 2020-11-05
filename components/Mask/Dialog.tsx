@@ -1,10 +1,9 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
-import styles from './style';
-import isPassiveSupported from '../../utils/is/isPassiveSupported';
+import * as React from 'react';
+import BSL from '../../typings';
 import device from '../../utils/device';
+import isPassiveSupported from '../../utils/is/isPassiveSupported';
+import styles from './style';
 
 export interface Props extends BSL.ComponentProps {
   children: any;
@@ -61,16 +60,16 @@ function Dialog(props: Props) {
 
   return (
     <div
-      className={classNames(css(styles.root), className)}
+      className={classNames(styles.root, className)}
       style={style}
     >
       <div
-        className={classNames(css(styles.bg), maskCls)}
+        className={classNames(styles.bg, maskCls)}
         onClick={onClick}
         ref={elemRef}
       />
       <div
-        className={classNames(css(styles.content), contentCls)}
+        className={classNames(styles.content, contentCls)}
         onClick={stopPropagation}
       >{children}</div>
     </div>

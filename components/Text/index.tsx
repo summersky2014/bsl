@@ -1,7 +1,6 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
+import * as React from 'react';
+import BSL from '../../typings';
 import styles from './style';
 
 export interface Props extends BSL.ComponentProps {
@@ -19,11 +18,11 @@ export interface Props extends BSL.ComponentProps {
 function Text(props: Props) {
   return (
     <div
-      className={classNames(css(
-        props.ellipsis && styles.ellipsis,
-        !!(props.ellipsisLines && props.ellipsisLines > 0) && styles.ellipsisLines,
-        props.justify && styles.justify
-      ), props.className)}
+      className={classNames(props.className, {
+        [styles.ellipsis]: props.ellipsis,
+        [styles.ellipsisLines]: !!(props.ellipsisLines && props.ellipsisLines > 0),
+        [styles.justify]: props.justify
+      })}
       style={{
         WebkitLineClamp: props.ellipsisLines,
         ...props.style
@@ -31,7 +30,7 @@ function Text(props: Props) {
       onClick={props.onClick}
     >
       {props.justify && typeof props.children === 'string' ? props.children.split('').map((item, i) => (
-        <div className={css(styles.justifyItem)} key={item + i}>{item}</div>
+        <div className={styles.justifyItem} key={item + i}>{item}</div>
       )) : props.children}
     </div>
   );

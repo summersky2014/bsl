@@ -1,8 +1,8 @@
-import { StyleSheet } from 'aphrodite/no-important';
+import { css, StyleSheet } from '../../css-in-js';
 import { border } from '../../styles/mixins';
 
 const styles = StyleSheet.create({
-  root: {
+  root: css({
     ...border('#e3e3e3', 'top'),
     display: 'flex',
     alignItems: 'center',
@@ -14,24 +14,24 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     zIndex: 10
-  },
-  item: {
+  }),
+  item: css({
     margin: '0 auto',
     flex: 1,
     width: 0,
     paddingTop: 2
-  },
-  icon: {
+  }),
+  icon: css({
     width: '100%',
     height: 20,
     fill: 'currentColor'
-  },
-  text: {
+  }),
+  text: css({
     color: 'currentColor',
     fontSize: 12,
     textAlign: 'center',
     marginTop: 3
-  }
+  })
 });
 
 export default styles;

@@ -1,4 +1,3 @@
-import { css } from 'aphrodite/no-important';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import BSL from '../../typings';
@@ -8,12 +7,11 @@ import variable from '../../utils/system/variable';
 import Icon from '../Icon';
 import compressImg from './compressImg';
 import styles from './style';
-import UploadView from './UploadView';
-
+import UploadView, { Props as UploadViewProps } from './UploadView';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-interface Props extends BSL.ComponentProps {
+interface Props extends BSL.ComponentProps, Pick<UploadViewProps, 'placeholder'> {
   src?: string;
   process?: number;
   disabled?: boolean;
@@ -29,7 +27,7 @@ interface Props extends BSL.ComponentProps {
 const fileSvg = variable.svgRootPath + require('../../assets/file.svg').id;
 const prefixCls = 'bsl-upload';
 function Upload(props: Props) {
-  const { className, disabled, mode, onAddClick } = props;
+  const { className, disabled, mode, onAddClick, placeholder } = props;
   const target = React.useRef<HTMLInputElement | null>(null);
   const [src, setSrc] = React.useState(props.src || '');
   const onChange = (e: ChangeEvent) => {
@@ -63,6 +61,21 @@ function Upload(props: Props) {
 
     setSrc('');
   };
+  let previewRender: JSX.Element | undefined;
+  // 默认显示，除非指定false
+  if (placeholder !== false) {
+    previewRender = mode === 'image' ? (
+      <img className={classNames(styles.img, variable.bslComponent, `${prefixCls}-img`)} src={src} data-hide={!src} />
+    ) : (
+      <Icon
+        className={classNames(styles.fileIcon, variable.bslComponent, `${prefixCls}-fileIcon`)}
+        src={fileSvg}
+        style={{
+          display: src ? 'block' : 'none'
+        }}
+      />
+    );
+  }
   
   React.useEffect(() => {
     if (props.src !== undefined) {
@@ -84,32 +97,25 @@ function Upload(props: Props) {
       src={src}
       process={props.process}
       disabled={disabled}
+      placeholder={placeholder}
       onRemove={onRemove}
     >
       <input
-        className={classNames(css(styles.input), `${prefixCls}-input`)}
+        className={classNames(styles.input, `${prefixCls}-input`)}
         type="file"
         onChange={onChange}
         disabled={!!src || disabled}
         //capture={device.system === 'android' ? 'camera' : undefined}
         // accept={mode === 'image' ? 'image/*' : undefined}
-        onClick={(event) => {
+        onClick={(e) => {
+          const target = e.target as HTMLInputElement;
           if (onAddClick) {
-            onAddClick(event);
+            onAddClick(e);
           }
+          target.value = "";
         }}
       />
-      {mode === 'image' ? (
-        <img className={classNames(css(styles.img), variable.bslComponent, `${prefixCls}-img`)} src={src} data-hide={!src} />
-      ) : (
-        <Icon
-          className={classNames(css(styles.fileIcon), variable.bslComponent, `${prefixCls}-fileIcon`)}
-          src={fileSvg}
-          style={{
-            display: src ? 'block' : 'none'
-          }}
-        />
-      )}
+      {previewRender}
     </UploadView>
   );
 }

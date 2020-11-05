@@ -1,48 +1,51 @@
-import BSL from '../../typings';
-import * as React from 'react';
 import * as classNames from 'classnames';
-import { css } from 'aphrodite/no-important';
+import * as React from 'react';
+import BSL from '../../typings';
+import variable from '../../utils/system/variable';
+import Icon from '../Icon';
 import styles from './style';
 
-import Icon from '../Icon';
-import variable from '../../utils/system/variable';
 
 const addSvg = variable.svgRootPath + require('../../assets/add.svg').id;
 const clearSvg = variable.svgRootPath + require('../../assets/clear.svg').id;
 
-interface Props extends BSL.ComponentProps {
+export interface Props extends BSL.ComponentProps {
   src: string;
   process?: number;
   disabled?: boolean;
   children?: any;
+  /** 是否显示默认的占位符 */
+  placeholder?: boolean;
   onRemove?: () => void;
 }
 
 const prefixCls = 'bsl-upload';
 function UploadView(props: Props) {
-  const { className, children, src, process, onRemove, disabled } = props;
+  const { className, children, src, process, onRemove, disabled, placeholder } = props;
   return (
     <div 
-      className={classNames(css(styles.root), prefixCls, className)}
+      className={classNames(placeholder ? styles.root : undefined, prefixCls, className)}
       id={props.id}
       style={props.style}
     >
-      <Icon
-        className={classNames(css(styles.addIcon), variable.bslComponent, `${prefixCls}-addIcon`)}
-        hide={!!src}
-        src={addSvg}
-      />
+      {placeholder !== false ? (
+        <Icon
+          className={classNames(styles.addIcon, variable.bslComponent, `${prefixCls}-addIcon`)}
+          hide={!!src}
+          src={addSvg}
+        />
+      ) : null}
       {children}
-      {process !== undefined && src ? (
+      {placeholder !== false && process !== undefined && src ? (
         <div
-          className={classNames(css(styles.notUploaded), `${prefixCls}-notUploaded`)}
+          className={classNames(styles.notUploaded, `${prefixCls}-notUploaded`)}
           style={{
             height: (100 - process) + '%'
           }}
         />
       ) : null}
-      {src && onRemove && !disabled ? (
-        <Icon className={classNames(css(styles.clear), `${prefixCls}-clear`)} src={clearSvg} onClick={onRemove} />
+      {placeholder !== false && src && onRemove && !disabled ? (
+        <Icon className={classNames(styles.clear, `${prefixCls}-clear`)} src={clearSvg} onClick={onRemove} />
       ) : null}
     </div>
   );

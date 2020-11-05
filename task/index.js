@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const isDev = env === 'development' ? true : false;
 function webpackConfig(params) {
     const { entry, dirname, publicPath, vender, cssModule, target, externals, configFile } = params;
@@ -172,8 +172,6 @@ function webpackConfig(params) {
                 moment$: 'moment/moment.js'
             },
             extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.tsx', '.ts', '.web.ts', '.scss', '.css'],
-            modules: isDev ? [path.resolve(dirname, 'node_modules')] : undefined,
-            mainFields: isDev ? ['jsnext:main', 'main'] : undefined
         },
         plugins,
         stats: {
